@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,4 +41,31 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2216846611
+    locked: 0
+  - name: Ground
+    uniqueID: 2149198261
+    locked: 0
+  - name: PlayerFeetBack
+    uniqueID: 2882612601
+    locked: 0
+  - name: PlayerFeetFront
+    uniqueID: 4245481291
+    locked: 0
+  - name: PlayerBody
+    uniqueID: 2258218049
+    locked: 0
+  - name: PlayerHead
+    uniqueID: 948224795
+    locked: 0
+  - name: Items
+    uniqueID: 4191960145
+    locked: 0
+  - name: PlayerWeapon
+    uniqueID: 1157620103
+    locked: 0
+  - name: Projectile
+    uniqueID: 2228502185
     locked: 0
