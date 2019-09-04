@@ -63,9 +63,9 @@ TagManager:
   - name: Items
     uniqueID: 4191960145
     locked: 0
-  - name: PlayerWeapon
+  - name: Projectile
     uniqueID: 1157620103
     locked: 0
-  - name: Projectile
+  - name: PlayerWeapon
     uniqueID: 2228502185
     locked: 0
