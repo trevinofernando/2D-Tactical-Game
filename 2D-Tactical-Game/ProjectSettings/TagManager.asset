@@ -69,3 +69,6 @@ TagManager:
   - name: PlayerWeapon
     uniqueID: 2228502185
     locked: 0
+  - name: Crosshair
+    uniqueID: 4145239497
+    locked: 0
