@@ -8,12 +8,14 @@ public class DamageHandler : MonoBehaviour
     public bool iAmDead = false;
     public GameObject deathEffect;
     private Animator anim;
+    private PlayerMovement movementControls;
 
 
     void Start()
     {
         //Get reference to animator component
         anim = GetComponent<Animator>();
+        movementControls = GetComponent<PlayerMovement>();
     }
 
     public void TakeDamage(int damage)
@@ -31,6 +33,9 @@ public class DamageHandler : MonoBehaviour
         {
             anim.SetTrigger("die");
             iAmDead = true;
+
+            //Disable PlayerMovement script to stop player from moving during animation in case of killing himself
+            movementControls.enabled = false;
             Die();
         }
         

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1071730802671521821}
   - component: {fileID: 1071730802671521818}
   - component: {fileID: 1071730802671521819}
-  - component: {fileID: 1071730802671521816}
+  - component: {fileID: 5762913170003279432}
   - component: {fileID: 1598543947205712218}
   m_Layer: 0
   m_Name: Projectile_Bomb
@@ -104,8 +104,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &1071730802671521816
-BoxCollider2D:
+--- !u!70 &5762913170003279432
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -117,19 +117,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03284189, y: 0.00469172}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.6571429, y: 0.6257143}
-    newSize: {x: 0.6571429, y: 0.6257143}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.51639193, y: 0.33482862}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.040638212, y: -0.0022579185}
+  m_Size: {x: 0.56643134, y: 0.3722709}
+  m_Direction: 1
 --- !u!114 &1598543947205712218
 MonoBehaviour:
   m_ObjectHideFlags: 0

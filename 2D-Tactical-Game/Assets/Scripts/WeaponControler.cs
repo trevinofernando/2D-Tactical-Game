@@ -12,10 +12,12 @@ public class WeaponControler : MonoBehaviour
     public GameObject projectilePrefab;
 
     private Vector3 mousePosition;
+    private bool haveShot = false;
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        //Shoot if we leftclick on the mouse and we are not moving horizontally
+        if (Input.GetButtonDown("Fire1") && Input.GetAxisRaw("Horizontal") == 0)
         {
             Shoot();
         }
@@ -23,20 +25,13 @@ public class WeaponControler : MonoBehaviour
         AimToMouse();
     }
 
-    void FixedUpdate()
-    {
-        //TODO: update rotation to aim at mouse
-    }
-
     void Shoot()
     {
-        if(projectilePrefab != null)
+        if(projectilePrefab != null && !haveShot)
         {
             Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-        }
-        else
-        {
-            Debug.Log("ProjectilePrefab missing, can't shoot. Sorry :(");
+            //This next line will stop the player from shooting multiple times
+            //haveShot = true;
         }
     }
 
