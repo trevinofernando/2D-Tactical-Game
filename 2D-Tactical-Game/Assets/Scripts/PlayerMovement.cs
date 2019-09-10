@@ -88,9 +88,6 @@ public class PlayerMovement : MonoBehaviour
         //Direct cast from Vector3 to Vector2
         playerPosition = transform.position;
 
-        centerToBottmLeftCorner = new Vector2(-colliderHalfWidth + distanceOffsetX, -colliderHalfHeight);
-        centerToBottmRightCorner = new Vector2(colliderHalfWidth - distanceOffsetX, -colliderHalfHeight - distanceOffsetY);
-
         //Check for any overlap area under the players feet
         isGrounded = Physics2D.OverlapArea(
             playerPosition + centerToBottmLeftCorner, 
