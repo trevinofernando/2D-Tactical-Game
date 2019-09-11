@@ -1,0 +1,91 @@
+Game State
+    Turn timer
+    Who's Turn
+
+Entity State
+
+Randomness
+    Map generation
+    AI shooting accuracy
+    Weapon drops
+
+
+UI
+    Health bar above each Players
+    Weapon selection
+    Menu
+        Settings
+    Before game settings(team names, player names)
+
+Player Input
+    Aim shot with arrow keys
+    Camera set to player with current turn, move camera to see
+    Weapon selection
+        Key mapping versus Selectable menu
+
+
+
+Gameplay
+    Time per turn ~ 30s-60s(Make it a setting?)
+    Turn rotation using mod, each team always has n turns even with players dying
+    Friendly fire on
+    Fall, you die
+    Turn based, everyone on same machine
+
+
+Weapons
+    Bazooka
+    Gun
+    Melee
+    Grenade
+
+Powerups
+    Weapons
+    Health
+    Tools
+
+Character Stats
+    Health 
+    Speed
+
+Character Classes
+    General for now (balanced)
+    Healer
+
+Entities
+    Player
+    AI
+    Camera
+
+Environment
+    Platform moving
+    Dynamic?
+    Water
+    Fire
+    Map scaling based on number of players or choose at start of game
+
+AI Make decisions based on:
+    Health 
+    Position of other Players
+    Who is winning
+    Who shot them last
+
+
+Settings
+    Choose map size setting
+    Choose number of player setting
+
+Tank as characters
+    Barrel changes with Weapon
+
+Team Name
+    Team colors
+    Player Name
+
+
+
+
+
+
+
+

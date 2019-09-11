@@ -1,0 +1,141 @@
+9/9 Meeting Notes
+
+Name
+
+
+Game manager
+    States of team arsenals
+    Who's turn it is
+    Time
+    Setup Game
+
+Environment
+
+
+private when you don't need to edit variables
+
+Weapons
+    Bazooka
+    Grenade launcher
+    AK-47
+    Sniper
+    Pistol
+    Submachine gun
+    Shotgun
+    Red grenade launcher
+    Gold grenade launcher
+    Special launcher
+    Laser gun
+    Pineapple launcher
+    Emoji launcher
+
+
+    Utility Items
+        Tile Shooter
+        Portal Shooter (grenade)
+        Moon boots
+        Jetpack
+    
+
+Priority
+    Game manager and menu
+    Camera
+    Playable map
+        Background
+        Size
+
+    More guns
+    Dynamic generating map
+    Destructable Map
+    AI player
+
+What your game is (feel free to compare to games we know)
+    Worms
+
+
+What platform (hardware and software), and why you've decided to make this game
+    PC, easier to test than mobile, performance
+
+Your plan for art and audio content for the game
+    Assets, making animations, sounds 
+
+A rough breakdown of your current plan on which member of the team will do which aspects of the game (knowing that could change as the project moves forward)
+    Fernando- Animations, Game state management
+    Alex- Menu
+    Joseph- Website, Map creation
+
+High-level schedule of the development of the game - reminder that first playable is 10/9, testing day is 11/18, game day is 12/11.
+    First Playable 10/9
+        One map
+        One weapon of each type
+        Menu and GUI
+        Take turns
+        Winnable
+
+    Testing day 11/18
+        More weapons
+        Destructable map
+        Tile-based dynamic map generation
+        Basic AI
+        Weapon drops (?)
+
+    Game Day 12/11
+        Weapons done
+        AI with difficulty levels
+        Persistent Settings
+
+
+    Nice to have
+        Health packs
+        Random thing
+        Drop random tiles
+        Random Environmental hazards
+        Mobile version
+        Neutral player
+
+Details on what you plan to have at "first playable" presentation
+
+Main Menu
+    General Settings
+        Audio
+        Resolution
+        Fullscreen/Windows
+
+    Game Settings
+        Number of players per team
+        Number of AI
+        Number of teams
+        Map selection
+        Time per turn
+        Game time limit (?)
+
+            Win/loss based team health left
+        Color selection
+            Individual choosing versus automatic
+
+        Enable/disable 
+            Weapon drops
+            Health packs
+
+Tile Types (Mario tiles?)
+    Grass
+    Sand
+    Bricks
+
+Tile Properties
+    Soft
+    Medium
+    Hard
+    Friction
+    Bounciness
+
+Map Themes
+    Desert
+    Beach
+    Snow
+    Volcano
+    Medival Castle
+    Mario-inspired
+    Minecraft
+
+
