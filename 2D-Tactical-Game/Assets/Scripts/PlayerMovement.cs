@@ -102,6 +102,8 @@ public class PlayerMovement : MonoBehaviour
         //Move The Horiziontal axis
         rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
 
+
+
         //Check if we are in the ground
         if (isGrounded)
         {
