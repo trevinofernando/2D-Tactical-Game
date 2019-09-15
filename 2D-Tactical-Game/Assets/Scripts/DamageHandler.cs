@@ -13,6 +13,8 @@ public class DamageHandler : MonoBehaviour
 
     void Start()
     {
+        health = GlobalVariables.Instance.healthPerAvatar;
+        
         //Get reference to animator component
         anim = GetComponent<Animator>();
         movementControls = GetComponent<PlayerMovement>();
@@ -23,19 +25,25 @@ public class DamageHandler : MonoBehaviour
         health -= damage;
 
         //Check if player haven't triggered the death sequence, if not then take damage
-        if (!iAmDead)
+        if (!iAmDead && anim != null)
         {
             anim.SetTrigger("takeDamage");
         }
-
+        
         //If player health below 0 then trigger death sequence
         if(health <= 0 && !iAmDead)
         {
-            anim.SetTrigger("die");
+            if(anim != null)
+            {
+                anim.SetTrigger("die");
+            }
             iAmDead = true;
 
             //Disable PlayerMovement script to stop player from moving during animation in case of killing himself
-            movementControls.enabled = false;
+            if(movementControls != null)
+            {
+                movementControls.enabled = false;
+            }
             Die();
         }
         
@@ -51,6 +59,13 @@ public class DamageHandler : MonoBehaviour
         //wait 6 seconds before destroyng this game object, to let the animations play
         //WARNING, this is a calculated time, if death animation changes, then this code needs to be generalized
         //but for now this will do the trick just fine
-        Destroy(gameObject, 6f);
+        if(movementControls != null)
+        {
+            Destroy(gameObject, 6f);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

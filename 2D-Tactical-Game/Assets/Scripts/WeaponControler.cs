@@ -17,7 +17,7 @@ public class WeaponControler : MonoBehaviour
     void Update()
     {
         //Shoot if we leftclick on the mouse and we are not moving horizontally
-        if (Input.GetButtonDown("Fire1") && Input.GetAxisRaw("Horizontal") == 0)
+        if (Input.GetButtonDown("Fire1") )//&& Input.GetAxisRaw("Horizontal") == 0)
         {
             Shoot();
         }

@@ -15,6 +15,15 @@ public class Projectile_Bomb : MonoBehaviour
         //Add initial force once to make a parabolic trajectory
         rb.AddForce(transform.right * launchForce);
     }
+
+    void Update()
+    {
+        if(gameObject.transform.position.y <= -50f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         //Calculate projectile traveling direction by using it's velocity on each frame

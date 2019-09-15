@@ -68,12 +68,12 @@ public class PlayerMovement : MonoBehaviour
         /*  HORIZIONTAL Movement Animations */
         if (moveDirection > 0) //Check for Right arrow or "d"
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            //transform.eulerAngles = new Vector3(0, 0, 0);
             anim.SetBool("isWalking", true);
         }
         else if(moveDirection < 0) //Check for Left arrow or "a"
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            //transform.eulerAngles = new Vector3(0, 180, 0);
             anim.SetBool("isWalking", true);
         }
         else

@@ -6,41 +6,59 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Transform gameManager; //Self reference
-
-    public int numPlayersHuman = 4; 
-    public int numPlayersNPCs = 0;
-    public int squadSizePerTeam = 4;
-
-    public float timePerTurn = 60f; //1 minute
-    public float timeBetweenTurns = 5f; // 5 seconds
-    public float TimePerGame = 60f * 20f; // 20 minutes
-
-    struct Employee
-    {
-        public int EmpId;
-        public string FirstName;
-        public string LastName;
-
-        public Employee(int empid, string fname, string lname)
-        {
-            EmpId = empid;
-            FirstName = fname;
-            LastName = lname;
-        }
-    }
+    private GlobalVariables GLOBALS;
+    public GameObject avatarPrefab;
+    public Vector3 spawnOffset = new Vector3(-18, 10, 0);
 
     void Start()
     {
-        //GameObject go = Instantiate(A, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-        //go.transform.parent = GameObject.Find("Stage Scroll").transform;
+        GLOBALS = GlobalVariables.Instance;
+        GLOBALS.gameState = GlobalVariables.GameState.LoadingScene;
 
-        //float clock = GlobalVariables.Instance.TimePerGame;
+        //Create Teams
+        for (int i = 0; i < GLOBALS.numTeams; i++)
+        {
+            for(int j = 0; j < GLOBALS.teamSize; j++)
+            {
+                spawnOffset.x += 2;
+                GLOBALS.teams[i , j] = Instantiate(avatarPrefab, transform.position + spawnOffset, transform.rotation);
+                GLOBALS.teams[i , j].GetComponent<PlayerSettings>().SetColor(GLOBALS.teamColors[i]);
+            }
+        }
     }
 
 
     void Update()
     {
-        
+        switch(GLOBALS.gameState)
+        {
+            case GlobalVariables.GameState.LoadingScene:
+                
+                break;
+
+            case GlobalVariables.GameState.MovingAvatar:
+                
+                break;
+
+            case GlobalVariables.GameState.Pause:
+
+                break;
+
+            case GlobalVariables.GameState.Shooting:
+
+                break;
+
+            case GlobalVariables.GameState.TurnTransition:
+
+                break;
+
+            case GlobalVariables.GameState.WeaponSelect:
+
+                break;
+
+            default:
+                Debug.LogError("Invalid State reached... but HOW??!!");
+                break;
+        }
     }
 }
