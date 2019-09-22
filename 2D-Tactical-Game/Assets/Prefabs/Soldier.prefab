@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2118373370}
   - component: {fileID: 6509640893437391283}
   - component: {fileID: 5226463133170334109}
+  - component: {fileID: 5352855559125752562}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Player
@@ -151,6 +152,24 @@ MonoBehaviour:
   nameGiven: 
   bodySprite: {fileID: 1591137667599323426}
   gameManager: {fileID: 0}
+--- !u!114 &5352855559125752562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591137666376314641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b54198778cd77e489d88ff916f76e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  degreesOfDeadZone: 0.25
+  weaponPivot: {fileID: 188067215955224553}
+  firePoint: {fileID: 3310176537547046930}
+  projectilePrefab: {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8,
+    type: 3}
+  playerSettings: {fileID: 5226463133170334109}
 --- !u!1 &1591137666620986174
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,7 +802,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 188067215955224553}
-  - component: {fileID: 986552613316920489}
   m_Layer: 0
   m_Name: WeaponPivot
   m_TagString: Untagged
@@ -806,23 +824,6 @@ Transform:
   m_Father: {fileID: 1591137667713380038}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &986552613316920489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4778983074310077445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b54198778cd77e489d88ff916f76e3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  degreesOfDeadZone: 0.25
-  parentPlayer: {fileID: 1591137666376314642}
-  firePoint: {fileID: 3310176537547046930}
-  projectilePrefab: {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8,
-    type: 3}
 --- !u!1 &8001103630847594121
 GameObject:
   m_ObjectHideFlags: 0

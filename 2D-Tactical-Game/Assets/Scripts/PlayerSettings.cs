@@ -16,7 +16,12 @@ public class PlayerSettings : MonoBehaviour
         bodySprite.color = newColor;
     }
 
-    public void updateHeatlh(int newHealth)
+    public void EndTurn()
+    {
+        gameManager.isTurnFinished = true;
+    }
+
+    public void UpdateHeatlh(int newHealth)
     {
         //Ignore negative values
         newHealth = Mathf.Max(newHealth, 0);

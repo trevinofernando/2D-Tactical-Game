@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
                 
                 //Deactivate movement script.
                 teams[i, j].GetComponent<PlayerMovement>().enabled = false;
+                teams[i, j].GetComponent<WeaponControler>().enabled = false;
 
             }
         }
@@ -219,6 +220,7 @@ public class GameManager : MonoBehaviour
                     if(go != null)
                     {
                         go.GetComponent<PlayerMovement>().enabled = true;
+                        go.GetComponent<WeaponControler>().enabled = true;
                     }
                     else
                     {
@@ -256,6 +258,7 @@ public class GameManager : MonoBehaviour
                     if (go != null)
                     {
                         go.GetComponent<PlayerMovement>().enabled = false; 
+                        go.GetComponent<WeaponControler>().enabled = false; 
                         //else we do nothing since the player is gone anyway
                     }
                 }

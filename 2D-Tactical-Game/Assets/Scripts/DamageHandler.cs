@@ -34,7 +34,7 @@ public class DamageHandler : MonoBehaviour
         if(playerSettings != null)
         {
             //updateHeatlh() will take care of negative values
-            playerSettings.updateHeatlh(health);
+            playerSettings.UpdateHeatlh(health);
         }
 
         //Check if player haven't triggered the death sequence, if not then take damage
