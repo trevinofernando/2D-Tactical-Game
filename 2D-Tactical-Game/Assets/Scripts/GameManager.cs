@@ -6,30 +6,37 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
     private GlobalVariables GLOBALS;
     public GameObject soldierPrefab;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
 
+    //Teams related variables
     private GameObject[,] teams; //[TeamID][SoldierID]
+    public int deadTeamsCounter = 0; 
     public int[] teamsHealth; //[TeamID]
     public int[,] soldiersHealth; //[TeamID, SoldierID]
-    private int currTeamTurn = 0; //index of current teams turn
-    private int[] currSoldierTurn; //[TeamID] to keep track of which soldier is next depending on team
+    public int currTeamTurn = 0; //index of current teams turn
+    public int[] currSoldierTurn; //[TeamID] to keep track of which soldier is next depending on team
 
+    //Time related variables
     public float turnClock = 0f;
     public float gameClock = 0f;
-    public bool suddenDeath = false;
-    public bool isOneTeamAlive = false;
     private bool corutineStarted = false;
     private IEnumerator coroutineTurnClock;
     private IEnumerator coroutineGameClock;
 
     //STATES
     public GameState gameState = GameState.LoadingScene;
+    public bool suddenDeath = false;
     public bool isTurnFinished = false;
+    public bool isOneTeamAlive = false;
     public AIState aiState = AIState.WaitingForTurn;
+
+    //Temporary Variables
+    private GameObject go;
+    private GameManager thisGM;
+    private PlayerSettings ps;
 
     public enum GameState
     {
@@ -74,6 +81,9 @@ public class GameManager : MonoBehaviour
         currSoldierTurn = new int[GLOBALS.numTeams]; //default value is already 0
         currTeamTurn = 0;
 
+        //Get reference to this GameManager component on this object
+        thisGM = gameObject.GetComponent<GameManager>();
+
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {
@@ -85,7 +95,9 @@ public class GameManager : MonoBehaviour
                 //temporary spawn location until map generation is done
                 //teams[i , j] = Instantiate(avatarPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
 
-                PlayerSettings ps = teams[i, j].GetComponent<PlayerSettings>();
+                teams[i, j].GetComponent<PlayerSettings>().gameManager = thisGM;
+
+                ps = teams[i, j].GetComponent<PlayerSettings>();
                 //Set color of player
                 ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i;
@@ -120,7 +132,23 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        switch(gameState)
+
+        //Check if game is over
+        deadTeamsCounter = 0;
+        for (int i = 0; i < GLOBALS.numTeams; i++)
+        {
+            if(teamsHealth[i] <= 0)
+            {
+                deadTeamsCounter++;
+            }
+        }
+
+        if(deadTeamsCounter >= GLOBALS.numTeams - 1)
+        {
+            gameState = GameState.GameOver;
+        }
+
+        switch (gameState)
         {
             case GameState.TurnTransition:
                 // Start timer for next turn.
@@ -131,7 +159,7 @@ public class GameManager : MonoBehaviour
                     StartCoroutine(coroutineTurnClock);
                 }
 
-                //TODO
+                //***************************TODO**************************
                 //Chance of Enviroment Hazard activation.
 
                 if (isTurnFinished)
@@ -141,10 +169,10 @@ public class GameManager : MonoBehaviour
                     gameState = GameState.TurnInProgress;//change State
 
                     // Find out which team is next in turn. By looping thru numteams - 1
+                    //If we don't get to the break statement, then game is over
+                    isOneTeamAlive = true;
                     for (int i = 0; i < GLOBALS.numTeams - 1; i++)
                     {
-                        //If we don't get to the break statement, then game is over
-                        isOneTeamAlive = true;
                         //Give turn to next team
                         currTeamTurn = (currTeamTurn + 1) % GLOBALS.numTeams;
 
@@ -170,8 +198,8 @@ public class GameManager : MonoBehaviour
                             //else nextTeamTurn stays the same
                         }
 
-                        //TODO 
-                        //trigger game over
+                        //Trigger GameOver state
+                        gameState = GameState.GameOver;
                     }
 
                     //Depending on the next Teams turn, find out which soldier is next on their team
@@ -180,24 +208,25 @@ public class GameManager : MonoBehaviour
                         //go to the next player alive in that turn
                         currSoldierTurn[currTeamTurn] = (currSoldierTurn[currTeamTurn] + 1) % GLOBALS.teamSize;
                         //check if Soldier is alive before choosing it for next turn
-                        if (soldiersHealth[currTeamTurn, currSoldierTurn[currTeamTurn]] <= 0)
+                        if (soldiersHealth[currTeamTurn, currSoldierTurn[currTeamTurn]] > 0)
                         {
                             break;
                         }
                     }
 
                     // Activate movement Script for player or AI to play
-                    PlayerMovement pm = teams[currTeamTurn, currSoldierTurn[currTeamTurn]].GetComponent<PlayerMovement>();
-                    if(pm != null)
+                    go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
+                    if(go != null)
                     {
-                        pm.enabled = true;
+                        go.GetComponent<PlayerMovement>().enabled = true;
                     }
                     else
                     {
                         Debug.LogError("Next Soldier in turn is dead, this state should never be reached");
                     }
 
-                    //TODO: Tell Camara to focus on this player
+                    //***************************TODO**************************
+                    //Tell Camara to focus on this player
 
                 }
 
@@ -214,34 +243,40 @@ public class GameManager : MonoBehaviour
 
                 //Check if turn suddently stops because premature death or self injure and StopCoroutine()
                 if (isTurnFinished){
+
                     corutineStarted = false; //Reset coroutine check
                     isTurnFinished = false; //Reset check before changing state
                     gameState = GameState.TurnTransition;
+
                     //Stop Coroutine just in case of premature death or self injure
                     StopCoroutine(coroutineTurnClock);
+
                     //Deactivate movement Script for player or AI to play
-                    
-                    teams[currTeamTurn, currSoldierTurn[currTeamTurn]].GetComponent<PlayerMovement>().enabled = false;
+                    go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
+                    if (go != null)
+                    {
+                        go.GetComponent<PlayerMovement>().enabled = false; 
+                        //else we do nothing since the player is gone anyway
+                    }
                 }
 
                 break;
 
             case GameState.Pause:
-                //TODO
-                /*
-                 * Adjust timer to not being afected by the pause
-                */
+                //***************************TODO**************************
+                //Adjust timer to not being afected by the pause
+                
                 break;
 
             case GameState.LoadingScene:
-                //TODO
+                //***************************TODO**************************
                 /*
                  *
                 */
                 break;
 
             case GameState.GameOver:
-                //TODO
+                //***************************TODO**************************
                 /*
                  *
                 */
@@ -259,7 +294,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Timer for GAME Clock started with " + waitTime + " Seconds");
         while (true)
         {
-            //TODO: update Clock GUI
+            //***************************TODO**************************: 
+            //update Clock GUI
             if (gameClock > 0)
             {
                 gameClock--;//update the clock timer
@@ -280,7 +316,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
         while (true)
         {
-            //TODO: update Clock GUI
+            //***************************TODO**************************: 
+            //update Clock GUI
             if (turnClock > 0)
             {
                 turnClock--;//update the clock timer

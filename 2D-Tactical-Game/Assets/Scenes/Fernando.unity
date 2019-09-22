@@ -2506,12 +2506,14 @@ MonoBehaviour:
     type: 3}
   spawnOffset: {x: -18, y: 10, z: 0}
   teamsHealth: 00000000000000000000000000000000
+  currTeamTurn: 0
+  currSoldierTurn: 
   turnClock: 0
   gameClock: 0
-  suddenDeath: 0
-  isOneTeamAlive: 0
   gameState: 0
+  suddenDeath: 0
   isTurnFinished: 0
+  isOneTeamAlive: 0
   aiState: 0
 --- !u!1001 &702825624
 PrefabInstance:

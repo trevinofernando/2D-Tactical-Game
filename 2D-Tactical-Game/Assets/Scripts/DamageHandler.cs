@@ -33,6 +33,7 @@ public class DamageHandler : MonoBehaviour
 
         if(playerSettings != null)
         {
+            //updateHeatlh() will take care of negative values
             playerSettings.updateHeatlh(health);
         }
 

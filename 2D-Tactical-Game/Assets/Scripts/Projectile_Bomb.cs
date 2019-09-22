@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Projectile_Bomb : MonoBehaviour
 {
-    public float launchForce = 10f;
     public int damage = 30;
+    public float launchForce = 10f;
+    public float autoDestroyOnHeight = -50f;
     public Rigidbody2D rb;
     public GameObject impactEffect;
-    private bool travelingUp;
     private float travelingDirection;
     void Start()
     {
@@ -18,7 +18,7 @@ public class Projectile_Bomb : MonoBehaviour
 
     void Update()
     {
-        if(gameObject.transform.position.y <= -50f)
+        if(gameObject.transform.position.y <= autoDestroyOnHeight)
         {
             Destroy(gameObject);
         }

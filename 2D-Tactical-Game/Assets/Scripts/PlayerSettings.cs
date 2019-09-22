@@ -18,6 +18,9 @@ public class PlayerSettings : MonoBehaviour
 
     public void updateHeatlh(int newHealth)
     {
+        //Ignore negative values
+        newHealth = Mathf.Max(newHealth, 0);
+
         //subtract current health of soldier from team health
         gameManager.teamsHealth[teamID] -= gameManager.soldiersHealth[teamID, ID];
 

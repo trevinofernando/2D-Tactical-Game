@@ -132,6 +132,8 @@ MonoBehaviour:
   health: 100
   iAmDead: 0
   deathEffect: {fileID: 0}
+  movementControls: {fileID: 2118373370}
+  playerSettings: {fileID: 5226463133170334109}
 --- !u!114 &5226463133170334109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +150,7 @@ MonoBehaviour:
   teamID: 0
   nameGiven: 
   bodySprite: {fileID: 1591137667599323426}
+  gameManager: {fileID: 0}
 --- !u!1 &1591137666620986174
 GameObject:
   m_ObjectHideFlags: 0
