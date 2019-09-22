@@ -2502,9 +2502,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26371c8ad3ff06c4da267a2c1e8c0a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatarPrefab: {fileID: 1591137666376314641, guid: 0adea04687411fc41b85b093f40fc10d,
+  soldierPrefab: {fileID: 1591137666376314641, guid: 0adea04687411fc41b85b093f40fc10d,
     type: 3}
   spawnOffset: {x: -18, y: 10, z: 0}
+  teamsHealth: 00000000000000000000000000000000
+  turnClock: 0
+  gameClock: 0
+  suddenDeath: 0
+  isOneTeamAlive: 0
+  gameState: 0
+  isTurnFinished: 0
+  aiState: 0
 --- !u!1001 &702825624
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4576,36 +4584,16 @@ MonoBehaviour:
   numTeams: 4
   numPlayersHuman: 4
   numPlayersNPCs: 0
+  teamSize: 4
+  healthPerAvatar: 100
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
-  teamSize: 4
-  teamNames:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  teamsHealth: 64000000640000006400000064000000
-  healthPerAvatar: 100
   timePerTurn: 60
   timeBetweenTurns: 5
   TimePerGame: 1200
-  gameState: 0
-  aiState: 0
 --- !u!4 &1289858339
 Transform:
   m_ObjectHideFlags: 0

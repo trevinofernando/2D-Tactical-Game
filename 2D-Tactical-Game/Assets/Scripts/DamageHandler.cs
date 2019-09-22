@@ -8,7 +8,9 @@ public class DamageHandler : MonoBehaviour
     public bool iAmDead = false;
     public GameObject deathEffect;
     private Animator anim;
-    private PlayerMovement movementControls;
+    public PlayerMovement movementControls;
+    public PlayerSettings playerSettings;
+
 
 
     void Start()
@@ -20,9 +22,19 @@ public class DamageHandler : MonoBehaviour
         movementControls = GetComponent<PlayerMovement>();
     }
 
+    public void SetHealth(int _health)
+    {
+        health = _health;
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
+
+        if(playerSettings != null)
+        {
+            playerSettings.updateHeatlh(health);
+        }
 
         //Check if player haven't triggered the death sequence, if not then take damage
         if (!iAmDead && anim != null)

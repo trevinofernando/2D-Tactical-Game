@@ -116,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
             //but if theres a ramp we could be moving up and down but no faster than "speed"
             if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < speed)
             {
-                Debug.Log("Jump");
+                //Debug.Log("Jump");
                 anim.SetTrigger("takeOff");
                 anim.SetBool("isJumping", true);
                 isJumping = true;

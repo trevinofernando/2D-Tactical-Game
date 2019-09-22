@@ -34,7 +34,7 @@ public class Projectile_Bomb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D colInfo)
     {
-        Debug.Log("Projectile Hit!");
+        //Debug.Log("Projectile Hit!");
 
         //Look for a DamageHandler script in object collided
         DamageHandler target = colInfo.GetComponent<DamageHandler>();
