@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
         LoadingScene,
         TurnInProgress,
         TurnTransition,
-        AITurn,
+        WhatchingShot,
         Pause,
         GameOver
     }
@@ -78,8 +79,8 @@ public class GameManager : MonoBehaviour
         teamsHealth = new int[GLOBALS.numTeams]; //default value is already 0
 
         //Initialize array to keep track of turn of soldiers, since each team will have a different order
-        currSoldierTurn = new int[GLOBALS.numTeams]; //default value is already 0
-        currTeamTurn = 0;
+        currSoldierTurn = Enumerable.Repeat(-1, GLOBALS.numTeams).ToArray(); //initialize Array with -1
+        currTeamTurn = -1; //-1 since we always add 1 when starting a turn
 
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
@@ -144,11 +145,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Check if there is 1 or less players alive
         if(deadTeamsCounter >= GLOBALS.numTeams - 1)
         {
             gameState = GameState.GameOver;
         }
 
+        //State Machine
         switch (gameState)
         {
             case GameState.TurnTransition:
@@ -265,9 +268,17 @@ public class GameManager : MonoBehaviour
 
                 break;
 
+            case GameState.WhatchingShot:
+                //***************************TODO**************************
+                /*
+                 * Tell camara to look at projectile
+                */
+                break;
+
             case GameState.Pause:
                 //***************************TODO**************************
                 //Adjust timer to not being afected by the pause
+                //Probably just add Time.deltaTime to gameClock and turnClock
                 
                 break;
 

@@ -2505,6 +2505,7 @@ MonoBehaviour:
   soldierPrefab: {fileID: 1591137666376314641, guid: 0adea04687411fc41b85b093f40fc10d,
     type: 3}
   spawnOffset: {x: -18, y: 10, z: 0}
+  deadTeamsCounter: 0
   teamsHealth: 00000000000000000000000000000000
   currTeamTurn: 0
   currSoldierTurn: 
@@ -4594,7 +4595,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   timePerTurn: 60
-  timeBetweenTurns: 5
+  timeBetweenTurns: 3
   TimePerGame: 1200
 --- !u!4 &1289858339
 Transform:
