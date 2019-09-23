@@ -30,7 +30,7 @@ public class GlobalVariables : MonoBehaviour
 
     //TIME related variables
     public float timePerTurn = 60f; //1 minute
-    public float timeBetweenTurns = 5f; // 5 seconds
+    public float timeBetweenTurns = 3f; // 3 seconds
     public float TimePerGame = 60f * 20f; // 20 minutes
 
 
