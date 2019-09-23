@@ -35,7 +35,7 @@ Weapons
         Portal Shooter (grenade)
         Moon boots
         Jetpack
-    
+
 
 Priority
     Game manager and menu
@@ -57,7 +57,7 @@ What platform (hardware and software), and why you've decided to make this game
     PC, easier to test than mobile, performance
 
 Your plan for art and audio content for the game
-    Assets, making animations, sounds 
+    Assets, making animations, sounds
 
 A rough breakdown of your current plan on which member of the team will do which aspects of the game (knowing that could change as the project moves forward)
     Fernando- Animations, Game state management
@@ -113,7 +113,7 @@ Main Menu
         Color selection
             Individual choosing versus automatic
 
-        Enable/disable 
+        Enable/disable
             Weapon drops
             Health packs
 
@@ -138,6 +138,21 @@ Map Themes
     Mario-inspired
     Minecraft
 
-    
-
-
+OPTIONS:
+    1. TEAMS
+        - number of teams DROPDOWN
+        - AI or Player TICK
+        - team color DROPDOWN? / uhhh wheel popup? idk
+        - team name FIELD
+        - team member names FIELD
+    2. MAP SELECTION
+        - style (dirt, beach, etc) DROPDOWN
+        - generate BUTTON
+        - map preview WINDOW
+    3. ADVANCED
+        - turn timer DROPDOWN
+        - game timer DROPDOWN
+        - win condition DROPDOWN
+        - player health FIELD
+        - supply crates FIELD
+        - # players per team?
