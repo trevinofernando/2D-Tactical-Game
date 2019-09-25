@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
 
+        spawnLocations = gameObject.GetComponent<GenerateMap>().generateMap();
+
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {

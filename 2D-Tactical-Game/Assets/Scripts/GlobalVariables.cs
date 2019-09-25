@@ -9,6 +9,9 @@ public class GlobalVariables : MonoBehaviour
 
     //*********GLOBAL VARIABLES*********//
 
+    //MAP related variables
+    public int[][] mapState;
+
 
 
     //TEAMS related variables
