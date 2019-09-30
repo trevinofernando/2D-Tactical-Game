@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private GlobalVariables GLOBALS;
+    public CameraController cam;
     public GameObject soldierPrefab;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
 
-        spawnLocations = gameObject.GetComponent<GenerateMap>().generateMap();
+        //spawnLocations = gameObject.GetComponent<GenerateMap>().generateMap();
 
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
@@ -106,6 +107,7 @@ public class GameManager : MonoBehaviour
                 ps.teamID = i;
                 ps.ID = j;
                 ps.nameGiven = GLOBALS.teamNames[i,j]; //[TeamID, SoldierID]
+                ps.cam = cam;
 
                 //Set Health of player
                 teams[i, j].GetComponent<DamageHandler>().SetHealth(GLOBALS.healthPerAvatar);
@@ -220,12 +222,16 @@ public class GameManager : MonoBehaviour
                         }
                     }
 
-                    // Activate movement Script for player or AI to play
+                    // Activate movement Script for player or AI to play and tell camera
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if(go != null)
                     {
                         go.GetComponent<PlayerMovement>().enabled = true;
                         go.GetComponent<WeaponControler>().enabled = true;
+
+                        //Tell camera which player is next in turn
+                        cam.soldier = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
+                        cam.shouldFollowTarget = true;
                     }
                     else
                     {
@@ -253,6 +259,7 @@ public class GameManager : MonoBehaviour
 
                     corutineStarted = false; //Reset coroutine check
                     isTurnFinished = false; //Reset check before changing state
+                    cam.shouldFollowTarget = false; //stop following player
                     gameState = GameState.TurnTransition;
 
                     //Stop Coroutine just in case of premature death or self injure

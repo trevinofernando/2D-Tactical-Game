@@ -9,7 +9,8 @@ public class PlayerSettings : MonoBehaviour
     public string nameGiven;
     public SpriteRenderer bodySprite;
     public GameManager gameManager;
-   
+    public CameraController cam;
+
 
     public void SetColor(Color newColor)//RBGA
     {
