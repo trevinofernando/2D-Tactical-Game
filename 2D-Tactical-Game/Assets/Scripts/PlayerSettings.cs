@@ -7,6 +7,7 @@ public class PlayerSettings : MonoBehaviour
     public int ID;
     public int teamID;
     public string nameGiven;
+    public bool isMyTurn = false;
     public SpriteRenderer bodySprite;
     public GameManager gameManager;
     public CameraController cam;

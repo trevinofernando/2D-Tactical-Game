@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     public float distanceOffsetY = 0.4f;
     public bool isGrounded;
     public LayerMask ground;
-    public bool isJumping = false;
 
     private float moveDirection;
     private Rigidbody2D rb;
@@ -85,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         //Direct cast from Vector3 to Vector2
         playerPosition = transform.position;
 
@@ -103,12 +103,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
 
 
-
         //Check if we are in the ground
         if (isGrounded)
         {
             //If we are on the ground, then we are not jumping
-            isJumping = false;
             anim.SetBool("isJumping", false);
 
             //But we can jump, so check for Up arrow, Space or "w"
@@ -119,7 +117,6 @@ public class PlayerMovement : MonoBehaviour
                 //Debug.Log("Jump");
                 anim.SetTrigger("takeOff");
                 anim.SetBool("isJumping", true);
-                isJumping = true;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }
