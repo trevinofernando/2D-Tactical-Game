@@ -336,6 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26371c8ad3ff06c4da267a2c1e8c0a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   soldierPrefab: {fileID: 1591137666376314641, guid: 0adea04687411fc41b85b093f40fc10d,
     type: 3}
   spawnOffset: {x: -18, y: 10, z: 0}
