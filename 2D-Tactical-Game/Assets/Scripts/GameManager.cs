@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject soldierPrefab;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
+    public MapInitializer mapInitializer;
 
     //Teams related variables
     private GameObject[,] teams; //[TeamID][SoldierID]
@@ -86,7 +87,9 @@ public class GameManager : MonoBehaviour
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
 
-        spawnLocations = gameObject.GetComponent<MapGenerator>().GenerateMap();
+
+        mapInitializer = gameObject.GetComponent<MapInitializer>();
+
 
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)

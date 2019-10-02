@@ -275,7 +275,7 @@ MonoBehaviour:
   soldierPrefab: {fileID: 1591137666376314641, guid: 0adea04687411fc41b85b093f40fc10d,
     type: 3}
   spawnOffset: {x: 0, y: 20, z: 0}
-  mapInitializer: {fileID: 0}
+  mapInitializer: {fileID: 1179372301}
   deadTeamsCounter: 0
   teamsHealth: 00000000000000000000000000000000
   currTeamTurn: 0
@@ -435,6 +435,7 @@ MonoBehaviour:
   numPlayersNPCs: 0
   teamSize: 4
   healthPerAvatar: 100
+  gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
