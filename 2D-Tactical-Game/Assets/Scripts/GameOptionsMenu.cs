@@ -6,11 +6,13 @@ using TMPro;
 
 public class GameOptionsMenu : MonoBehaviour
 {
- 
+    // the team object array
     public SampleTeam[] teams = new SampleTeam[8];
+    
+    // object variables tied to team submenu
     public TMP_InputField[] namesTMP;
     public GameObject[] namesObjects;
-    public TMP_InputField teamTMP;
+    public TMP_InputField teamNameTMP;
     public TextMeshProUGUI teamTitle;
     public TextMeshProUGUI numTeamsTMP;
     public TextMeshProUGUI teamSizeTMP;
@@ -18,17 +20,22 @@ public class GameOptionsMenu : MonoBehaviour
     public TextMeshProUGUI gameTimerTMP;
     public TextMeshProUGUI playerHealthTMP;
     public Toggle isAIToggle;
+
+    // object variables tied to advanced submenu
     public Toggle supplyCrateToggle;
     public Dropdown teamColorIndex;
     public Dropdown gameModeIndex; // 1 is LTS, 2 is BTC. if 0 choose 1.
+
+    // we need to transfer these to global vars
     public int teamSize = 8;
     public int numTeams = 8;
-    public int currentTeamShowing;
-    public int turnTimer;
-    public int gameTimer;
+    public double turnTimer;
+    public double gameTimer;
     public int playerHealth;
-    public int enableSupplyCrates;
+    public bool enableSupplyCrates;
     public int gameMode;
+
+    public int currentTeamShowing;
 
     public Color[] teamColors =
     {
@@ -59,21 +66,27 @@ public class GameOptionsMenu : MonoBehaviour
             }
         }
 
-        teamTMP.text = teams[0].teamName;
+        // initialize team name field
+        teamNameTMP.text = teams[0].teamName;
         teamTitle.text = ("Team 1:");
+
+        // initialize numTeams slider
         numTeams = 2;
         numTeamsTMP.text = numTeams.ToString();
+        
+        // initialize teamSize slider
         teamSize = 4;
         teamSizeTMP.text = teamSize.ToString();
+        
+        // initialize the sliders
         SetPlayersPerTeam(4);
-        SetTurnTImer(6);
-        SetGameTImer(1);
+        SetTurnTimer(6);
+        SetGameTimer(1);
         SetPlayerHealth(100);
     }
 
     public void NextTeam ()
     {
-        Debug.Log("Next");
         SavePlayerFields();
         if (currentTeamShowing < numTeams - 1)
         {
@@ -85,7 +98,6 @@ public class GameOptionsMenu : MonoBehaviour
 
     public void PreviousTeam ()
     {
-        Debug.Log("Back");
         SavePlayerFields();
         if (currentTeamShowing > 0)
         {
@@ -96,7 +108,7 @@ public class GameOptionsMenu : MonoBehaviour
 
     public void UpdateTeamNames ()
     {
-        teamTMP.text = teams[currentTeamShowing].teamName;
+        teamNameTMP.text = teams[currentTeamShowing].teamName;
         teamTitle.text = ("Team " + (currentTeamShowing + 1).ToString() + ":");
         isAIToggle.isOn = teams[currentTeamShowing].isAI;
         teamColorIndex.value = teams[currentTeamShowing].teamColorIndex;
@@ -108,7 +120,7 @@ public class GameOptionsMenu : MonoBehaviour
 
     public void SavePlayerFields ()
     {
-        teams[currentTeamShowing].teamName = teamTMP.text;
+        teams[currentTeamShowing].teamName = teamNameTMP.text;
         teams[currentTeamShowing].isAI = isAIToggle.isOn;
         Debug.Log("Color is " + teamColorIndex.value);
         teams[currentTeamShowing].teamColorIndex = teamColorIndex.value;
@@ -122,19 +134,16 @@ public class GameOptionsMenu : MonoBehaviour
     {
         numTeams = (int)sliderValue;
         numTeamsTMP.text = numTeams.ToString();
-        Debug.Log(numTeams);
         if (currentTeamShowing >= numTeams)
         {
             PreviousTeam();
         }
-
     }
 
     public void SetPlayersPerTeam (float sliderValue)
     {
         teamSize = (int)sliderValue;
         teamSizeTMP.text = teamSize.ToString();
-        Debug.Log(teamSize);
         // hide the remaining player slots
         for (int hideElement = 7; (hideElement - teamSize) >= 0; hideElement--)
         {
@@ -144,20 +153,18 @@ public class GameOptionsMenu : MonoBehaviour
         {
             namesObjects[showElement].SetActive(true);
         }
-
-
     }
 
-    public void SetTurnTImer (float sliderValue)
+    public void SetTurnTimer (float sliderValue)
     {
-        turnTimer = (int)sliderValue * 5;
-        turnTimerTMP.text = (turnTimer.ToString() + " seconds");
+        turnTimer = sliderValue * 5;
+        turnTimerTMP.text = (((int)turnTimer).ToString() + " seconds");
     }
 
-    public void SetGameTImer(float sliderValue)
+    public void SetGameTimer(float sliderValue)
     {
-        gameTimer = (int)sliderValue * 5;
-        gameTimerTMP.text = (gameTimer.ToString() + " minutes");
+        gameTimer = sliderValue * 5;
+        gameTimerTMP.text = (((int)gameTimer).ToString() + " minutes");
     }
 
     public void SetPlayerHealth(float sliderValue)
@@ -165,6 +172,7 @@ public class GameOptionsMenu : MonoBehaviour
         playerHealth = (int)sliderValue;
         playerHealthTMP.text = (playerHealth.ToString() + " HP");
     }
+
     public void FindAdequateColor (int invalidTeam)
     {
         int checker = 0;
@@ -172,46 +180,97 @@ public class GameOptionsMenu : MonoBehaviour
         // rotate through each color
         for (int colorIndex = 1; colorIndex < 9; colorIndex++)
         {
+            Debug.Log("Checking color " + colorIndex);
             checker = 0;
             // check each team's color to see if its taken
             for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
             {
+                Debug.Log("Checking team " + invalidTeam + " with team " + teamNumber);
                 if (teamNumber == invalidTeam)
                 {
+                    Debug.Log("Same team, NEXT!!!");
                     continue;
                 }
-                if (teams[invalidTeam].teamColor == teams[teamNumber].teamColor)
+                if (colorIndex == teams[teamNumber].teamColorIndex)
                 {
+                    Debug.Log("Same color, TOSS IT OUT!!");
                     checker++;
                     break;
                 }
+                Debug.Log("made it through the for loop");
             }
 
+            Debug.Log("checking the checker of size " + checker);
             if (checker == 0)
             {
-                teams[invalidTeam].teamColor = teamColors[colorIndex];
+                Debug.Log("Looks like we found a match, bois. colorIndex is " + colorIndex);
+                teams[invalidTeam].teamColorIndex = colorIndex;
+                break;
             }
-
+            Debug.Log("changing the color now.");
         }
     }
 
+    public void CheckForColorConflicts ()
+    {
+        // needs to check every team to see if there is a duplicate color choice
+        for (int alphaTeam = 0; alphaTeam < numTeams; alphaTeam++)
+        {
+            for (int betaTeam = alphaTeam + 1; betaTeam < numTeams; betaTeam++)
+            {
+                Debug.Log("Checking team " + alphaTeam + " with team " + betaTeam);
+                if (teams[alphaTeam].teamColorIndex == teams[betaTeam].teamColorIndex)
+                {
+                    Debug.Log("SAME COLOR!! Fixing team " + betaTeam);
+                    FindAdequateColor(betaTeam);
+                }
+            }
+        }
+    }
+
+    public void UpdateEverythingElse ()
+    {
+        // game mode, supply crates
+        gameMode = gameModeIndex.value;
+        if (gameMode == 0)
+            gameMode++;
+
+        enableSupplyCrates = supplyCrateToggle.isOn;
+    }
+
+    public void SetOfficialTeamColors ()
+    {
+        for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
+        {
+            teams[teamNumber].teamColor = teamColors[teams[teamNumber].teamColorIndex];
+        }
+    }
     public void BeginGame ()
     {
         Debug.Log("START MATCH");
-        // transfer everything to global variables
+        // check for color conflicts
+        Debug.Log("Checking for color conflicts...");
+        CheckForColorConflicts();
+        Debug.Log("Successfully resolved any color conflicts.");
 
-        // this will be the call to transfer all the valiables to Global Vars
+        // set team colors officially
+        SetOfficialTeamColors();
+        Debug.Log("Successfully established official team colors.");
+
+        // fetch the advanced options that haven't been updated yet
+        UpdateEverythingElse();
+        Debug.Log("Successfully updated everything else.");
+
+        // transfer everything to global variables
         // need to transfer:
-        // - number of teams
-        // - number of human teams / AI teams
-        // - players per team
-        // - health per player
-        // - all of the team names AND player names in the form of a 2D array
-        // - the team colors
-        // - time per turn
-        // - time of entire game
+        // - number of teams (numTeams)
+        // - number of human teams / AI teams (can reference a method that establishes this)
+        // - players per team (teamSize)
+        // - health per player (playerHealth)
+        // - all of the team names AND player names in the form of a 2D array (can reference teams[] in a method)
+        // - the team colors (for loop, teams[i].teamColor)
+        // - time per turn (turnTimer)
+        // - time of entire game (gameTimer)
         // - *time between turns? probably not
-        //
-        // NEED TO CHECK FOR DUPLICATE COLORS OR UNSELECTED COLORS AND CHOOSE ACCORDINGLY
     }
 }

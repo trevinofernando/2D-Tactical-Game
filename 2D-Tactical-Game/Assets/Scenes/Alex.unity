@@ -12441,7 +12441,7 @@ MonoBehaviour:
   - {fileID: 27238084}
   - {fileID: 2134664869}
   - {fileID: 1070186108}
-  teamTMP: {fileID: 769106372}
+  teamNameTMP: {fileID: 769106372}
   teamTitle: {fileID: 230581181}
   numTeamsTMP: {fileID: 641183870}
   teamSizeTMP: {fileID: 421639171}
@@ -12454,12 +12454,12 @@ MonoBehaviour:
   gameModeIndex: {fileID: 1494556993}
   teamSize: 8
   numTeams: 8
-  currentTeamShowing: 0
   turnTimer: 0
   gameTimer: 0
   playerHealth: 0
   enableSupplyCrates: 0
   gameMode: 0
+  currentTeamShowing: 0
   teamColors:
   - {r: 0, g: 0, b: 0, a: 0}
   - {r: 1, g: 0, b: 0, a: 1}
@@ -13978,7 +13978,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1247540688}
-        m_MethodName: SetGameTImer
+        m_MethodName: SetGameTimer
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16581,7 +16581,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1247540688}
-        m_MethodName: SetTurnTImer
+        m_MethodName: SetTurnTimer
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
