@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOptionsMenu : MonoBehaviour
 {
     // the team object array
     public SampleTeam[] teams = new SampleTeam[8];
+    private GlobalVariables GLOBALS;
     
     // object variables tied to team submenu
     public TMP_InputField[] namesTMP;
@@ -29,8 +31,8 @@ public class GameOptionsMenu : MonoBehaviour
     // we need to transfer these to global vars
     public int teamSize = 8;
     public int numTeams = 8;
-    public double turnTimer;
-    public double gameTimer;
+    public float turnTimer;
+    public float gameTimer;
     public int playerHealth;
     public bool enableSupplyCrates;
     public int gameMode;
@@ -52,6 +54,7 @@ public class GameOptionsMenu : MonoBehaviour
 
     public void Start ()
     {
+        GLOBALS = GlobalVariables.Instance;
 
         for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
         {
@@ -216,6 +219,9 @@ public class GameOptionsMenu : MonoBehaviour
         // needs to check every team to see if there is a duplicate color choice
         for (int alphaTeam = 0; alphaTeam < numTeams; alphaTeam++)
         {
+            if (teams[alphaTeam].teamColorIndex == 0)
+                FindAdequateColor(alphaTeam);
+
             for (int betaTeam = alphaTeam + 1; betaTeam < numTeams; betaTeam++)
             {
                 Debug.Log("Checking team " + alphaTeam + " with team " + betaTeam);
@@ -261,16 +267,29 @@ public class GameOptionsMenu : MonoBehaviour
         UpdateEverythingElse();
         Debug.Log("Successfully updated everything else.");
 
+        GLOBALS.numTeams = numTeams;
+        GLOBALS.teamSize = teamSize;
+        GLOBALS.healthPerAvatar = playerHealth;
+        GLOBALS.timePerTurn = turnTimer;
+        GLOBALS.TimePerGame = gameTimer * 60;   // convert seconds to minutes.
+        GLOBALS.gameMode = gameMode;
+
+        GLOBALS.teamColors = new Color[numTeams];
+        for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
+        {
+            GLOBALS.teams[teamNumber] = teams[teamNumber];
+            GLOBALS.teamColors[teamNumber] = teams[teamNumber].teamColor    ;
+        }
+
+        Debug.Log("Successfully updated Globals");
+
+        // swap the scenes
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
         // transfer everything to global variables
         // need to transfer:
-        // - number of teams (numTeams)
         // - number of human teams / AI teams (can reference a method that establishes this)
-        // - players per team (teamSize)
-        // - health per player (playerHealth)
         // - all of the team names AND player names in the form of a 2D array (can reference teams[] in a method)
         // - the team colors (for loop, teams[i].teamColor)
-        // - time per turn (turnTimer)
-        // - time of entire game (gameTimer)
-        // - *time between turns? probably not
     }
 }

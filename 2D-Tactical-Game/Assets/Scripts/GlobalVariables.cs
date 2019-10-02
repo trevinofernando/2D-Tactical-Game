@@ -20,7 +20,12 @@ public class GlobalVariables : MonoBehaviour
     public int numPlayersNPCs = 0;
     public int teamSize = 4;
     public int healthPerAvatar = 100;
+
+    // redundant
     public string[,] teamNames = new string[4,4]; //[Team, Soldier]
+
+    public SampleTeam[] teams = new SampleTeam[8];
+    public int gameMode = 1;
 
     public Color[] teamColors =
     {

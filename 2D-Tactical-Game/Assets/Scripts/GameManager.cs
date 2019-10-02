@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject soldierPrefab;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
+    public MapInitializer mapInitializer;
 
     //Teams related variables
     private GameObject[,] teams; //[TeamID][SoldierID]
@@ -86,7 +87,9 @@ public class GameManager : MonoBehaviour
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
 
-        //spawnLocations = gameObject.GetComponent<GenerateMap>().generateMap();
+
+        mapInitializer = gameObject.GetComponent<MapInitializer>();
+
 
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
@@ -106,7 +109,7 @@ public class GameManager : MonoBehaviour
                 ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i;
                 ps.ID = j;
-                ps.nameGiven = GLOBALS.teamNames[i,j]; //[TeamID, SoldierID]
+                ps.nameGiven = GLOBALS.teams[i].roster[j].playerName; //[TeamID, SoldierID]
                 ps.cam = cam;
 
                 //Set Health of player
@@ -226,6 +229,9 @@ public class GameManager : MonoBehaviour
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if(go != null)
                     {
+                        //**************TODO*********************************
+                        //Check for Human/AI
+
                         go.GetComponent<PlayerMovement>().enabled = true;
                         go.GetComponent<WeaponControler>().enabled = true;
 
