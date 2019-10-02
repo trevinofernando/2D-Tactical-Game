@@ -62,13 +62,17 @@ public class CameraController : MonoBehaviour
 
         //normalize speed
         speed = smoothSpeed * 10f * Time.deltaTime;
+        //move a fraction (speed) of the way between the current location and de desired location
         newPosition = Vector3.Lerp(transform.position, target.transform.position + cameraOffset, speed);
         transform.position = newPosition;
     }
     private void HandleZoom()
     {
+        //get direction and amount to zoom
         scroll = Input.GetAxis("Mouse ScrollWheel");
+        //Calculate new size
         cam.orthographicSize -= scroll * scrollSpeed * Time.deltaTime;
+        //bound the size between min and max zoom
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
     }
 
@@ -93,7 +97,7 @@ public class CameraController : MonoBehaviour
             newPosition.x -= speed * (-(mousePos + screenBorderOffset));
         }
 
-
+        //reuse mousePos for y input
         mousePos = Input.mousePosition.y;
 
         if (mousePos > Screen.height - screenBorderOffset)
@@ -105,18 +109,26 @@ public class CameraController : MonoBehaviour
             newPosition.y -= speed * (-(mousePos + screenBorderOffset));
         }
 
-
+        //set the x and y boundries between min and max edge limits
         newPosition.x = Mathf.Clamp(newPosition.x, minEdgeLimit.x, maxEdgeLimit.x);
         newPosition.y = Mathf.Clamp(newPosition.y, minEdgeLimit.y, maxEdgeLimit.y);
 
+        //if position changed
         if(transform.position != newPosition)
         {
+            //stop following target
             shouldFollowTarget = false;
+
+            //move to new location
             transform.position = newPosition;
+            
+            //stop any ongoing coroutine
             if(coroutine != null)
             {
                 StopCoroutine(coroutine); //stop previous coroutine
             }
+
+            //set and start a new corutine to reset the camera back to the player's position
             coroutine = FollowTargetIn(timeBeforeResetCamera); 
             StartCoroutine(coroutine); //start new timer
 
@@ -125,7 +137,9 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator FollowTargetIn(float waitTime)
     {
+        //wait about 5 seconds to reset camera to following the player again
         yield return new WaitForSeconds(waitTime);
+        //change camera state to following again
         shouldFollowTarget = true;
     }
 }

@@ -155,4 +155,3 @@ OPTIONS:
         - win condition DROPDOWN
         - player health FIELD
         - supply crates FIELD
-        - # players per team?
