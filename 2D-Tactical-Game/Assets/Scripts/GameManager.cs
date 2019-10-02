@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
                 ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i;
                 ps.ID = j;
-                ps.nameGiven = GLOBALS.teamNames[i,j]; //[TeamID, SoldierID]
+                ps.nameGiven = GLOBALS.teams[i].roster[j].playerName; //[TeamID, SoldierID]
                 ps.cam = cam;
 
                 //Set Health of player
@@ -226,6 +226,9 @@ public class GameManager : MonoBehaviour
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if(go != null)
                     {
+                        //**************TODO*********************************
+                        //Check for Human/AI
+
                         go.GetComponent<PlayerMovement>().enabled = true;
                         go.GetComponent<WeaponControler>().enabled = true;
 
