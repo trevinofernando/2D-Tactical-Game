@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         thisGM = gameObject.GetComponent<GameManager>();
 
 
-        mapInitializer = gameObject.GetComponent<MapInitializer>();
+        //mapInitializer = gameObject.GetComponent<MapInitializer>();
 
 
         //Create Teams
@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
                 ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i;
                 ps.ID = j;
-                ps.nameGiven = GLOBALS.teams[i].roster[j].playerName; //[TeamID, SoldierID]
+                ps.nameGiven = GLOBALS.teamNames[i, j];//GLOBALS.teams[i].roster[j].playerName;
                 ps.cam = cam;
 
                 //Set Health of player
@@ -120,8 +120,7 @@ public class GameManager : MonoBehaviour
                 teamsHealth[i] += GLOBALS.healthPerAvatar;
                 
                 //Deactivate movement script.
-                teams[i, j].GetComponent<PlayerMovement>().enabled = false;
-                teams[i, j].GetComponent<WeaponControler>().enabled = false;
+                teams[i, j].GetComponent<PlayerSettings>().isMyTurn = false;
 
             }
         }
@@ -232,8 +231,7 @@ public class GameManager : MonoBehaviour
                         //**************TODO*********************************
                         //Check for Human/AI
 
-                        go.GetComponent<PlayerMovement>().enabled = true;
-                        go.GetComponent<WeaponControler>().enabled = true;
+                        go.GetComponent<PlayerSettings>().isMyTurn = true;
 
                         //Tell camera which player is next in turn
                         cam.soldier = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
@@ -275,8 +273,7 @@ public class GameManager : MonoBehaviour
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if (go != null)
                     {
-                        go.GetComponent<PlayerMovement>().enabled = false; 
-                        go.GetComponent<WeaponControler>().enabled = false; 
+                        go.GetComponent<PlayerSettings>().isMyTurn = false;
                         //else we do nothing since the player is gone anyway
                     }
                 }

@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float moveDirection;
     private Rigidbody2D rb;
     private Animator anim;
+    private PlayerSettings ps;
 
     /*
      We will make an invisible rectangle to check if it overlaps with anything under 
@@ -45,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //Get reference to Animator component of this player object
         anim = GetComponent<Animator>();
+        //Get reference to PlayerSettings component of this player object
+        ps = GetComponent<PlayerSettings>();
         //Get reference to CapsuleCollider2D component of this player object
         colliderInfo = GetComponent<CapsuleCollider2D>();
 
@@ -63,64 +66,59 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-
-        /*  HORIZIONTAL Movement Animations */
-        if (moveDirection > 0) //Check for Right arrow or "d"
+        if (ps.isMyTurn)
         {
-            //transform.eulerAngles = new Vector3(0, 0, 0);
-            anim.SetBool("isWalking", true);
+            if (moveDirection == 0) 
+            {
+                anim.SetBool("isWalking", false);
+            }
+            else
+            {
+                anim.SetBool("isWalking", true);
+            }
         }
-        else if(moveDirection < 0) //Check for Left arrow or "a"
-        {
-            //transform.eulerAngles = new Vector3(0, 180, 0);
-            anim.SetBool("isWalking", true);
-        }
-        else
-        {
-            anim.SetBool("isWalking", false);
-        }
-
     }
 
     void FixedUpdate()
     {
-        
-        //Direct cast from Vector3 to Vector2
-        playerPosition = transform.position;
-
-        //Check for any overlap area under the players feet
-        isGrounded = Physics2D.OverlapArea(
-            playerPosition + centerToBottmLeftCorner, 
-            playerPosition + centerToBottmRightCorner,
-            ground);
-
-        //Left arrow = -1, Right arrow = 1
-        //if it feels weird, try removing "Raw"
-        moveDirection = Input.GetAxisRaw("Horizontal");
-
-
-        //Move The Horiziontal axis
-        rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
-
-
-        //Check if we are in the ground
-        if (isGrounded)
+        if (ps.isMyTurn)
         {
-            //If we are on the ground, then we are not jumping
-            anim.SetBool("isJumping", false);
+            //Direct cast from Vector3 to Vector2
+            playerPosition = transform.position;
 
-            //But we can jump, so check for Up arrow, Space or "w"
-            //And check if we are relatively not moving up or down
-            //but if theres a ramp we could be moving up and down but no faster than "speed"
-            if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < speed)
+            //Check for any overlap area under the players feet
+            isGrounded = Physics2D.OverlapArea(
+                playerPosition + centerToBottmLeftCorner, 
+                playerPosition + centerToBottmRightCorner,
+                ground);
+
+            //Left arrow = -1, Right arrow = 1
+            //if it feels weird, try removing "Raw"
+            moveDirection = Input.GetAxisRaw("Horizontal");
+
+
+            //Move The Horiziontal axis
+            rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
+
+
+            //Check if we are in the ground
+            if (isGrounded)
             {
-                //Debug.Log("Jump");
-                anim.SetTrigger("takeOff");
-                anim.SetBool("isJumping", true);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                //If we are on the ground, then we are not jumping
+                anim.SetBool("isJumping", false);
+
+                //But we can jump, so check for Up arrow, Space or "w"
+                //And check if we are relatively not moving up or down
+                //but if theres a ramp we could be moving up and down but no faster than "speed"
+                if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < speed)
+                {
+                    //Debug.Log("Jump");
+                    anim.SetTrigger("takeOff");
+                    anim.SetBool("isJumping", true);
+                    rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                }
             }
         }
-
     }
 
 }

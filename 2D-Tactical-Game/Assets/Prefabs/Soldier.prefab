@@ -117,7 +117,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 256
-  isJumping: 0
 --- !u!114 &6509640893437391283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +149,10 @@ MonoBehaviour:
   ID: 0
   teamID: 0
   nameGiven: 
+  isMyTurn: 0
   bodySprite: {fileID: 1591137667599323426}
   gameManager: {fileID: 0}
+  cam: {fileID: 0}
 --- !u!114 &5352855559125752562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,10 +167,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   degreesOfDeadZone: 0.25
   weaponPivot: {fileID: 188067215955224553}
-  firePoint: {fileID: 3310176537547046930}
-  projectilePrefab: {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8,
-    type: 3}
+  weapon: {fileID: 2140574270392134435}
   playerSettings: {fileID: 5226463133170334109}
+  weaponSprites:
+  - {fileID: 0}
+  - {fileID: 21300000, guid: 268e5ad12bdc0480693757af28937bf5, type: 3}
+  - {fileID: 21300000, guid: 7bfe8c70e15184bbe8325ef7072ada76, type: 3}
+  currWeapon: 0
 --- !u!1 &1591137666620986174
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +696,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5612683250428667488}
   - component: {fileID: 7592505711494285516}
+  - component: {fileID: 1813370298514301842}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -752,7 +757,7 @@ SpriteRenderer:
   m_SortingLayerID: 1157620103
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 268e5ad12bdc0480693757af28937bf5, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -760,9 +765,36 @@ SpriteRenderer:
   m_Size: {x: 2.99, y: 0.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1813370298514301842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2140574270392134435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e29c817becbd985449951a7fc756ad14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponCode: 0
+  playerSettings: {fileID: 5226463133170334109}
+  WeaponControler: {fileID: 5352855559125752562}
+  firePoint: {fileID: 3310176537547046930}
+  projectilePrefab:
+  - {fileID: 0}
+  - {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

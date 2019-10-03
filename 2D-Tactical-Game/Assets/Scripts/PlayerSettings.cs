@@ -11,8 +11,13 @@ public class PlayerSettings : MonoBehaviour
     public SpriteRenderer bodySprite;
     public GameManager gameManager;
     public CameraController cam;
+    private Animator anim;
 
-
+    void Start()
+    {
+        //Get reference to Animator component of this player object
+        anim = GetComponent<Animator>();
+    }
     public void SetColor(Color newColor)//RBGA
     {
         bodySprite.color = newColor;
@@ -20,7 +25,14 @@ public class PlayerSettings : MonoBehaviour
 
     public void EndTurn()
     {
-        gameManager.isTurnFinished = true;
+        if(anim != null)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+        }
+        if(gameManager != null)
+            gameManager.isTurnFinished = true;
+        isMyTurn = false;
     }
 
     public void UpdateHeatlh(int newHealth)

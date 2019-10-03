@@ -8,26 +8,70 @@ public class WeaponControler : MonoBehaviour
     public float degreesOfDeadZone = 0.25f;
 
     public Transform weaponPivot;
-    public Transform firePoint;
-    public GameObject projectilePrefab;
+    public GameObject weapon;
     public PlayerSettings playerSettings;
+
+    private SpriteRenderer sprRenderer;
+    public Sprite[] weaponSprites;
+    /*
+     * 0    = Empty
+     * 1    = Bazooka
+     * 2    = 
+     * 3    =
+     * 4    =
+     * 5    =
+     * 6    =
+     * 7    =
+     * 8    =
+     * 9    =
+     * 10   =
+    */
+    private Weapon weaponScript;
+    public int currWeapon = 0;
+    private int prevWeapon = 0;
+    private int numWeapons;
 
     private Vector3 mousePosition;
 
+    void Start()
+    {
+        sprRenderer = weapon.GetComponent<SpriteRenderer>();
+        weaponScript = weapon.GetComponent<Weapon>();
+        numWeapons = weaponSprites.Length;
+    }
+
     void Update()
     {
-        AimToMouse();
-        
-        //Shoot if we leftclick on the mouse
-        if (Input.GetButtonDown("Fire1"))
+        if (playerSettings.isMyTurn)
         {
-            Shoot();
-            playerSettings.EndTurn();
+            AimToMouse();
+
+            prevWeapon = currWeapon;
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                currWeapon = (currWeapon + 1) % numWeapons; //next weapon
+            }
+            else if(Input.GetKeyDown(KeyCode.Q))
+            {
+                currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
+            }
+            
+            if(prevWeapon != currWeapon)
+            {
+                ChangeWeapon();
+            }
         }
 
     }
 
-    void Shoot()
+    void ChangeWeapon()
+    {
+        weaponScript.weaponCode = currWeapon; //update weapon script
+        sprRenderer.sprite = weaponSprites[currWeapon]; //change to corresponding sprite
+    }
+
+    public void Shoot(GameObject projectilePrefab, Transform firePoint)
     {
         if(projectilePrefab != null )
         {
