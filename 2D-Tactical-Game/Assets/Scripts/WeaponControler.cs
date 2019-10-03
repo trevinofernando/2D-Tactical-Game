@@ -27,7 +27,7 @@ public class WeaponControler : MonoBehaviour
      * 10   =
     */
     private Weapon weaponScript;
-    public int currWeapon = 0;
+    private int currWeapon = 0;
     private int prevWeapon = 0;
     private int numWeapons;
 

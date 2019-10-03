@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     
     public PlayerSettings playerSettings;
     public WeaponControler WeaponControler;
-    public Transform firePoint;
+    public Transform firePoint1;
     public GameObject[] projectilePrefab;
 
     private bool canShoot = true;
@@ -44,7 +44,7 @@ public class Weapon : MonoBehaviour
                     {
                         Invoke("EndTurn", 3);
                         canShoot = false;
-                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint);
+                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1);
                     }
                     break;
                 default:

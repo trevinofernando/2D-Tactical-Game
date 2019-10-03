@@ -94,7 +94,7 @@ public class CameraController : MonoBehaviour
         }
         else if (mousePos < screenBorderOffset)
         {
-            newPosition.x -= speed * (-(mousePos + screenBorderOffset));
+            newPosition.x -= speed * (screenBorderOffset + Mathf.Abs(mousePos));
         }
 
         //reuse mousePos for y input
@@ -106,7 +106,7 @@ public class CameraController : MonoBehaviour
         }
         else if (mousePos < screenBorderOffset)
         {
-            newPosition.y -= speed * (-(mousePos + screenBorderOffset));
+            newPosition.y -= speed * (screenBorderOffset + Mathf.Abs(mousePos));
         }
 
         //set the x and y boundries between min and max edge limits
