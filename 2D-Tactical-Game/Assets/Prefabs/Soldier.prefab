@@ -133,7 +133,7 @@ MonoBehaviour:
   iAmDead: 0
   deathEffect: {fileID: 0}
   movementControls: {fileID: 2118373370}
-  playerSettings: {fileID: 5226463133170334109}
+  ps: {fileID: 0}
 --- !u!114 &5226463133170334109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,7 +711,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140574270392134435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.7199998, y: -0.13999993, z: 0}
+  m_LocalPosition: {x: 0.7199998, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3310176537547046930}
@@ -761,7 +761,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.99, y: 0.65}
+  m_Size: {x: 3.26, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -780,13 +780,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponCode: 0
+  endTurnDelay: 3
   playerSettings: {fileID: 5226463133170334109}
   WeaponControler: {fileID: 5352855559125752562}
   firePoint1: {fileID: 3310176537547046930}
   projectilePrefab:
   - {fileID: 0}
   - {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8, type: 3}
-  - {fileID: 0}
+  - {fileID: 283400023036061233, guid: f75c985cae36067458c5b82ac2a65cf1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
