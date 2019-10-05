@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private GlobalVariables GLOBALS;
     public CameraController cam;
     public GameObject soldierPrefab;
+    public CrosshairManager crosshairManger;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
@@ -102,15 +103,16 @@ public class GameManager : MonoBehaviour
                 //temporary spawn location until map generation is done
                 //teams[i , j] = Instantiate(avatarPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
 
-                teams[i, j].GetComponent<PlayerSettings>().gameManager = thisGM;
+                teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
+                
 
                 ps = teams[i, j].GetComponent<PlayerSettings>();
-                //Set color of player
-                ps.SetColor(GLOBALS.teamColors[i]);
-                ps.teamID = i;
-                ps.ID = j;
+                ps.gameManager = thisGM; //Self reference to each soldier to keep contact
+                ps.cam = cam; //pass camera reference
+                ps.SetColor(GLOBALS.teamColors[i]); //Set color of player
+                ps.teamID = i; //set team id (unique for each team)
+                ps.ID = j; //set player id (unique inside each team)
                 ps.nameGiven = GLOBALS.teamNames[i, j];//GLOBALS.teams[i].roster[j].playerName;
-                ps.cam = cam;
 
                 //Set Health of player
                 teams[i, j].GetComponent<DamageHandler>().SetHealth(GLOBALS.healthPerAvatar);
@@ -261,8 +263,8 @@ public class GameManager : MonoBehaviour
                 //Check if turn suddently stops because premature death or self injure and StopCoroutine()
                 if (isTurnFinished){
 
+                    
                     corutineStarted = false; //Reset coroutine check
-                    isTurnFinished = false; //Reset check before changing state
                     cam.shouldFollowTarget = false; //stop following player
                     gameState = GameState.TurnTransition;
 
@@ -273,9 +275,14 @@ public class GameManager : MonoBehaviour
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if (go != null)
                     {
-                        go.GetComponent<PlayerSettings>().isMyTurn = false;
-                        //else we do nothing since the player is gone anyway
+                        ps = go.GetComponent<PlayerSettings>();
+                        if(ps != null)
+                            ps.EndTurn(); //call clean up funtion for players end turn
+                        //else 
+                            //we do nothing since the player is gone anyway
                     }
+
+                    isTurnFinished = false; //Reset check before changing state. THIS must be CALLED at the END of this state!
                 }
 
                 break;

@@ -10,6 +10,7 @@ public class WeaponControler : MonoBehaviour
     public Transform weaponPivot;
     public GameObject weapon;
     public PlayerSettings playerSettings;
+    [System.NonSerialized] public CrosshairManager crosshairs;
 
     private SpriteRenderer sprRenderer;
     public Sprite[] weaponSprites;
@@ -57,25 +58,27 @@ public class WeaponControler : MonoBehaviour
                 currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
             }
             
+            //Only call this method if we actuallt change weapons
             if(prevWeapon != currWeapon)
             {
-                ChangeWeapon();
+                ChangeWeapon(currWeapon);
             }
         }
 
     }
 
-    void ChangeWeapon()
+    public void ChangeWeapon(int weaponChoice)
     {
-        weaponScript.weaponCode = currWeapon; //update weapon script
-        sprRenderer.sprite = weaponSprites[currWeapon]; //change to corresponding sprite
+        weaponScript.weaponCode = weaponChoice; //update weapon script
+        sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
+        crosshairs.SetCrosshairTo(weaponChoice);
     }
 
-    public void Shoot(GameObject projectilePrefab, Transform firePoint)
+    public void Shoot(GameObject projectilePrefab, Transform firePoint, Quaternion direction)
     {
         if(projectilePrefab != null )
         {
-            Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            Instantiate(projectilePrefab, firePoint.position, direction);
         }
     }
 

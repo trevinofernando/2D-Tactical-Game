@@ -1,25 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CrosshairManager : MonoBehaviour
 { 
     public Sprite[] sprites;
 
     private Vector3 mousePosition;
-    private SpriteRenderer spriteRenderer;
+    private Image img;
 
     void Awake()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        img = gameObject.GetComponent<Image>();
     }
 
     void Start()
     {
         //Hide mouse cursor to show crosshair instead
         Cursor.visible = false;
-        spriteRenderer.sprite = sprites[0];
-
+        img.sprite = sprites[0];
     }
 
     void FixedUpdate()
@@ -34,6 +34,6 @@ public class CrosshairManager : MonoBehaviour
 
     public void SetCrosshairTo(int indexOfCrosshairChoice)
     {
-        spriteRenderer.sprite = sprites[indexOfCrosshairChoice];
+        img.sprite = sprites[indexOfCrosshairChoice];
     }
 }

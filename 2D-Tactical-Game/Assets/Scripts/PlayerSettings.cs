@@ -9,14 +9,16 @@ public class PlayerSettings : MonoBehaviour
     public string nameGiven;
     public bool isMyTurn = false;
     public SpriteRenderer bodySprite;
-    public GameManager gameManager;
-    public CameraController cam;
+    [System.NonSerialized] public GameManager gameManager;
+    [System.NonSerialized] public CameraController cam;
     private Animator anim;
+    private WeaponControler weaponContr;
 
     void Start()
     {
         //Get reference to Animator component of this player object
         anim = GetComponent<Animator>();
+        weaponContr = GetComponent<WeaponControler>();
     }
     public void SetColor(Color newColor)//RBGA
     {
@@ -25,13 +27,21 @@ public class PlayerSettings : MonoBehaviour
 
     public void EndTurn()
     {
+        //Revert Animations to idle
         if(anim != null)
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isJumping", false);
         }
+
+        //Change to default weapon
+        weaponContr.ChangeWeapon(0);
+
+        //Tell gameManager the turn is done
         if(gameManager != null)
             gameManager.isTurnFinished = true;
+
+        //Let all scripts in this player know the turn is done, so they stop updating
         isMyTurn = false;
     }
 

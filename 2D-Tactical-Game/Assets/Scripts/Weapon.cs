@@ -46,12 +46,12 @@ public class Weapon : MonoBehaviour
                         //Shoot if we leftclick on the mouse
                         Invoke("EndTurn", endTurnDelay);
                         canShoot = false;
-                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1);
+                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
                         break;
                     case 2:
                         Invoke("EndTurn", endTurnDelay);
                         canShoot = false;
-                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1);
+                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
                         break;
                     default:
                         break;
