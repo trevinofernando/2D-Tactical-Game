@@ -31,6 +31,7 @@ public class WeaponControler : MonoBehaviour
     private int currWeapon = 0;
     private int prevWeapon = 0;
     private int numWeapons;
+    private GameObject go;
 
     private Vector3 mousePosition;
 
@@ -46,22 +47,24 @@ public class WeaponControler : MonoBehaviour
         if (playerSettings.isMyTurn)
         {
             AimToMouse();
-
-            prevWeapon = currWeapon;
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (weaponScript.canChangeWeapons)
             {
-                currWeapon = (currWeapon + 1) % numWeapons; //next weapon
-            }
-            else if(Input.GetKeyDown(KeyCode.Q))
-            {
-                currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
-            }
+                prevWeapon = currWeapon;
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    currWeapon = (currWeapon + 1) % numWeapons; //next weapon
+                }
+                else if(Input.GetKeyDown(KeyCode.Q))
+                {
+                    currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
+                }
             
-            //Only call this method if we actuallt change weapons
-            if(prevWeapon != currWeapon)
-            {
-                ChangeWeapon(currWeapon);
+                //Only call this method if we actuallt change weapons
+                if(prevWeapon != currWeapon)
+                {
+                    ChangeWeapon(currWeapon);
+                }
             }
         }
 
@@ -74,11 +77,19 @@ public class WeaponControler : MonoBehaviour
         crosshairs.SetCrosshairTo(weaponChoice);
     }
 
-    public void Shoot(GameObject projectilePrefab, Transform firePoint, Quaternion direction)
+    public void Shoot(GameObject projectilePrefab, Transform firePoint, Quaternion direction, Transform target = null)
     {
         if(projectilePrefab != null )
         {
-            Instantiate(projectilePrefab, firePoint.position, direction);
+            go = Instantiate(projectilePrefab, firePoint.position, direction);
+            if(target != null)
+            {
+                HomingBomb hb = go.GetComponent<HomingBomb>();
+                if(hb != null)
+                {
+                    hb.target = target.position;
+                }
+            }
         }
     }
 

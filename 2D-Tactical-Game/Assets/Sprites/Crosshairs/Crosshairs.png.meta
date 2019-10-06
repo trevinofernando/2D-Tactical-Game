@@ -10,16 +10,16 @@ TextureImporter:
     second: Crosshairs_8
   - first:
       213: 4643512889193156404
-    second: Crosshairs_2
+    second: Special
   - first:
       213: -7030421075088229959
-    second: Crosshairs_3
+    second: Shotgun
   - first:
       213: -3820606255585267655
-    second: Crosshairs_4
+    second: Heavy
   - first:
       213: -5658126617407119640
-    second: Crosshairs_5
+    second: Rifle
   - first:
       213: 2102067402093574066
     second: Crosshairs_6
@@ -125,7 +125,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Crosshairs_0
+      name: Default
       rect:
         serializedVersion: 2
         x: 2
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crosshairs_1
+      name: Precision
       rect:
         serializedVersion: 2
         x: 138
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crosshairs_2
+      name: Special
       rect:
         serializedVersion: 2
         x: 273
@@ -188,7 +188,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crosshairs_3
+      name: Shotgun
       rect:
         serializedVersion: 2
         x: 4
@@ -209,7 +209,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crosshairs_4
+      name: Heavy
       rect:
         serializedVersion: 2
         x: 138
@@ -230,7 +230,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Crosshairs_5
+      name: Rifle
       rect:
         serializedVersion: 2
         x: 277

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7354808264935725193
+--- !u!1 &1071730802671521817
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7354808264935725188}
-  - component: {fileID: 7354808264935725195}
-  - component: {fileID: 7354808264935725194}
+  - component: {fileID: 1071730802671521821}
+  - component: {fileID: 1071730802671521818}
+  - component: {fileID: 1071730802671521819}
+  - component: {fileID: 5762913170003279432}
+  - component: {fileID: -3679964008777780602}
   m_Layer: 0
-  m_Name: Crosshair
+  m_Name: HomingBomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7354808264935725188
+--- !u!4 &1071730802671521821
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354808264935725193}
+  m_GameObject: {fileID: 1071730802671521817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +34,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7354808264935725195
+--- !u!212 &1071730802671521818
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354808264935725193}
+  m_GameObject: {fileID: 1071730802671521817}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -67,40 +69,74 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -149727799
-  m_SortingLayer: 10
+  m_SortingLayerID: 1157620103
+  m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3433597805001075986, guid: cb01db0860dcc594d9d1f19225a3b36a,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39ba9b0a0130b5b45b5ef97d61ce0bb4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.32}
+  m_Size: {x: 0.6571429, y: 0.6257143}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7354808264935725194
+--- !u!50 &1071730802671521819
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071730802671521817}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
+--- !u!70 &5762913170003279432
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071730802671521817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.040638212, y: -0.0022579185}
+  m_Size: {x: 0.56643134, y: 0.3722709}
+  m_Direction: 1
+--- !u!114 &-3679964008777780602
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7354808264935725193}
+  m_GameObject: {fileID: 1071730802671521817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582b75ca0919b2341a5006329773e5dc, type: 3}
+  m_Script: {fileID: 11500000, guid: eeff559cd104ec2469646493170f345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 3433597805001075986, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: -1422151607811118223, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: 4643512889193156404, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: -7030421075088229959, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: -3820606255585267655, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: -5658126617407119640, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: 2102067402093574066, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: 414298129779726306, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
-  - {fileID: -918493542259498133, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
+  damage: 30
+  launchForce: 1000
+  speed: 15
+  rotationSpeed: 200
+  chaseTimer: 1
+  autoDestroyOnHeight: -50
+  target: {x: 0, y: 0, z: 0}
+  impactEffect: {fileID: 0}

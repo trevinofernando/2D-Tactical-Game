@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    public GameObject targetSprite;
     public int weaponCode = 0;
     /*
      * 0    = Empty
@@ -23,10 +24,14 @@ public class Weapon : MonoBehaviour
     public WeaponControler WeaponControler;
     public Transform firePoint1;
     public GameObject[] projectilePrefab;
+    public bool canChangeWeapons = true;
+
 
     private RaycastHit hit;
-    private bool canShoot = true;
+    public  bool canShoot = true;
+    private bool targetSelected = false;
     private DamageHandler dh;
+    private GameObject go;
 
 
 
@@ -36,33 +41,56 @@ public class Weapon : MonoBehaviour
         //if is not the players turn, then ignore all code
         if (playerSettings.isMyTurn)
         {
-            if (Input.GetButtonDown("Fire1") && canShoot)
+            switch (weaponCode)
             {
-                switch (weaponCode)
-                {
-                    case 0:
-                        break;
-                    case 1:
-                        //Shoot if we leftclick on the mouse
+                case 0:
+                    break;
+                case 1:
+                case 2:
+                    //Shoot if we leftclick on the mouse
+                    if (Input.GetButtonDown("Fire1") && canShoot)
+                    {
                         Invoke("EndTurn", endTurnDelay);
                         canShoot = false;
                         WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
-                        break;
-                    case 2:
-                        Invoke("EndTurn", endTurnDelay);
-                        canShoot = false;
-                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
-                        break;
-                    default:
-                        break;
-                }
+                    }
+                    break;
+                case 3:
+                    //Shoot if we leftclick on the mouse
+                    if (Input.GetButtonDown("Fire1") && canShoot)
+                    {
+                        if (!targetSelected)
+                        {
+                            targetSelected = true;
+                            canChangeWeapons = false;
+                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            mousePos.z = 0;
+                            go = Instantiate(targetSprite, mousePos, Quaternion.identity);
+                            Destroy(go, 15f); //just in case the turn ends suddently
+                        }
+                        else
+                        {
+                            Invoke("EndTurn", endTurnDelay);
+                            targetSelected = false;
+                            canShoot = false;
+                            WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation, go.transform);
+                            if (go != null)
+                            {
+                                Destroy(go, 5f);
+                            }
+                        }  
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }
 
-    void EndTurn()
+    public void EndTurn()
     {
         canShoot = true;
+        canChangeWeapons = true;
         playerSettings.EndTurn();
     }
 

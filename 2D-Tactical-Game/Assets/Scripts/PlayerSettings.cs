@@ -9,6 +9,7 @@ public class PlayerSettings : MonoBehaviour
     public string nameGiven;
     public bool isMyTurn = false;
     public SpriteRenderer bodySprite;
+    public Weapon weaponScript;
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
     private Animator anim;
@@ -36,6 +37,10 @@ public class PlayerSettings : MonoBehaviour
 
         //Change to default weapon
         weaponContr.ChangeWeapon(0);
+
+        //Reset these variable in case of sudden turn ending
+        weaponScript.canChangeWeapons = true;
+        weaponScript.canShoot = true;
 
         //Tell gameManager the turn is done
         if(gameManager != null)

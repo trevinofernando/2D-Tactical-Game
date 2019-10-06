@@ -133,7 +133,6 @@ MonoBehaviour:
   iAmDead: 0
   deathEffect: {fileID: 0}
   movementControls: {fileID: 2118373370}
-  ps: {fileID: 0}
 --- !u!114 &5226463133170334109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,8 +150,7 @@ MonoBehaviour:
   nameGiven: 
   isMyTurn: 0
   bodySprite: {fileID: 1591137667599323426}
-  gameManager: {fileID: 0}
-  cam: {fileID: 0}
+  weaponScript: {fileID: 1813370298514301842}
 --- !u!114 &5352855559125752562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,6 +171,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 21300000, guid: 268e5ad12bdc0480693757af28937bf5, type: 3}
   - {fileID: 21300000, guid: 7bfe8c70e15184bbe8325ef7072ada76, type: 3}
+  - {fileID: 21300000, guid: 2731c087e81294149b9e8d27c004bc00, type: 3}
 --- !u!1 &1591137666620986174
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,6 +778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29c817becbd985449951a7fc756ad14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetSprite: {fileID: 7354808264935725193, guid: aaddce2ab1e0d064495d83adcf51b61a,
+    type: 3}
   weaponCode: 0
   endTurnDelay: 3
   playerSettings: {fileID: 5226463133170334109}
@@ -788,13 +789,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8, type: 3}
   - {fileID: 283400023036061233, guid: f75c985cae36067458c5b82ac2a65cf1, type: 3}
+  - {fileID: 1071730802671521817, guid: 763ae087dedbeb94ba27d5beaa26822d, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
+  canChangeWeapons: 1
+  canShoot: 1
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0
