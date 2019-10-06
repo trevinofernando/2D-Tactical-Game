@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5762913170003279432}
   - component: {fileID: 1598543947205712218}
   m_Layer: 0
-  m_Name: Projectile_Bomb
+  m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,7 +132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09d7d24084d24f141aae952bcd62b751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 1000
+  directHitDamage: 10
   damage: 30
-  rb: {fileID: 1071730802671521819}
+  launchForce: 1000
+  explosionForce: 1500
+  extraSideForce: -10
+  explosionRadius: 4
   impactEffect: {fileID: 0}
+  autoDestroyOnHeight: -50

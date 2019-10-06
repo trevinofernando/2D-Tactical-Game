@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6651597881942285278}
   - component: {fileID: -7063731185557397749}
   m_Layer: 0
-  m_Name: MuzzleFlashSniper
+  m_Name: SniperMuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+  pushBackForce: 1250
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 1, g: 1, b: 0, a: 1}
   mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
