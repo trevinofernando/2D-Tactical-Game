@@ -11,8 +11,9 @@ public class PlayerMovement : MonoBehaviour
     public float distanceOffsetX = 0.17f;
     public float distanceOffsetY = 0.4f;
     public bool isGrounded;
-    public LayerMask ground;
+    public float groundDistance = 0.2f;
 
+    //private float 
     private float moveDirection;
     private Rigidbody2D rb;
     private Animator anim;
@@ -60,8 +61,8 @@ public class PlayerMovement : MonoBehaviour
         //Pre-compute offset distante of corners of rectangle under player
         //So we can just add it to the current position of our player and 
         //and get the right coordinate
-        centerToBottmLeftCorner = new Vector2(-colliderHalfWidth + distanceOffsetX, -colliderHalfHeight);
-        centerToBottmRightCorner = new Vector2(colliderHalfWidth - distanceOffsetX, -colliderHalfHeight - distanceOffsetY);
+        centerToBottmLeftCorner = new Vector2(-colliderHalfWidth - colliderInfo.offset.x + distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - 0.5f);
+        centerToBottmRightCorner = new Vector2(colliderHalfWidth + colliderInfo.offset.x - distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - distanceOffsetY -0.5f);
     }
 
     void Update()
@@ -87,10 +88,9 @@ public class PlayerMovement : MonoBehaviour
             playerPosition = transform.position;
 
             //Check for any overlap area under the players feet
-            isGrounded = Physics2D.OverlapArea(
-                playerPosition + centerToBottmLeftCorner, 
-                playerPosition + centerToBottmRightCorner,
-                ground);
+            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottmLeftCorner, playerPosition + centerToBottmRightCorner);
+            //isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundDistance);
+
 
             //Left arrow = -1, Right arrow = 1
             //if it feels weird, try removing "Raw"
@@ -98,7 +98,11 @@ public class PlayerMovement : MonoBehaviour
 
 
             //Move The Horiziontal axis
-            rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
+            if(moveDirection != 0)
+            {
+                //By not calling this when movement is 0, this stops bugs responsible for weird physics movements where the x axis is constrained
+                rb.AddForce(Vector2.right * moveDirection * speed);
+            }
 
 
             //Check if we are in the ground
@@ -110,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
                 //But we can jump, so check for Up arrow, Space or "w"
                 //And check if we are relatively not moving up or down
                 //but if theres a ramp we could be moving up and down but no faster than "speed"
-                if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < speed)
+                if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < 5f)
                 {
                     //Debug.Log("Jump");
                     anim.SetTrigger("takeOff");
