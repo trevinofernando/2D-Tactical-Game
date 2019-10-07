@@ -10,14 +10,14 @@ public class Weapon : MonoBehaviour
      * 0    = Empty
      * 1    = Bazooka
      * 2    = Sniper
-     * 3    =
-     * 4    =
-     * 5    =
-     * 6    =
-     * 7    =
-     * 8    =
-     * 9    =
-     * 10   =
+     * 3    = Homing Bazooka
+     * 4    = 
+     * 5    = 
+     * 6    = 
+     * 7    = 
+     * 8    = 
+     * 9    = 
+     * 10   = 
     */
     public float endTurnDelay = 3f;
     public PlayerSettings playerSettings;

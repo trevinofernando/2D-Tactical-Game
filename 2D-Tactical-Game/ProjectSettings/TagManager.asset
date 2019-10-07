@@ -73,3 +73,6 @@ TagManager:
   - name: Crosshair
     uniqueID: 4145239497
     locked: 0
+  - name: Water
+    uniqueID: 3093170725
+    locked: 0

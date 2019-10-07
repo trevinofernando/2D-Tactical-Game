@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public MapInitializer mapInitializer;
 
     //Teams related variables
-    private GameObject[,] teams; //[TeamID][SoldierID]
+    private GameObject[,] teams; //[TeamID, SoldierID]
     public int deadTeamsCounter = 0; 
     public int[] teamsHealth; //[TeamID]
     public int[,] soldiersHealth; //[TeamID, SoldierID]
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
         isTurnFinished = false; //Set initial state
 
         /****** TODO: Call Map generator and get spawn locations *******/
-        // spawnLocations = GenerateMap(GLOBALS.numTeams * GLOBALS.teamSize);
+        spawnLocations = mapInitializer.GenerateMap();
 
 
         //Initialize array to hold each soldier object team[Team][Avatar]
@@ -99,9 +99,9 @@ public class GameManager : MonoBehaviour
             {
                 spawnOffset.x += 2; //temporary offset until map generation is done
                 //Spawn Player
-                teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
+                //teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
                 //temporary spawn location until map generation is done
-                //teams[i , j] = Instantiate(avatarPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
+                teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
 
                 teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
                 
@@ -109,10 +109,18 @@ public class GameManager : MonoBehaviour
                 ps = teams[i, j].GetComponent<PlayerSettings>();
                 ps.gameManager = thisGM; //Self reference to each soldier to keep contact
                 ps.cam = cam; //pass camera reference
-                ps.SetColor(GLOBALS.teamColors[i]); //Set color of player
+                ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i; //set team id (unique for each team)
                 ps.ID = j; //set player id (unique inside each team)
-                ps.nameGiven = GLOBALS.teamNames[i, j];//GLOBALS.teams[i].roster[j].playerName;
+
+                if(GLOBALS.teams[i] != null)
+                {
+                    ps.nameGiven = GLOBALS.teams[i].roster[j].playerName;
+                }
+                else
+                {
+                    ps.nameGiven = GLOBALS.teamNames[i, j];//GLOBALS.teams[i].roster[j].playerName;
+                }
 
                 //Set Health of player
                 teams[i, j].GetComponent<DamageHandler>().SetHealth(GLOBALS.healthPerAvatar);
