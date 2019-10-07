@@ -71,7 +71,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 1591137666376314641}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1044a1ffb1c095f458448d06dfc70d62, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -109,12 +109,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45b538223a974f459247c687a44a2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
-  jumpForce: 17
-  distanceOffsetX: 0.35
-  distanceOffsetY: 0.01
+  speed: 5
+  jumpForce: 15
+  distanceOffsetX: 0.15
+  distanceOffsetY: 0.38
   isGrounded: 0
-  groundDistance: 0.2
+  ground:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &6509640893437391283
 MonoBehaviour:
   m_ObjectHideFlags: 0

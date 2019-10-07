@@ -5,12 +5,12 @@ using UnityEngine;
 public class MuzzleFlashSniperScript : MonoBehaviour
 {
     public int damage = 50;
-    public float pushBackForce = 1250f;
     public Color startColor = new Color(1, 1, 0, 1); //Yellow
     public Color endColor = new Color(1, 1, 1, 1); //White
     public Material mat;
     public float traceDuration = 0.05f;
     private RaycastHit2D hit;
+    private DamageHandler dh;
     private Vector2 origin;
     private Vector2 direction;
     private Vector3 dir3;
@@ -36,20 +36,12 @@ public class MuzzleFlashSniperScript : MonoBehaviour
             DrawLine(transform.position, hit.point, startColor, endColor, traceDuration);
             
             //Get the DamageHandler component from the target hit
-            DamageHandler dh = hit.transform.GetComponent<DamageHandler>();
+            dh = hit.transform.GetComponent<DamageHandler>();
 
             //Damage target if we can
             if (dh != null)
             {
                 dh.TakeDamage(damage);
-
-                //get rigidbody to add a force to reflect the impact
-                Rigidbody2D rb = hit.transform.GetComponent<Rigidbody2D>();
-                if(rb != null)
-                {
-                    //Only add force if component have a rigidbody2D
-                    rb.AddForce(direction * pushBackForce);
-                }
             }
         }
         else

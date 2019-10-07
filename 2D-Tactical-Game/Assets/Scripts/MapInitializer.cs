@@ -85,7 +85,7 @@ public class MapInitializer : MonoBehaviour
     public void GenerateMap()
     {
         //How big the map will be based on number of players
-        mapState = new int[scaleToPlayersX * 5, scaleToPlayersY * 5];
+        mapState = new int[1000, 1000];
 
         //Base Platform
         for (int y = 0; y < scaleToPlayersY; y++)
@@ -104,7 +104,7 @@ public class MapInitializer : MonoBehaviour
         yCoordinate = scaleToPlayersY;
 
         //Add tiles
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 50; i++)
         {
             RandomlyPickPlatform();
         }
@@ -139,8 +139,8 @@ public class MapInitializer : MonoBehaviour
     //Skips between 1 and 3 tiles in the x and y direction
     private void SkipTiles()
     {
-        int skipX = Random.Range(0, 4);
-        int skipY = Random.Range(0, 4);
+        int skipX = Random.Range(0, 2);
+        int skipY = Random.Range(0, 1);
 
         xCoordinate += skipX;
         yCoordinate += skipY;
