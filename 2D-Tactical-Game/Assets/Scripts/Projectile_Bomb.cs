@@ -56,9 +56,10 @@ public class Projectile_Bomb : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         }
 
-        //
+        //Get all colliders in a circular area of radius "explosionRadious"
         Collider2D[] collisions = Physics2D.OverlapCircleAll( transform.position, explosionRadius);
 
+        //Loop thru each collider
         foreach(Collider2D col in collisions)
         {
             //get rigidbody and add a repulsive force

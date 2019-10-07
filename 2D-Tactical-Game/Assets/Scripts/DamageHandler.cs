@@ -90,6 +90,12 @@ public class DamageHandler : MonoBehaviour
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
+
+        if (ps.isMyTurn)
+        {
+            ps.EndTurn();
+        }
+
         //wait 6 seconds before destroyng this game object, to let the animations play
         //WARNING, this is a calculated time, if death animation changes, then this code needs to be generalized
         //but for now this will do the trick just fine
