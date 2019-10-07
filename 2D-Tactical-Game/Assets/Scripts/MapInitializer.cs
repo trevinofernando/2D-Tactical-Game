@@ -31,7 +31,7 @@ public class MapInitializer : MonoBehaviour
         gameObjects = new List<GameObject>();
         numPlayers = GLOBALS.numTeams * GLOBALS.teamSize;
         GenerateMap();
-        //GenerateSpawnLocations();
+        GenerateSpawnLocations();
         GenerateProps();
         GenerateBoss();
     }
@@ -86,6 +86,9 @@ public class MapInitializer : MonoBehaviour
     {
         //How big the map will be based on number of players
         mapState = new int[1000, 1000];
+
+        scaleToPlayersX *= numPlayers;
+        scaleToPlayersY *= numPlayers;
 
         //Base Platform
         for (int y = 0; y < scaleToPlayersY; y++)
