@@ -133,10 +133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directHitDamage: 10
-  damage: 30
+  damage: 40
   launchForce: 1000
-  explosionForce: 1500
-  extraSideForce: -10
-  explosionRadius: 4
+  explosionForce: 1000
+  extraSideForce: -5
+  explosionRadius: 5
   impactEffect: {fileID: 0}
   autoDestroyOnHeight: -50

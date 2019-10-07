@@ -132,8 +132,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeff559cd104ec2469646493170f345e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directHitDamage: 10
   damage: 30
   launchForce: 1000
+  explosionForce: 800
+  extraSideForce: -5
+  explosionRadius: 4
   speed: 15
   rotationSpeed: 200
   chaseTimer: 1

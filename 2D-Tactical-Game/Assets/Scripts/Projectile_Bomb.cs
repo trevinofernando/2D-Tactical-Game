@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile_Bomb : MonoBehaviour
 {
     public int directHitDamage = 10;
-    public int damage = 30;
+    public int damage = 40;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
     public float extraSideForce = 10f;

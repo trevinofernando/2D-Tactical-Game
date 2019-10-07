@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class HomingBomb : MonoBehaviour
 {
+    
+    public int directHitDamage = 10;
     public int damage = 30;
     public float launchForce = 1000f;
+    public float explosionForce = 800f;
+    public float extraSideForce = -5f;
+    public float explosionRadius = 4f;
     public float speed = 100f;
     public float rotationSpeed = 250f;
     public float chaseTimer = 1f;
@@ -59,13 +64,35 @@ public class HomingBomb : MonoBehaviour
         //Make sure target has a DamageHandler script, and if so then inflict damage.
         if (target != null)
         {
-            target.TakeDamage(damage);
+            target.TakeDamage(directHitDamage);
         }
 
         //Create an impact effect like an explosion
         if (impactEffect != null)
         {
             Instantiate(impactEffect, transform.position, Quaternion.identity);
+        }
+
+        //
+        Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+
+        foreach (Collider2D col in collisions)
+        {
+            //get rigidbody and add a repulsive force
+            rb = col.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraSideForce);
+            }
+
+            //get damageHandler script and apply damage depending on distance
+            target = col.GetComponent<DamageHandler>();
+            if (target != null)
+            {
+                var dir = (col.transform.position - transform.position);
+                float wearoff = 1 - (dir.magnitude / explosionRadius);
+                target.TakeDamage((int)(damage * wearoff));
+            }
         }
 
         Destroy(gameObject);
