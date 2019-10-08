@@ -28,23 +28,28 @@ public class PlayerSettings : MonoBehaviour
 
     public void EndTurn()
     {
-        //Revert Animations to idle
-        if(anim != null)
+        if (isMyTurn)
         {
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isJumping", false);
+            //Revert Animations to idle
+            if(anim != null)
+            {
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isJumping", false);
+            }
+
+            //Change to default weapon
+            weaponContr.ChangeWeapon(0);
+
+            //Reset these variable in case of sudden turn ending
+            weaponScript.canChangeWeapons = true;
+            weaponScript.canShoot = true;
+
+            //Tell gameManager the turn is done
+            if(gameManager != null)
+            {
+                gameManager.isTurnFinished = true;
+            }
         }
-
-        //Change to default weapon
-        weaponContr.ChangeWeapon(0);
-
-        //Reset these variable in case of sudden turn ending
-        weaponScript.canChangeWeapons = true;
-        weaponScript.canShoot = true;
-
-        //Tell gameManager the turn is done
-        if(gameManager != null)
-            gameManager.isTurnFinished = true;
 
         //Let all scripts in this player know the turn is done, so they stop updating
         isMyTurn = false;
