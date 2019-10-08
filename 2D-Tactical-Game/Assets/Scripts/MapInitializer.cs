@@ -41,7 +41,7 @@ public class MapInitializer : MonoBehaviour
         Vector3[] spawnLocations = new Vector3[numPlayers];
         int numSpawnLocations = 0;
         bool skip = false;
-
+        /*
         while (numSpawnLocations < numPlayers)
         {
             for (int x = 0; x < xMax; x++)
@@ -60,6 +60,7 @@ public class MapInitializer : MonoBehaviour
                 }
             }
         }
+        */
     }
 
     public void RandomlyPickPlatform()

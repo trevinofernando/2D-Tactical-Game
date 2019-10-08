@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
+    public Canvas gameOverCanvas;
 
     //Teams related variables
     private GameObject[,] teams; //[TeamID, SoldierID]
@@ -35,12 +36,15 @@ public class GameManager : MonoBehaviour
     public bool suddenDeath = false;
     public bool isTurnFinished = false;
     public bool isOneTeamAlive = false;
+    public int winningTeamID;
+    public string winningTeamName;
     public AIState aiState = AIState.WaitingForTurn;
 
     //Temporary Variables
     private GameObject go;
     private GameManager thisGM;
     private PlayerSettings ps;
+
 
     public enum GameState
     {
@@ -69,7 +73,7 @@ public class GameManager : MonoBehaviour
         isTurnFinished = false; //Set initial state
 
         /****** TODO: Call Map generator and get spawn locations *******/
-        spawnLocations = mapInitializer.GenerateMap();
+        //spawnLocations = mapInitializer.GenerateMap();
 
 
         //Initialize array to hold each soldier object team[Team][Avatar]
@@ -99,9 +103,9 @@ public class GameManager : MonoBehaviour
             {
                 spawnOffset.x += 2; //temporary offset until map generation is done
                 //Spawn Player
-                //teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
+                teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
                 //temporary spawn location until map generation is done
-                teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
+                //teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
 
                 teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
                 
@@ -159,12 +163,23 @@ public class GameManager : MonoBehaviour
             {
                 deadTeamsCounter++;
             }
+            else
+            {
+                winningTeamID = i;
+            }
         }
 
         //Check if there is 1 or less players alive
         if(deadTeamsCounter >= GLOBALS.numTeams - 1)
         {
-            gameState = GameState.GameOver;
+            if(gameState == GameState.GameOver || gameState == GameState.LoadingScene)
+            {
+                gameState = GameState.LoadingScene; //change state to prevent repetitive calls to gameOver
+            }
+            else
+            {
+                gameState = GameState.GameOver;
+            }
         }
 
         //State Machine
@@ -321,6 +336,24 @@ public class GameManager : MonoBehaviour
                 /*
                  *
                 */
+
+                Debug.Log("Game Over");
+
+                //Pass the name of the winning team if there is one
+                if(GLOBALS.teams[winningTeamID] != null)
+                {
+                    gameOverCanvas.GetComponent<GameOverScreen>().winningTeamName = GLOBALS.teams[winningTeamID].teamName;
+                }
+                //pass the teamID
+                gameOverCanvas.GetComponent<GameOverScreen>().winningTeamID = winningTeamID;
+
+                //pass winning team color
+                gameOverCanvas.GetComponent<GameOverScreen>().winTeamColor = GLOBALS.teamColors[winningTeamID];
+
+
+                //Enable the game over canvas to trigger the end of the game
+                gameOverCanvas.gameObject.SetActive(true);
+
                 break;
 
             default:
