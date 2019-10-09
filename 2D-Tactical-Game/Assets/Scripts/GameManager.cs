@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
     public Canvas gameOverCanvas;
+    public SunScript sun;
 
     //Teams related variables
     private GameObject[,] teams; //[TeamID, SoldierID]
@@ -72,10 +73,6 @@ public class GameManager : MonoBehaviour
         gameState = GameState.LoadingScene;
         isTurnFinished = false; //Set initial state
 
-        /****** TODO: Call Map generator and get spawn locations *******/
-        spawnLocations = mapInitializer.GenerateMap();
-
-        Debug.Log("Size of spawn loc " + spawnLocations.Count());
 
 
         //Initialize array to hold each soldier object team[Team][Avatar]
@@ -95,8 +92,11 @@ public class GameManager : MonoBehaviour
         thisGM = gameObject.GetComponent<GameManager>();
 
 
+        /****** TODO: Call Map generator and get spawn locations *******/
+        spawnLocations = mapInitializer.GenerateMap();
         //mapInitializer = gameObject.GetComponent<MapInitializer>();
 
+        int count = 0;
 
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
                 //Spawn Player
                 //teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
                 //temporary spawn location until map generation is done
-                teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
+                teams[i , j] = Instantiate(soldierPrefab, spawnLocations[count++], transform.rotation);
 
                 teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
                 
@@ -194,10 +194,18 @@ public class GameManager : MonoBehaviour
                     corutineStarted = true;
                     coroutineTurnClock = SetTurnClock(GLOBALS.timeBetweenTurns); //time between turns should be 1 to 5 sec
                     StartCoroutine(coroutineTurnClock);
+                    //***************************TODO**************************
+                    //Chance of Enviroment Hazard activation.
+                    go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
+                    if (Random.Range(0f,1f) > .2f)
+                        if(go != null)
+                        {
+                            sun.Shoot(go.transform.position);
+                            AudioManager.instance.Play("Laser");
+                        }
                 }
 
-                //***************************TODO**************************
-                //Chance of Enviroment Hazard activation.
+                
 
                 if (isTurnFinished)
                 {

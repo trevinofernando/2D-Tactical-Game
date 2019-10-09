@@ -15,8 +15,8 @@ public class MapInitializer : MonoBehaviour
     private List<GameObject> gameObjects;
     private int xCoordinate;
     private int yCoordinate;
-    private int scaleToPlayersX = 3;
-    private int scaleToPlayersY = 1;
+    private int scaleToPlayersX = 4;
+    private int scaleToPlayersY = 3;
     private int xMax;
     private int yMax;
     private List<Vector3> spawnPoints;
@@ -29,14 +29,14 @@ public class MapInitializer : MonoBehaviour
 
 
 
-    void Start()
+    void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
         transform.position = new Vector3(0f, 0f, 0f);
         gameObjects = new List<GameObject>();
         numPlayers = GLOBALS.numTeams * GLOBALS.teamSize;
         spawnPoints = new List<Vector3>();
-        GenerateMap();
+        //GenerateMap();
     }
 
     public Vector3[] GenerateSpawnLocations()
@@ -49,7 +49,7 @@ public class MapInitializer : MonoBehaviour
             if (CanSpawn(x, randomY))
             {
                 Debug.Log("Spawn point is (" + x + "," + randomY + ")");
-                spawnPoints.Add(new Vector3(xCoordinate * positionOffSet, randomY * positionOffSet, 0));
+                spawnPoints.Add(new Vector3(x * positionOffSet, randomY * positionOffSet, 0));
             }
         }
 
@@ -57,8 +57,8 @@ public class MapInitializer : MonoBehaviour
 
         Debug.Log(spawnPoints[0]);
 
-        return spawnPoints.ToArray();
-        //return spawnPoints.OrderBy(a => System.Guid.NewGuid()).ToArray();
+        //return spawnPoints.ToArray();
+        return spawnPoints.OrderBy(a => System.Guid.NewGuid()).ToArray();
 
     }
 
@@ -162,6 +162,7 @@ public class MapInitializer : MonoBehaviour
             if (mapState[x, y] == 0)
             {
                 GameObject newTile = Instantiate(tilePrefab, transform.position + new Vector3(x * positionOffSet, y * positionOffSet, 0), transform.rotation);
+                newTile.transform.SetParent(transform);
                 gameObjects.Add(newTile);
                 mapState[x, y] = 1;
             }
