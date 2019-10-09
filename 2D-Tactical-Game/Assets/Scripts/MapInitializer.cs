@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MapInitializer : MonoBehaviour
@@ -14,14 +15,18 @@ public class MapInitializer : MonoBehaviour
     private List<GameObject> gameObjects;
     private int xCoordinate;
     private int yCoordinate;
-    private int scaleToPlayersX = 50;
-    private int scaleToPlayersY = 4;
-    private int xMax = 50;
-    private int yMax = 20;
+    private int scaleToPlayersX = 3;
+    private int scaleToPlayersY = 1;
+    private int xMax;
+    private int yMax;
+    private List<Vector3> spawnPoints;
+    private int alternate;
 
     //Values for map state:
     //0 is an empty 2*2 area
     //1 is an occupied 2*2 area
+
+
 
 
     void Start()
@@ -30,89 +35,121 @@ public class MapInitializer : MonoBehaviour
         transform.position = new Vector3(0f, 0f, 0f);
         gameObjects = new List<GameObject>();
         numPlayers = GLOBALS.numTeams * GLOBALS.teamSize;
+        spawnPoints = new List<Vector3>();
         GenerateMap();
-        GenerateSpawnLocations();
-        GenerateProps();
-        GenerateBoss();
     }
 
-    public void GenerateSpawnLocations()
+    public Vector3[] GenerateSpawnLocations()
     {
-        Vector3[] spawnLocations = new Vector3[numPlayers];
-        int numSpawnLocations = 0;
-        bool skip = false;
-        /*
-        while (numSpawnLocations < numPlayers)
-        {
-            for (int x = 0; x < xMax; x++)
-            {
-                for (int y = scaleToPlayersY; y < yMax; y++)
-                {
-                    //Skips a tile 1/3 of the time
-                    if (Random.Range(0, 3) == 0)
-                        skip = true;
 
-                    //Check if map is occupied in a space, and the space above, and something is below the player
-                    if (mapState[x, y] == 0 && mapState[x, y + 1] == 0 && mapState[x, y - 1] == 1 && !skip)
-                    {
-                        spawnLocations[numSpawnLocations++] = new Vector3(x * positionOffSet, y * positionOffSet, 0);
-                    }
-                }
+        for (int x = 0; x < xMax; x++)
+        {
+            int randomY = Random.Range(3, yMax+1);
+
+            if (CanSpawn(x, randomY))
+            {
+                Debug.Log("Spawn point is (" + x + "," + randomY + ")");
+                spawnPoints.Add(new Vector3(xCoordinate * positionOffSet, randomY * positionOffSet, 0));
             }
         }
-        */
+
+        Debug.Log(spawnPoints.Count());
+
+        Debug.Log(spawnPoints[0]);
+
+        return spawnPoints.ToArray();
+        //return spawnPoints.OrderBy(a => System.Guid.NewGuid()).ToArray();
+
+    }
+
+    public bool CanSpawn(int x, int y)
+    {
+        if (y < yMax - 1)
+        { 
+            if (mapState[x, y] == 0 && mapState[x, y+1] == 0)
+                return true;
+        }
+        return false;
     }
 
     public void RandomlyPickPlatform()
     {
-        int randomNumber = Random.Range(0, 10);
 
-        if (randomNumber < 2)
-            PlaceOneTile();
-        else if (randomNumber >= 3 && randomNumber < 5)
-            PlaceFlatPlatform();
-        else if (randomNumber >= 6 && randomNumber < 8)
-            PlaceLayeredPlatform();
-        else if (randomNumber == 8)
-            PlaceStairs();
-        else if (randomNumber == 9)
-            PlacePyramid();
-        else
-            SkipTiles();
+        switch(alternate)
+        {
+            case 0:
+                PlaceFlatPlatform();
+                if(Random.Range(0, 2) > 0)
+                {
+                    xCoordinate += 2;
+                    yCoordinate -= 2;
+                    PlaceFlatPlatform();
+                }
+                
+                break;
+            case 1:
+                PlaceLayeredPlatform();
+                xCoordinate++;
+                yCoordinate--;
+                break;
+            case 2:
+                PlacePyramid();
+                xCoordinate++;
+                break;
+            default:
+                //PlaceOneTile();
+                Debug.Log("Skipping tiles");
+                SkipTiles();
+                yCoordinate -= 8;
+                break;
+        }
+
+        //alternate++;
+        //alternate %= 3;
 
     }
 
 
-    public void GenerateMap()
+    public Vector3[] GenerateMap()
     {
         //How big the map will be based on number of players
-        mapState = new int[1000, 1000];
+        
 
-        scaleToPlayersX *= numPlayers;
-        scaleToPlayersY *= numPlayers;
+        xMax = numPlayers * scaleToPlayersX;
+        yMax = numPlayers * scaleToPlayersY;
+
+        Debug.Log("X max boundaries " + xMax + " Y max boundaries " + yMax);
+        mapState = new int[xMax, yMax];
 
         //Base Platform
-        for (int y = 0; y < scaleToPlayersY; y++)
+        for (int y = 0; y < yMax / 4; y++)
         {
-            for (int x = 0; x < scaleToPlayersX; x++)
+            for (int x = 0; x < xMax; x++)
             {
                 CreateTile(x, y);
                 mapState[x, y] = 1;
                 numTiles++;
-                //Debug.Log("Placing tile at " + "(" + x + "," + y);
+                yCoordinate = y;
+                xCoordinate = x;
             }
         }
 
         //Update to where the base platform leaves off
-        xCoordinate = 0;
-        yCoordinate = scaleToPlayersY;
+        xCoordinate = Random.Range(0, 4);
+        yCoordinate += 2;
+        Debug.Log("X is at " + xCoordinate + " Y is at " + yCoordinate);
 
         //Add tiles
-        for (int i = 0; i < 50; i++)
+        for (int i = 0; i < numPlayers /2 ; i++)
         {
             RandomlyPickPlatform();
         }
 
+        xCoordinate = 0;
+        yCoordinate -= 5;
+
+
+        return GenerateSpawnLocations();
     }
 
     /*Tile Platform Generators*/
@@ -120,12 +157,17 @@ public class MapInitializer : MonoBehaviour
     //Creates tile at given coordinate
     private void CreateTile(int x, int y)
     {
-        if (mapState[x, y] == 0)
+        if(xCoordinate < xMax && yCoordinate < yMax)
         {
-            GameObject newTile = Instantiate(tilePrefab, transform.position + new Vector3(x * positionOffSet, y * positionOffSet, 0), transform.rotation);
-            gameObjects.Add(newTile);
-            mapState[x, y] = 1;
+            if (mapState[x, y] == 0)
+            {
+                GameObject newTile = Instantiate(tilePrefab, transform.position + new Vector3(x * positionOffSet, y * positionOffSet, 0), transform.rotation);
+                gameObjects.Add(newTile);
+                mapState[x, y] = 1;
+            }
         }
+
+        
     }
 
 
@@ -133,7 +175,7 @@ public class MapInitializer : MonoBehaviour
     {
         //Iterate x coordinate and check if you need to reset x and increase y
         xCoordinate++;
-        if (xCoordinate >= scaleToPlayersX)
+        if (xCoordinate >= xMax)
         {
             xCoordinate = 0;
             yCoordinate++;
@@ -167,6 +209,10 @@ public class MapInitializer : MonoBehaviour
             CreateTile(xCoordinate, yCoordinate);
             IteratePosition();
         }
+
+
+        xCoordinate++;
+        yCoordinate += 2;
     }
 
     //Places a (2-5) x 2 size platform
