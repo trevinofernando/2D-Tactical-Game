@@ -27,43 +27,6 @@ public class AITurn : MonoBehaviour
     }
 
 
-
-    private List<GameObject> DecideTargets()
-    {
-        List<GameObject> targets = new List<GameObject>();
-
-        for(int i = 0; i < numTeams; i++)
-        {
-            if(i != myTeamId)
-            {
-                for (int j = 0; j < numPlayers; j++)
-                {
-                    if(teams[i, j] != null)
-                    {
-                        if(IsShootable(teams[i, j].transform.position))
-                        {
-                            targets.Add(teams[i, j]);
-                        }
-
-                    }
-                }
-            }
-            
-        }
-
-        return targets;
-    }
-
-    //Checks if you can ray cast to an enemy player
-    private bool IsShootable(Vector3 otherPosition)
-    {
-        raycast = Physics2D.Raycast(transform.position, (otherPosition - transform.position).normalized);
-
-        return raycast.transform.position == otherPosition;
-    }
-
-
-
     
     
 }

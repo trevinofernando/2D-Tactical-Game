@@ -73,7 +73,9 @@ public class GameManager : MonoBehaviour
         isTurnFinished = false; //Set initial state
 
         /****** TODO: Call Map generator and get spawn locations *******/
-        //spawnLocations = mapInitializer.GenerateMap();
+        spawnLocations = mapInitializer.GenerateMap();
+
+        Debug.Log("Size of spawn loc " + spawnLocations.Count());
 
 
         //Initialize array to hold each soldier object team[Team][Avatar]
@@ -103,9 +105,9 @@ public class GameManager : MonoBehaviour
             {
                 spawnOffset.x += 2; //temporary offset until map generation is done
                 //Spawn Player
-                teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
+                //teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
                 //temporary spawn location until map generation is done
-                //teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
+                teams[i , j] = Instantiate(soldierPrefab, spawnLocations[i * GLOBALS.numTeams + j], transform.rotation);
 
                 teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
                 
