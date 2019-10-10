@@ -50,3 +50,9 @@ MonoBehaviour:
     pitch: 0.98
     loop: 1
     source: {fileID: 0}
+  - name: Laser
+    clip: {fileID: 8300000, guid: 9beabfcac0c0b6d429fcddb85a95d4c7, type: 3}
+    volume: 0.342
+    pitch: 0.98
+    loop: 0
+    source: {fileID: 0}
