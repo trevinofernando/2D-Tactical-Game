@@ -143,4 +143,5 @@ MonoBehaviour:
   chaseTimer: 1
   autoDestroyOnHeight: -50
   target: {x: 0, y: 0, z: 0}
-  impactEffect: {fileID: 0}
+  impactEffect: {fileID: 2963543577588028294, guid: 315a7ddf0713d7045b116e4f480f681b,
+    type: 3}

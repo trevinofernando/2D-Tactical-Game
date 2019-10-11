@@ -76,3 +76,6 @@ TagManager:
   - name: Water
     uniqueID: 3093170725
     locked: 0
+  - name: Particles
+    uniqueID: 2237446637
+    locked: 0
