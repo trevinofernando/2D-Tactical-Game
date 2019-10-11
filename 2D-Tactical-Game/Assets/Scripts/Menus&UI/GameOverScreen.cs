@@ -14,10 +14,7 @@ public class GameOverScreen : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Game Over Canvas active");
-        Debug.Log(winningTeamID);
-        Debug.Log(winningTeamName);
-        Debug.Log(winTeamColor);
+        //if not empty name show that name, else show team number
         if(winningTeamName != "")
         {
             winnerTextHolder.text = winningTeamName;
@@ -26,6 +23,7 @@ public class GameOverScreen : MonoBehaviour
         {
             winnerTextHolder.text = "Team #" + winningTeamID.ToString();
         }
+        //set the text to be the color of the winning team 
         winnerTextHolder.color = winTeamColor;
 
     }
@@ -33,6 +31,7 @@ public class GameOverScreen : MonoBehaviour
 
     void Update()
     {
+        //check for escape key to go back to the menu
         if(Input.GetKey(KeyCode.Escape))
         {
             //Back to the menu
