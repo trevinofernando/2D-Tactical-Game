@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile_Bomb : MonoBehaviour
+public class Grenade : MonoBehaviour
 {
-    public int directHitDamage = 10;
-    public int damage = 40;
+    public int damage = 60;
+    public int timer = 3;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
     public float extraSideForce = 10f;
-    public float explosionRadius = 5f;
+    public float explosionRadius = 4f;
     public GameObject impactEffect;
     public float autoDestroyOnHeight = -50f;
     private Rigidbody2D rb;
-    private float travelingDirection;
+    private CircleCollider2D cirColider;
+    private DamageHandler target;
     void Start()
     {
         AudioManager.instance.Play("Grenade_Launcher");
@@ -21,37 +22,27 @@ public class Projectile_Bomb : MonoBehaviour
         //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * launchForce * rb.mass);
+
+        StartCoroutine(Timer((float)timer));
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(gameObject.transform.position.y <= autoDestroyOnHeight)
         {
             Destroy(gameObject);
         }
-    }
-
-    void FixedUpdate()
-    {
+        
         //Calculate projectile traveling direction by using it's velocity on each frame
-        travelingDirection = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        //rb.angularVelocity = rb.velocity.x * cirColider.radius;
 
         //Set the rotation of the projectile to point to it's current direction for a more realistic effect.
-        transform.rotation = Quaternion.Euler(0, 0, travelingDirection);
+        //transform.rotation = Quaternion.Euler(0, 0, travelingDirection);
     }
-    void OnTriggerEnter2D(Collider2D colInfo)
+    void Detonate()
     {
         //Explosion Sound
         AudioManager.instance.Play("Dark_Explosion");
-
-        //Look for a DamageHandler script in object collided
-        DamageHandler target = colInfo.GetComponent<DamageHandler>();
-
-        //Make sure target has a DamageHandler script, and if so then inflict damage.
-        if(target != null)
-        {
-            target.TakeDamage(directHitDamage);
-        }
 
         //Create an impact effect like an explosion
         if(impactEffect != null)
@@ -83,5 +74,11 @@ public class Projectile_Bomb : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator Timer(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        Detonate();
     }
 }

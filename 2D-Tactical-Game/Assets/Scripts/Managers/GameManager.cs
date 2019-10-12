@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     //Time related variables
     public float turnClock = 0f;
     public float gameClock = 0f;
-    private bool corutineStarted = false;
+    private bool coroutineStarted = false;
     private IEnumerator coroutineTurnClock;
     private IEnumerator coroutineGameClock;
 
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         //Start gameClock Timer
         coroutineGameClock = SetGameClock(GLOBALS.TimePerGame);
         StartCoroutine(coroutineGameClock);
-        corutineStarted = false;
+        coroutineStarted = false;
         gameState = GameState.TurnTransition;
     }
 
@@ -189,17 +189,20 @@ public class GameManager : MonoBehaviour
         {
             case GameState.TurnTransition:
                 // Start timer for next turn.
-                if (!corutineStarted)
+                if (!coroutineStarted)
                 {
-                    corutineStarted = true;
+                    coroutineStarted = true;
                     coroutineTurnClock = SetTurnClock(GLOBALS.timeBetweenTurns); //time between turns should be 1 to 5 sec
                     StartCoroutine(coroutineTurnClock);
                     //***************************TODO**************************
-                    //Chance of Enviroment Hazard activation.
+                    //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
                     if (Random.Range(0f,1f) > .2f)
                         if(go != null)
                         {
+                            //Tell camera to look at the sun
+                            cam.soldier = sun.gameObject;
+                            cam.shouldFollowTarget = true;
                             sun.Shoot(go.transform.position);
                             AudioManager.instance.Play("Short_Choir");
                         }
@@ -209,7 +212,7 @@ public class GameManager : MonoBehaviour
 
                 if (isTurnFinished)
                 {
-                    corutineStarted = false; //Reset coroutine check
+                    coroutineStarted = false; //Reset coroutine check
                     isTurnFinished = false; //Reset check before changing state
                     gameState = GameState.TurnInProgress;//change State
 
@@ -286,9 +289,9 @@ public class GameManager : MonoBehaviour
 
             case GameState.TurnInProgress:
                 //Start timer to change state
-                if (!corutineStarted)
+                if (!coroutineStarted)
                 {
-                    corutineStarted = true;
+                    coroutineStarted = true;
                     coroutineTurnClock = SetTurnClock(GLOBALS.timePerTurn); //timePerTurn should be 30 - 120 sec
                     StartCoroutine(coroutineTurnClock);
                 }
@@ -297,7 +300,7 @@ public class GameManager : MonoBehaviour
                 if (isTurnFinished){
 
                     
-                    corutineStarted = false; //Reset coroutine check
+                    coroutineStarted = false; //Reset coroutine check
                     cam.shouldFollowTarget = false; //stop following player
                     gameState = GameState.TurnTransition;
 

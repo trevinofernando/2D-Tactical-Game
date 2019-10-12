@@ -97,11 +97,11 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = Input.GetAxisRaw("Horizontal");
 
 
-            //Move The Horiziontal axis
+            //Move The Horizontal axis
             if(moveDirection != 0)
             {
                 //By not calling this when movement is 0, this stops bugs responsible for weird physics movements where the x axis is constrained
-                rb.AddForce(Vector2.right * moveDirection * speed);
+                rb.AddForce(Vector2.right * moveDirection * speed * Time.deltaTime * 100f);
             }
 
 

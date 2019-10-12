@@ -29,7 +29,7 @@ public class HomingBomb : MonoBehaviour
 
         //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * launchForce);
+        rb.AddForce(transform.right * launchForce * rb.mass);
         StartCoroutine(Timer(chaseTimer));
     }
 
@@ -82,7 +82,7 @@ public class HomingBomb : MonoBehaviour
             Instantiate(impactEffect, transform.position, Quaternion.identity);
         }
 
-        //Get all colliders in a circular area of radius "explosionRadious"
+        //Get all colliders in a circular area of radius "explosionRadius"
         Collider2D[] collisions = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
         //Loop thru each collider

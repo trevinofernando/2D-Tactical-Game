@@ -46,13 +46,13 @@ MonoBehaviour:
   sounds:
   - name: The Duel
     clip: {fileID: 8300000, guid: 7b9267b7f98a5054f9d2cdc06a13d844, type: 3}
-    volume: 0.342
+    volume: 0.3
     pitch: 0.98
     loop: 1
     source: {fileID: 0}
   - name: Missile_LockOn
     clip: {fileID: 8300000, guid: 74b713967e7cda946a371ae4a88a3b6e, type: 3}
-    volume: 0.75
+    volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Dark_Explosion
     clip: {fileID: 8300000, guid: 58f12f78ba30cd64e9a61a43cbb1fad4, type: 3}
-    volume: 0.75
+    volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}

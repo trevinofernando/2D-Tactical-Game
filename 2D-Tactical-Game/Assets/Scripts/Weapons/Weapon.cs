@@ -11,7 +11,7 @@ public class Weapon : MonoBehaviour
      * 1    = Bazooka
      * 2    = Sniper
      * 3    = Homing Bazooka
-     * 4    = 
+     * 4    = Grenade
      * 5    = 
      * 6    = 
      * 7    = 
@@ -19,9 +19,9 @@ public class Weapon : MonoBehaviour
      * 9    = 
      * 10   = 
     */
-    public float endTurnDelay = 3f;
+    public float endTurnDelay = 5f;
     public PlayerSettings playerSettings;
-    public WeaponControler WeaponControler;
+    public WeaponControler WeaponController;
     public Transform firePoint1;
     public GameObject[] projectilePrefab;
     public bool canChangeWeapons = true;
@@ -37,7 +37,7 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        //if weapon is not equiped, then ignore all code
+        //if weapon is not equipped, then ignore all code
         //if is not the players turn, then ignore all code
         if (playerSettings.isMyTurn)
         {
@@ -47,12 +47,13 @@ public class Weapon : MonoBehaviour
                     break;
                 case 1:
                 case 2:
+                case 4:
                     //Shoot if we leftclick on the mouse
                     if (Input.GetButtonDown("Fire1") && canShoot)
                     {
                         Invoke("EndTurn", endTurnDelay);
                         canShoot = false;
-                        WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation);
                     }
                     break;
                 case 3:
@@ -67,14 +68,14 @@ public class Weapon : MonoBehaviour
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             mousePos.z = 0;
                             go = Instantiate(targetSprite, mousePos, Quaternion.identity);
-                            Destroy(go, 15f); //just in case the turn ends suddently
+                            Destroy(go, 15f); //just in case the turn ends suddenly
                         }
                         else
                         {
                             Invoke("EndTurn", endTurnDelay);
                             targetSelected = false;
                             canShoot = false;
-                            WeaponControler.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation, go.transform);
+                            WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1, firePoint1.rotation, go.transform);
                             if (go != null)
                             {
                                 Destroy(go, 5f);

@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 1071730802671521821}
   - component: {fileID: 1071730802671521818}
   - component: {fileID: 1071730802671521819}
-  - component: {fileID: 5762913170003279432}
-  - component: {fileID: 4414414054474842093}
-  - component: {fileID: -3679964008777780602}
+  - component: {fileID: 5833167029226084502}
+  - component: {fileID: 3643555499164389044}
+  - component: {fileID: -2124547653311230606}
   m_Layer: 0
-  m_Name: HomingBomb
+  m_Name: Grenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1157620103
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 39ba9b0a0130b5b45b5ef97d61ce0bb4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d762d186c0ade4fd696f4336660dbd88, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,32 +96,16 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_Mass: 2
+  m_LinearDrag: 0.5
+  m_AngularDrag: 0.01
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 1044a1ffb1c095f458448d06dfc70d62, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!70 &5762913170003279432
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071730802671521817}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.040638212, y: -0.0022579185}
-  m_Size: {x: 0.56643134, y: 0.3722709}
-  m_Direction: 1
---- !u!96 &4414414054474842093
+--- !u!96 &5833167029226084502
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -160,7 +144,7 @@ TrailRenderer:
   m_SortingLayerID: -103007151
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Time: 2
+  m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -190,8 +174,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.24313727, g: 0.23529413, b: 0.16078432, a: 1}
+      key1: {r: 1, g: 0.9865479, b: 0.6367924, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -224,9 +208,25 @@ TrailRenderer:
     shadowBias: 0.5
     generateLightingData: 0
   m_MinVertexDistance: 0
-  m_Autodestruct: 1
+  m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &-3679964008777780602
+--- !u!58 &3643555499164389044
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071730802671521817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 1044a1ffb1c095f458448d06dfc70d62, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.13552362, y: -0.020648658}
+  serializedVersion: 2
+  m_Radius: 0.35640794
+--- !u!114 &-2124547653311230606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,19 +235,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071730802671521817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeff559cd104ec2469646493170f345e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d791f89fd05cb349acd6c13932ceb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directHitDamage: 10
-  damage: 30
+  damage: 60
+  timer: 3
   launchForce: 1000
-  explosionForce: 800
-  extraSideForce: -5
+  explosionForce: 1000
+  extraSideForce: 10
   explosionRadius: 4
-  speed: 15
-  rotationSpeed: 200
-  chaseTimer: 1
-  autoDestroyOnHeight: -50
-  target: {x: 0, y: 0, z: 0}
-  impactEffect: {fileID: 2963543577588028294, guid: 315a7ddf0713d7045b116e4f480f681b,
+  impactEffect: {fileID: 2150632809549486280, guid: aba0286abb5a94f42a81f02763e67b58,
     type: 3}
+  autoDestroyOnHeight: -50
