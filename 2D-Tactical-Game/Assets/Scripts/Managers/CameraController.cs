@@ -48,7 +48,7 @@ public class CameraController : MonoBehaviour
         }
 
         HandleZoom();
-        FollowMouse();
+        FollowMouse(); //if out of the screen
     }
 
 

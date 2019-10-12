@@ -12,6 +12,7 @@ public class Grenade : MonoBehaviour
     public float explosionRadius = 4f;
     public GameObject impactEffect;
     public float autoDestroyOnHeight = -50f;
+    private float rotationAmount;
     private Rigidbody2D rb;
     private CircleCollider2D cirColider;
     private DamageHandler target;
@@ -32,12 +33,9 @@ public class Grenade : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        //Calculate projectile traveling direction by using it's velocity on each frame
-        //rb.angularVelocity = rb.velocity.x * cirColider.radius;
 
-        //Set the rotation of the projectile to point to it's current direction for a more realistic effect.
-        //transform.rotation = Quaternion.Euler(0, 0, travelingDirection);
+        //Calculate rotation amount given the horizontal speed
+        rb.angularVelocity = -rb.velocity.x * 25f; 
     }
     void Detonate()
     {
