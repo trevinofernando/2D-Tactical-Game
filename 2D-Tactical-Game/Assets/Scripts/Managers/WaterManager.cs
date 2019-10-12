@@ -11,7 +11,9 @@ public class WaterManager : MonoBehaviour
     void OnTriggerEnter2D(Collider2D colInfo)
     {
         //Debug.Log("Water Touched!");
-
+        if(colInfo.transform.tag == "Player"){
+            AudioManager.instance.Play("Drowning");
+        }
         //get rigidbody
         Rigidbody2D rb = colInfo.attachedRigidbody;
         if(rb != null)

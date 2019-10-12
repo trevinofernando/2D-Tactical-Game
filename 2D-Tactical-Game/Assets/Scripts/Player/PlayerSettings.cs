@@ -55,7 +55,7 @@ public class PlayerSettings : MonoBehaviour
         isMyTurn = false;
     }
 
-    public void UpdateHeatlh(int newHealth)
+    public void UpdateHealth(int newHealth)
     {
         //Ignore negative values
         newHealth = Mathf.Max(newHealth, 0);

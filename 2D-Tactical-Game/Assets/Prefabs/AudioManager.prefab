@@ -50,9 +50,57 @@ MonoBehaviour:
     pitch: 0.98
     loop: 1
     source: {fileID: 0}
-  - name: Laser
-    clip: {fileID: 8300000, guid: 9beabfcac0c0b6d429fcddb85a95d4c7, type: 3}
-    volume: 0.342
-    pitch: 0.98
+  - name: Missile_LockOn
+    clip: {fileID: 8300000, guid: 74b713967e7cda946a371ae4a88a3b6e, type: 3}
+    volume: 0.25
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Sniper
+    clip: {fileID: 8300000, guid: f684cbfa33a902d4f812e99ffc906d5a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Target_Acquired
+    clip: {fileID: 8300000, guid: e106ad8296e3dba478031326c717dd3c, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Dark_Explosion
+    clip: {fileID: 8300000, guid: 58f12f78ba30cd64e9a61a43cbb1fad4, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Fatality
+    clip: {fileID: 8300000, guid: b921d672f2ac00045828a617aafaddab, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Take_Damage
+    clip: {fileID: 8300000, guid: b08303fcd51c49e49969e0c6c6e63b6a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Short_Choir
+    clip: {fileID: 8300000, guid: c2ab05ec55bfc074fae55aba370f7e24, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Grenade_Launcher
+    clip: {fileID: 8300000, guid: ac4ff1403295829499c1a19b4d27c919, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Drowning
+    clip: {fileID: 8300000, guid: b0025ea0b8e47ff418b2187b541ef8b2, type: 3}
+    volume: 0.75
+    pitch: 1
     loop: 0
     source: {fileID: 0}

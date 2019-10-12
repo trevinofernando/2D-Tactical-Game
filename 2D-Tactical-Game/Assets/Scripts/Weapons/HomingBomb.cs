@@ -21,9 +21,13 @@ public class HomingBomb : MonoBehaviour
     private Vector2 direction;
     private float rotationAmount;
     private bool chasingMode = false;
+    private bool audioPlaying = false;
 
     void Start()
     {
+        AudioManager.instance.Play("Grenade_Launcher");
+
+        //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * launchForce);
         StartCoroutine(Timer(chaseTimer));
@@ -41,7 +45,10 @@ public class HomingBomb : MonoBehaviour
     {
         if (chasingMode)
         {
-            
+            if(!audioPlaying){
+                audioPlaying = true;
+                AudioManager.instance.Play("Missile_LockOn");
+            }
             direction = (Vector2)target - rb.position;
             direction.Normalize();
 
@@ -56,7 +63,9 @@ public class HomingBomb : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D colInfo)
     {
-        //Debug.Log("Projectile Hit!");
+        //Explosion Sound
+        AudioManager.instance.Play("Dark_Explosion");
+        AudioManager.instance.Stop("Missile_LockOn");
 
         //Look for a DamageHandler script in object collided
         DamageHandler target = colInfo.GetComponent<DamageHandler>();

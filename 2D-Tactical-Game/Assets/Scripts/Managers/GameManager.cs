@@ -201,7 +201,7 @@ public class GameManager : MonoBehaviour
                         if(go != null)
                         {
                             sun.Shoot(go.transform.position);
-                            AudioManager.instance.Play("Laser");
+                            AudioManager.instance.Play("Short_Choir");
                         }
                 }
 

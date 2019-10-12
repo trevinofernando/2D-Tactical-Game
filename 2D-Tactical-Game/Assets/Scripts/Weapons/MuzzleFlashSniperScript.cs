@@ -17,6 +17,9 @@ public class MuzzleFlashSniperScript : MonoBehaviour
 
     void Start()
     {
+        //Start Audio
+        AudioManager.instance.Play("Sniper");
+        
         //Find direction vector from gun to mouse and normalize it to lenght 1
         dir3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         dir3.Normalize();

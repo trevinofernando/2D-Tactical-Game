@@ -21,7 +21,7 @@ public class GameOverScreen : MonoBehaviour
         }
         else
         {
-            winnerTextHolder.text = "Team #" + winningTeamID.ToString();
+            winnerTextHolder.text = "Team #" + (winningTeamID + 1).ToString();
         }
         //set the text to be the color of the winning team 
         winnerTextHolder.color = winTeamColor;

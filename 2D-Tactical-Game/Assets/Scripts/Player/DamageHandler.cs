@@ -36,9 +36,9 @@ public class DamageHandler : MonoBehaviour
 
         if (ps != null) //if we are a player
         {
-            //updateHeatlh() will take care of negative values
-            ps.UpdateHeatlh(health);
-
+            //updateHealth() will take care of negative values
+            ps.UpdateHealth(health);
+            AudioManager.instance.Play("Take_Damage");
 
             //Check if player haven't triggered the death sequence, if not then take damage
             if (!iAmDead)
@@ -85,6 +85,8 @@ public class DamageHandler : MonoBehaviour
 
     void Die()
     {
+        AudioManager.instance.Play("Fatality");
+        
         //Added this just in case we want to add a deathEffect later
         if (deathEffect != null)
         {

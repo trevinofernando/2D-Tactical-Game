@@ -16,8 +16,10 @@ public class Projectile_Bomb : MonoBehaviour
     private float travelingDirection;
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody2D>();
+        AudioManager.instance.Play("Grenade_Launcher");
+        
         //Add initial force once to make a parabolic trajectory
+        rb = gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * launchForce);
     }
 
@@ -39,7 +41,8 @@ public class Projectile_Bomb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D colInfo)
     {
-        //Debug.Log("Projectile Hit!");
+        //Explosion Sound
+        AudioManager.instance.Play("Dark_Explosion");
 
         //Look for a DamageHandler script in object collided
         DamageHandler target = colInfo.GetComponent<DamageHandler>();

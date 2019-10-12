@@ -61,6 +61,7 @@ public class Weapon : MonoBehaviour
                     {
                         if (!targetSelected)
                         {
+                            AudioManager.instance.Play("Target_Acquired");
                             targetSelected = true;
                             canChangeWeapons = false;
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
