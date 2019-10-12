@@ -52,7 +52,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Missile_LockOn
     clip: {fileID: 8300000, guid: 74b713967e7cda946a371ae4a88a3b6e, type: 3}
-    volume: 0.25
+    volume: 0.75
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Drowning
     clip: {fileID: 8300000, guid: b0025ea0b8e47ff418b2187b541ef8b2, type: 3}
-    volume: 0.75
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
