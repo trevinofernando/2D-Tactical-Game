@@ -48,14 +48,10 @@ public class MapInitializer : MonoBehaviour
 
             if (CanSpawn(x, randomY))
             {
-                Debug.Log("Spawn point is (" + x + "," + randomY + ")");
+                //Debug.Log("Spawn point is (" + x + "," + randomY + ")");
                 spawnPoints.Add(new Vector3(x * positionOffSet, randomY * positionOffSet, 0));
             }
         }
-
-        Debug.Log(spawnPoints.Count());
-
-        Debug.Log(spawnPoints[0]);
 
         //return spawnPoints.ToArray();
         return spawnPoints.OrderBy(a => System.Guid.NewGuid()).ToArray();
@@ -98,7 +94,7 @@ public class MapInitializer : MonoBehaviour
                 break;
             default:
                 //PlaceOneTile();
-                Debug.Log("Skipping tiles");
+                //Debug.Log("Skipping tiles");
                 SkipTiles();
                 yCoordinate -= 8;
                 break;
@@ -118,7 +114,7 @@ public class MapInitializer : MonoBehaviour
         xMax = numPlayers * scaleToPlayersX;
         yMax = numPlayers * scaleToPlayersY;
 
-        Debug.Log("X max boundaries " + xMax + " Y max boundaries " + yMax);
+        //Debug.Log("X max boundaries " + xMax + " Y max boundaries " + yMax);
         mapState = new int[xMax, yMax];
 
         //Base Platform
@@ -137,7 +133,7 @@ public class MapInitializer : MonoBehaviour
         //Update to where the base platform leaves off
         xCoordinate = Random.Range(0, 4);
         yCoordinate += 2;
-        Debug.Log("X is at " + xCoordinate + " Y is at " + yCoordinate);
+        //Debug.Log("X is at " + xCoordinate + " Y is at " + yCoordinate);
 
         //Add tiles
         for (int i = 0; i < numPlayers /2 ; i++)

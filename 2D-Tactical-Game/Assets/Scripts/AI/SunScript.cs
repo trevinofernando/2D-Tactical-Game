@@ -20,9 +20,9 @@ public class SunScript : MonoBehaviour
 
     public void Shoot(Vector3 targetPosition)
     {
-        Debug.Log("Shooting " + targetPosition);
+        //Debug.Log("Shooting " + targetPosition);
         
-        //Find direction vector from gun to mouse and normalize it to lenght 1
+        //Find direction vector from gun to mouse and normalize it to length 1
         dir3 = targetPosition - transform.position;
         dir3.Normalize();
         dir3.z = 0;
@@ -88,15 +88,15 @@ public class SunScript : MonoBehaviour
         lr.startColor = color1;
         lr.endColor = color2;
 
-        //set the widt of the line to something very small, since we are making a bullet
+        //set the width of the line to something very small, since we are making a bullet
         lr.startWidth = 0.1f;
         lr.endWidth = 1f;
 
-        //This will set the leght of the line
+        //This will set the length of the line
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
 
-        //Destroy this line adter some time, since this is a bullet trace
+        //Destroy this line after some time, since this is a bullet trace
         GameObject.Destroy(myLine, duration);
     }
 }

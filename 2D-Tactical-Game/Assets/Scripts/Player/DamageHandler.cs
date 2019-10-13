@@ -34,30 +34,36 @@ public class DamageHandler : MonoBehaviour
     {
         health -= damage;
 
-        if (ps != null) //if we are a player
+        //if we are a player
+        if (ps != null) 
         {
             //updateHealth() will take care of negative values
             ps.UpdateHealth(health);
-            AudioManager.instance.Play("Take_Damage");
 
-            //Check if player haven't triggered the death sequence, if not then take damage
-            if (!iAmDead)
-            {
-                anim.SetTrigger("takeDamage");
-            }
+            //if the damage is negative, then player was healed, no need to continue
+            if(damage > 0){
+                //start sound
+                AudioManager.instance.Play("Take_Damage");
 
-            //If player health below 0 then trigger death sequence
-            if (health <= 0 && !iAmDead)
-            {
-                anim.SetTrigger("die");
-                iAmDead = true;
-
-                //Disable PlayerMovement script to stop player from moving during animation in case of killing himself
-                if (movementControls != null)
+                //Check if player haven't triggered the death sequence, if not then take damage
+                if (!iAmDead)
                 {
-                    movementControls.enabled = false;
+                    anim.SetTrigger("takeDamage");
                 }
-                Die();
+
+                //If player health below 0 then trigger death sequence
+                if (health <= 0 && !iAmDead)
+                {
+                    anim.SetTrigger("die");
+                    iAmDead = true;
+
+                    //Disable PlayerMovement script to stop player from moving during animation in case of killing himself
+                    if (movementControls != null)
+                    {
+                        movementControls.enabled = false;
+                    }
+                    Die();
+                }
             }
         }
         else //we must be a tile, prop, etc.

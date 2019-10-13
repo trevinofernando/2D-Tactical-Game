@@ -378,7 +378,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator SetGameClock(float waitTime)
     {
         gameClock = waitTime;
-        Debug.Log("Timer for GAME Clock started with " + waitTime + " Seconds");
+        //Debug.Log("Timer for GAME Clock started with " + waitTime + " Seconds");
         while (true)
         {
             //***************************TODO**************************: 
@@ -393,14 +393,14 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1.0f);//wait one second
         }
-        Debug.Log("Timer for GAME Clock finished");
+        //Debug.Log("Timer for GAME Clock finished");
         suddenDeath = true;
     }
 
     public IEnumerator SetTurnClock(float waitTime)
     {
         turnClock = waitTime;
-        Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
+        //Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
         while (true)
         {
             //***************************TODO**************************: 
@@ -415,7 +415,7 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1.0f);//wait one second
         }
-        Debug.Log("Timer for TURN Clock finished");
+        //Debug.Log("Timer for TURN Clock finished");
         isTurnFinished = true;
     }
 }
