@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3643555499164389044}
   - component: {fileID: -2124547653311230606}
   m_Layer: 0
-  m_Name: Grenade
+  m_Name: HolyGrenade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 1157620103
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d762d186c0ade4fd696f4336660dbd88, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 47e7910642ba5df4e9b99cf0f608363f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
+  m_Mass: 3
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -238,12 +238,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d791f89fd05cb349acd6c13932ceb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 60
+  damage: 90
   timer: 3
   launchForce: 1000
   explosionForce: 1000
   extraSideForce: 10
-  explosionRadius: 4
-  impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
+  explosionRadius: 10
+  impactEffect: {fileID: 2495769490140607598, guid: 4c0da6b337310f540948736f5daf635b,
     type: 3}
+  explosionSoundName: Distant_Explosion
   autoDestroyOnHeight: -50

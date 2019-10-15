@@ -110,3 +110,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Distant_Explosion
+    clip: {fileID: 8300000, guid: c743f77d1e49b1247a6c1a397b906bb1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

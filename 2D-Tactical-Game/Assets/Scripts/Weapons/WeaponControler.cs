@@ -20,7 +20,7 @@ public class WeaponControler : MonoBehaviour
      * 2    = Sniper
      * 3    = Homing Bazooka
      * 4    = Grenade
-     * 5    = 
+     * 5    = Holy Grenade
      * 6    = 
      * 7    = 
      * 8    = 

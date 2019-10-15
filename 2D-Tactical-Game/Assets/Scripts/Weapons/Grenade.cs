@@ -11,6 +11,7 @@ public class Grenade : MonoBehaviour
     public float extraSideForce = 10f;
     public float explosionRadius = 4f;
     public GameObject impactEffect;
+    public string explosionSoundName = "Dark_Explosion";
     public float autoDestroyOnHeight = -50f;
     private float rotationAmount;
     private Rigidbody2D rb;
@@ -40,7 +41,7 @@ public class Grenade : MonoBehaviour
     void Detonate()
     {
         //Explosion Sound
-        AudioManager.instance.Play("Dark_Explosion");
+        AudioManager.instance.Play(explosionSoundName);
 
         //Create an impact effect like an explosion
         if(impactEffect != null)

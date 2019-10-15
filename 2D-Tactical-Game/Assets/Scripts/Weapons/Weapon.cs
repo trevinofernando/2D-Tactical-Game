@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
      * 2    = Sniper
      * 3    = Homing Bazooka
      * 4    = Grenade
-     * 5    = 
+     * 5    = Holy Grenade
      * 6    = 
      * 7    = 
      * 8    = 
@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviour
                 case 1:
                 case 2:
                 case 4:
+                case 5:
                     //Shoot if we leftclick on the mouse
                     if (Input.GetButtonDown("Fire1") && canShoot)
                     {
