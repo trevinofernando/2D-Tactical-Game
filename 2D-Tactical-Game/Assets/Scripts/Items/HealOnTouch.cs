@@ -17,6 +17,8 @@ public class HealOnTouch : MonoBehaviour
             if(dh != null){
                 //pass negative damage to heal
                 dh.TakeDamage(-healthBonus);
+
+                AudioManager.instance.Play("Magic_PickUp");
                 //Spawn some VFX when picked up
                 if(impactEffect != null)
                 {
