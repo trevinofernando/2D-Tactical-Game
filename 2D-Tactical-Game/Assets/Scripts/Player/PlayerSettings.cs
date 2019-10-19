@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.Numerics;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,18 +9,21 @@ public class PlayerSettings : MonoBehaviour
     public int teamID;
     public string nameGiven;
     public bool isMyTurn = false;
+    public bool iAmAI = false;
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
-    private Animator anim;
+    public Animator anim;
     private WeaponControler weaponContr;
+    private Rigidbody2D rb;
 
     void Start()
     {
         //Get reference to Animator component of this player object
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         weaponContr = GetComponent<WeaponControler>();
+        rb = GetComponent<Rigidbody2D>();
     }
     public void SetColor(Color newColor)//RBGA
     {
@@ -70,4 +74,15 @@ public class PlayerSettings : MonoBehaviour
         gameManager.teamsHealth[teamID] += gameManager.soldiersHealth[teamID, ID];
     }
 
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(!isMyTurn && other.transform.tag == "Player"){
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if(!isMyTurn && other.transform.tag == "Player"){
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+    }
 }

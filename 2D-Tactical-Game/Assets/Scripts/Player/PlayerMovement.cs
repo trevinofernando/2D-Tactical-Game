@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     //private float 
     private float moveDirection;
     private Rigidbody2D rb;
-    private Animator anim;
+    public Animator anim;
     private PlayerSettings ps;
 
     /*
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         //Get reference to rigidbody of this player object
         rb = GetComponent<Rigidbody2D>();
         //Get reference to Animator component of this player object
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         //Get reference to PlayerSettings component of this player object
         ps = GetComponent<PlayerSettings>();
         //Get reference to CapsuleCollider2D component of this player object
@@ -84,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (ps.isMyTurn)
         {
+            //Freeze rotation on Z and unfreeze position on X
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation; 
+            
             //Direct cast from Vector3 to Vector2
             playerPosition = transform.position;
 
@@ -101,7 +104,9 @@ public class PlayerMovement : MonoBehaviour
             if(moveDirection != 0)
             {
                 //By not calling this when movement is 0, this stops bugs responsible for weird physics movements where the x axis is constrained
-                rb.AddForce(Vector2.right * moveDirection * speed * Time.deltaTime * 100f);
+                rb.velocity = new Vector2(moveDirection * speed * Time.deltaTime, rb.velocity.y );
+            }else{
+                rb.velocity = new Vector2(0, rb.velocity.y );
             }
 
 

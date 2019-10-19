@@ -241,7 +241,7 @@ MonoBehaviour:
   directHitDamage: 10
   damage: 40
   launchForce: 1000
-  explosionForce: 1000
+  explosionForce: 500
   extraSideForce: -5
   explosionRadius: 5
   impactEffect: {fileID: 2150632809549486280, guid: aba0286abb5a94f42a81f02763e67b58,

@@ -241,7 +241,7 @@ MonoBehaviour:
   directHitDamage: 10
   damage: 30
   launchForce: 1000
-  explosionForce: 800
+  explosionForce: 400
   extraSideForce: -5
   explosionRadius: 4
   speed: 15

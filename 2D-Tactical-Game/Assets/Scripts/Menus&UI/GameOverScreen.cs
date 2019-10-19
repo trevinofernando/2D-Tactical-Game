@@ -14,17 +14,22 @@ public class GameOverScreen : MonoBehaviour
 
     void Start()
     {
-        //if not empty name show that name, else show team number
-        if(winningTeamName != "")
-        {
-            winnerTextHolder.text = winningTeamName;
+        if(winningTeamID == -1){
+            winnerTextHolder.text = "DRAW";
+        }else{
+            //if not empty name show that name, else show team number
+            if(winningTeamName != "")
+            {
+                winnerTextHolder.text = winningTeamName;
+            }
+            else
+            {
+                winnerTextHolder.text = "Team #" + (winningTeamID + 1).ToString();
+            }
+            //set the text to be the color of the winning team 
+            winnerTextHolder.color = winTeamColor;
         }
-        else
-        {
-            winnerTextHolder.text = "Team #" + (winningTeamID + 1).ToString();
-        }
-        //set the text to be the color of the winning team 
-        winnerTextHolder.color = winTeamColor;
+        
 
     }
 

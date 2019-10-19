@@ -78,10 +78,10 @@ public class GameManager : MonoBehaviour
         //Initialize array to hold each soldier object team[Team][Avatar]
         teams = new GameObject[GLOBALS.numTeams, GLOBALS.teamSize];
         
-        //Initialize array to hold healt of each soldier of each team
+        //Initialize array to hold health of each soldier of each team
         soldiersHealth = new int[GLOBALS.numTeams, GLOBALS.teamSize];
 
-        //Initialize array to hold healt of each team
+        //Initialize array to hold health of each team
         teamsHealth = new int[GLOBALS.numTeams]; //default value is already 0
 
         //Initialize array to keep track of turn of soldiers, since each team will have a different order
@@ -159,6 +159,7 @@ public class GameManager : MonoBehaviour
 
         //Check if game is over
         deadTeamsCounter = 0;
+        winningTeamID = -1;
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {
             if(teamsHealth[i] <= 0)
@@ -197,7 +198,7 @@ public class GameManager : MonoBehaviour
                     //***************************TODO**************************
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
-                    if (Random.Range(0f,1f) > .2f)
+                    if (Random.Range(0f,1f) > .5f)
                         if(go != null)
                         {
                             //Tell camera to look at the sun
@@ -351,18 +352,23 @@ public class GameManager : MonoBehaviour
                 */
 
                 Debug.Log("Game Over");
-
-                //Pass the name of the winning team if there is one
-                if(GLOBALS.teams[winningTeamID] != null)
-                {
-                    gameOverCanvas.GetComponent<GameOverScreen>().winningTeamName = GLOBALS.teams[winningTeamID].teamName;
-                }
+                
+                //Get reference to GameOverScreen component
+                GameOverScreen gos = gameOverCanvas.GetComponent<GameOverScreen>();
+                
                 //pass the teamID
-                gameOverCanvas.GetComponent<GameOverScreen>().winningTeamID = winningTeamID;
+                gos.winningTeamID = winningTeamID;
 
-                //pass winning team color
-                gameOverCanvas.GetComponent<GameOverScreen>().winTeamColor = GLOBALS.teamColors[winningTeamID];
+                if(winningTeamID != -1){
+                    //Pass the name of the winning team if there is one
+                    if(GLOBALS.teams[winningTeamID] != null)
+                    {
+                        gos.winningTeamName = GLOBALS.teams[winningTeamID].teamName;
+                    }
 
+                    //pass winning team color
+                    gos.winTeamColor = GLOBALS.teamColors[winningTeamID];
+                }
 
                 //Enable the game over canvas to trigger the end of the game
                 gameOverCanvas.gameObject.SetActive(true);

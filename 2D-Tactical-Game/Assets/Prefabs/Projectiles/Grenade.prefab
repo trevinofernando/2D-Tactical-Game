@@ -241,9 +241,10 @@ MonoBehaviour:
   damage: 60
   timer: 3
   launchForce: 1000
-  explosionForce: 1000
+  explosionForce: 500
   extraSideForce: 10
   explosionRadius: 4
   impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
     type: 3}
+  explosionSoundName: Dark_Explosion
   autoDestroyOnHeight: -50

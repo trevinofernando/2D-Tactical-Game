@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1071730802671521821}
   - component: {fileID: 1071730802671521818}
   - component: {fileID: 1071730802671521819}
-  - component: {fileID: 5833167029226084502}
   - component: {fileID: 3643555499164389044}
+  - component: {fileID: 5833167029226084502}
   - component: {fileID: -2124547653311230606}
   m_Layer: 0
   m_Name: HolyGrenade
@@ -105,6 +105,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!58 &3643555499164389044
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1071730802671521817}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 1044a1ffb1c095f458448d06dfc70d62, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0039162636, y: -0.28984565}
+  serializedVersion: 2
+  m_Radius: 0.589712
 --- !u!96 &5833167029226084502
 TrailRenderer:
   serializedVersion: 2
@@ -210,22 +226,6 @@ TrailRenderer:
   m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!58 &3643555499164389044
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1071730802671521817}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: 1044a1ffb1c095f458448d06dfc70d62, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.13552362, y: -0.020648658}
-  serializedVersion: 2
-  m_Radius: 0.35640794
 --- !u!114 &-2124547653311230606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
   damage: 90
   timer: 3
   launchForce: 1000
-  explosionForce: 1000
+  explosionForce: 750
   extraSideForce: 10
   explosionRadius: 10
   impactEffect: {fileID: 2495769490140607598, guid: 4c0da6b337310f540948736f5daf635b,

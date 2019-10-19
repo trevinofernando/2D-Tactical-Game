@@ -9,7 +9,7 @@ public class DamageHandler : MonoBehaviour
     public GameObject deathEffect;
     public PlayerMovement movementControls;
     [System.NonSerialized] public PlayerSettings ps;
-    private Animator anim;
+    public Animator anim;
 
 
 
@@ -20,7 +20,7 @@ public class DamageHandler : MonoBehaviour
         {
             health = GlobalVariables.Instance.healthPerAvatar;
             //Get reference to animator component
-            anim = GetComponent<Animator>();
+            //anim = GetComponent<Animator>();
             movementControls = GetComponent<PlayerMovement>();
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 977653236385224080}
   - component: {fileID: 4378301550762690017}
   - component: {fileID: 3154016017238305830}
+  - component: {fileID: -2067362605770546317}
   - component: {fileID: -4377000524059042602}
   m_Layer: 0
   m_Name: Orange Sand
@@ -91,7 +92,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 5356843448387457571}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: bd4993398a640b14e9d35a9d46952b3d, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -108,6 +109,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.266667, y: 4.266667}
   m_EdgeRadius: 0
+--- !u!251 &-2067362605770546317
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5356843448387457571}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 0
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 0
+  m_UseSideFriction: 0
+  m_UseSideBounce: 0
+  m_SideArc: 90
 --- !u!114 &-4377000524059042602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,3 +144,4 @@ MonoBehaviour:
   iAmDead: 0
   deathEffect: {fileID: 0}
   movementControls: {fileID: 0}
+  anim: {fileID: 0}

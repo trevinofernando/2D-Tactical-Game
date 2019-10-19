@@ -320,11 +320,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -372,6 +372,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1409655049}
     m_Modifications:
+    - target: {fileID: 1056364572507723404, guid: 36024aa62ede9974e966fa11bf0f7a00,
+        type: 3}
+      propertyPath: m_SurfaceArc
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1056364572507723404, guid: 36024aa62ede9974e966fa11bf0f7a00,
+        type: 3}
+      propertyPath: m_SideArc
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 1982589862050825191, guid: 36024aa62ede9974e966fa11bf0f7a00,
         type: 3}
       propertyPath: m_Name
@@ -1665,11 +1675,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
@@ -4126,7 +4136,7 @@ MonoBehaviour:
   damage: 10
   pushBackForce: 500
   traceDuration: 1
-  mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 3}
   startColor: {r: 1, g: 1, b: 0, a: 0.5882353}
   endColor: {r: 1, g: 0, b: 0, a: 0.5882353}
 --- !u!1001 &844742086
@@ -5569,11 +5579,11 @@ MonoBehaviour:
     lineCount: 1
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 0
+  m_havePropertiesChanged: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 0
+  m_isInputParsingRequired: 1
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_subTextObjects:
