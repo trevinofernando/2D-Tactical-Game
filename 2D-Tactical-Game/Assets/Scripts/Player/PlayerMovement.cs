@@ -114,7 +114,8 @@ public class PlayerMovement : MonoBehaviour
             if (isGrounded)
             {
                 //If we are on the ground, then we are not jumping
-                anim.SetBool("isJumping", false);
+                if(rb.velocity.y < 0.1)
+                    anim.SetBool("isJumping", false);
 
                 //But we can jump, so check for Up arrow, Space or "w"
                 //And check if we are relatively not moving up or down
@@ -126,6 +127,8 @@ public class PlayerMovement : MonoBehaviour
                     anim.SetBool("isJumping", true);
                     rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
                 }
+            }else{
+                anim.SetBool("isJumping", true);
             }
         }
     }
