@@ -12,11 +12,11 @@ public class PlayerMovement : MonoBehaviour
     public float distanceOffsetY = 0.4f;
     public bool isGrounded;
     public float groundDistance = 0.2f;
+    public Animator anim;
 
     //private float 
     private float moveDirection;
     private Rigidbody2D rb;
-    public Animator anim;
     private PlayerSettings ps;
 
     /*
@@ -37,16 +37,14 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D colliderInfo;
     private float colliderHalfWidth;
     private float colliderHalfHeight;
-    private Vector2 centerToBottmLeftCorner;
-    private Vector2 centerToBottmRightCorner;
+    private Vector2 centerToBottomLeftCorner;
+    private Vector2 centerToBottomRightCorner;
     private Vector2 playerPosition;
 
     void Start()
     {
         //Get reference to rigidbody of this player object
         rb = GetComponent<Rigidbody2D>();
-        //Get reference to Animator component of this player object
-        //anim = GetComponent<Animator>();
         //Get reference to PlayerSettings component of this player object
         ps = GetComponent<PlayerSettings>();
         //Get reference to CapsuleCollider2D component of this player object
@@ -61,8 +59,8 @@ public class PlayerMovement : MonoBehaviour
         //Pre-compute offset distante of corners of rectangle under player
         //So we can just add it to the current position of our player and 
         //and get the right coordinate
-        centerToBottmLeftCorner = new Vector2(-colliderHalfWidth - colliderInfo.offset.x + distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - 0.5f);
-        centerToBottmRightCorner = new Vector2(colliderHalfWidth + colliderInfo.offset.x - distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - distanceOffsetY -0.5f);
+        centerToBottomLeftCorner = new Vector2(-colliderHalfWidth - colliderInfo.offset.x + distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - 0.5f);
+        centerToBottomRightCorner = new Vector2(colliderHalfWidth + colliderInfo.offset.x - distanceOffsetX, -colliderHalfHeight + colliderInfo.offset.y - distanceOffsetY -0.5f);
     }
 
     void Update()
@@ -91,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
             playerPosition = transform.position;
 
             //Check for any overlap area under the players feet
-            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottmLeftCorner, playerPosition + centerToBottmRightCorner);
+            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottomLeftCorner, playerPosition + centerToBottomRightCorner);
             //isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundDistance);
 
 

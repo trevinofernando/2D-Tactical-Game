@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponControler : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
 
     public float degreesOfDeadZone = 0.25f;
@@ -103,7 +103,7 @@ public class WeaponControler : MonoBehaviour
         float xDiff = mousePosition.x - weaponPivot.position.x;
         float yDiff = mousePosition.y - weaponPivot.position.y;
 
-        //Calculate angule with 2D tangent formula and change from radians to degrees
+        //Calculate angle with 2D tangent formula and change from radians to degrees
         float zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
         
         if (xDiff > 0 + degreesOfDeadZone)

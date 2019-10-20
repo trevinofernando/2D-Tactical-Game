@@ -15,14 +15,13 @@ public class PlayerSettings : MonoBehaviour
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
     public Animator anim;
-    private WeaponControler weaponContr;
+    private WeaponController weaponContr;
     private Rigidbody2D rb;
 
     void Start()
     {
-        //Get reference to Animator component of this player object
-        //anim = GetComponent<Animator>();
-        weaponContr = GetComponent<WeaponControler>();
+        //Get reference to weaponController script and Rigidbody component
+        weaponContr = GetComponent<WeaponController>();
         rb = GetComponent<Rigidbody2D>();
     }
     public void SetColor(Color newColor)//RBGA

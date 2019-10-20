@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     public bool isOneTeamAlive = false;
     public int winningTeamID;
     public string winningTeamName;
-    public AIState aiState = AIState.WaitingForTurn;
 
     //Temporary Variables
     private GameObject go;
@@ -55,16 +54,6 @@ public class GameManager : MonoBehaviour
         WhatchingShot,
         Pause,
         GameOver
-    }
-
-    public enum AIState
-    {
-        WaitingForTurn,
-        PickingTarget,
-        WeaponSelect,
-        Aiming,
-        Shooting,
-        Pause
     }
 
     void Start()
@@ -109,7 +98,7 @@ public class GameManager : MonoBehaviour
                 //temporary spawn location until map generation is done
                 teams[i , j] = Instantiate(soldierPrefab, spawnLocations[count++], transform.rotation);
 
-                teams[i, j].GetComponent<WeaponControler>().crosshairs = crosshairManger;
+                teams[i, j].GetComponent<WeaponController>().crosshairs = crosshairManger;
                 
 
                 ps = teams[i, j].GetComponent<PlayerSettings>();
@@ -217,7 +206,7 @@ public class GameManager : MonoBehaviour
                     isTurnFinished = false; //Reset check before changing state
                     gameState = GameState.TurnInProgress;//change State
 
-                    // Find out which team is next in turn. By looping thru numteams - 1
+                    //Find out which team is next in turn. By looping thru the number of teams - 1
                     //If we don't get to the break statement, then game is over
                     isOneTeamAlive = true;
                     for (int i = 0; i < GLOBALS.numTeams - 1; i++)
@@ -297,7 +286,7 @@ public class GameManager : MonoBehaviour
                     StartCoroutine(coroutineTurnClock);
                 }
 
-                //Check if turn suddently stops because premature death or self injure and StopCoroutine()
+                //Check if turn suddenly stops because premature death or self injure and StopCoroutine()
                 if (isTurnFinished){
 
                     
@@ -314,7 +303,7 @@ public class GameManager : MonoBehaviour
                     {
                         ps = go.GetComponent<PlayerSettings>();
                         if(ps != null)
-                            ps.EndTurn(); //call clean up funtion for players end turn
+                            ps.EndTurn(); //call clean up function for players end turn
                         //else 
                             //we do nothing since the player is gone anyway
                     }
@@ -333,7 +322,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.Pause:
                 //***************************TODO**************************
-                //Adjust timer to not being afected by the pause
+                //Adjust timer to not being affected by the pause
                 //Probably just add Time.deltaTime to gameClock and turnClock
                 
                 break;

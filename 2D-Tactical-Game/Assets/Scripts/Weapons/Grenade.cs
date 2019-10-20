@@ -11,6 +11,7 @@ public class Grenade : MonoBehaviour
     public float extraSideForce = 10f;
     public float explosionRadius = 4f;
     public GameObject impactEffect;
+    public string spawnSoundName = "Grenade_Launcher";
     public string explosionSoundName = "Dark_Explosion";
     public float autoDestroyOnHeight = -50f;
     private float rotationAmount;
@@ -19,7 +20,7 @@ public class Grenade : MonoBehaviour
     private DamageHandler target;
     void Start()
     {
-        AudioManager.instance.Play("Grenade_Launcher");
+        AudioManager.instance.Play(spawnSoundName);
         
         //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();

@@ -21,7 +21,7 @@ public class Weapon : MonoBehaviour
     */
     public float endTurnDelay = 5f;
     public PlayerSettings playerSettings;
-    public WeaponControler WeaponController;
+    public WeaponController WeaponController;
     public Transform firePoint1;
     public GameObject[] projectilePrefab;
     public bool canChangeWeapons = true;
