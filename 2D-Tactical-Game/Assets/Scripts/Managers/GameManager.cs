@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public SunScript sun;
 
     //Teams related variables
-    private GameObject[,] teams; //[TeamID, SoldierID]
+    [System.NonSerialized]
+    public GameObject[,] teams; //[TeamID, SoldierID]
     public int deadTeamsCounter = 0; 
     public int[] teamsHealth; //[TeamID]
     public int[,] soldiersHealth; //[TeamID, SoldierID]

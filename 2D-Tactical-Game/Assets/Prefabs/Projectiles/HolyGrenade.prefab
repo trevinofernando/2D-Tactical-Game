@@ -240,11 +240,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 90
   timer: 3
+  IsHoly: 1
   launchForce: 1000
   explosionForce: 750
-  extraSideForce: 10
+  extraSideForce: -10
   explosionRadius: 10
   impactEffect: {fileID: 2495769490140607598, guid: 4c0da6b337310f540948736f5daf635b,
     type: 3}
+  spawnSoundName: Grenade_Launcher
   explosionSoundName: Distant_Explosion
   autoDestroyOnHeight: -50
