@@ -8,6 +8,7 @@ public class CrosshairManager : MonoBehaviour
     public Sprite[] sprites;
 
     private Vector3 mousePosition;
+    private Vector2 offset;
     private Image img;
 
     void Awake()
@@ -28,8 +29,13 @@ public class CrosshairManager : MonoBehaviour
         mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         
+        if(img.sprite == sprites[0]){
+            offset = new Vector2(-0.45f, 0.7f);
+        }else{
+            offset = Vector2.zero;
+        }
         // Move Crosshair to mouse position. And leave the z coordinate alone
-        transform.position = new Vector2(mousePosition.x, mousePosition.y);
+        transform.position = (new Vector2(mousePosition.x, mousePosition.y)) - offset;
     }
 
     public void SetCrosshairTo(int indexOfCrosshairChoice)
