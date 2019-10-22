@@ -23,6 +23,7 @@ public class GlobalVariables : MonoBehaviour
 
     // redundant
     public string[,] teamNames = new string[4,4]; //[Team, Soldier]
+    public bool[] isTeamAI = {false, false, true, true}; //[Team]
 
     public SampleTeam[] teams = new SampleTeam[8];
     public int gameMode = 1;

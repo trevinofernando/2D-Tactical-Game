@@ -22,7 +22,7 @@ public class SunScript : MonoBehaviour
     {
         //Debug.Log("Shooting " + targetPosition);
         
-        //Find direction vector from gun to mouse and normalize it to length 1
+        //Find direction vector from self to target and normalize it to length 1
         dir3 = targetPosition - transform.position;
         dir3.Normalize();
         dir3.z = 0;

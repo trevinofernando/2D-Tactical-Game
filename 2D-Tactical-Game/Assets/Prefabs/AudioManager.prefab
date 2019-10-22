@@ -122,3 +122,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Metal_Hit_High
+    clip: {fileID: 8300000, guid: e5fdd043cf017624cb0f7314ee6de53c, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Metal_Hit_Low
+    clip: {fileID: 8300000, guid: 64be9c4686fad8f4a839cfa9259af96b, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

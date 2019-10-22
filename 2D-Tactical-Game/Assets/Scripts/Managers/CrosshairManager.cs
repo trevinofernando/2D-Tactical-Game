@@ -29,8 +29,10 @@ public class CrosshairManager : MonoBehaviour
         mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         
+        //sprite[0] is the gauntlet
         if(img.sprite == sprites[0]){
-            offset = new Vector2(-0.45f, 0.7f);
+            //offset the sprite to have the gauntlet finger tip exactly on the cursor tip
+            offset = new Vector2(-0.45f, 0.7f); 
         }else{
             offset = Vector2.zero;
         }

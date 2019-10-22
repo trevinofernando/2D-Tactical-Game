@@ -12,16 +12,18 @@ public class PlayerSettings : MonoBehaviour
     public bool iAmAI = false;
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
+    public Animator anim;
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
-    public Animator anim;
+    private AIController AICont;
     private WeaponController weaponContr;
     private Rigidbody2D rb;
 
     void Start()
     {
-        //Get reference to weaponController script and Rigidbody component
+        //Get reference to weaponController and AIController script, and Rigidbody component
         weaponContr = GetComponent<WeaponController>();
+        AICont = GetComponent<AIController>();
         rb = GetComponent<Rigidbody2D>();
     }
     public void SetColor(Color newColor)//RBGA
@@ -46,6 +48,9 @@ public class PlayerSettings : MonoBehaviour
             //Reset these variable in case of sudden turn ending
             weaponScript.canChangeWeapons = true;
             weaponScript.canShoot = true;
+            
+            //Reset AI State machine to waiting
+            AICont.curState = AIController.AIState.WaitingForTurn;
 
             //Tell gameManager the turn is done
             if(gameManager != null)

@@ -14,8 +14,11 @@ public class Grenade : MonoBehaviour
     public GameObject impactEffect;
     public string spawnSoundName = "Grenade_Launcher";
     public string explosionSoundName = "Dark_Explosion";
+    public string impactSound1 = "Metal_Hit_High";
+    public string impactSound2 = "Metal_Hit_Low";
     public float autoDestroyOnHeight = -50f;
     private float rotationAmount;
+    private bool soundAlternator;
     private Rigidbody2D rb;
     private CircleCollider2D cirColider;
     private DamageHandler target;
@@ -77,6 +80,15 @@ public class Grenade : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(soundAlternator){
+            AudioManager.instance.Play(impactSound1);
+        }else{
+            AudioManager.instance.Play(impactSound2);
+        }
+        soundAlternator = !soundAlternator;
     }
 
     private IEnumerator Timer(float waitTime)

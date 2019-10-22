@@ -275,10 +275,12 @@ public class GameOptionsMenu : MonoBehaviour
         GLOBALS.gameMode = gameMode;
 
         GLOBALS.teamColors = new Color[numTeams];
+        GLOBALS.isTeamAI = new bool[numTeams];
         for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
         {
             GLOBALS.teams[teamNumber] = teams[teamNumber];
-            GLOBALS.teamColors[teamNumber] = teams[teamNumber].teamColor    ;
+            GLOBALS.teamColors[teamNumber] = teams[teamNumber].teamColor;
+            GLOBALS.isTeamAI[teamNumber] = teams[teamNumber].isAI;
         }
 
         Debug.Log("Successfully updated Globals");

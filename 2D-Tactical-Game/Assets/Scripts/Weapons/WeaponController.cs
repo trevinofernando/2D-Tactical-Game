@@ -44,7 +44,7 @@ public class WeaponController : MonoBehaviour
 
     void Update()
     {
-        if (playerSettings.isMyTurn)
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI)
         {
             AimToMouse();
             if (weaponScript.canChangeWeapons)

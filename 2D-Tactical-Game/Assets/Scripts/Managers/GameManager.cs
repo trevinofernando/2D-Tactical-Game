@@ -100,14 +100,15 @@ public class GameManager : MonoBehaviour
                 teams[i , j] = Instantiate(soldierPrefab, spawnLocations[count++], transform.rotation);
 
                 teams[i, j].GetComponent<WeaponController>().crosshairs = crosshairManger;
+                teams[i, j].GetComponent<AIController>().GM = thisGM;
                 
-
                 ps = teams[i, j].GetComponent<PlayerSettings>();
                 ps.gameManager = thisGM; //Self reference to each soldier to keep contact
                 ps.cam = cam; //pass camera reference
                 ps.SetColor(GLOBALS.teamColors[i]);
                 ps.teamID = i; //set team id (unique for each team)
                 ps.ID = j; //set player id (unique inside each team)
+                ps.iAmAI = GLOBALS.isTeamAI[i]; //Mark Soldier as AI or not
 
                 if(GLOBALS.teams[i] != null)
                 {
@@ -156,7 +157,7 @@ public class GameManager : MonoBehaviour
             {
                 deadTeamsCounter++;
             }
-            else
+            else if(winningTeamID == -1 || teamsHealth[i] > teamsHealth[winningTeamID])
             {
                 winningTeamID = i;
             }

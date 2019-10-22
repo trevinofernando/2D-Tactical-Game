@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
-    
-    public GameManager GM;
     public Animator anim;
+
+    //References to other scripts
+    [System.NonSerialized]
+    public GameManager GM;
     private Rigidbody2D rb;
     private PlayerSettings ps;
     private GlobalVariables GLOBALS;
@@ -14,8 +17,14 @@ public class AIController : MonoBehaviour
 
     private List<Transform> targets = new List<Transform>();
 
-    private AIState curState = AIState.WaitingForTurn;
+    //Temporal variables
+    private RaycastHit2D hit;
+    private Vector2 origin;
+    private Vector2 direction;
+    private Vector3 dir3;
+    private Transform target;
 
+    public AIState curState = AIState.WaitingForTurn;
 
     public enum AIState
     {
@@ -41,8 +50,6 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!ps.isMyTurn)
-            return; //not my turn, so exit
         
         switch (curState)
         {
@@ -68,15 +75,46 @@ public class AIController : MonoBehaviour
                         
                         //Add Soldier to possible targets to shoot
                         targets.Add(GM.teams[i,j].transform);
-
-                        
                     }
                 }
 
-                //We now have all possible targets, now we need to sort them
-                //***************************TODO**************************
-                //Use Insert on above forloop to sort
+                //We now have all possible targets, now we need to sort them:
 
+                //sort by distance to player ascending
+                targets = targets.OrderBy(x => Vector2.Distance(this.transform.position,x.position)).ToList();
+                //sort by teams health decending
+                targets = targets.OrderBy(x => -GM.teamsHealth[x.GetComponent<PlayerSettings>().teamID]).ToList();
+                //sort by soldiers health decending
+                targets = targets.OrderBy(x => -x.GetComponent<DamageHandler>().health).ToList();
+
+                foreach (Transform tar in targets){
+                    //Find direction vector from self to target and normalize it to length 1
+                    dir3 = tar.position - transform.position;
+                    dir3.Normalize();
+                    dir3.z = 0;
+
+                    //Direct cast from Vector3s to Vector2s
+                    origin = transform.position;
+                    direction = dir3;
+
+                    //Send a ray and store the information in hit
+                    hit = Physics2D.Raycast(origin, direction);
+                    
+                    //Check if we are hitting a player and that player is not in our team
+                    if(hit.transform.tag == "Player" && ps.teamID != hit.transform.GetComponent<PlayerSettings>().teamID){
+                        target = hit.transform;
+                        break;
+                    }
+                }
+
+                //Find diff in x and y
+                float xDiff = target.position.x - weaponContr.weaponPivot.position.x;
+                float yDiff = target.position.y - weaponContr.weaponPivot.position.y;
+
+                //Calculate angle to rotate with 2D tangent formula and change from radians to degrees
+                float zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
+                
+                curState = AIState.Aiming;
                 break;
             case(AIState.Moving):
                 //***************************TODO**************************
@@ -84,7 +122,7 @@ public class AIController : MonoBehaviour
                 break;
             case(AIState.Aiming):
                 //***************************TODO**************************
-
+                //move 
                 break;
             case(AIState.Shooting):
                 //***************************TODO**************************
