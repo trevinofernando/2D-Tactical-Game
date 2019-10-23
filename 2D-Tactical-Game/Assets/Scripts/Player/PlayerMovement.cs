@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (ps.isMyTurn && !playerSettings.iAmAI)
+        if (ps.isMyTurn && !ps.iAmAI)
         {
             //Freeze rotation on Z and unfreeze position on X
             rb.constraints = RigidbodyConstraints2D.FreezeRotation; 

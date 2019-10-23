@@ -359,7 +359,7 @@ public class GameManager : MonoBehaviour
                     }
                     
                 }
-                else if (Input.GetKeyDown(KeyCode.P)){
+                else if (Input.GetKeyDown(KeyCode.P) || !pauseMenuCanvas.gameObject.activeInHierarchy){
                     stateSaved = false; //reset flag
                     
                     isTurnFinished = isTurnFinishedWhenPaused; //Recover this variable state
