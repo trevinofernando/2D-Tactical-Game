@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public Animator anim;
 
     //private float 
-    private float moveDirection;
+    [System.NonSerialized]
+    public float moveDirection;
     private Rigidbody2D rb;
     private PlayerSettings ps;
 
@@ -80,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (ps.isMyTurn)
+        if (ps.isMyTurn && !playerSettings.iAmAI)
         {
             //Freeze rotation on Z and unfreeze position on X
             rb.constraints = RigidbodyConstraints2D.FreezeRotation; 

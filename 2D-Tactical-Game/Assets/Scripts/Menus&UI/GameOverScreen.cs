@@ -12,8 +12,11 @@ public class GameOverScreen : MonoBehaviour
     public Color winTeamColor;
     public TextMeshProUGUI winnerTextHolder;
 
-    void Start()
-    {
+    private void OnEnable() {
+        if(winnerTextHolder == null){
+            //This can happen if another canvas in enabled and this winnerTextHolder is disabled
+            return;
+        }
         if(winningTeamID == -1){
             winnerTextHolder.text = "DRAW";
         }else{
@@ -29,13 +32,16 @@ public class GameOverScreen : MonoBehaviour
             //set the text to be the color of the winning team 
             winnerTextHolder.color = winTeamColor;
         }
-        
-
+    
     }
-
 
     void Update()
     {
+        /*
+        if(!gameObject.enabled)
+            return;
+        */
+
         //check for escape key to go back to the menu
         if(Input.GetKey(KeyCode.Escape))
         {

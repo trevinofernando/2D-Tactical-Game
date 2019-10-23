@@ -23,7 +23,7 @@ public class CrosshairManager : MonoBehaviour
         img.sprite = sprites[0];
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //Find Mouse position in monitor and then translate that to a point in the world
         mousePosition = Input.mousePosition;

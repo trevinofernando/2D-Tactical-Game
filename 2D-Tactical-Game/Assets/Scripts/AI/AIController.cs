@@ -107,6 +107,9 @@ public class AIController : MonoBehaviour
                     }
                 }
 
+                if(target == null){
+                    break;
+                }
                 //Find diff in x and y
                 float xDiff = target.position.x - weaponContr.weaponPivot.position.x;
                 float yDiff = target.position.y - weaponContr.weaponPivot.position.y;

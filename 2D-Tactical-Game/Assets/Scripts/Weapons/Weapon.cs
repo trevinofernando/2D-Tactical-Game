@@ -35,11 +35,11 @@ public class Weapon : MonoBehaviour
 
 
 
-    void Update()
+    void FixedUpdate()
     {
         //if weapon is not equipped, then ignore all code
         //if is not the players turn, then ignore all code
-        if (playerSettings.isMyTurn)
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI)
         {
             switch (weaponCode)
             {

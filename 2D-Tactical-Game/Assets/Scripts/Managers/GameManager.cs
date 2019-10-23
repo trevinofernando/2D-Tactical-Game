@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
     public Canvas gameOverCanvas;
+    public Canvas pauseMenuCanvas;
     public SunScript sun;
 
     //Teams related variables
@@ -24,20 +25,26 @@ public class GameManager : MonoBehaviour
     public int[] teamsHealth; //[TeamID]
     public int[,] soldiersHealth; //[TeamID, SoldierID]
     public int currTeamTurn = 0; //index of current teams turn
+    private int currTeamTurnWhenPause; //index of current teams turn when the game was paused
     public int[] currSoldierTurn; //[TeamID] to keep track of which soldier is next depending on team
 
     //Time related variables
     public float turnClock = 0f;
+    private float turnClockWhenPause;
     public float gameClock = 0f;
+    private float gameClockWhenPause;
     private bool coroutineStarted = false;
     private IEnumerator coroutineTurnClock;
     private IEnumerator coroutineGameClock;
 
     //STATES
     public GameState gameState = GameState.LoadingScene;
+    public GameState prevGameState = GameState.LoadingScene;
     public bool suddenDeath = false;
     public bool isTurnFinished = false;
+    private bool isTurnFinishedWhenPaused;
     public bool isOneTeamAlive = false;
+    public bool stateSaved = false;
     public int winningTeamID;
     public string winningTeamName;
 
@@ -45,7 +52,7 @@ public class GameManager : MonoBehaviour
     private GameObject go;
     private GameManager thisGM;
     private PlayerSettings ps;
-
+    private const int GauntletCursorCode = 0;
 
     public enum GameState
     {
@@ -62,7 +69,7 @@ public class GameManager : MonoBehaviour
         GLOBALS = GlobalVariables.Instance;
         gameState = GameState.LoadingScene;
         isTurnFinished = false; //Set initial state
-
+        Time.timeScale = 1.0f; //Set normal time for game to run
 
 
         //Initialize array to hold each soldier object team[Team][Avatar]
@@ -176,6 +183,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //Check for Pause input if we are not in the pause state
+        if(Input.GetKeyDown(KeyCode.P) && gameState != GameState.Pause){
+            prevGameState = gameState; //save prevGameState
+            gameState = GameState.Pause; //Change to Pause state
+            pauseMenuCanvas.gameObject.SetActive(true); //enable Pause Menu
+        }
+
         //State Machine
         switch (gameState)
         {
@@ -272,8 +286,6 @@ public class GameManager : MonoBehaviour
                         Debug.LogError("Next Soldier in turn is dead, this state should never be reached");
                     }
 
-                    //***************************TODO**************************
-                    //Tell Camara to focus on this player
 
                 }
 
@@ -323,10 +335,49 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.Pause:
-                //***************************TODO**************************
-                //Adjust timer to not being affected by the pause
-                //Probably just add Time.deltaTime to gameClock and turnClock
-                
+                //Adjust timer to not being affected by the pause and save the current game state
+                if(!stateSaved){
+                    stateSaved = true; //Update flag
+                    Time.timeScale = 0.0f; //Stop time
+
+                    turnClockWhenPause = turnClock; //Save turnClock
+                    StopCoroutine(coroutineTurnClock); //And stop the turn Coroutine
+
+                    gameClockWhenPause = gameClock; //Save gameClock
+                    StopCoroutine(coroutineGameClock); //And stop the game Coroutine
+
+                    isTurnFinishedWhenPaused = isTurnFinished; //Save turn state
+                    currTeamTurnWhenPause = currTeamTurn; //Save current Team Turn
+
+                    //Force player to change to the gauntlet weapon
+                    go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
+                    if (go != null)
+                    {
+                        WeaponController wc = go.GetComponent<WeaponController>();
+                        if(wc != null)
+                            wc.ChangeWeapon(GauntletCursorCode); // Weapon Code for the gauntlet is 0
+                    }
+                    
+                }
+                else if (Input.GetKeyDown(KeyCode.P)){
+                    stateSaved = false; //reset flag
+                    
+                    isTurnFinished = isTurnFinishedWhenPaused; //Recover this variable state
+
+                    //Check if the coroutine was in progress or not, this only happens in exactly 1 frame
+                    if(!isTurnFinishedWhenPaused){
+                        //Resume gameClock Timer
+                        coroutineGameClock = SetGameClock(gameClockWhenPause);
+                        StartCoroutine(coroutineGameClock);
+                        //Resume turnClock Timer
+                        coroutineTurnClock = SetTurnClock(turnClockWhenPause); //time between turns should be 1 to 5 sec
+                        StartCoroutine(coroutineTurnClock);
+                    }
+
+                    Time.timeScale = 1.0f; //Unfreeze time
+                    gameState = prevGameState; //Resume the game
+                    pauseMenuCanvas.gameObject.SetActive(false);//disable Pause Menu
+                }
                 break;
 
             case GameState.LoadingScene:
@@ -337,10 +388,6 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.GameOver:
-                //***************************TODO**************************
-                /*
-                 *
-                */
 
                 Debug.Log("Game Over");
                 

@@ -28,9 +28,9 @@ public class WeaponController : MonoBehaviour
      * 10   = 
     */
     private Weapon weaponScript;
-    private int currWeapon = 0;
-    private int prevWeapon = 0;
-    private int numWeapons;
+    public int currWeapon = 0;
+    public int prevWeapon = 0;
+    public int numWeapons;
     private GameObject go;
 
     private Vector3 mousePosition;
@@ -44,7 +44,8 @@ public class WeaponController : MonoBehaviour
 
     void Update()
     {
-        if (playerSettings.isMyTurn && !playerSettings.iAmAI)
+        //Only run this code if the game isn't paused, the soldier is not AI and if it is this soldiers turn
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
         {
             AimToMouse();
             if (weaponScript.canChangeWeapons)
@@ -72,6 +73,7 @@ public class WeaponController : MonoBehaviour
 
     public void ChangeWeapon(int weaponChoice)
     {
+        currWeapon = weaponChoice; //This is needed if an external script calls this method
         weaponScript.weaponCode = weaponChoice; //update weapon script
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
         crosshairs.SetCrosshairTo(weaponChoice);

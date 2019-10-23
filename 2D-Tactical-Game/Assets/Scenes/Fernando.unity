@@ -4673,6 +4673,7 @@ MonoBehaviour:
   spawnOffset: {x: -18, y: 10, z: 0}
   mapInitializer: {fileID: 1738065371}
   gameOverCanvas: {fileID: 1574460688}
+  pauseMenuCanvas: {fileID: 610489720}
   sun: {fileID: 837861691}
   deadTeamsCounter: 0
   teamsHealth: 00000000000000000000000000000000
@@ -4681,9 +4682,11 @@ MonoBehaviour:
   turnClock: 0
   gameClock: 0
   gameState: 0
+  prevGameState: 0
   suddenDeath: 0
   isTurnFinished: 0
   isOneTeamAlive: 0
+  stateSaved: 0
   winningTeamID: 0
   winningTeamName: 
 --- !u!1001 &702825624
@@ -9310,36 +9313,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2115885540}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1260124190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1260124191}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1260124191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260124190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.45, y: 0.7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1266504846
 GameObject:
