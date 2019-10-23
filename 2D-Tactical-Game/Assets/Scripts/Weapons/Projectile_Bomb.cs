@@ -8,7 +8,7 @@ public class Projectile_Bomb : MonoBehaviour
     public int damage = 40;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
-    public float extraSideForce = 10f;
+    public float extraUpForce = -1f;
     public float explosionRadius = 5f;
     public GameObject impactEffect;
     public float autoDestroyOnHeight = -50f;
@@ -69,7 +69,7 @@ public class Projectile_Bomb : MonoBehaviour
             rb = col.GetComponent<Rigidbody2D>();
             if(rb != null)
             {
-                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraSideForce);
+                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraUpForce);
             }
 
             //get damageHandler script and apply damage depending on distance

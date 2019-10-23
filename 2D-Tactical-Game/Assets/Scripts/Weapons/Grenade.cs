@@ -9,7 +9,7 @@ public class Grenade : MonoBehaviour
     public bool IsHoly = false;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
-    public float extraSideForce = 10f;
+    public float extraUpForce = -1f;
     public float explosionRadius = 4f;
     public GameObject impactEffect;
     public string spawnSoundName = "Grenade_Launcher";
@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
             rb = col.GetComponent<Rigidbody2D>();
             if(rb != null)
             {
-                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraSideForce);
+                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraUpForce);
             }
 
             //get damageHandler script and apply damage depending on distance

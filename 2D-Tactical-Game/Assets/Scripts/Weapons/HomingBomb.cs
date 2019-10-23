@@ -9,7 +9,7 @@ public class HomingBomb : MonoBehaviour
     public int damage = 30;
     public float launchForce = 1000f;
     public float explosionForce = 800f;
-    public float extraSideForce = -5f;
+    public float extraUpForce = -1f;
     public float explosionRadius = 4f;
     public float speed = 100f;
     public float rotationSpeed = 250f;
@@ -92,7 +92,7 @@ public class HomingBomb : MonoBehaviour
             rb = col.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraSideForce);
+                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraUpForce);
             }
 
             //get damageHandler script and apply damage depending on distance

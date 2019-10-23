@@ -96,7 +96,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.3
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -243,10 +243,12 @@ MonoBehaviour:
   IsHoly: 1
   launchForce: 1000
   explosionForce: 750
-  extraSideForce: -10
+  extraUpForce: -3
   explosionRadius: 10
   impactEffect: {fileID: 2495769490140607598, guid: 4c0da6b337310f540948736f5daf635b,
     type: 3}
   spawnSoundName: Grenade_Launcher
   explosionSoundName: Distant_Explosion
+  impactSound1: Metal_Hit_High
+  impactSound2: Metal_Hit_Low
   autoDestroyOnHeight: -50

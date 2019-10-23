@@ -50,7 +50,9 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!ps.iAmAI){
+            return;
+        }
         switch (curState)
         {
             case(AIState.WaitingForTurn):

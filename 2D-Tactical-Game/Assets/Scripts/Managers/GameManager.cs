@@ -207,10 +207,12 @@ public class GameManager : MonoBehaviour
                         if(go != null)
                         {
                             //Tell camera to look at the sun
-                            cam.soldier = sun.gameObject;
-                            cam.shouldFollowTarget = true;
-                            sun.Shoot(go.transform.position);
-                            AudioManager.instance.Play("Short_Choir");
+                            if(sun != null){
+                                cam.soldier = sun.gameObject;
+                                cam.shouldFollowTarget = true;
+                                sun.Shoot(go.transform.position);
+                                AudioManager.instance.Play("Short_Choir");
+                            }
                         }
                 }
 
