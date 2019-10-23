@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MuzzleFlashSniperScript : MonoBehaviour
 {
-    public int damage = 50;
+    public int damageToPlayer = 50;
+    public int damageToProps = 50;
     public float pushBackForce = 1250f;
     public Color startColor = new Color(1, 1, 0, 1); //Yellow
     public Color endColor = new Color(1, 1, 1, 1); //White
@@ -44,7 +45,7 @@ public class MuzzleFlashSniperScript : MonoBehaviour
             //Damage target if we can
             if (dh != null)
             {
-                dh.TakeDamage(damage);
+                dh.TakeDamage(damageToPlayer, damageToProps);
 
                 //get rigidbody to add a force to reflect the impact
                 Rigidbody2D rb = hit.transform.GetComponent<Rigidbody2D>();

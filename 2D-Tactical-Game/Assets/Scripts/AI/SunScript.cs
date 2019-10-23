@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SunScript : MonoBehaviour
 {
-    public int damage = 50;
+    public int damageToPlayer = 50;
+    public int damageToProps = 9999;
     public float pushBackForce = 500f;
     public float traceDuration = 1f;
     public Material mat;
@@ -47,7 +48,7 @@ public class SunScript : MonoBehaviour
             //Damage target if we can
             if (dh != null)
             {
-                dh.TakeDamage(damage);
+                dh.TakeDamage(damageToPlayer, damageToPlayer);
 
                 //get rigidbody to add a force to reflect the impact
                 Rigidbody2D rb = hit.transform.GetComponent<Rigidbody2D>();

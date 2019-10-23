@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    public int damage = 60;
+    public int damageToPlayer = 60;
+    public int damageToProps = 60;
     public int timer = 3;
     public bool IsHoly = false;
     public float launchForce = 1000f;
@@ -75,7 +76,7 @@ public class Grenade : MonoBehaviour
             {
                 var dir = (col.transform.position - transform.position);
                 float wearoff = 1 - (dir.magnitude / explosionRadius);
-                target.TakeDamage( (int)(damage * wearoff));
+                target.TakeDamage( (int)(damageToPlayer * wearoff), damageToProps);
             }
         }
 

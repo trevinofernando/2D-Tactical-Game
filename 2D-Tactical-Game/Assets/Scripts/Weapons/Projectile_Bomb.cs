@@ -5,7 +5,8 @@ using UnityEngine;
 public class Projectile_Bomb : MonoBehaviour
 {
     public int directHitDamage = 10;
-    public int damage = 40;
+    public int damageToPlayer = 40;
+    public int damageToProps = 40;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
     public float extraUpForce = -1f;
@@ -50,7 +51,7 @@ public class Projectile_Bomb : MonoBehaviour
         //Make sure target has a DamageHandler script, and if so then inflict damage.
         if(target != null)
         {
-            target.TakeDamage(directHitDamage);
+            target.TakeDamage(directHitDamage, directHitDamage);
         }
 
         //Create an impact effect like an explosion
@@ -78,7 +79,7 @@ public class Projectile_Bomb : MonoBehaviour
             {
                 var dir = (col.transform.position - transform.position);
                 float wearoff = 1 - (dir.magnitude / explosionRadius);
-                target.TakeDamage( (int)(damage * wearoff));
+                target.TakeDamage( (int)(damageToPlayer * wearoff), damageToProps);
             }
         }
 

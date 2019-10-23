@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageHandler : MonoBehaviour
 {
     public int health = 100;
+    public bool isPlayer = false;
     public bool iAmDead = false;
     public GameObject deathEffect;
     public PlayerMovement movementControls;
@@ -15,7 +16,10 @@ public class DamageHandler : MonoBehaviour
 
     void Start()
     {
-        ps = GetComponent<PlayerSettings>();
+        if(isPlayer){
+            ps = GetComponent<PlayerSettings>();
+        }
+            
         if(ps != null)
         {
             health = GlobalVariables.Instance.healthPerAvatar;
@@ -30,9 +34,17 @@ public class DamageHandler : MonoBehaviour
         health = _health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damageToPlayers, int damageToProps = -1)
     {
-        health -= damage;
+        if(damageToProps == -1){
+            damageToProps = damageToPlayers;
+        }
+        if(isPlayer){
+            health -= damageToPlayers;
+        }else{
+            health -= damageToProps;
+        }
+            
 
         //if we are a player
         if (ps != null) 
@@ -41,7 +53,7 @@ public class DamageHandler : MonoBehaviour
             ps.UpdateHealth(health);
 
             //if the damage is negative, then player was healed, no need to continue
-            if(damage > 0){
+            if(damageToPlayers > 0){
                 //start sound
                 AudioManager.instance.Play("Take_Damage");
 
@@ -85,7 +97,7 @@ public class DamageHandler : MonoBehaviour
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
-
+        GlobalVariables.Instance.mapState[(int)transform.position.x / 2, (int)transform.position.y / 2] = 0;
         Destroy(gameObject);
     }
 

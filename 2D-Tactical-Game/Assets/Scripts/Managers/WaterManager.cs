@@ -28,7 +28,7 @@ public class WaterManager : MonoBehaviour
         //Make sure target has a DamageHandler script, and if so then inflict damage.
         if (target != null)
         {
-            target.TakeDamage(Damage);
+            target.TakeDamage(Damage, Damage);
         }
 
         //Create an impact effect like an explosion

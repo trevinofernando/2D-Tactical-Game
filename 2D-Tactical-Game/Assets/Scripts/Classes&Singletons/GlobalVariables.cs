@@ -10,7 +10,7 @@ public class GlobalVariables : MonoBehaviour
     //*********GLOBAL VARIABLES*********//
 
     //MAP related variables
-    public int[][] mapState;
+    public int[,] mapState = new int[1000,1000];
 
 
 
