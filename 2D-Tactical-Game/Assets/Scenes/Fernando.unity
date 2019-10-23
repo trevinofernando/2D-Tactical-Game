@@ -9394,7 +9394,7 @@ MonoBehaviour:
   numPlayersNPCs: 0
   teamSize: 4
   healthPerAvatar: 100
-  isTeamAI: 00000101
+  isTeamAI: 00000000
   gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}

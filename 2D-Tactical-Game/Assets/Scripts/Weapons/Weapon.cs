@@ -35,11 +35,12 @@ public class Weapon : MonoBehaviour
 
 
 
-    void FixedUpdate()
+    void Update()
     {
         //if weapon is not equipped, then ignore all code
         //if is not the players turn, then ignore all code
-        if (playerSettings.isMyTurn && !playerSettings.iAmAI)
+        //if the game is paused, then ignore all code
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
         {
             switch (weaponCode)
             {
