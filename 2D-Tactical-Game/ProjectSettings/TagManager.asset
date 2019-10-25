@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Water
+  - Projectile
   layers:
   - Default
   - TransparentFX

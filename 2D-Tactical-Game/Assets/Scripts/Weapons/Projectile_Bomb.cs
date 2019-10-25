@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile_Bomb : MonoBehaviour
 {
+    public bool isCargo = false;
     public int directHitDamage = 10;
     public int damageToPlayer = 40;
     public int damageToProps = 40;
@@ -17,11 +18,15 @@ public class Projectile_Bomb : MonoBehaviour
     private float travelingDirection;
     void Start()
     {
-        AudioManager.instance.Play("Grenade_Launcher");
-        
-        //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.right * launchForce * rb.mass);
+
+        if(!isCargo){
+            AudioManager.instance.Play("Grenade_Launcher");
+            //Add initial force once to make a parabolic trajectory
+            rb.AddForce(transform.right * launchForce * rb.mass);
+        }else{
+            //AudioManager.instance.Play("fall");
+        }
     }
 
     void Update()
@@ -42,6 +47,10 @@ public class Projectile_Bomb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D colInfo)
     {
+        if(colInfo.transform.tag == transform.tag){
+            return;
+        }
+        
         //Explosion Sound
         AudioManager.instance.Play("Dark_Explosion");
 
@@ -66,11 +75,15 @@ public class Projectile_Bomb : MonoBehaviour
         //Loop thru each collider
         foreach(Collider2D col in collisions)
         {
+            if(col.transform.tag == transform.tag){
+                continue;
+            }
+            
             //get rigidbody and add a repulsive force
             rb = col.GetComponent<Rigidbody2D>();
             if(rb != null)
             {
-                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce, extraUpForce);
+                Rigidbody2DExtension.AddExplosionForce(rb, transform.position, explosionRadius, explosionForce);
             }
 
             //get damageHandler script and apply damage depending on distance

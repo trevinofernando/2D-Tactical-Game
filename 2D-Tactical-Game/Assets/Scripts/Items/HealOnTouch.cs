@@ -28,4 +28,10 @@ public class HealOnTouch : MonoBehaviour
             }
         }
     }
+
+    private void FixedUpdate() {
+        if(transform.position.y < -50){
+            Destroy(gameObject);
+        }
+    }
 }

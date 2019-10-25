@@ -5934,10 +5934,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137db6ef3b5dd97468eb807676d6aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damageToPlayer: 50
+  damageToProps: 9999
   pushBackForce: 500
   traceDuration: 1
-  mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 3}
+  mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   startColor: {r: 1, g: 1, b: 0, a: 0.5882353}
   endColor: {r: 1, g: 0, b: 0, a: 0.5882353}
 --- !u!1001 &844742086
@@ -7601,7 +7602,7 @@ MonoBehaviour:
   - {fileID: -3820606255585267655, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: 2102067402093574066, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: 21300000, guid: a53d22ed462fead4ba862ad1ea662200, type: 3}
-  - {fileID: 2102067402093574066, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
+  - {fileID: -3820606255585267655, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: -1422151607811118223, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: 4643512889193156404, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
 --- !u!114 &1164008666

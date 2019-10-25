@@ -79,17 +79,23 @@ public class WeaponController : MonoBehaviour
         crosshairs.SetCrosshairTo(weaponChoice);
     }
 
-    public void Shoot(GameObject projectilePrefab, Transform firePoint, Quaternion direction, Transform target = null)
+    public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)
     {
         if(projectilePrefab != null )
         {
-            go = Instantiate(projectilePrefab, firePoint.position, direction);
+            go = Instantiate(projectilePrefab, firePoint, direction);
             if(target != null)
             {
+                PlaneManager pm = go.GetComponent<PlaneManager>();
+                if(pm != null){
+                    pm.SetTarget(target.position, numItemsToDrop, dropArea);
+                    return;
+                }
                 HomingBomb hb = go.GetComponent<HomingBomb>();
                 if(hb != null)
                 {
                     hb.target = target.position;
+                    return;
                 }
             }
         }
