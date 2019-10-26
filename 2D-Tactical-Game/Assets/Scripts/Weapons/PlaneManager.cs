@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlaneManager : MonoBehaviour
 {
-    public float speed = -15;
+    public float speed = -20;
     public float dropArea = 5f;
     public int numItemsToDrop = 1;
     public bool randomizeDrops = false;
     public GameObject[] prefabCargo;
 
-    //[System.NonSerialized]
-    public Vector2[] dropPoints;
+    [System.NonSerialized] public Vector2[] dropPoints;
+    [System.NonSerialized] public GameManager GM;
 
-    public Vector2 target;
+    private Vector2 target;
     private GameObject go;
     private Rigidbody2D rb;
     private int nextPrefabIndex;
@@ -39,7 +39,7 @@ public class PlaneManager : MonoBehaviour
     void Update()
     {
         //destroy object when horizontal edge is reached
-        if(transform.position.x < -35f || transform.position.x > 150f){
+        if(transform.position.x < -40f || transform.position.x > 200f){
             Destroy(gameObject);
         }
         //don't do anything if this is satisfied
@@ -59,6 +59,8 @@ public class PlaneManager : MonoBehaviour
             }
             //Spawn item from cargo
             go = Instantiate(prefabCargo[numItemsToDrop % prefabCargo.Length], transform.position, transform.rotation);
+            //Tell GM what projectile is in the air so the camera can follow it
+            GM.projectile = go;
             //Get reference to RigidBody and set initial speed
             rb = go.GetComponent<Rigidbody2D>();
             if(rb != null){
@@ -97,8 +99,8 @@ public class PlaneManager : MonoBehaviour
 
     private Vector2 FindDropPoint(Vector2 _target){
         //Assuming target is below plane
-        float yDiff = transform.position.y - _target.y;
-        float time = yDiff / -Physics2D.gravity.y;
+        float yDiff = Mathf.Abs(transform.position.y - _target.y);
+        float time = Mathf.Sqrt( 2 * yDiff / -Physics2D.gravity.y);
         float xDiff = speed * time;
         //Flip sign on xDiff since we need to drop the cargo before target
         return new Vector2(_target.x - xDiff, yDiff);

@@ -21,7 +21,7 @@ public class WeaponController : MonoBehaviour
      * 3    = Homing Bazooka
      * 4    = Grenade
      * 5    = Holy Grenade
-     * 6    = 
+     * 6    = PlaneBomber
      * 7    = 
      * 8    = 
      * 9    = 
@@ -84,10 +84,12 @@ public class WeaponController : MonoBehaviour
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
+            playerSettings.gameManager.projectile = go;
             if(target != null)
             {
                 PlaneManager pm = go.GetComponent<PlaneManager>();
                 if(pm != null){
+                    pm.GM = playerSettings.gameManager;
                     pm.SetTarget(target.position, numItemsToDrop, dropArea);
                     return;
                 }

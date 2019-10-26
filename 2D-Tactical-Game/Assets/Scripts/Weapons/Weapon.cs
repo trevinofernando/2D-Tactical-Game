@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Vector3 PlaneSpawnPoint  = new Vector3(140f, 65f, 0);
+    public Vector3 PlaneSpawnPoint  = new Vector3(200f, 65f, 0);
     public GameObject targetSprite;
     public int weaponCode = 0;
     /*
@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
      * 9    = 
      * 10   = 
     */
-    public float endTurnDelay = 5f;
+    public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
     public WeaponController WeaponController;
     public Transform firePoint1;
@@ -54,9 +54,9 @@ public class Weapon : MonoBehaviour
                     //Shoot if we leftclick on the mouse
                     if (Input.GetButtonDown("Fire1") && canShoot)
                     {
-                        Invoke("EndTurn", endTurnDelay);
                         canShoot = false;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);
+                        EndTurn();
                     }
                     break;
                 case 3:
@@ -75,7 +75,6 @@ public class Weapon : MonoBehaviour
                         }
                         else
                         {
-                            Invoke("EndTurn", endTurnDelay);
                             targetSelected = false;
                             canShoot = false;
                             WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, go.transform);
@@ -83,6 +82,7 @@ public class Weapon : MonoBehaviour
                             {
                                 Destroy(go, 5f);
                             }
+                            EndTurn();
                         }  
                     }
                     break;
@@ -90,27 +90,20 @@ public class Weapon : MonoBehaviour
                     //Shoot if we leftclick on the mouse
                     if (Input.GetButtonDown("Fire1") && canShoot)
                     {
-                        if (!targetSelected)
+                        canShoot = false;
+                        
+                        AudioManager.instance.Play("Target_Acquired");
+                        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        mousePos.z = 0;
+
+                        go = Instantiate(targetSprite, mousePos, Quaternion.identity);
+                        WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, go.transform);
+                        if (go != null)
                         {
-                            AudioManager.instance.Play("Target_Acquired");
-                            targetSelected = true;
-                            canChangeWeapons = false;
-                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                            mousePos.z = 0;
-                            go = Instantiate(targetSprite, mousePos, Quaternion.identity);
-                            Destroy(go, 25f); //just in case the turn ends suddenly
+                            Destroy(go, 10f);
                         }
-                        else
-                        {
-                            Invoke("EndTurn", endTurnDelay * 2);
-                            targetSelected = false;
-                            canShoot = false;
-                            WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, go.transform);
-                            if (go != null)
-                            {
-                                Destroy(go, 10f);
-                            }
-                        }  
+                        
+                        EndTurn();
                     }
                     break;
                 default:

@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29c817becbd985449951a7fc756ad14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaneSpawnPoint: {x: 140, y: 65, z: 0}
+  PlaneSpawnPoint: {x: 200, y: 65, z: 0}
   targetSprite: {fileID: 7354808264935725193, guid: aaddce2ab1e0d064495d83adcf51b61a,
     type: 3}
   weaponCode: 0

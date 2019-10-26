@@ -62,7 +62,6 @@ public class Projectile_Bomb : MonoBehaviour
         {
             target.TakeDamage(directHitDamage, directHitDamage);
         }
-
         //Create an impact effect like an explosion
         if(impactEffect != null)
         {

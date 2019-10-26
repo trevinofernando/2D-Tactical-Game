@@ -457,11 +457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a26fa7f2731e3d459a433c4c3f38ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: -15
-  dropPoints: []
-  dropArea: 5
-  numItemsToDrop: 1
-  randomizeDrops: 0
+  speed: -20
+  dropArea: 50
+  numItemsToDrop: 3
+  randomizeDrops: 1
   prefabCargo:
   - {fileID: 2752310064404446370, guid: c752025ddd2bd654cb2a3848ccb838b7, type: 3}
   - {fileID: 2752310064404446370, guid: 81c05bcb0ebbb204c91bab1cb7447b0b, type: 3}

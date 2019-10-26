@@ -8,9 +8,9 @@ public class DamageHandler : MonoBehaviour
     public bool isPlayer = false;
     public bool iAmDead = false;
     public GameObject deathEffect;
-    public PlayerMovement movementControls;
     [System.NonSerialized] public PlayerSettings ps;
     public Animator anim;
+    private PlayerMovement movementControls;
 
 
 

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     private GlobalVariables GLOBALS;
     public CameraController cam;
     public GameObject soldierPrefab;
+    public GameObject planeHealerPrefab;
+    public Vector3 PlaneSpawnPoint  = new Vector3(200f, 65f, 0);
     public CrosshairManager crosshairManger;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
@@ -17,6 +19,7 @@ public class GameManager : MonoBehaviour
     public Canvas gameOverCanvas;
     public Canvas pauseMenuCanvas;
     public SunScript sun;
+    public GameObject projectile;
 
     //Teams related variables
     [System.NonSerialized]
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
 
     //Temporary Variables
     private GameObject go;
+    private PlaneManager pm;
     private GameManager thisGM;
     private PlayerSettings ps;
     private const int GauntletCursorCode = 0;
@@ -203,7 +207,7 @@ public class GameManager : MonoBehaviour
                     //***************************TODO**************************
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
-                    if (Random.Range(0f,1f) > .5f)
+                    if (Random.Range(0f,1f) > 0.7f){
                         if(go != null)
                         {
                             //Tell camera to look at the sun
@@ -214,9 +218,21 @@ public class GameManager : MonoBehaviour
                                 AudioManager.instance.Play("Short_Choir");
                             }
                         }
+                    }else if(Random.Range(0f,1f) > 0.5f){
+                        //Chance of droping health in the map
+                        go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
+                        cam.soldier = go;
+                        cam.shouldFollowTarget = true;
+                        turnClock+= 5f; //increase turn clock timer to watch the plane
+                        if(go != null){
+                            pm = go.GetComponent<PlaneManager>();
+                            if(pm != null){
+                                pm.GM = thisGM;
+                                pm.SetTarget(new Vector3(50, 20, 0), 3, 50);
+                            }
+                        }
+                    }
                 }
-
-                
 
                 if (isTurnFinished)
                 {
@@ -304,11 +320,18 @@ public class GameManager : MonoBehaviour
 
                 //Check if turn suddenly stops because premature death or self injure and StopCoroutine()
                 if (isTurnFinished){
-
                     
                     coroutineStarted = false; //Reset coroutine check
-                    cam.shouldFollowTarget = false; //stop following player
-                    gameState = GameState.TurnTransition;
+
+                    //If there is a projectile, follow it
+                    if(projectile != null){
+                        cam.soldier = projectile;
+                        cam.shouldFollowTarget = true; //follow projectile
+                        gameState = GameState.WhatchingShot;
+                    }else{
+                        cam.shouldFollowTarget = false; //stop following player
+                        gameState = GameState.TurnTransition;
+                    }
 
                     //Stop Coroutine just in case of premature death or self injure
                     StopCoroutine(coroutineTurnClock);
@@ -330,10 +353,13 @@ public class GameManager : MonoBehaviour
                 break;
 
             case GameState.WhatchingShot:
-                //***************************TODO**************************
-                /*
-                 * Tell camara to look at projectile
-                */
+                //Once projectile is null, change state
+                if(projectile == null){
+                    cam.shouldFollowTarget = false; //stop following player
+                    gameState = GameState.TurnTransition;
+                }else{
+                    cam.soldier = projectile; //this is in case the initial projectile releases more projectiles
+                }
                 break;
 
             case GameState.Pause:

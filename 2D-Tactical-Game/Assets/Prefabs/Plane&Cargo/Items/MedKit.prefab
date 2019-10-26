@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 7038874206175458345}
   - component: {fileID: 2752310064404446371}
   - component: {fileID: 4201171501027095905}
+  - component: {fileID: 2240978531991811428}
   m_Layer: 0
   m_Name: MedKit
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +99,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -166,3 +167,22 @@ MonoBehaviour:
   objectTagToHeal: Player
   impactEffect: {fileID: 8279540977525265318, guid: 4b78315f935d48d4da1f02a8d206d267,
     type: 3}
+--- !u!114 &2240978531991811428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2752310064404446370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1
+  isPlayer: 0
+  iAmDead: 0
+  deathEffect: {fileID: 2963543577588028294, guid: 315a7ddf0713d7045b116e4f480f681b,
+    type: 3}
+  movementControls: {fileID: 0}
+  anim: {fileID: 0}
