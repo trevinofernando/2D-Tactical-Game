@@ -21,6 +21,7 @@ public class PlaneManager : MonoBehaviour
     
     void Start()
     {
+        AudioManager.instance.Play("Old_Motor");
         //Can't allow static planes
         if(speed == 0){
             speed = -5;
@@ -39,18 +40,23 @@ public class PlaneManager : MonoBehaviour
     void Update()
     {
         //destroy object when horizontal edge is reached
-        if(transform.position.x < -40f || transform.position.x > 200f){
+        if(transform.position.x < -20f || transform.position.x > 200f){
+            AudioManager.instance.Stop("Old_Motor");
             Destroy(gameObject);
         }
         //don't do anything if this is satisfied
         if(dropPoints == null || numItemsToDrop < 1){
             return;
         }
-        
+        if(!AudioManager.instance.IsPlaying("Old_Motor")){
+            AudioManager.instance.Play("Old_Motor");
+        }
+
         //Check if we have reached passed the dropPoints, if  yes, then drop one item from the cargo
         if(transform.position.x * Mathf.Sign(speed) > dropPoints[numItemsToDrop - 1].x * Mathf.Sign(speed)){
             //decrease the number of Items to drop
             numItemsToDrop--;
+            AudioManager.instance.Play("Bomb_Falling");
 
             //Calculate the index of the next item to drop as a queue or random
             nextPrefabIndex = numItemsToDrop % prefabCargo.Length;

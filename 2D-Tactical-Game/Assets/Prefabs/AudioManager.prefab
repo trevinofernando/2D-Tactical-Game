@@ -64,7 +64,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Target_Acquired
     clip: {fileID: 8300000, guid: e106ad8296e3dba478031326c717dd3c, type: 3}
-    volume: 0.75
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -128,9 +128,21 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Old_Motor
+    clip: {fileID: 8300000, guid: b0fbf1c80027d8e46b82838ff8ea5819, type: 3}
+    volume: 0.3
+    pitch: 0.7
+    loop: 1
+    source: {fileID: 0}
   - name: Metal_Hit_Low
     clip: {fileID: 8300000, guid: 64be9c4686fad8f4a839cfa9259af96b, type: 3}
     volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Bomb_Falling
+    clip: {fileID: 8300000, guid: e5cee3637925e174eb8875805ec0548a, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}

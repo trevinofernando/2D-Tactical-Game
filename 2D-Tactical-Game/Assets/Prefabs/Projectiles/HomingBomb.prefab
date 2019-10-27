@@ -239,15 +239,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directHitDamage: 10
-  damage: 30
+  damageToPlayer: 30
+  damageToProps: 30
   launchForce: 1000
   explosionForce: 400
-  extraSideForce: -5
+  extraUpForce: -1
   explosionRadius: 4
   speed: 15
   rotationSpeed: 200
   chaseTimer: 1
   autoDestroyOnHeight: -50
   target: {x: 0, y: 0, z: 0}
-  impactEffect: {fileID: 2963543577588028294, guid: 315a7ddf0713d7045b116e4f480f681b,
+  impactEffect: {fileID: 2150632809549486280, guid: aba0286abb5a94f42a81f02763e67b58,
     type: 3}

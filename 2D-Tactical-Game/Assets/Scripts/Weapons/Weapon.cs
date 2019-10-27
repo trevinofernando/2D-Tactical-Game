@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
                             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             mousePos.z = 0;
                             go = Instantiate(targetSprite, mousePos, Quaternion.identity);
-                            Destroy(go, 15f); //just in case the turn ends suddenly
+                            Destroy(go, playerSettings.gameManager.turnClock); //just in case the turn ends suddenly
                         }
                         else
                         {

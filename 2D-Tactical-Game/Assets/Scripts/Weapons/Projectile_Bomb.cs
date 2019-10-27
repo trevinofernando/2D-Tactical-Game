@@ -53,6 +53,7 @@ public class Projectile_Bomb : MonoBehaviour
         
         //Explosion Sound
         AudioManager.instance.Play("Dark_Explosion");
+        AudioManager.instance.Stop("Bomb_Falling"); //in te case of being dropped from a plane
 
         //Look for a DamageHandler script in object collided
         DamageHandler target = colInfo.GetComponent<DamageHandler>();

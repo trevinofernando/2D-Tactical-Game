@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5226463133170334109}
   - component: {fileID: 5352855559125752562}
   - component: {fileID: -8477054899914721875}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Soldier
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -110,7 +110,6 @@ MonoBehaviour:
   isPlayer: 1
   iAmDead: 0
   deathEffect: {fileID: 0}
-  movementControls: {fileID: 2118373370}
   anim: {fileID: 7529892519968174175}
 --- !u!114 &5226463133170334109
 MonoBehaviour:
@@ -183,7 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1591137666620986169}
   - component: {fileID: 1591137666620986168}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137666706389785}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetFrontBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137666738383684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HeadBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137667050591217}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetBackBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137667326444706}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegFrontBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1591137667341396309}
   - component: {fileID: 1591137667341396308}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -469,7 +468,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1591137667599323427}
   - component: {fileID: 1591137667599323426}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1591137667607095214}
   - component: {fileID: 1591137667607095209}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +629,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137667713380038}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BodyBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591137667978403487}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LegBackBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -696,7 +695,7 @@ GameObject:
   - component: {fileID: 5612683250428667488}
   - component: {fileID: 7592505711494285516}
   - component: {fileID: 1813370298514301842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -809,7 +808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3310176537547046930}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 188067215955224553}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WeaponPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -871,7 +870,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8655501702043261793}
   - component: {fileID: 7529892519968174175}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4463039524897822065}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FeetPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

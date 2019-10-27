@@ -204,34 +204,8 @@ public class GameManager : MonoBehaviour
                     coroutineStarted = true;
                     coroutineTurnClock = SetTurnClock(GLOBALS.timeBetweenTurns); //time between turns should be 1 to 5 sec
                     StartCoroutine(coroutineTurnClock);
-                    //***************************TODO**************************
-                    //Chance of Environment Hazard activation.
-                    go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
-                    if (Random.Range(0f,1f) > 0.7f){
-                        if(go != null)
-                        {
-                            //Tell camera to look at the sun
-                            if(sun != null){
-                                cam.soldier = sun.gameObject;
-                                cam.shouldFollowTarget = true;
-                                sun.Shoot(go.transform.position);
-                                AudioManager.instance.Play("Short_Choir");
-                            }
-                        }
-                    }else if(Random.Range(0f,1f) > 0.5f){
-                        //Chance of droping health in the map
-                        go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
-                        cam.soldier = go;
-                        cam.shouldFollowTarget = true;
-                        turnClock+= 5f; //increase turn clock timer to watch the plane
-                        if(go != null){
-                            pm = go.GetComponent<PlaneManager>();
-                            if(pm != null){
-                                pm.GM = thisGM;
-                                pm.SetTarget(new Vector3(50, 20, 0), 3, 50);
-                            }
-                        }
-                    }
+
+                    
                 }
 
                 if (isTurnFinished)
@@ -453,8 +427,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Timer for GAME Clock started with " + waitTime + " Seconds");
         while (true)
         {
-            //***************************TODO**************************: 
-            //update Clock GUI
+            
             if (gameClock > 0)
             {
                 gameClock--;//update the clock timer
@@ -475,11 +448,39 @@ public class GameManager : MonoBehaviour
         //Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
         while (true)
         {
-            //***************************TODO**************************: 
-            //update Clock GUI
             if (turnClock > 0)
             {
                 turnClock--;//update the clock timer
+
+                if(gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 1){
+                    //***************************TODO**************************
+                    //Chance of Environment Hazard activation.
+                    go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
+                    if (Random.Range(0f,1f) > 0.7f){
+                        if(go != null)
+                        {
+                            //Tell camera to look at the sun
+                            if(sun != null){
+                                cam.soldier = sun.gameObject;
+                                cam.shouldFollowTarget = true;
+                                sun.Shoot(go.transform.position);
+                                AudioManager.instance.Play("Short_Choir");
+                            }
+                        }
+                    }else if(Random.Range(0f,1f) > 0.5f){
+                        //Chance of droping health in the map
+                        go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
+                        cam.soldier = go;
+                        cam.shouldFollowTarget = true;
+                        if(go != null){
+                            pm = go.GetComponent<PlaneManager>();
+                            if(pm != null){
+                                pm.GM = thisGM;
+                                pm.SetTarget(new Vector3(50, 20, 0), 3, 50);
+                            }
+                        }
+                    }
+                }
             }
             else
             {

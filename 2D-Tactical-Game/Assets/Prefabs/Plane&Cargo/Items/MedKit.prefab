@@ -116,7 +116,7 @@ Animator:
   m_GameObject: {fileID: 2752310064404446370}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 53dff099378256345bd043ce26081a74, type: 2}
+  m_Controller: {fileID: 9100000, guid: 164e4af3b7891b74eabf45c89b5eaaf4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -184,5 +184,4 @@ MonoBehaviour:
   iAmDead: 0
   deathEffect: {fileID: 2963543577588028294, guid: 315a7ddf0713d7045b116e4f480f681b,
     type: 3}
-  movementControls: {fileID: 0}
   anim: {fileID: 0}
