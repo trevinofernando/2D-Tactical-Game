@@ -452,7 +452,7 @@ public class GameManager : MonoBehaviour
             {
                 turnClock--;//update the clock timer
 
-                if(gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 1){
+                if(gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
                     //***************************TODO**************************
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
@@ -461,7 +461,7 @@ public class GameManager : MonoBehaviour
                         {
                             //Tell camera to look at the sun
                             if(sun != null){
-                                cam.soldier = sun.gameObject;
+                                cam.soldier = go;
                                 cam.shouldFollowTarget = true;
                                 sun.Shoot(go.transform.position);
                                 AudioManager.instance.Play("Short_Choir");
@@ -476,7 +476,7 @@ public class GameManager : MonoBehaviour
                             pm = go.GetComponent<PlaneManager>();
                             if(pm != null){
                                 pm.GM = thisGM;
-                                pm.SetTarget(new Vector3(50, 20, 0), 3, 50);
+                                pm.SetTarget(new Vector3(Random.Range(50f,80f), Random.Range(15f,40f), 0), (int)Random.Range(1,4), (int)Random.Range(10,50));
                             }
                         }
                     }
