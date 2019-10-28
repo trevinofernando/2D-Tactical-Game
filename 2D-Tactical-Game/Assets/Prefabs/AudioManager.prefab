@@ -143,6 +143,6 @@ MonoBehaviour:
   - name: Bomb_Falling
     clip: {fileID: 8300000, guid: e5cee3637925e174eb8875805ec0548a, type: 3}
     volume: 1
-    pitch: 1
+    pitch: 0.75
     loop: 0
     source: {fileID: 0}

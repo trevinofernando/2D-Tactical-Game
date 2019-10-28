@@ -4060,11 +4060,11 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -10}
   minEdgeLimit: {x: -25, y: -15}
   maxEdgeLimit: {x: 200, y: 100}
-  minZoom: 10
+  minZoom: 5
   maxZoom: 50
   soldier: {fileID: 0}
   shouldFollowTarget: 0
-  timeBeforeResetCamera: 10
+  timeBeforeResetCamera: 5
   smoothSpeed: 0.35
 --- !u!20 &519420031
 Camera:
@@ -6804,6 +6804,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lite Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 4312467920144940909, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1061ab6ac85dbe248b928abf6739ed89, type: 3}
@@ -14344,6 +14349,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115885540}
     m_Modifications:
+    - target: {fileID: 5235757334923542391, guid: 602f2830abd128445b4ee74c6ece522f,
+        type: 3}
+      propertyPath: m_Name
+      value: Dark Water
+      objectReference: {fileID: 0}
     - target: {fileID: 1778398010916869308, guid: 602f2830abd128445b4ee74c6ece522f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14409,10 +14419,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.204
       objectReference: {fileID: 0}
-    - target: {fileID: 5235757334923542391, guid: 602f2830abd128445b4ee74c6ece522f,
+    - target: {fileID: 897014407435893735, guid: 602f2830abd128445b4ee74c6ece522f,
         type: 3}
-      propertyPath: m_Name
-      value: Dark Water
+      propertyPath: m_Color.a
+      value: 0.49019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602f2830abd128445b4ee74c6ece522f, type: 3}
