@@ -97,7 +97,9 @@ public class DamageHandler : MonoBehaviour
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
         }
-        GlobalVariables.Instance.mapState[(int)transform.position.x / 2, (int)transform.position.y / 2] = 0;
+        if(transform.tag == "Ground"){
+            //GlobalVariables.Instance.mapState[(int)transform.position.x / 2, (int)transform.position.y / 2] = 0;
+        }
         Destroy(gameObject);
     }
 

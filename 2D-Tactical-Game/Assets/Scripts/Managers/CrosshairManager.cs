@@ -10,6 +10,7 @@ public class CrosshairManager : MonoBehaviour
     private Vector3 mousePosition;
     private Vector2 offset;
     private Image img;
+    private bool onSyncWithFixedUpdate;
 
     void Awake()
     {
@@ -25,6 +26,13 @@ public class CrosshairManager : MonoBehaviour
 
     void LateUpdate()
     {
+        //Sync with Fixed update to stop weird cursor movement when following plane
+        if(!onSyncWithFixedUpdate && Time.timeScale != 0.0f){ //Ignore sync if time is stopped
+            return;
+        }
+        else{
+            onSyncWithFixedUpdate = false;
+        }
         //Find Mouse position in monitor and then translate that to a point in the world
         mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -43,5 +51,9 @@ public class CrosshairManager : MonoBehaviour
     public void SetCrosshairTo(int indexOfCrosshairChoice)
     {
         img.sprite = sprites[indexOfCrosshairChoice];
+    }
+
+    private void FixedUpdate() {
+        onSyncWithFixedUpdate = true;
     }
 }

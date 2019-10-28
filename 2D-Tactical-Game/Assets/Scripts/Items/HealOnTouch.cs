@@ -10,7 +10,6 @@ public class HealOnTouch : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D other) {
         AudioManager.instance.Stop("Bomb_Falling"); //incase of falling from plane
-        Debug.Log("Enter");
         //Check if tag match to target
         if(other.transform.tag == objectTagToHeal){
             //get Damage Handler component
