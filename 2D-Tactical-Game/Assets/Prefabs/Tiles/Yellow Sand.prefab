@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3207076841221649598}
   - component: {fileID: -627635288011903365}
   - component: {fileID: 4481282494130364715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Yellow Sand
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 6200000, guid: bd4993398a640b14e9d35a9d46952b3d, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 0
+  m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
