@@ -66,7 +66,9 @@ public class PlaneManager : MonoBehaviour
             //Spawn item from cargo
             go = Instantiate(prefabCargo[numItemsToDrop % prefabCargo.Length], transform.position, transform.rotation);
             //Tell GM what projectile is in the air so the camera can follow it
-            GM.projectile = go;
+            if(go.transform.tag != "Item")
+                GM.projectile = go;
+            
             //Get reference to RigidBody and set initial speed
             rb = go.GetComponent<Rigidbody2D>();
             if(rb != null){
