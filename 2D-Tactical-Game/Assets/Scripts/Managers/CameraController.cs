@@ -9,17 +9,17 @@ public class CameraController : MonoBehaviour
     public float screenBorderOffset = 10f;
     public Vector3 cameraOffset;
 
-    public Vector2 minEdgeLimit = new Vector2(-50f, -10f);
-    public Vector2 maxEdgeLimit = new Vector2(50f, 100f);
-    public float minZoom = 5f;
+    public Vector2 minEdgeLimit = new Vector2(-25f, -15f);
+    public Vector2 maxEdgeLimit = new Vector2(200f, 100f);
+    public float minZoom = 10f;
     public float maxZoom = 50f;
 
     public GameObject soldier;
     public bool shouldFollowTarget = false;
-    public float timeBeforeResetCamera = 5f;
+    public float timeBeforeResetCamera = 10f;
 
     [Range(0f, 1f)] //should be between 0 and 1
-    public float smoothSpeed = 0.25f;
+    public float smoothSpeed = 0.35f;
 
     private IEnumerator coroutine;
     private Vector3 newPosition;
@@ -88,7 +88,7 @@ public class CameraController : MonoBehaviour
         if (mousePos > Screen.width - screenBorderOffset)
         {
             //increase camera position on x by a fixed amount every frame 
-            //depending on the mosude distance from the screen edge
+            //depending on the mouse distance from the screen edge
             //so the farther out the mouse is, the faster the camera will move
             newPosition.x += speed * (mousePos - (Screen.width - screenBorderOffset));
         }
@@ -109,7 +109,7 @@ public class CameraController : MonoBehaviour
             newPosition.y -= speed * (screenBorderOffset + Mathf.Abs(mousePos));
         }
 
-        //set the x and y boundries between min and max edge limits
+        //set the x and y boundaries between min and max edge limits
         newPosition.x = Mathf.Clamp(newPosition.x, minEdgeLimit.x, maxEdgeLimit.x);
         newPosition.y = Mathf.Clamp(newPosition.y, minEdgeLimit.y, maxEdgeLimit.y);
 
@@ -128,10 +128,9 @@ public class CameraController : MonoBehaviour
                 StopCoroutine(coroutine); //stop previous coroutine
             }
 
-            //set and start a new corutine to reset the camera back to the player's position
+            //set and start a new coroutine to reset the camera back to the player's position
             coroutine = FollowTargetIn(timeBeforeResetCamera); 
             StartCoroutine(coroutine); //start new timer
-
         }
     }
 

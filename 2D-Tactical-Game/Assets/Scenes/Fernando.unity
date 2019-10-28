@@ -3421,11 +3421,11 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -10}
   minEdgeLimit: {x: -25, y: -15}
   maxEdgeLimit: {x: 200, y: 100}
-  minZoom: 5
+  minZoom: 10
   maxZoom: 50
   soldier: {fileID: 0}
   shouldFollowTarget: 0
-  timeBeforeResetCamera: 5
+  timeBeforeResetCamera: 10
   smoothSpeed: 0.35
 --- !u!20 &519420031
 Camera:

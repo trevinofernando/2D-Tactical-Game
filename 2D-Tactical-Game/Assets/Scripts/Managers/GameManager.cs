@@ -352,6 +352,9 @@ public class GameManager : MonoBehaviour
                     currTeamTurnWhenPause = currTeamTurn; //Save current Team Turn
 
                     //Force player to change to the gauntlet weapon
+                    if(currTeamTurn < 0 || currSoldierTurn[currTeamTurn] < 0)
+                        return;
+                    
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if (go != null)
                     {
