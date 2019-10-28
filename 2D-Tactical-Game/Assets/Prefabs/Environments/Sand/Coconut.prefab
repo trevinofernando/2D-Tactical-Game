@@ -461,15 +461,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d791f89fd05cb349acd6c13932ceb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 60
-  damageToProps: 60
+  damageToPlayer: 10
+  damageToProps: 20
   timer: 3
   IsHoly: 0
   launchForce: 1000
   explosionForce: 1000
   extraUpForce: -1
-  explosionRadius: 4
-  impactEffect: {fileID: 0}
+  explosionRadius: 2
+  impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
+    type: 3}
   spawnSoundName: Grenade_Launcher
   explosionSoundName: Dark_Explosion
   impactSound1: Metal_Hit_High
