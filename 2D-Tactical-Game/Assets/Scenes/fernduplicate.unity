@@ -4060,11 +4060,11 @@ MonoBehaviour:
   cameraOffset: {x: 0, y: 0, z: -10}
   minEdgeLimit: {x: -25, y: -15}
   maxEdgeLimit: {x: 200, y: 100}
-  minZoom: 10
+  minZoom: 5
   maxZoom: 50
   soldier: {fileID: 0}
   shouldFollowTarget: 0
-  timeBeforeResetCamera: 10
+  timeBeforeResetCamera: 5
   smoothSpeed: 0.35
 --- !u!20 &519420031
 Camera:
@@ -6805,6 +6805,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lite Water
       objectReference: {fileID: 0}
+    - target: {fileID: 4312467920144940909, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49019608
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1061ab6ac85dbe248b928abf6739ed89, type: 3}
 --- !u!1001 &846403698
@@ -8696,11 +8701,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8922552718644912695, guid: 6641b622c0494494db84f6847ba25c4a,
-        type: 3}
-      propertyPath: sounds.Array.data[16].pitch
-      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6641b622c0494494db84f6847ba25c4a, type: 3}
@@ -14418,6 +14418,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 897014407435893735, guid: 602f2830abd128445b4ee74c6ece522f,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.49019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602f2830abd128445b4ee74c6ece522f, type: 3}
