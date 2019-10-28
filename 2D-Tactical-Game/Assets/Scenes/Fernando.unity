@@ -8697,11 +8697,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8922552718644912695, guid: 6641b622c0494494db84f6847ba25c4a,
-        type: 3}
-      propertyPath: sounds.Array.data[16].pitch
-      value: 0.75
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6641b622c0494494db84f6847ba25c4a, type: 3}
 --- !u!1 &1165413010
@@ -14349,11 +14344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115885540}
     m_Modifications:
-    - target: {fileID: 5235757334923542391, guid: 602f2830abd128445b4ee74c6ece522f,
-        type: 3}
-      propertyPath: m_Name
-      value: Dark Water
-      objectReference: {fileID: 0}
     - target: {fileID: 1778398010916869308, guid: 602f2830abd128445b4ee74c6ece522f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14418,6 +14408,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 5235757334923542391, guid: 602f2830abd128445b4ee74c6ece522f,
+        type: 3}
+      propertyPath: m_Name
+      value: Dark Water
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602f2830abd128445b4ee74c6ece522f, type: 3}
