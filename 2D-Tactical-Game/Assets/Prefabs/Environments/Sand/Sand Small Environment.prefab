@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5027998026814770818}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.845497, y: 15.694206, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5631972984011941933}
@@ -660,11 +660,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5027998026814770819}
     m_Modifications:
-    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Sand
-      objectReference: {fileID: 0}
     - target: {fileID: 8313556858827461265, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -719,6 +714,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Sand
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9446197d58247a442b99a2caf9f0c17d, type: 3}
