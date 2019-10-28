@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1778398010916869308}
   - component: {fileID: 897014407435893735}
   - component: {fileID: 3478109246458562734}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Dark Water
   m_TagString: Water
   m_Icon: {fileID: 0}
