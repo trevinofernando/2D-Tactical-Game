@@ -6022,11 +6022,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lite Water
       objectReference: {fileID: 0}
-    - target: {fileID: 4312467920144940909, guid: 1061ab6ac85dbe248b928abf6739ed89,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.49019608
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1061ab6ac85dbe248b928abf6739ed89, type: 3}
 --- !u!1001 &846403698
@@ -12221,26 +12216,6 @@ RectTransform:
   m_AnchoredPosition: {x: 10.8, y: -5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1757910874 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5235757334923542391, guid: 602f2830abd128445b4ee74c6ece522f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1794466427}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1757910875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1757910874}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 278f780a5c5b28448abb2463ce767a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 999999
-  drowningEffect: {fileID: 0}
 --- !u!4 &1757910878 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1778398010916869308, guid: 602f2830abd128445b4ee74c6ece522f,
@@ -12722,11 +12697,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.204
-      objectReference: {fileID: 0}
-    - target: {fileID: 897014407435893735, guid: 602f2830abd128445b4ee74c6ece522f,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 0.49019608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 602f2830abd128445b4ee74c6ece522f, type: 3}

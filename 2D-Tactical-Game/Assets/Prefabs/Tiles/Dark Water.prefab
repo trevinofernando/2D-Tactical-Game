@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1778398010916869308}
   - component: {fileID: 897014407435893735}
   - component: {fileID: 3478109246458562734}
+  - component: {fileID: 1757910875}
   m_Layer: 4
   m_Name: Dark Water
   m_TagString: Water
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5235757334923542391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.46875, y: 0.46875, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 11
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 9db26ebe8235b5e42924bb2c54ad0c80, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.49019608}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,3 +108,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.2664595, y: 4.266727}
   m_EdgeRadius: 0
+--- !u!114 &1757910875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5235757334923542391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 278f780a5c5b28448abb2463ce767a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damage: 999999
+  drowningEffect: {fileID: 0}
