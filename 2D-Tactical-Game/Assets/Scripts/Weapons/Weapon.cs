@@ -58,6 +58,7 @@ public class Weapon : MonoBehaviour
                     case 5:
                         canShoot = false;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);
+                        playerSettings.arsenalAmmo[weaponCode]--;
                         EndTurn();
                         break;
                     case 3:
@@ -76,6 +77,7 @@ public class Weapon : MonoBehaviour
                             targetSelected = false;
                             canShoot = false;
                             WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, go.transform);
+                            playerSettings.arsenalAmmo[weaponCode]--;
                             if (go != null)
                             {
                                 Destroy(go, 5f);
@@ -92,6 +94,7 @@ public class Weapon : MonoBehaviour
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
                         WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, go.transform);
+                        playerSettings.arsenalAmmo[weaponCode]--;
                         if (go != null)
                         {
                             Destroy(go, 10f);
@@ -103,6 +106,7 @@ public class Weapon : MonoBehaviour
                         canShoot = false;
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);
+                        playerSettings.arsenalAmmo[weaponCode]--;
                         Invoke("UnfreezePosition", 7f);
                         EndTurn();
                         break;

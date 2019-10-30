@@ -54,11 +54,15 @@ public class WeaponController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    currWeapon = (currWeapon + 1) % numWeapons; //next weapon
+                    do{
+                        currWeapon = (currWeapon + 1) % numWeapons; //next weapon
+                    }while(playerSettings.arsenalAmmo[currWeapon] < 1);
                 }
                 else if(Input.GetKeyDown(KeyCode.Q))
                 {
-                    currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
+                    do{
+                        currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
+                    }while(playerSettings.arsenalAmmo[currWeapon] < 1);
                 }
             
                 //Only call this method if we actuallt change weapons
@@ -71,12 +75,16 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public void ChangeWeapon(int weaponChoice)
+    public bool ChangeWeapon(int weaponChoice)
     {
+        if(playerSettings.arsenalAmmo[weaponChoice] < 1)
+            return false;
+        prevWeapon = currWeapon; //To keep track of what weapon to go back if out of ammo
         currWeapon = weaponChoice; //This is needed if an external script calls this method
         weaponScript.weaponCode = weaponChoice; //update weapon script
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
         crosshairs.SetCrosshairTo(weaponChoice);
+        return true;
     }
 
     public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)

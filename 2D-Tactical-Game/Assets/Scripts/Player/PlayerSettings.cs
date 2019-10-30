@@ -14,6 +14,7 @@ public class PlayerSettings : MonoBehaviour
     public Weapon weaponScript;
     public Animator anim;
     public GameObject thisGameObject;
+    public int[] arsenalAmmo = {1,1,1,1,1};
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
     private AIController AICont;
