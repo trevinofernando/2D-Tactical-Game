@@ -56,13 +56,13 @@ public class WeaponController : MonoBehaviour
                 {
                     do{
                         currWeapon = (currWeapon + 1) % numWeapons; //next weapon
-                    }while(playerSettings.arsenalAmmo[currWeapon] < 1);
+                    }while(!playerSettings.HaveAmmo(currWeapon));
                 }
                 else if(Input.GetKeyDown(KeyCode.Q))
                 {
                     do{
                         currWeapon = (currWeapon + numWeapons - 1) % numWeapons; //previews weapon
-                    }while(playerSettings.arsenalAmmo[currWeapon] < 1);
+                    }while(!playerSettings.HaveAmmo(currWeapon));
                 }
             
                 //Only call this method if we actuallt change weapons
@@ -77,7 +77,7 @@ public class WeaponController : MonoBehaviour
 
     public bool ChangeWeapon(int weaponChoice)
     {
-        if(playerSettings.arsenalAmmo[weaponChoice] < 1)
+        if(!playerSettings.HaveAmmo(weaponChoice))
             return false;
         prevWeapon = currWeapon; //To keep track of what weapon to go back if out of ammo
         currWeapon = weaponChoice; //This is needed if an external script calls this method

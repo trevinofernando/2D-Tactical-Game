@@ -14,7 +14,29 @@ public class PlayerSettings : MonoBehaviour
     public Weapon weaponScript;
     public Animator anim;
     public GameObject thisGameObject;
-    public int[] arsenalAmmo = {1,1,1,1,1};
+    /*
+     * 0    = Empty
+     * 1    = Bazooka
+     * 2    = Sniper
+     * 3    = Homing Bazooka
+     * 4    = Grenade
+     * 5    = Holy Grenade
+     * 6    = PlaneBomber
+     * 7    = BFG 9000 (Doom gun)
+     * 8    = 
+     * 9    = 
+     * 10   = 
+    */
+    public static int[,] arsenalAmmo = new int[,]{
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
+        {1, 99, 10, 5,  99,  2,  2,  1,  1,  1}
+    }; 
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
     private AIController AICont;
@@ -65,6 +87,14 @@ public class PlayerSettings : MonoBehaviour
         isMyTurn = false;
     }
 
+    public bool HaveAmmo(int weaponCode){ 
+        //Check if the shared arsenal have ammo on the weapon selected
+        return arsenalAmmo[teamID, weaponCode] > 0;
+    }
+    public void UpdateAmmo(int weaponCode, int ammoChange){
+        //Increase or decrease the ammo by ammoChange units
+        arsenalAmmo[teamID, weaponCode] += ammoChange;
+    }
     public void UpdateHealth(int newHealth)
     {
         //Ignore negative values
