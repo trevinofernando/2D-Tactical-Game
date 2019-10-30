@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {
+            //PlayerSettings.arsenalAmmo.Add(GLOBALS.arsenalAmmo);
             for(int j = 0; j < GLOBALS.teamSize; j++)
             {
                 spawnOffset.x += 2; //temporary offset until map generation is done
@@ -139,7 +140,6 @@ public class GameManager : MonoBehaviour
                 
                 //Deactivate movement script.
                 teams[i, j].GetComponent<PlayerSettings>().isMyTurn = false;
-
             }
         }
 

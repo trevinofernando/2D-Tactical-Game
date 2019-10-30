@@ -17046,11 +17046,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0b688460445947b8f0fe54f8544c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000100000001000000
   numTeams: 4
   numPlayersHuman: 4
   numPlayersNPCs: 0
   teamSize: 4
   healthPerAvatar: 100
+  isTeamAI: 00000000
   gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}
@@ -17058,7 +17060,7 @@ MonoBehaviour:
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   timePerTurn: 60
-  timeBetweenTurns: 3
+  timeBetweenTurns: 5
   TimePerGame: 1200
 --- !u!4 &1916301379
 Transform:

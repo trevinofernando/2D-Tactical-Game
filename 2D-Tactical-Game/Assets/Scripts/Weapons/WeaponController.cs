@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-
     public float degreesOfDeadZone = 0.25f;
 
     public Transform weaponPivot;
@@ -65,7 +64,7 @@ public class WeaponController : MonoBehaviour
                     }while(!playerSettings.HaveAmmo(currWeapon));
                 }
             
-                //Only call this method if we actuallt change weapons
+                //Only call this method if we actually change weapons
                 if(prevWeapon != currWeapon)
                 {
                     ChangeWeapon(currWeapon);

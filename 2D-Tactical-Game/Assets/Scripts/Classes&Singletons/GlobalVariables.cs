@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 //Singleton implementation for global variables
 
@@ -11,8 +13,7 @@ public class GlobalVariables : MonoBehaviour
 
     //MAP related variables
     public int[,] mapState = new int[1000,1000];
-
-
+    public List<int> arsenalAmmo = new List<int>();
 
     //TEAMS related variables
     public int numTeams = 4;

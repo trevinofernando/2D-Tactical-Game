@@ -27,7 +27,11 @@ public class PlayerSettings : MonoBehaviour
      * 9    = 
      * 10   = 
     */
+    //The arsenal is static to have only one instance of this variable in 
+    //all of the Player Settings classes
+    //public static List<List<int>> arsenalAmmo = new List<List<int>>();
     public static int[,] arsenalAmmo = new int[,]{
+    //  {0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15} WeaponCode Index
         {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
         {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
         {1, 99, 10, 5,  99,  2,  2,  1,  1,  1},
@@ -89,11 +93,11 @@ public class PlayerSettings : MonoBehaviour
 
     public bool HaveAmmo(int weaponCode){ 
         //Check if the shared arsenal have ammo on the weapon selected
-        return arsenalAmmo[teamID, weaponCode] > 0;
+        return arsenalAmmo[teamID,weaponCode] > 0;
     }
     public void UpdateAmmo(int weaponCode, int ammoChange){
         //Increase or decrease the ammo by ammoChange units
-        arsenalAmmo[teamID, weaponCode] += ammoChange;
+        arsenalAmmo[teamID,weaponCode] += ammoChange;
     }
     public void UpdateHealth(int newHealth)
     {
