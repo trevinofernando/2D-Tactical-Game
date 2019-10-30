@@ -102,7 +102,12 @@ public class GameManager : MonoBehaviour
         //Create Teams
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {
-            //PlayerSettings.arsenalAmmo.Add(GLOBALS.arsenalAmmo);
+            List<int> subArsenal = new List<int>();
+            for(int weaponCode = 0; weaponCode < GLOBALS.arsenalAmmo.Count; weaponCode++){
+                subArsenal.Add(GLOBALS.arsenalAmmo[weaponCode]);
+            }
+            PlayerSettings.arsenalAmmo.Add(subArsenal);
+
             for(int j = 0; j < GLOBALS.teamSize; j++)
             {
                 spawnOffset.x += 2; //temporary offset until map generation is done
