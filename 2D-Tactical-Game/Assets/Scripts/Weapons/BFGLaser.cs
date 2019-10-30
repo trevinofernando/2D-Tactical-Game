@@ -6,9 +6,10 @@ public class BFGLaser : MonoBehaviour
 {
     public int damageToPlayer = 20;
     public int damageToProps = 100;
-    public float rayLifeTime = 1f;
+    public float rayLifeTime = 7f;
 
     private void Start() {
+        AudioManager.instance.Play("BFG9000");
         Destroy(gameObject, rayLifeTime + 0.3f);
     }
 

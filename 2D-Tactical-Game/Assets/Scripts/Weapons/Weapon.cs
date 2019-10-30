@@ -103,7 +103,7 @@ public class Weapon : MonoBehaviour
                         canShoot = false;
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);
-                        Invoke("UnfreezePosition", 1);
+                        Invoke("UnfreezePosition", 7f);
                         EndTurn();
                         break;
                     default:
