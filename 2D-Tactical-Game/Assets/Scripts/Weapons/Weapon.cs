@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
      * 4    = Grenade
      * 5    = Holy Grenade
      * 6    = PlaneBomber
-     * 7    = 
+     * 7    = BFG 9000 (Doom gun)
      * 8    = 
      * 9    = 
      * 10   = 
@@ -24,15 +24,19 @@ public class Weapon : MonoBehaviour
     public PlayerSettings playerSettings;
     public WeaponController WeaponController;
     public Transform firePoint1;
+    public Transform firePoint2;
     public GameObject[] projectilePrefab;
     public bool canChangeWeapons = true;
 
-
-    private RaycastHit hit;
     public  bool canShoot = true;
     private bool targetSelected = false;
-    private DamageHandler dh;
     private GameObject go;
+    private Rigidbody2D rb;
+    private  Vector3 mousePos;
+
+    private void Start() {
+        rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
+    }
 
 
 
@@ -43,32 +47,26 @@ public class Weapon : MonoBehaviour
         //if the game is paused, then ignore all code
         if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
         {
-            switch (weaponCode)
-            {
-                case 0:
-                    break;
-                case 1:
-                case 2:
-                case 4:
-                case 5:
-                    //Shoot if we leftclick on the mouse
-                    if (Input.GetButtonDown("Fire1") && canShoot)
-                    {
+            if (Input.GetButtonDown("Fire1") && canShoot){
+                switch (weaponCode)
+                {
+                    case 0:
+                        break;
+                    case 1:
+                    case 2:
+                    case 4:
+                    case 5:
                         canShoot = false;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);
                         EndTurn();
-                    }
-                    break;
-                case 3:
-                    //Shoot if we leftclick on the mouse
-                    if (Input.GetButtonDown("Fire1") && canShoot)
-                    {
+                        break;
+                    case 3:
                         if (!targetSelected)
                         {
                             AudioManager.instance.Play("Target_Acquired");
                             targetSelected = true;
                             canChangeWeapons = false;
-                            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                             mousePos.z = 0;
                             go = Instantiate(targetSprite, mousePos, Quaternion.identity);
                             Destroy(go, playerSettings.gameManager.turnClock); //just in case the turn ends suddenly
@@ -84,16 +82,12 @@ public class Weapon : MonoBehaviour
                             }
                             EndTurn();
                         }  
-                    }
-                    break;
-                case 6:
-                    //Shoot if we leftclick on the mouse
-                    if (Input.GetButtonDown("Fire1") && canShoot)
-                    {
+                        break;
+                    case 6:
                         canShoot = false;
                         
                         AudioManager.instance.Play("Target_Acquired");
-                        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         mousePos.z = 0;
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
@@ -104,10 +98,17 @@ public class Weapon : MonoBehaviour
                         }
                         
                         EndTurn();
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                    case 7:
+                        canShoot = false;
+                        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);
+                        Invoke("UnfreezePosition", 1);
+                        EndTurn();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -117,6 +118,10 @@ public class Weapon : MonoBehaviour
         canShoot = true;
         canChangeWeapons = true;
         playerSettings.EndTurn();
+    }
+
+    private void UnfreezePosition(){
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
 }

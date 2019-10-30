@@ -13,6 +13,7 @@ public class PlayerSettings : MonoBehaviour
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
     public Animator anim;
+    public GameObject thisGameObject;
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
     private AIController AICont;

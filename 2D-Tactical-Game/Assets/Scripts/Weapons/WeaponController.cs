@@ -22,7 +22,7 @@ public class WeaponController : MonoBehaviour
      * 4    = Grenade
      * 5    = Holy Grenade
      * 6    = PlaneBomber
-     * 7    = 
+     * 7    = BFG 9000 (Doom gun)
      * 8    = 
      * 9    = 
      * 10   = 

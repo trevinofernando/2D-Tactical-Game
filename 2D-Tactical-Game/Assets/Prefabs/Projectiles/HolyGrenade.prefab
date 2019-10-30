@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2124547653311230606}
   m_Layer: 0
   m_Name: HolyGrenade
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -238,7 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d791f89fd05cb349acd6c13932ceb6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 90
+  damageToPlayer: 60
+  damageToProps: 60
   timer: 3
   IsHoly: 1
   launchForce: 1000

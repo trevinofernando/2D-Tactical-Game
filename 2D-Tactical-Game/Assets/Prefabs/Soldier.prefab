@@ -131,6 +131,7 @@ MonoBehaviour:
   bodySprite: {fileID: 1591137667599323426}
   weaponScript: {fileID: 1813370298514301842}
   anim: {fileID: 7529892519968174175}
+  thisGameObject: {fileID: 1591137666376314641}
 --- !u!114 &5352855559125752562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +156,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d1a255d119521488ea8e85ccb9166313, type: 3}
   - {fileID: 21300000, guid: 737d53f974343b548b127d75830c0f5d, type: 3}
   - {fileID: 21300000, guid: 0c8c79e44291dd445978c33ff3bd3441, type: 3}
+  - {fileID: 21300000, guid: 36b7a31ce6d77374a9af7cfcc3e7a060, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -714,6 +716,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3310176537547046930}
+  - {fileID: 8589799381862919829}
   m_Father: {fileID: 188067215955224553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -760,7 +763,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.26, y: 1}
+  m_Size: {x: 7.28, y: 4.06}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -786,6 +789,7 @@ MonoBehaviour:
   playerSettings: {fileID: 5226463133170334109}
   WeaponController: {fileID: 5352855559125752562}
   firePoint1: {fileID: 3310176537547046930}
+  firePoint2: {fileID: 8589799381862919829}
   projectilePrefab:
   - {fileID: 0}
   - {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8, type: 3}
@@ -794,7 +798,7 @@ MonoBehaviour:
   - {fileID: 1071730802671521817, guid: efeb672d863c54442a8b2fc194fcb874, type: 3}
   - {fileID: 1071730802671521817, guid: 47ebdbd915e9e1c4ca6e63166cffb714, type: 3}
   - {fileID: 6110699083877153648, guid: 18f03be67371f404eb1f086cbcf6bc5b, type: 3}
-  - {fileID: 0}
+  - {fileID: 4731540090307745078, guid: decb7b93b1b01854a8019c8e07b84d03, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   canChangeWeapons: 1
@@ -943,4 +947,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8655501702043261793}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8468600578924030440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8589799381862919829}
+  m_Layer: 9
+  m_Name: FirePoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8589799381862919829
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8468600578924030440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.69, y: -2.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5612683250428667488}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
