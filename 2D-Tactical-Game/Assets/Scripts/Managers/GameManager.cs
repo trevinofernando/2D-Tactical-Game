@@ -37,7 +37,9 @@ public class GameManager : MonoBehaviour
     private float turnClockWhenPause;
     public float gameClock = 0f;
     private float gameClockWhenPause;
+    public float timeWatchingDamage = 3f;
     private bool coroutineStarted = false;
+    private bool coroutineEnded = false;
     private IEnumerator coroutineTurnClock;
     private IEnumerator coroutineGameClock;
 
@@ -49,6 +51,7 @@ public class GameManager : MonoBehaviour
     private bool isTurnFinishedWhenPaused;
     public bool isOneTeamAlive = false;
     public bool stateSaved = false;
+    public bool planeWasCalled = false;
     public int winningTeamID;
     public string winningTeamName;
 
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
         TurnInProgress,
         TurnTransition,
         WhatchingShot,
+        WhatchingDamage,
         Pause,
         GameOver
     }
@@ -278,6 +282,7 @@ public class GameManager : MonoBehaviour
                         //Tell camera which player is next in turn
                         cam.soldier = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                         cam.shouldFollowTarget = true;
+                        cam.SetZoom(10f);
                     }
                     else
                     {
@@ -335,10 +340,27 @@ public class GameManager : MonoBehaviour
             case GameState.WhatchingShot:
                 //Once projectile is null, change state
                 if(projectile == null){
-                    cam.shouldFollowTarget = false; //stop following player
-                    gameState = GameState.TurnTransition;
+                    gameState = GameState.WhatchingDamage;
                 }else{
                     cam.soldier = projectile; //this is in case the initial projectile releases more projectiles
+                }
+                break;
+
+            case GameState.WhatchingDamage:
+                 //Start timer to change state
+                if (!coroutineStarted)
+                {
+                    coroutineStarted = true;
+                    coroutineTurnClock = SetTurnClock(timeWatchingDamage); //timePerTurn should be 30 - 120 sec
+                    StartCoroutine(coroutineTurnClock);
+                    coroutineEnded = false;
+                }
+
+                if (coroutineEnded)
+                {
+                    coroutineStarted = false; //Reset coroutine check
+                    isTurnFinished = false; //Reset check before changing state
+                    gameState = GameState.TurnTransition;
                 }
                 break;
 
@@ -454,6 +476,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator SetTurnClock(float waitTime)
     {
         turnClock = waitTime;
+        planeWasCalled = false;
         //Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
         while (true)
         {
@@ -461,9 +484,9 @@ public class GameManager : MonoBehaviour
             {
                 turnClock--;//update the clock timer
 
-                if(gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
-                    //***************************TODO**************************
+                if(!planeWasCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
                     Random.InitState(System.DateTime.Now.Millisecond);
+                    planeWasCalled = true; //set flag
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
                     if (Random.Range(0f,1f) > 0.7f){
@@ -473,12 +496,13 @@ public class GameManager : MonoBehaviour
                             if(sun != null){
                                 cam.soldier = go;
                                 cam.shouldFollowTarget = true;
+                                cam.SetZoom(30f);
                                 sun.Shoot(go.transform.position);
                                 AudioManager.instance.Play("Short_Choir");
                             }
                         }
                     }else if(Random.Range(0f,1f) > 0.5f){//Chance of calling the cargo plane
-                        
+                        turnClock += 5f; //Give extra time to watch plane fly
                         if(Random.Range(0f,1f) > 0.5f){
                             // 50% of droping crates
                             go = Instantiate(planeCratesPrefab, PlaneSpawnPoint, Quaternion.identity);
@@ -488,6 +512,7 @@ public class GameManager : MonoBehaviour
                         }
                         cam.soldier = go;
                         cam.shouldFollowTarget = true;
+                        cam.SetZoom(50f);
                         if(go != null){
                             pm = go.GetComponent<PlaneManager>();
                             if(pm != null){
@@ -506,5 +531,6 @@ public class GameManager : MonoBehaviour
         }
         //Debug.Log("Timer for TURN Clock finished");
         isTurnFinished = true;
+        coroutineEnded = true;
     }
 }

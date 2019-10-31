@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3a278d298f6dd340b8b878010e9447c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 20
+  damageToPlayer: 40
   damageToProps: 100
   rayLifeTime: 7
 --- !u!1 &6846543882319661073

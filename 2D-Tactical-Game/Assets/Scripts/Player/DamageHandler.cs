@@ -57,6 +57,10 @@ public class DamageHandler : MonoBehaviour
                 //start sound
                 AudioManager.instance.Play("Take_Damage");
 
+                //Tell camera to look at the player
+                ps.cam.soldier = gameObject;
+                ps.cam.shouldFollowTarget = true;
+
                 //Check if player haven't triggered the death sequence, if not then take damage
                 if (!iAmDead)
                 {

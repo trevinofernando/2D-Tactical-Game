@@ -13,14 +13,13 @@ public class PlayerSettings : MonoBehaviour
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
     public Animator anim;
-    public GameObject thisGameObject;
     
     //The arsenal is static to have only one instance of this variable in 
     //all of the Player Settings classes
-    public static List<List<int>> arsenalAmmo = new List<List<int>>(); //[TeamID][WeaponCode]
-
+    [System.NonSerialized]public static List<List<int>> arsenalAmmo = new List<List<int>>(); //[TeamID][WeaponCode]
     [System.NonSerialized] public GameManager gameManager;
     [System.NonSerialized] public CameraController cam;
+    [System.NonSerialized]public GameObject thisGameObject;
     private AIController AICont;
     private WeaponController weaponContr;
     private Rigidbody2D rb;
@@ -31,6 +30,7 @@ public class PlayerSettings : MonoBehaviour
         weaponContr = GetComponent<WeaponController>();
         AICont = GetComponent<AIController>();
         rb = GetComponent<Rigidbody2D>();
+        thisGameObject = gameObject;
     }
     public void SetColor(Color newColor)//RBGA
     {

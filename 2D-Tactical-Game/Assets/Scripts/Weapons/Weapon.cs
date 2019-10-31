@@ -32,7 +32,8 @@ public class Weapon : MonoBehaviour
     private bool targetSelected = false;
     private GameObject go;
     private Rigidbody2D rb;
-    private  Vector3 mousePos;
+    private Vector3 mousePos;
+    private float zoomAmount;
 
     private void Start() {
         rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
@@ -108,6 +109,8 @@ public class Weapon : MonoBehaviour
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);
                         playerSettings.UpdateAmmo(weaponCode, -1);
                         Invoke("UnfreezePosition", 7f);
+                        zoomAmount = 50f;
+                        Invoke("SetZoom", 5f);
                         EndTurn();
                         break;
                     default:
@@ -126,6 +129,10 @@ public class Weapon : MonoBehaviour
 
     private void UnfreezePosition(){
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    private void SetZoom(){
+        playerSettings.cam.SetZoom(zoomAmount);
     }
 
 }

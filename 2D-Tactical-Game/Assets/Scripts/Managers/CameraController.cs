@@ -141,5 +141,12 @@ public class CameraController : MonoBehaviour
         //change camera state to following again
         shouldFollowTarget = true;
     }
+
+    public void SetZoom(float zoomAmount){
+        //bound the size between min and max zoom
+        zoomAmount = Mathf.Clamp(zoomAmount, minZoom, maxZoom);
+        //Set new size
+        cam.orthographicSize = zoomAmount;
+    }
 }
 
