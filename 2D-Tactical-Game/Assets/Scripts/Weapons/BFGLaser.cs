@@ -16,11 +16,10 @@ public class BFGLaser : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         //I decided to use a coroutine because I can pass arguments, and I want to pass arguments so I can call this function from other scripts
         StartCoroutine(DamageArea(other.transform, damageToPlayer, damageToProps, rayLifeTime));
-        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
     }
 
     public IEnumerator DamageArea(Transform obj, int _damageToPlayer, int _damageToProps, float delayTime){
-
         //Wait a few seconds and start
         yield return new WaitForSeconds(delayTime);
 
@@ -30,6 +29,4 @@ public class BFGLaser : MonoBehaviour
         }
         Destroy(gameObject);
     }
-
-
 }

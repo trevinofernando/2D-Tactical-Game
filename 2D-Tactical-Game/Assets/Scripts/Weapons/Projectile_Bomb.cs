@@ -25,7 +25,7 @@ public class Projectile_Bomb : MonoBehaviour
             //Add initial force once to make a parabolic trajectory
             rb.AddForce(transform.right * launchForce * rb.mass);
         }else{
-            //AudioManager.instance.Play("fall");
+            AudioManager.instance.Play("Bomb_Falling");
         }
     }
 

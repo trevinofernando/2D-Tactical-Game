@@ -5671,6 +5671,8 @@ MonoBehaviour:
     type: 3}
   planeHealerPrefab: {fileID: 6110699083877153648, guid: 41d056140467d1846a0fd60df32b3247,
     type: 3}
+  planeCratesPrefab: {fileID: 6110699083877153648, guid: 1357e0a482e090942ad6907977f41cc1,
+    type: 3}
   PlaneSpawnPoint: {x: 200, y: 65, z: 0}
   crosshairManger: {fileID: 1164008665}
   spawnOffset: {x: -18, y: 10, z: 0}

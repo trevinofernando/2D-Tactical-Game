@@ -56,7 +56,6 @@ public class PlaneManager : MonoBehaviour
         if(transform.position.x * Mathf.Sign(speed) > dropPoints[numItemsToDrop - 1].x * Mathf.Sign(speed)){
             //decrease the number of Items to drop
             numItemsToDrop--;
-            AudioManager.instance.Play("Bomb_Falling");
 
             //Calculate the index of the next item to drop as a queue or random
             nextPrefabIndex = numItemsToDrop % prefabCargo.Length;

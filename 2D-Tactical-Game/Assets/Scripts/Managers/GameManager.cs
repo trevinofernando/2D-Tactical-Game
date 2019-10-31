@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public CameraController cam;
     public GameObject soldierPrefab;
     public GameObject planeHealerPrefab;
+    public GameObject planeCratesPrefab;
     public Vector3 PlaneSpawnPoint  = new Vector3(200f, 65f, 0);
     public CrosshairManager crosshairManger;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
@@ -52,11 +53,11 @@ public class GameManager : MonoBehaviour
     public string winningTeamName;
 
     //Temporary Variables
+    private const int GauntletCursorCode = 0;
     private GameObject go;
     private PlaneManager pm;
     private GameManager thisGM;
     private PlayerSettings ps;
-    private const int GauntletCursorCode = 0;
 
     public enum GameState
     {
@@ -462,6 +463,7 @@ public class GameManager : MonoBehaviour
 
                 if(gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
                     //***************************TODO**************************
+                    Random.InitState(System.DateTime.Now.Millisecond);
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
                     if (Random.Range(0f,1f) > 0.7f){
@@ -475,16 +477,22 @@ public class GameManager : MonoBehaviour
                                 AudioManager.instance.Play("Short_Choir");
                             }
                         }
-                    }else if(Random.Range(0f,1f) > 0.5f){
-                        //Chance of droping health in the map
-                        go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
+                    }else if(Random.Range(0f,1f) > 0.5f){//Chance of calling the cargo plane
+                        
+                        if(Random.Range(0f,1f) > 0.5f){
+                            // 50% of droping crates
+                            go = Instantiate(planeCratesPrefab, PlaneSpawnPoint, Quaternion.identity);
+                        }else{
+                            // 50% of droping health
+                            go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
+                        }
                         cam.soldier = go;
                         cam.shouldFollowTarget = true;
                         if(go != null){
                             pm = go.GetComponent<PlaneManager>();
                             if(pm != null){
                                 pm.GM = thisGM;
-                                pm.SetTarget(new Vector3(Random.Range(50f,80f), Random.Range(15f,40f), 0), (int)Random.Range(1,4), (int)Random.Range(10,50));
+                                pm.SetTarget(new Vector2(Random.Range(50f,70f), Random.Range(15f,40f)), Random.Range(3,6), 50);
                             }
                         }
                     }
