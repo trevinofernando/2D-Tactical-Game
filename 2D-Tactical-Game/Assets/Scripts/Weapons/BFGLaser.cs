@@ -6,6 +6,7 @@ public class BFGLaser : MonoBehaviour
 {
     public int damageToPlayer = 20;
     public int damageToProps = 100;
+    [System.NonSerialized] 
     public float rayLifeTime = 7f;
 
     private void Start() {

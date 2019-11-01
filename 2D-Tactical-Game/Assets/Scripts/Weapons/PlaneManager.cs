@@ -17,6 +17,7 @@ public class PlaneManager : MonoBehaviour
     private GameObject go;
     private Rigidbody2D rb;
     private int nextPrefabIndex;
+    private int center;
 
     
     void Start()
@@ -65,7 +66,7 @@ public class PlaneManager : MonoBehaviour
             //Spawn item from cargo
             go = Instantiate(prefabCargo[numItemsToDrop % prefabCargo.Length], transform.position, transform.rotation);
             //Tell GM what projectile is in the air so the camera can follow it
-            if(go.transform.tag != "Item")
+            if(numItemsToDrop == center && go.transform.tag != "Item")
                 GM.projectile = go;
             
             //Get reference to RigidBody and set initial speed
@@ -85,7 +86,7 @@ public class PlaneManager : MonoBehaviour
         if(_dropArea > 0){
             dropArea = _dropArea;
         }
-
+        center = numItemsToDrop/2;
         //Initialize dropPoints array
         dropPoints = new Vector2[numItemsToDrop];
                 

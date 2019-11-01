@@ -148,5 +148,9 @@ public class CameraController : MonoBehaviour
         //Set new size
         cam.orthographicSize = zoomAmount;
     }
+
+    public void SetCameraOffset(Vector2 offset){
+        cameraOffset = new Vector3(offset.x, offset.y, cameraOffset.z);
+    }
 }
 

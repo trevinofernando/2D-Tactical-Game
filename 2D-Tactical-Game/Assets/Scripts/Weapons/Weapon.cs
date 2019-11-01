@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     public GameObject targetSprite;
     public int weaponCode = 0;
     /*
-     * 0    = Empty
+     * 0    = Gauntlet
      * 1    = Bazooka
      * 2    = Sniper
      * 3    = Homing Bazooka
@@ -51,34 +51,41 @@ public class Weapon : MonoBehaviour
             if (Input.GetButtonDown("Fire1") && canShoot){
                 switch (weaponCode)
                 {
-                    case 0:
+                    case 0:// Gauntlet
                         break;
-                    case 1:
-                    case 2:
-                    case 4:
-                    case 5:
-                        canShoot = false;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);
-                        playerSettings.UpdateAmmo(weaponCode, -1);
+                    case 1:// Bazooka
+                    case 2:// Sniper
+                    case 4:// Grenade
+                        canShoot = false; //set flag
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case 3:
+                    case 5:// Holy Grenade
+                        zoomAmount = 20f; //set desired zoom
+                        Invoke("SetZoom", 3f); //wait for explosion then zoom out if necessary
+                        canShoot = false;//set flag
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
+                        EndTurn();
+                        break;
+                    case 3:// Homing Bazooka
                         if (!targetSelected)
                         {
                             AudioManager.instance.Play("Target_Acquired");
-                            targetSelected = true;
-                            canChangeWeapons = false;
-                            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                            mousePos.z = 0;
-                            go = Instantiate(targetSprite, mousePos, Quaternion.identity);
+                            targetSelected = true; //set flag
+                            canChangeWeapons = false; //set flag
+                            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //capture mouse location
+                            mousePos.z = 0; //clean z value
+                            go = Instantiate(targetSprite, mousePos, Quaternion.identity);//spawn target mark
                             Destroy(go, playerSettings.gameManager.turnClock); //just in case the turn ends suddenly
                         }
                         else
                         {
-                            targetSelected = false;
-                            canShoot = false;
-                            WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, go.transform);
-                            playerSettings.UpdateAmmo(weaponCode, -1);
+                            targetSelected = false;//set flag
+                            canShoot = false;//set flag
+                            WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, go.transform);//call method to spawn prefab
+                            playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                             if (go != null)
                             {
                                 Destroy(go, 5f);
@@ -86,7 +93,7 @@ public class Weapon : MonoBehaviour
                             EndTurn();
                         }  
                         break;
-                    case 6:
+                    case 6: //PlaneBomber
                         canShoot = false;
                         
                         AudioManager.instance.Play("Target_Acquired");
@@ -95,7 +102,9 @@ public class Weapon : MonoBehaviour
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
                         WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, go.transform);
-                        playerSettings.UpdateAmmo(weaponCode, -1);
+                        zoomAmount = 30f;
+                        SetZoom();
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         if (go != null)
                         {
                             Destroy(go, 10f);
@@ -103,14 +112,15 @@ public class Weapon : MonoBehaviour
                         
                         EndTurn();
                         break;
-                    case 7:
-                        canShoot = false;
+                    case 7: //BFG900
+                        canShoot = false;//set flag
+                        //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);
-                        playerSettings.UpdateAmmo(weaponCode, -1);
-                        Invoke("UnfreezePosition", 7f);
-                        zoomAmount = 50f;
-                        Invoke("SetZoom", 5f);
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
+                        Invoke("UnfreezePosition", 7f); //unfreeze player after animation
+                        zoomAmount = 50f; //set desired zoom
+                        Invoke("SetZoom", 5f); //wait for animation then zoom out
                         EndTurn();
                         break;
                     default:
@@ -122,13 +132,13 @@ public class Weapon : MonoBehaviour
 
     public void EndTurn()
     {
-        canShoot = true;
-        canChangeWeapons = true;
-        playerSettings.EndTurn();
+        canShoot = true; //reset flag for next turn
+        canChangeWeapons = true; //reset flag next turn
+        playerSettings.EndTurn(); //call master clean up function for all other scripts 
     }
 
     private void UnfreezePosition(){
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation; //rotation on Z should be freeze at all time
     }
 
     private void SetZoom(){

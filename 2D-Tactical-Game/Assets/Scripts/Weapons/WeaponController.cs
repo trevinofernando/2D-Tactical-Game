@@ -14,7 +14,7 @@ public class WeaponController : MonoBehaviour
     private SpriteRenderer sprRenderer;
     public Sprite[] weaponSprites;
     /*
-     * 0    = Empty
+     * 0    = Gauntlet
      * 1    = Bazooka
      * 2    = Sniper
      * 3    = Homing Bazooka
@@ -91,7 +91,10 @@ public class WeaponController : MonoBehaviour
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
-            playerSettings.gameManager.projectile = go;
+            if(currWeapon != 2) //Don't follow the sniper bullet
+                playerSettings.gameManager.projectile = go;//Tell GM what projectile is  in the game, to tell the camera to follow it
+            
+            //Specific targeting info for some prefabs like plane and homing bazooka
             if(target != null)
             {
                 PlaneManager pm = go.GetComponent<PlaneManager>();

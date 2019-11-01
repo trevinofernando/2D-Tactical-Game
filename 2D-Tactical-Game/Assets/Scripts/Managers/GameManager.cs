@@ -314,7 +314,6 @@ public class GameManager : MonoBehaviour
                         cam.shouldFollowTarget = true; //follow projectile
                         gameState = GameState.WhatchingShot;
                     }else{
-                        cam.shouldFollowTarget = false; //stop following player
                         gameState = GameState.TurnTransition;
                     }
 
