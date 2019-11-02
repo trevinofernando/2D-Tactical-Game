@@ -16,6 +16,8 @@ public class GlobalVariables : MonoBehaviour
     public List<int> arsenalAmmo = new List<int>();
     public String mapSize = "Large";
     public String mapTheme = "Desert";
+    public int mapXMax;
+    public int mapYMax;
 
     //TEAMS related variables
     public int numTeams = 4;

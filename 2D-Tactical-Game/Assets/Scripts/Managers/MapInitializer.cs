@@ -59,9 +59,11 @@ public class MapInitializer : MonoBehaviour
     void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
-        Debug.Log(GLOBALS.mapSize + " " + GLOBALS.mapTheme);
-        DetermineMapSize(GLOBALS.mapSize);
         DetermineMapTheme(GLOBALS.mapTheme);
+        DetermineMapSize(GLOBALS.mapSize);
+        GLOBALS.mapXMax = xMax;
+        GLOBALS.mapYMax = yMax;
+        
     }
 
     void DetermineMapSize(string map)
@@ -78,7 +80,6 @@ public class MapInitializer : MonoBehaviour
                     break;
                 case MapSize.Medium:
                     mapSize = MapSize.Medium;
-                    //TODO check medium map boundaries
                     xMax = mediumCoordinate.x;
                     yMax = mediumCoordinate.y;
                     break;
@@ -115,8 +116,6 @@ public class MapInitializer : MonoBehaviour
 
     public Vector3[] GenerateMap()
     {
-        Debug.Log(mapSize + " " + mapTheme);
-
         switch(mapTheme)
         {
             case MapTheme.Beach:
@@ -193,9 +192,6 @@ public class MapInitializer : MonoBehaviour
                 
             }
         }
-
-        Debug.Log(numSpawns);
-        //spawns.OrderBy(a => System.Guid.NewGuid());
 
         var rand = new System.Random();
 
