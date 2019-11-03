@@ -1,0 +1,37 @@
+Survey
+
+    Weapons
+        Which weapon was your favorite?
+        The weapons were fun to use.
+
+    Controls
+        I felt like the controls were intuitive.
+
+
+    AI
+        The AI player was fun to play against.
+
+
+    Camera
+        The camera transitions were seamless.
+
+
+    Gameplay
+        Player movement 
+        Aiming and shooting weapons was intuitive.
+        I felt that I had enough time in my turn to make decisions.
+        I would play this game with my friends.
+
+
+    Environment
+        Map size
+        Anything annoying (like the sun)
+
+
+    What is something that you would change about the game?
+
+
+    What features would make this game more enjoyable?
+
+
+    Other thoughts and comments?
