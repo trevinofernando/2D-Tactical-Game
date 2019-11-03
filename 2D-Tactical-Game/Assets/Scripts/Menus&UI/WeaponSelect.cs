@@ -40,5 +40,8 @@ public class WeaponSelect : MonoBehaviour
     {
         currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
         currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+
+        // TODO: Disable 'Q' and 'E' inputs
+
     }
 }
