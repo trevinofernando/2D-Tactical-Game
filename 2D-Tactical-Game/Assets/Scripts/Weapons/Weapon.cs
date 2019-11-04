@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
      * 5    = Holy Grenade
      * 6    = PlaneBomber
      * 7    = BFG 9000 (Doom gun)
-     * 8    = 
+     * 8    = Shotgun
      * 9    = 
      * 10   = 
     */
@@ -58,6 +58,7 @@ public class Weapon : MonoBehaviour
                     case 1:// Bazooka
                     case 2:// Sniper
                     case 4:// Grenade
+                    case 8://Shotgun
                         canShoot = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon

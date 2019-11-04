@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 737d53f974343b548b127d75830c0f5d, type: 3}
   - {fileID: 21300000, guid: 0c8c79e44291dd445978c33ff3bd3441, type: 3}
   - {fileID: 21300000, guid: 36b7a31ce6d77374a9af7cfcc3e7a060, type: 3}
+  - {fileID: 21300000, guid: e8062a492e27c4d7fba3444c94f1eaee, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -798,7 +799,7 @@ MonoBehaviour:
   - {fileID: 1071730802671521817, guid: 47ebdbd915e9e1c4ca6e63166cffb714, type: 3}
   - {fileID: 6110699083877153648, guid: 18f03be67371f404eb1f086cbcf6bc5b, type: 3}
   - {fileID: 4731540090307745078, guid: decb7b93b1b01854a8019c8e07b84d03, type: 3}
-  - {fileID: 0}
+  - {fileID: 283400023036061233, guid: 1dd8308c0bbbabf4c8e53481d1e5885b, type: 3}
   - {fileID: 0}
   canChangeWeapons: 1
   canShoot: 1
