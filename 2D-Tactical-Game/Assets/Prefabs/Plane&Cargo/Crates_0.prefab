@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -9038922839523378133}
   m_Layer: 0
   m_Name: Crates_0
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,3 +184,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectTagToInteract: Player
   impactEffect: {fileID: 0}
+  weaponNames:
+  - Gauntlet
+  - Bazooka
+  - Sniper
+  - Homing Bazooka
+  - Grenade
+  - Holy Grenade
+  - PlaneBomber
+  - BFG9000
+  - Shotgun
+  - MissingName
+  - MissingName
+  - MissingName
+  - MissingName

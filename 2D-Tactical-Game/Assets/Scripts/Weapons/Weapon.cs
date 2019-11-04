@@ -37,8 +37,7 @@ public class Weapon : MonoBehaviour
 
     private void Start() {
         rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
-        //PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 25f, 0);
-        PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax - 25f, 0);
+        PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 20f, 0);
     }
 
 
