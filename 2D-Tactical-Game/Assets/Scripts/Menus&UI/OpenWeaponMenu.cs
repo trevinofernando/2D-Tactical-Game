@@ -6,6 +6,11 @@ public class OpenWeaponMenu : MonoBehaviour
 {
     public GameObject weaponCanvas;
     public GameManager gm;
+    public GameObject invButton;
+    public GameObject pauseButton;
+
+    private GameObject currPlayer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,16 +27,41 @@ public class OpenWeaponMenu : MonoBehaviour
                 if (!weaponCanvas.gameObject.activeInHierarchy)
                 {
                     weaponCanvas.SetActive(true);
+                    invButton.SetActive(false);
+                    pauseButton.SetActive(false);
                 }
                 else
                 {
                     weaponCanvas.SetActive(false);
+                    invButton.SetActive(true);
+                    pauseButton.SetActive(true);
                 }
             }
+            else if (!weaponCanvas.gameObject.activeInHierarchy)
+            {
+                invButton.SetActive(true);
+                pauseButton.SetActive(true);
+            }
+        }
+        else if (gm.gameState == GameManager.GameState.Pause)
+        {
+            weaponCanvas.SetActive(false);
+            invButton.SetActive(false);
+            pauseButton.SetActive(false);
         }
         else
         {
             weaponCanvas.SetActive(false);
+            invButton.SetActive(true);
+            pauseButton.SetActive(true);
         }
+    }
+
+    void OnMouseOver ()
+    {
+        // this is never used anywhere btw
+        Debug.Log("we mousin over bois!");
+        currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
+        currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
     }
 }

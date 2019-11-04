@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Vector3 PlaneSpawnPoint  = new Vector3(200f, 65f, 0);
     public GameObject targetSprite;
     public int weaponCode = 0;
+    private Vector3 PlaneSpawnPoint;
     /*
      * 0    = Gauntlet
      * 1    = Bazooka
@@ -16,7 +16,7 @@ public class Weapon : MonoBehaviour
      * 5    = Holy Grenade
      * 6    = PlaneBomber
      * 7    = BFG 9000 (Doom gun)
-     * 8    = 
+     * 8    = Shotgun
      * 9    = 
      * 10   = 
     */
@@ -37,6 +37,8 @@ public class Weapon : MonoBehaviour
 
     private void Start() {
         rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
+        //PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 25f, 0);
+        PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax - 25f, 0);
     }
 
 
@@ -56,6 +58,7 @@ public class Weapon : MonoBehaviour
                     case 1:// Bazooka
                     case 2:// Sniper
                     case 4:// Grenade
+                    case 8://Shotgun
                         canShoot = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
@@ -119,7 +122,7 @@ public class Weapon : MonoBehaviour
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 7f); //unfreeze player after animation
-                        zoomAmount = 50f; //set desired zoom
+                        zoomAmount = 100f; //set desired zoom
                         Invoke("SetZoom", 5f); //wait for animation then zoom out
                         EndTurn();
                         break;

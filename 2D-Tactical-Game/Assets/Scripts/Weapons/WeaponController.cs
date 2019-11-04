@@ -8,7 +8,7 @@ public class WeaponController : MonoBehaviour
 
     public Transform weaponPivot;
     public GameObject weapon;
-    public PlayerSettings playerSettings;
+    [System.NonSerialized] public PlayerSettings playerSettings;
     [System.NonSerialized] public CrosshairManager crosshairs;
 
     private SpriteRenderer sprRenderer;
@@ -22,7 +22,7 @@ public class WeaponController : MonoBehaviour
      * 5    = Holy Grenade
      * 6    = PlaneBomber
      * 7    = BFG 9000 (Doom gun)
-     * 8    = 
+     * 8    = Shotgun
      * 9    = 
      * 10   = 
     */
@@ -36,6 +36,7 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
+        playerSettings = GetComponent<PlayerSettings>();
         sprRenderer = weapon.GetComponent<SpriteRenderer>();
         weaponScript = weapon.GetComponent<Weapon>();
         numWeapons = weaponSprites.Length;
@@ -44,7 +45,7 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         //Only run this code if the game isn't paused, the soldier is not AI and if it is this soldiers turn
-        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f && !playerSettings.gameManager.isArsenalOpen)
         {
             AimToMouse();
             if (weaponScript.canChangeWeapons)
@@ -91,7 +92,7 @@ public class WeaponController : MonoBehaviour
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
-            if(currWeapon != 2) //Don't follow the sniper bullet
+            if(currWeapon != 2 || currWeapon != 8) //Don't follow the sniper or shotgun bullets
                 playerSettings.gameManager.projectile = go;//Tell GM what projectile is  in the game, to tell the camera to follow it
             
             //Specific targeting info for some prefabs like plane and homing bazooka

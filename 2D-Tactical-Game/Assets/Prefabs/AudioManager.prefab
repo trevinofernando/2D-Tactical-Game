@@ -152,3 +152,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Shotgun
+    clip: {fileID: 8300000, guid: 76dd5608f12b0144e8f052e8cd0502e1, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
