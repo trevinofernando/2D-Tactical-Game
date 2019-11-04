@@ -1629,8 +1629,6 @@ MonoBehaviour:
   scrollSpeed: 5
   screenBorderOffset: 10
   cameraOffset: {x: 0, y: 0, z: -10}
-  minEdgeLimit: {x: -25, y: -15}
-  maxEdgeLimit: {x: 200, y: 100}
   minZoom: 5
   maxZoom: 50
   soldier: {fileID: 0}
@@ -2270,6 +2268,7 @@ MonoBehaviour:
   planeWasCalled: 0
   winningTeamID: 0
   winningTeamName: 
+  isArsenalOpen: 0
 --- !u!1 &786696987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4525,10 +4524,14 @@ MonoBehaviour:
   arsenalAmmo: 
   mapSize: Large
   mapTheme: Desert
-  numTeams: 4
-  numPlayersHuman: 4
+  mapXMin: 0
+  mapYMin: 0
+  mapXMax: 0
+  mapYMax: 0
+  numTeams: 8
+  numPlayersHuman: 8
   numPlayersNPCs: 0
-  teamSize: 4
+  teamSize: 8
   healthPerAvatar: 100
   isTeamAI: 00000000
   gameMode: 1

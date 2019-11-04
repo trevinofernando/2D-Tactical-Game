@@ -1,0 +1,45 @@
+Environmental Hazards
+    Environment Hazard Manager
+    AI Movement
+    Bush
+        Wandering by targeting random player
+    
+AI shooting but not movement yet
+
+Improve map generation
+    Map broken into several layers, randomly pick layers
+
+Health Bar and Player name
+
+
+AI Presentation
+    Data Driven
+
+    Homing Missle
+        Steering and Seeking
+
+    Bush
+        Wandering
+        Seeking
+        Steering
+
+    Map
+
+    Plane
+
+    AI Player
+        Targeting
+        Seeking
+        Steering 
+
+    Crates
+
+    Hazards
+
+    Camera
+        Seeking
+
+
+    Issues
+        Implementing pause
+
