@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
         cameraOffset = new Vector3(0, 0, -10);
         newPosition = cameraOffset;
         minEdgeLimit = new Vector2(-25f, -15f);
-        maxEdgeLimit = new Vector2(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax);
+        maxEdgeLimit = new Vector2(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 25f);
 
         //normalize speeds to be around the same value
         cameraSpeed /= 1000f;
