@@ -15,7 +15,12 @@ public class Crate : MonoBehaviour
         "Grenade",
         "Holy Grenade",
         "PlaneBomber",
-        "BFG9000"
+        "BFG9000",
+        "Shotgun",
+        "MissingName",
+        "MissingName",
+        "MissingName",
+        "MissingName"
     };
     private int weaponCode;
 

@@ -92,7 +92,7 @@ public class WeaponController : MonoBehaviour
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
-            if(currWeapon != 2) //Don't follow the sniper bullet
+            if(currWeapon != 2 || currWeapon != 8) //Don't follow the sniper or shotgun bullets
                 playerSettings.gameManager.projectile = go;//Tell GM what projectile is  in the game, to tell the camera to follow it
             
             //Specific targeting info for some prefabs like plane and homing bazooka

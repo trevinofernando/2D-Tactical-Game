@@ -45,7 +45,7 @@ public class CrosshairManager : MonoBehaviour
             offset = Vector2.zero;
         }
         // Move Crosshair to mouse position. And leave the z coordinate alone
-        transform.position = (new Vector2(mousePosition.x, mousePosition.y)) - offset;
+        transform.position = new Vector3(mousePosition.x - offset.x, mousePosition.y - offset.y, -5f);
     }
 
     public void SetCrosshairTo(int indexOfCrosshairChoice)

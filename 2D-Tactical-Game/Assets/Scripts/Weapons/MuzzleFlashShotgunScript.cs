@@ -22,7 +22,7 @@ public class MuzzleFlashShotgunScript : MonoBehaviour
     {
         hitList = new RaycastHit2D[3];
         //Start Audio
-        AudioManager.instance.Play("Sniper");
+        AudioManager.instance.Play("Shotgun");
         
         //Find direction vector from gun to mouse and normalize it to length 1
         dir3 = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
