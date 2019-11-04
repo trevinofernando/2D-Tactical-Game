@@ -15,14 +15,14 @@ public class MapInitializer : MonoBehaviour
     private List<Vector3> spawnPoints;
     private int xMax;
     private int yMax;
-    private Vector3 smallMapSpawnPoint = new Vector3(69, 20, 0);
-    private Vector2Int smallCoordinate = new Vector2Int(100, 80);
+    private Vector3 smallMapSpawnPoint = new Vector3(70, 80, 0);
+    private Vector2Int smallCoordinate = new Vector2Int(100, 50);
 
     private Vector3 mediumMapSpawnPoint = new Vector3(105, 47, 0);
     private Vector2Int mediumCoordinate = new Vector2Int(200, 130);
 
-    private Vector3 largeMapSpawnPoint = new Vector3(142, 75, 0);
-    private Vector2Int largeCoordinate = new Vector2Int(290, 150);
+    private Vector3 largeMapSpawnPoint = new Vector3(170, 150, 0);
+    private Vector2Int largeCoordinate = new Vector2Int(290, 100);
 
     //Desert Maps
     public GameObject largeDesert;
