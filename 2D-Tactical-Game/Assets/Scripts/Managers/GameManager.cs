@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject soldierPrefab;
     public GameObject planeHealerPrefab;
     public GameObject planeCratesPrefab;
-    public Vector3 PlaneSpawnPoint  = new Vector3(200f, 65f, 0);
+    public Vector3 PlaneSpawnPoint;
     public CrosshairManager crosshairManger;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public bool planeWasCalled = false;
     public int winningTeamID;
     public string winningTeamName;
+    public bool isArsenalOpen = false;
 
     //Temporary Variables
     private const int GauntletCursorCode = 0;
@@ -80,6 +81,7 @@ public class GameManager : MonoBehaviour
         isTurnFinished = false; //Set initial state
         Time.timeScale = 1.0f; //Set normal time for game to run
 
+        PlaneSpawnPoint  = new Vector3(GLOBALS.mapXMax + 30f, GLOBALS.mapYMax + 25f, 0);
 
         //Initialize array to hold each soldier object team[Team][Avatar]
         teams = new GameObject[GLOBALS.numTeams, GLOBALS.teamSize];
@@ -511,7 +513,7 @@ public class GameManager : MonoBehaviour
                         }
                         cam.soldier = go;
                         cam.shouldFollowTarget = true;
-                        cam.SetZoom(50f);
+                        cam.SetZoom(100f);
                         if(go != null){
                             pm = go.GetComponent<PlaneManager>();
                             if(pm != null){

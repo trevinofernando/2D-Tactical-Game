@@ -4840,10 +4840,8 @@ MonoBehaviour:
   scrollSpeed: 5
   screenBorderOffset: 10
   cameraOffset: {x: 0, y: 0, z: -10}
-  minEdgeLimit: {x: -25, y: -15}
-  maxEdgeLimit: {x: 200, y: 100}
   minZoom: 10
-  maxZoom: 50
+  maxZoom: 60
   soldier: {fileID: 0}
   shouldFollowTarget: 0
   timeBeforeResetCamera: 10
@@ -6118,6 +6116,7 @@ MonoBehaviour:
   planeWasCalled: 0
   winningTeamID: 0
   winningTeamName: 
+  isArsenalOpen: 0
 --- !u!1001 &702825624
 PrefabInstance:
   m_ObjectHideFlags: 0

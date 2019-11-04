@@ -23,8 +23,10 @@ public class InvAndPauseButtons : MonoBehaviour
     void OnMouseOver ()
     {
         //Debug.Log("is this actually working?");
-        currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-        currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+        if(gm.gameState == GameManager.GameState.TurnInProgress){
+            currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
+            currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+        }
     }
 
     public void PauseGame ()

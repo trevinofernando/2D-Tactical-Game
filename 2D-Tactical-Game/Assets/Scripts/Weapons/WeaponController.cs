@@ -8,7 +8,7 @@ public class WeaponController : MonoBehaviour
 
     public Transform weaponPivot;
     public GameObject weapon;
-    public PlayerSettings playerSettings;
+    [System.NonSerialized] public PlayerSettings playerSettings;
     [System.NonSerialized] public CrosshairManager crosshairs;
 
     private SpriteRenderer sprRenderer;
@@ -36,6 +36,7 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
+        playerSettings = GetComponent<PlayerSettings>();
         sprRenderer = weapon.GetComponent<SpriteRenderer>();
         weaponScript = weapon.GetComponent<Weapon>();
         numWeapons = weaponSprites.Length;
@@ -44,7 +45,7 @@ public class WeaponController : MonoBehaviour
     void Update()
     {
         //Only run this code if the game isn't paused, the soldier is not AI and if it is this soldiers turn
-        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
+        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f && !playerSettings.gameManager.isArsenalOpen)
         {
             AimToMouse();
             if (weaponScript.canChangeWeapons)

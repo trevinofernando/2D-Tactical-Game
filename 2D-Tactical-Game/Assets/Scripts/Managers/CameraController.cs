@@ -9,10 +9,10 @@ public class CameraController : MonoBehaviour
     public float screenBorderOffset = 10f;
     public Vector3 cameraOffset;
 
-    public Vector2 minEdgeLimit = new Vector2(-25f, -15f);
-    public Vector2 maxEdgeLimit = new Vector2(200f, 100f);
     public float minZoom = 10f;
-    public float maxZoom = 50f;
+    public float maxZoom = 60f;
+    private Vector2 minEdgeLimit;
+    private Vector2 maxEdgeLimit;
 
     public GameObject soldier;
     public bool shouldFollowTarget = false;
@@ -33,6 +33,8 @@ public class CameraController : MonoBehaviour
         cam = gameObject.GetComponent<Camera>();
         cameraOffset = new Vector3(0, 0, -10);
         newPosition = cameraOffset;
+        minEdgeLimit = new Vector2(-25f, -15f);
+        maxEdgeLimit = new Vector2(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax);
 
         //normalize speeds to be around the same value
         cameraSpeed /= 1000f;

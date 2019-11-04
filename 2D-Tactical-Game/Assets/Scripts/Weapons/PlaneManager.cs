@@ -41,7 +41,7 @@ public class PlaneManager : MonoBehaviour
     void Update()
     {
         //destroy object when horizontal edge is reached
-        if(transform.position.x < -20f || transform.position.x > 200f){
+        if(transform.position.x < -20f || transform.position.x > GlobalVariables.Instance.mapXMax + 50f){
             AudioManager.instance.Stop("Old_Motor");
             Destroy(gameObject);
         }

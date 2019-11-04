@@ -51,6 +51,7 @@ public class CrosshairManager : MonoBehaviour
     public void SetCrosshairTo(int indexOfCrosshairChoice)
     {
         img.sprite = sprites[indexOfCrosshairChoice];
+        Cursor.visible = false; //just in case the cursor was enable by other method
     }
 
     private void FixedUpdate() {

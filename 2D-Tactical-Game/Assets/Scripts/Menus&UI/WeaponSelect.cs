@@ -38,10 +38,17 @@ public class WeaponSelect : MonoBehaviour
 
     public void OnEnable()
     {
-        currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-        currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+        if(gm.gameState == GameManager.GameState.TurnInProgress){
+            gm.isArsenalOpen = true;
+            currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
+            currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+        }else{
+            //Can't change weapons when no turn is in progress
+            weaponMenu.gameObject.transform.GetChild(0).gameObject.SetActive(false); //disable arsenal Menu
+        }
+    }
 
-        // TODO: Disable 'Q' and 'E' inputs
-
+    private void OnDisable() {
+        gm.isArsenalOpen = false;
     }
 }
