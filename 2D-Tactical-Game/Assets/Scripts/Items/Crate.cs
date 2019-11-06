@@ -43,7 +43,7 @@ public class Crate : MonoBehaviour
                 //pass negative damage to heal
                 ps.UpdateAmmo(weaponCode, + 1);
 
-                AudioManager.instance.Play("Magic_PickUp");
+                AudioManager.instance.Play("Weapon_PickUp");
                 //Spawn some VFX when picked up
                 if(impactEffect != null)
                 {

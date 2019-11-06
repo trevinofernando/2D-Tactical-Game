@@ -503,7 +503,7 @@ public class GameManager : MonoBehaviour
                             }
                         }
                     }else if(Random.Range(0f,1f) > 0.5f){//Chance of calling the cargo plane
-                        turnClock += 5f; //Give extra time to watch plane fly
+                        turnClock += (int)(GLOBALS.mapXMax / 100) + 5f; //Give extra time to watch plane fly
                         if(Random.Range(0f,1f) > 0.5f){
                             // 50% of droping crates
                             go = Instantiate(planeCratesPrefab, PlaneSpawnPoint, Quaternion.identity);
@@ -518,7 +518,7 @@ public class GameManager : MonoBehaviour
                             pm = go.GetComponent<PlaneManager>();
                             if(pm != null){
                                 pm.GM = thisGM;
-                                pm.SetTarget(new Vector2(Random.Range(50f,70f), Random.Range(15f,40f)), Random.Range(3,6), 50);
+                                pm.SetTarget(new Vector2((GLOBALS.mapXMax/2) + Random.Range(-20f,20f), Random.Range(15f,40f)), (int)Random.Range(3,6), (GLOBALS.mapXMax/2) - (int)Random.Range(0f,30f));
                             }
                         }
                     }

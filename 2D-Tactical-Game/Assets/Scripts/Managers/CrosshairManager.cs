@@ -20,7 +20,6 @@ public class CrosshairManager : MonoBehaviour
     void Start()
     {
         //Hide mouse cursor to show crosshair instead
-        Cursor.visible = false;
         img.sprite = sprites[0];
     }
 
@@ -51,7 +50,13 @@ public class CrosshairManager : MonoBehaviour
     public void SetCrosshairTo(int indexOfCrosshairChoice)
     {
         img.sprite = sprites[indexOfCrosshairChoice];
-        Cursor.visible = false; //just in case the cursor was enable by other method
+        if(indexOfCrosshairChoice == 0){
+            img.enabled = false;
+            Cursor.visible = true; //show gauntlet
+        }else{
+            img.enabled = true;
+            Cursor.visible = false; //hide gauntlet
+        }
     }
 
     private void FixedUpdate() {

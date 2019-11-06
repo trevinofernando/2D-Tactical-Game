@@ -158,3 +158,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Weapon_PickUp
+    clip: {fileID: 8300000, guid: 545d949b3d034bf4f947ff9ead59ac59, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Weapon_Swap
+    clip: {fileID: 8300000, guid: 7d89d6759aa0b064e93467f8ff52f80d, type: 3}
+    volume: 0.4
+    pitch: 1.5
+    loop: 0
+    source: {fileID: 0}

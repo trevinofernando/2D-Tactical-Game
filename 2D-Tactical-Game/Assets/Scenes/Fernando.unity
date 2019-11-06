@@ -867,7 +867,7 @@ GameObject:
   - component: {fileID: 54986866}
   - component: {fileID: 54986868}
   - component: {fileID: 54986867}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4478,7 +4478,7 @@ GameObject:
   - component: {fileID: 445249408}
   - component: {fileID: 445249410}
   - component: {fileID: 445249409}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6629,7 +6629,7 @@ GameObject:
   - component: {fileID: 706646340}
   - component: {fileID: 706646343}
   - component: {fileID: 706646344}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: InventoryButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6644,7 +6644,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706646338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_Children:
   - {fileID: 445249408}
@@ -6794,7 +6794,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -10806,7 +10806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-  - {fileID: 21300000, guid: 3b67c7c8bfa1b654ca92183e8020759d, type: 3}
+  - {fileID: 21300000, guid: ee20cd103665c644da4bd2e3b78bb7c8, type: 3}
   - {fileID: -7414383827266533784, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: -2235407112661783195, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: -3820606255585267655, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
@@ -12964,6 +12964,8 @@ MonoBehaviour:
   arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a000000
   mapSize: Large
   mapTheme: Desert
+  mapXMin: 0
+  mapYMin: 0
   mapXMax: 0
   mapYMax: 0
   numTeams: 4
@@ -13957,7 +13959,7 @@ GameObject:
   - component: {fileID: 1386493721}
   - component: {fileID: 1386493720}
   - component: {fileID: 1386493719}
-  m_Layer: 5
+  m_Layer: 15
   m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13974,7 +13976,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -14137,7 +14139,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386493718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.625, y: 0.625, z: 0.625}
   m_Children:
   - {fileID: 54986866}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2950300502624062535}
   - component: {fileID: 2950300502624062534}
   - component: {fileID: 6450198992083450216}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sand Tower
   m_TagString: Ground
   m_Icon: {fileID: 0}

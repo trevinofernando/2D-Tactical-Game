@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860117186359457794}
-  m_Layer: 0
-  m_Name: 1x3 Platform
+  m_Layer: 8
+  m_Name: 1x3 Platform Dirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,6 +40,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 860117186359457794}
     m_Modifications:
+    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Sand
+      objectReference: {fileID: 0}
     - target: {fileID: 8313556858827461265, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -95,11 +100,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Sand
-      objectReference: {fileID: 0}
     - target: {fileID: 2867639124547799077, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_Sprite
@@ -121,6 +121,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 860117186359457794}
     m_Modifications:
+    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Sand (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 8313556858827461265, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -176,11 +181,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Sand (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 2867639124547799077, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_Sprite
@@ -202,6 +202,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 860117186359457794}
     m_Modifications:
+    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
+        type: 3}
+      propertyPath: m_Name
+      value: Yellow Sand (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 8313556858827461265, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -256,11 +261,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5211286607004404672, guid: 9446197d58247a442b99a2caf9f0c17d,
-        type: 3}
-      propertyPath: m_Name
-      value: Yellow Sand (1)
       objectReference: {fileID: 0}
     - target: {fileID: 2867639124547799077, guid: 9446197d58247a442b99a2caf9f0c17d,
         type: 3}

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5420020383985953118}
-  m_Layer: 0
-  m_Name: Sand Tower Stairs Right End
+  m_Layer: 8
+  m_Name: Sand Tower Stairs Right End Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,11 +121,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5420020383985953118}
     m_Modifications:
-    - target: {fileID: 1959354142178347986, guid: 22616ee9cc77ae440b34d9a217293b11,
-        type: 3}
-      propertyPath: m_Name
-      value: 4 Stair
-      objectReference: {fileID: 0}
     - target: {fileID: 1959354142178347987, guid: 22616ee9cc77ae440b34d9a217293b11,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -180,6 +175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959354142178347986, guid: 22616ee9cc77ae440b34d9a217293b11,
+        type: 3}
+      propertyPath: m_Name
+      value: 4 Stair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 22616ee9cc77ae440b34d9a217293b11, type: 3}

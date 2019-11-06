@@ -77,13 +77,18 @@ public class WeaponController : MonoBehaviour
 
     public bool ChangeWeapon(int weaponChoice)
     {
-        if(!playerSettings.HaveAmmo(weaponChoice))
+        if(!playerSettings.HaveAmmo(weaponChoice)){
             return false;
+        }
+        if(prevWeapon == weaponChoice){
+            return false;
+        }
         prevWeapon = currWeapon; //To keep track of what weapon to go back if out of ammo
         currWeapon = weaponChoice; //This is needed if an external script calls this method
         weaponScript.weaponCode = weaponChoice; //update weapon script
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
         crosshairs.SetCrosshairTo(weaponChoice);
+        AudioManager.instance.Play("Weapon_Swap");
         return true;
     }
 
