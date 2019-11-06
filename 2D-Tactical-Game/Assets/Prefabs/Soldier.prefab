@@ -146,7 +146,6 @@ MonoBehaviour:
   degreesOfDeadZone: 0.25
   weaponPivot: {fileID: 188067215955224553}
   weapon: {fileID: 2140574270392134435}
-  playerSettings: {fileID: 5226463133170334109}
   weaponSprites:
   - {fileID: 0}
   - {fileID: 21300000, guid: 268e5ad12bdc0480693757af28937bf5, type: 3}
@@ -157,6 +156,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0c8c79e44291dd445978c33ff3bd3441, type: 3}
   - {fileID: 21300000, guid: 36b7a31ce6d77374a9af7cfcc3e7a060, type: 3}
   - {fileID: 21300000, guid: e8062a492e27c4d7fba3444c94f1eaee, type: 3}
+  - {fileID: 21300000, guid: 52c2de2d51a25ae41a0d5e0123e9b199, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -781,7 +781,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29c817becbd985449951a7fc756ad14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlaneSpawnPoint: {x: 200, y: 65, z: 0}
   targetSprite: {fileID: 7354808264935725193, guid: aaddce2ab1e0d064495d83adcf51b61a,
     type: 3}
   weaponCode: 0
@@ -800,7 +799,7 @@ MonoBehaviour:
   - {fileID: 6110699083877153648, guid: 18f03be67371f404eb1f086cbcf6bc5b, type: 3}
   - {fileID: 4731540090307745078, guid: decb7b93b1b01854a8019c8e07b84d03, type: 3}
   - {fileID: 283400023036061233, guid: 1dd8308c0bbbabf4c8e53481d1e5885b, type: 3}
-  - {fileID: 0}
+  - {fileID: 5557481230497431642, guid: 32233fb77312975438560dc0541cf5cc, type: 3}
   canChangeWeapons: 1
   canShoot: 1
 --- !u!1 &4124883912320935195

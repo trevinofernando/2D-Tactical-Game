@@ -17,7 +17,7 @@ public class Crate : MonoBehaviour
         "PlaneBomber",
         "BFG9000",
         "Shotgun",
-        "MissingName",
+        "Mjolnir",
         "MissingName",
         "MissingName",
         "MissingName"

@@ -83,22 +83,26 @@ public class WeaponController : MonoBehaviour
         if(prevWeapon == weaponChoice){
             return false;
         }
+        if(weaponChoice != 0){
+            AudioManager.instance.Play("Weapon_Swap");
+        }
         prevWeapon = currWeapon; //To keep track of what weapon to go back if out of ammo
         currWeapon = weaponChoice; //This is needed if an external script calls this method
         weaponScript.weaponCode = weaponChoice; //update weapon script
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
         crosshairs.SetCrosshairTo(weaponChoice);
-        AudioManager.instance.Play("Weapon_Swap");
         return true;
     }
 
-    public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)
+    public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction, bool cameraShouldFollow = true, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)
     {
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
-            if(currWeapon != 2 || currWeapon != 8) //Don't follow the sniper or shotgun bullets
+
+            if(cameraShouldFollow){//Don't follow the sniper or shotgun or melee weapons
                 playerSettings.gameManager.projectile = go;//Tell GM what projectile is  in the game, to tell the camera to follow it
+            } 
             
             //Specific targeting info for some prefabs like plane and homing bazooka
             if(target != null)
