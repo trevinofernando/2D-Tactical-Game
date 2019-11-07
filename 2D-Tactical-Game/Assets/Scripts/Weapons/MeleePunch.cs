@@ -8,7 +8,7 @@ public class MeleePunch : MonoBehaviour
     public int damageToProps = 100;
     public float delayTime = 1.5f;
     public float horizontalForce = 2000f;
-    public float verticalForce = 2000f;
+    public float verticalForce = 250f;
     private Collider2D thisCollider;
     private DamageHandler target;
     private Rigidbody2D rb;
@@ -43,21 +43,33 @@ public class MeleePunch : MonoBehaviour
         }
         thisCollider.enabled = false; //Deactivate Collider
     }
-/* 
+/*
     private void OnTriggerEnter2D(Collider2D other) {
         //I decided to use a coroutine because I can pass arguments, and I want to pass arguments so I can call this function from other scripts
-        StartCoroutine(DamageArea(other.transform, damageToPlayer, damageToProps, rayLifeTime));
-        gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+        StartCoroutine(DamageArea(other.gameObject));
+        thisCollider.enabled = false; //Deactivate Collider
     }
-*/
-    public IEnumerator DamageArea(Transform obj, int _damageToPlayer, int _damageToProps, float delayTime){
+ */
+    private IEnumerator DamageArea(GameObject obj){
         //Wait a few seconds and start
         yield return new WaitForSeconds(delayTime);
         
+        //Get DamageHandler script if ay from colliding object
         target = obj.GetComponent<DamageHandler>();
+
+        //Deal damage
         if(target != null){
-            target.TakeDamage( _damageToPlayer , _damageToProps);
+            target.TakeDamage(damageToPlayer, damageToProps);
         }
+        //get rigidbody to add a force to reflect the impact
+        rb = obj.transform.GetComponent<Rigidbody2D>();
+        if(rb != null)
+        {
+            //Only add force if component have a rigidbody2D
+            rb.AddForce(transform.up * verticalForce);
+            rb.AddForce(transform.right * horizontalForce);
+        }
+
         Destroy(gameObject);
     }
 }

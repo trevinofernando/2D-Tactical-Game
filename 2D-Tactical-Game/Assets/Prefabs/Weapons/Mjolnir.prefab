@@ -175,4 +175,4 @@ MonoBehaviour:
   damageToProps: 100
   delayTime: 1.5
   horizontalForce: 2000
-  verticalForce: 2000
+  verticalForce: 500
