@@ -9,7 +9,8 @@ AI shooting but not movement yet
 Improve map generation
     Map broken into several layers, randomly pick layers
 
-Health Bar and Player name
+
+
 
 
 AI Presentation
