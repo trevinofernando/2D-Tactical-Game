@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour
 
     [Range(0f, 1f)] //should be between 0 and 1
     public float smoothSpeed = 0.35f;
+    
+    public static CameraController instance;
 
     private IEnumerator coroutine;
     private Vector3 newPosition;
@@ -30,6 +32,14 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        
         cam = gameObject.GetComponent<Camera>();
         cameraOffset = new Vector3(0, 0, -10);
         newPosition = cameraOffset;

@@ -342,7 +342,7 @@ public class GameManager : MonoBehaviour
                 //Once projectile is null, change state
                 if(projectile == null){
                     gameState = GameState.WhatchingDamage;
-                }else{
+                }else if(cam.soldier == null){
                     cam.soldier = projectile; //this is in case the initial projectile releases more projectiles
                 }
                 break;
