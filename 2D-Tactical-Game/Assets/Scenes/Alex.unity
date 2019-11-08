@@ -17046,7 +17046,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0b688460445947b8f0fe54f8544c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000100000001000000
+  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a0000000200000001000000
+  mapSize: Large
+  mapTheme: Desert
+  mapXMin: 0
+  mapYMin: 0
+  mapXMax: 0
+  mapYMax: 0
   numTeams: 4
   numPlayersHuman: 4
   numPlayersNPCs: 0
@@ -17062,6 +17068,7 @@ MonoBehaviour:
   timePerTurn: 60
   timeBetweenTurns: 5
   TimePerGame: 1200
+  GM: {fileID: 0}
 --- !u!4 &1916301379
 Transform:
   m_ObjectHideFlags: 0

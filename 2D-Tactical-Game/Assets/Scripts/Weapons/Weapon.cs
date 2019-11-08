@@ -17,8 +17,8 @@ public class Weapon : MonoBehaviour
      * 6    = PlaneBomber
      * 7    = BFG 9000 (Doom gun)
      * 8    = Shotgun
-     * 9    = 
-     * 10   = 
+     * 9    = Mjolnir
+     * 10   = Infinity Gauntlet
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -137,6 +137,19 @@ public class Weapon : MonoBehaviour
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 2f); //unfreeze player after animation
+                        EndTurn();
+                        break;
+                    case 10://Infinity Gauntlet
+                        canShoot = false;//set flag
+                        //freeze player in place to play animation smoothly
+                        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+                        WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, true);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
+                        zoomAmount = 5f;
+                        SetZoom();
+                        Invoke("UnfreezePosition", 7.5f); //unfreeze player after animation
+                        zoomAmount = 25f; //set desired zoom
+                        Invoke("SetZoom", 7.5f); //wait for animation then zoom out
                         EndTurn();
                         break;
                     default:

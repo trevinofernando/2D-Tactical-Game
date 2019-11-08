@@ -46,7 +46,7 @@ MonoBehaviour:
   sounds:
   - name: The Duel
     clip: {fileID: 8300000, guid: 7b9267b7f98a5054f9d2cdc06a13d844, type: 3}
-    volume: 0.3
+    volume: 0.2
     pitch: 0.98
     loop: 1
     source: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Weapon_PickUp
     clip: {fileID: 8300000, guid: 545d949b3d034bf4f947ff9ead59ac59, type: 3}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -179,6 +179,12 @@ MonoBehaviour:
   - name: Hammer_Hit
     clip: {fileID: 8300000, guid: b8d120ec14723264cac8cfa493b3d486, type: 3}
     volume: 0.4
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: I_Am_Inevitable
+    clip: {fileID: 8300000, guid: c71d3e09d5249c846ab6c9017d477858, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}

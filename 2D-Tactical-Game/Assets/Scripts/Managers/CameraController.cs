@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public float screenBorderOffset = 10f;
     public Vector3 cameraOffset;
 
-    public float minZoom = 10f;
+    public float minZoom = 5f;
     public float maxZoom = 60f;
     private Vector2 minEdgeLimit;
     private Vector2 maxEdgeLimit;

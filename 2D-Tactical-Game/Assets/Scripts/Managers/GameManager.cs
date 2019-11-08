@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         GLOBALS = GlobalVariables.Instance;
+        
         gameState = GameState.LoadingScene;
         isTurnFinished = false; //Set initial state
         Time.timeScale = 1.0f; //Set normal time for game to run
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
 
         //Get reference to this GameManager component on this object
         thisGM = gameObject.GetComponent<GameManager>();
-
+        GLOBALS.GM = thisGM;
 
         /****** TODO: Call Map generator and get spawn locations *******/
         spawnLocations = mapInitializer.GenerateMap();

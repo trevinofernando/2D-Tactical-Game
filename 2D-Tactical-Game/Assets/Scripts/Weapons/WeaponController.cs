@@ -23,8 +23,8 @@ public class WeaponController : MonoBehaviour
      * 6    = PlaneBomber
      * 7    = BFG 9000 (Doom gun)
      * 8    = Shotgun
-     * 9    = 
-     * 10   = 
+     * 9    = Mjolnir
+     * 10   = Infinity Gauntlet
     */
     private Weapon weaponScript;
     public int currWeapon = 0;

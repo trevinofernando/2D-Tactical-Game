@@ -34,17 +34,17 @@ public class DamageHandler : MonoBehaviour
         health = _health;
     }
 
-    public void TakeDamage(int damageToPlayers, int damageToProps = -1)
+    public void TakeDamage(int damageToPlayers, int damageToProps = -1, int damageToPlayersPercent = 0, int damageToPropsPercent = 0)
     {
         if(damageToProps == -1){
             damageToProps = damageToPlayers;
         }
         if(isPlayer){
-            health -= damageToPlayers;
+            health -= (int)((float)damageToPlayers + (float)health * damageToPlayersPercent / 100f);
         }else{
-            health -= damageToProps;
+            health -= (int)((float)damageToProps + (float)health * damageToPropsPercent / 100f);
         }
-            
+        
 
         //if we are a player
         if (ps != null) 
@@ -53,7 +53,7 @@ public class DamageHandler : MonoBehaviour
             ps.UpdateHealth(health);
 
             //if the damage is negative, then player was healed, no need to continue
-            if(damageToPlayers > 0){
+            if(damageToPlayers > 0 || damageToPlayersPercent > 0){
                 //start sound
                 AudioManager.instance.Play("Take_Damage");
 

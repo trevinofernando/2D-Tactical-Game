@@ -5002,7 +5002,7 @@ MonoBehaviour:
   scrollSpeed: 5
   screenBorderOffset: 10
   cameraOffset: {x: 0, y: 0, z: -10}
-  minZoom: 10
+  minZoom: 5
   maxZoom: 60
   soldier: {fileID: 0}
   shouldFollowTarget: 0
@@ -10816,6 +10816,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 41a02fa7d106c594d8051c6cc7826820, type: 3}
   - {fileID: -7030421075088229959, guid: cb01db0860dcc594d9d1f19225a3b36a, type: 3}
   - {fileID: 21300000, guid: 3b67c7c8bfa1b654ca92183e8020759d, type: 3}
+  - {fileID: 21300000, guid: 3b67c7c8bfa1b654ca92183e8020759d, type: 3}
 --- !u!114 &1164008666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12962,7 +12963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0b688460445947b8f0fe54f8544c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000063000000
+  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a0000000200000001000000
   mapSize: Large
   mapTheme: Desert
   mapXMin: 0
@@ -12984,6 +12985,7 @@ MonoBehaviour:
   timePerTurn: 60
   timeBetweenTurns: 5
   TimePerGame: 1200
+  GM: {fileID: 0}
 --- !u!4 &1289858339
 Transform:
   m_ObjectHideFlags: 0

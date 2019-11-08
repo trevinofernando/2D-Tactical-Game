@@ -18,7 +18,7 @@ public class Crate : MonoBehaviour
         "BFG9000",
         "Shotgun",
         "Mjolnir",
-        "MissingName",
+        "Infinity Gauntlet",
         "MissingName",
         "MissingName"
     };
