@@ -171,8 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd162f38fa94f634488f2c167b0f0167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 40
+  damageToPlayer: 35
   damageToProps: 100
   delayTime: 1.5
   horizontalForce: 2000
   verticalForce: 500
+  swingSound: Hammer_Spin
+  hitSound: Hammer_Hit

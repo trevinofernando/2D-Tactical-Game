@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MeleePunch : MonoBehaviour
 {
-    public int damageToPlayer = 40;
+    public int damageToPlayer = 35;
     public int damageToProps = 100;
     public float delayTime = 1.5f;
     public float horizontalForce = 2000f;
-    public float verticalForce = 250f;
+    public float verticalForce = 500f;
     public string swingSound = "Hammer_Spin";
     public string hitSound = "Hammer_Hit";
     private Collider2D thisCollider;
