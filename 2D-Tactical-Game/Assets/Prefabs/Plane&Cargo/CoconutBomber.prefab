@@ -252,7 +252,7 @@ SpriteRenderer:
   m_SortingLayerID: -2036749247
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: -1077895129297371098, guid: a4eb99303bc51a54e9f855af24527517,
+  m_Sprite: {fileID: -1860563950245943098, guid: cfe6472ea30d4ba4389047eef6293d89,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -274,7 +274,7 @@ Animator:
   m_GameObject: {fileID: 6110699083628956517}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b38a8cb854583fe4b9053c69616ffc32, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7e9d85ba5a13f974996e64c47f44a26d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 6446375933993972404}
   - component: {fileID: 8146953275869595008}
   m_Layer: 0
-  m_Name: PlaneBomber
+  m_Name: CoconutBomber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -458,9 +458,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: -20
-  dropArea: 20
-  numItemsToDrop: 5
+  dropArea: 50
+  numItemsToDrop: 3
   randomizeDrops: 0
   prefabCargo:
-  - {fileID: 1071730802671521817, guid: 01e0deab5b1a0644aa2e57744e169c68, type: 3}
-  planeSound: Old_Motor
+  - {fileID: 2880340708203235166, guid: bc158163cbae3a2468c6dcbe424f2231, type: 3}
+  planeSound: Lovely_Coconuts

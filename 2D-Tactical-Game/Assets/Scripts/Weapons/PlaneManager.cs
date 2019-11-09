@@ -9,6 +9,7 @@ public class PlaneManager : MonoBehaviour
     public int numItemsToDrop = 1;
     public bool randomizeDrops = false;
     public GameObject[] prefabCargo;
+    public string planeSound;
 
     [System.NonSerialized] public Vector2[] dropPoints;
     [System.NonSerialized] public GameManager GM;
@@ -22,7 +23,7 @@ public class PlaneManager : MonoBehaviour
     
     void Start()
     {
-        AudioManager.instance.Play("Old_Motor");
+        AudioManager.instance.Play(planeSound);
         //Can't allow static planes
         if(speed == 0){
             speed = -5;
@@ -42,15 +43,15 @@ public class PlaneManager : MonoBehaviour
     {
         //destroy object when horizontal edge is reached
         if(transform.position.x < -20f || transform.position.x > GlobalVariables.Instance.mapXMax + 50f){
-            AudioManager.instance.Stop("Old_Motor");
+            AudioManager.instance.Stop(planeSound);
             Destroy(gameObject);
         }
         //don't do anything if this is satisfied
         if(dropPoints == null || numItemsToDrop < 1){
             return;
         }
-        if(!AudioManager.instance.IsPlaying("Old_Motor")){
-            AudioManager.instance.Play("Old_Motor");
+        if(!AudioManager.instance.IsPlaying(planeSound)){
+            AudioManager.instance.Play(planeSound);
         }
 
         //Check if we have reached passed the dropPoints, if  yes, then drop one item from the cargo
@@ -66,8 +67,12 @@ public class PlaneManager : MonoBehaviour
             //Spawn item from cargo
             go = Instantiate(prefabCargo[numItemsToDrop % prefabCargo.Length], transform.position, transform.rotation);
             //Tell GM what projectile is in the air so the camera can follow it
-            if(numItemsToDrop == center && go.transform.tag != "Item")
-                GM.cam.soldier = go;
+            if(GM != null)
+            {
+                if(numItemsToDrop == center && go.transform.tag != "Item")
+                    GM.cam.soldier = go;
+            }
+            
             
             //Get reference to RigidBody and set initial speed
             rb = go.GetComponent<Rigidbody2D>();

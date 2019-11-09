@@ -13,6 +13,11 @@ public class TreeScript : MonoBehaviour
     public float autoDestroyOnHeight = -50f;
 
 
+    void Start()
+    {
+        Shoot();
+    }
+
     void Update()
     {
         if (gameObject.transform.position.y <= autoDestroyOnHeight)
@@ -23,9 +28,11 @@ public class TreeScript : MonoBehaviour
     }
 
     void Shoot()
-    {
+    {   
+        AudioManager.instance.Play("Leaves_Rustling");
         GameObject leftCoconut = Instantiate(projectilePrefab, transform.position + downLeft, Quaternion.identity);
         GameObject rightCoconut = Instantiate(projectilePrefab, transform.position + downRight, Quaternion.identity);
+        
 
         Rigidbody2D leftrb = leftCoconut.transform.GetComponent<Rigidbody2D>();
         Rigidbody2D rightrb = rightCoconut.transform.GetComponent<Rigidbody2D>();

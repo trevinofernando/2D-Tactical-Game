@@ -464,3 +464,4 @@ MonoBehaviour:
   prefabCargo:
   - {fileID: 2752310064404446370, guid: c752025ddd2bd654cb2a3848ccb838b7, type: 3}
   - {fileID: 2752310064404446370, guid: 81c05bcb0ebbb204c91bab1cb7447b0b, type: 3}
+  planeSound: Old_Motor
