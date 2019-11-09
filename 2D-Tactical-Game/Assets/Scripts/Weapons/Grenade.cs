@@ -17,6 +17,7 @@ public class Grenade : MonoBehaviour
     public string explosionSoundName = "Dark_Explosion";
     public string impactSound1 = "Metal_Hit_High";
     public string impactSound2 = "Metal_Hit_Low";
+    public bool isTreeProjectile = false;
     public float autoDestroyOnHeight = -50f;
     private float rotationAmount;
     private bool soundAlternator;
@@ -31,6 +32,8 @@ public class Grenade : MonoBehaviour
         //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * launchForce * rb.mass);
+        if (rb == null)
+            Debug.Log("null rigidbody");
 
         StartCoroutine(Timer((float)timer));
     }
@@ -84,6 +87,17 @@ public class Grenade : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+
+        if(isTreeProjectile)
+        {
+            if (other.transform.GetComponent<TreeScript>())
+            {
+                Physics2D.IgnoreCollision(other.collider, gameObject.GetComponent<Collider2D>());
+            }
+                
+        }
+
+
         if(soundAlternator){
             AudioManager.instance.Play(impactSound1);
         }else{

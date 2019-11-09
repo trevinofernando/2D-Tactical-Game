@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5093664468095071919}
   - component: {fileID: 5093664468095071918}
   - component: {fileID: -1261149042578069243}
+  - component: {fileID: -6207429770959904721}
   m_Layer: 0
   m_Name: Palm Tree
   m_TagString: Ground
@@ -198,3 +199,20 @@ PolygonCollider2D:
       - {x: 0.24499999, y: -1.025}
       - {x: 0.295, y: -0.965}
       - {x: 0.315, y: -0.765}
+--- !u!114 &-6207429770959904721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5093664468095071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf36800ae689a4244be3ee117513f9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2880340708203235166, guid: 6e6a9dc50d853114ea10d32ea031d5b2,
+    type: 3}
+  pushForce: 2500
+  angularVelocity: 500
+  autoDestroyOnHeight: -50

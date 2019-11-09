@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2584179119313658707}
   - component: {fileID: 2584179119313658708}
   - component: {fileID: 6431271838707751631}
+  - component: {fileID: 1351243665249065341}
   m_Layer: 0
   m_Name: Cactus
   m_TagString: Ground
@@ -183,3 +184,18 @@ PolygonCollider2D:
       - {x: 0.21, y: -1.135}
       - {x: 0.19, y: -1.055}
       - {x: 0.11, y: -0.98499995}
+--- !u!114 &1351243665249065341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584179119313658705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72ce19504406f74180ff9818238b7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 5
+  autoDestroyOnHeight: -50
+  pushBackForce: 2500
