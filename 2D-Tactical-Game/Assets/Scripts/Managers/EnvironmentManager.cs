@@ -7,8 +7,12 @@ public class EnvironmentManager : MonoBehaviour
 
     System.Random rand;
 
+    private GlobalVariables GLOBALS;
+    public Vector3 planeSpawnPoint;
     public GameObject[] environmentHazards;
+    public GameObject coconutBomberPrefab;
     int hazardCode = 0;
+
 
     /*
      * 0    Sun
@@ -23,12 +27,16 @@ public class EnvironmentManager : MonoBehaviour
 
     void Awake()
     {
+        GLOBALS = GlobalVariables.Instance;
         rand = new System.Random();
+        planeSpawnPoint = new Vector3(GLOBALS.mapXMax + 30f, GLOBALS.mapYMax + 20f, 0);
+        //Attack();
     }
 
     void Attack()
     {
-        hazardCode = rand.Next(environmentHazards.Length);
+        //hazardCode = rand.Next(environmentHazards.Length);
+        hazardCode = 1;
         //environmentHazards[i].Shoot();
 
         switch(hazardCode)
@@ -36,7 +44,10 @@ public class EnvironmentManager : MonoBehaviour
             case 0:
 
             case 1:
-
+                GameObject coconutBomber = Instantiate(coconutBomberPrefab, planeSpawnPoint, Quaternion.identity);
+                PlaneManager pm = coconutBomber.transform.GetComponent<PlaneManager>();
+                pm.SetTarget(new Vector2((GLOBALS.mapXMax / 2) + Random.Range(-20f, 20f), Random.Range(15f, 40f)), (int)Random.Range(3, 6), (GLOBALS.mapXMax / 2) - (int)Random.Range(0f, 30f));
+                break;
             case 2:
 
             case 3:
