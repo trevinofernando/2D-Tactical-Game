@@ -29,6 +29,7 @@ public class AIController : MonoBehaviour
     private float yDiff;
     private float zRotation;
     private float currentRotation;
+    private bool coroutineFinished = true;
 
     public AIState curState = AIState.WaitingForTurn;
 
@@ -66,8 +67,10 @@ public class AIController : MonoBehaviour
         {
             case(AIState.WaitingForTurn):
                 //Change state when player starts turn
-                if(ps.isMyTurn){
-                    curState = AIState.PickingTarget;
+                if(ps.isMyTurn && coroutineFinished){
+                    coroutineFinished = false;
+                    StartCoroutine(ChangeStateIn(AIState.PickingTarget, 5f));
+                    //curState = AIState.PickingTarget;
                 }
                 break;
             case(AIState.PickingTarget):
@@ -149,16 +152,16 @@ public class AIController : MonoBehaviour
             case(AIState.Aiming):
                 //***************************TODO**************************
                 //Rotate Weapon
-                if(Mathf.Abs(weaponContr.weaponPivot.eulerAngles.z - zRotation) < 5f){
+                if(Mathf.Abs(currentRotation - Mathf.Abs(zRotation)) < 25f){
                     Debug.Log("AI Player says: Shooting");
                     curState = AIState.Shooting;
                     weaponContr.AimTo(zRotation, xDiff);
                     break;
                 }
 
-                currentRotation += 1f;
-
-                if (Mathf.Abs(currentRotation) < 89f)
+                currentRotation = (currentRotation + 1) % 360;
+                
+                if (Mathf.Cos(currentRotation * Mathf.Deg2Rad) > 0)
                 {
                     //We should be facing right
                     transform.eulerAngles = new Vector3(0, 0, 0);
@@ -195,5 +198,6 @@ public class AIController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         curState = state;
+        coroutineFinished = true;
     }
 }

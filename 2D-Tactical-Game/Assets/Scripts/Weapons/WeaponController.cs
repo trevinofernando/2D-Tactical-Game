@@ -90,7 +90,10 @@ public class WeaponController : MonoBehaviour
         currWeapon = weaponChoice; //This is needed if an external script calls this method
         weaponScript.weaponCode = weaponChoice; //update weapon script
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
-        crosshairs.SetCrosshairTo(weaponChoice);
+        //Only change cursor if not an AI player
+        if(!playerSettings.iAmAI){
+            crosshairs.SetCrosshairTo(weaponChoice);
+        }
         return true;
     }
 

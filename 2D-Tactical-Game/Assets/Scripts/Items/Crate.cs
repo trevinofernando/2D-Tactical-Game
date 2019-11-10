@@ -6,6 +6,7 @@ public class Crate : MonoBehaviour
 {
     public string objectTagToInteract = "Player";
     public GameObject impactEffect;
+    public int predeterminedWeaponToSpawn = -1;
 
     [System.NonSerialized]
     public string[] weaponNames = 
@@ -28,7 +29,17 @@ public class Crate : MonoBehaviour
 
     private void Start() {
         Random.InitState(System.DateTime.Now.Millisecond);
-        weaponCode = Random.Range(1, GlobalVariables.Instance.arsenalAmmo.Count);
+        if(predeterminedWeaponToSpawn == -1){
+            weaponCode = Random.Range(1, GlobalVariables.Instance.arsenalAmmo.Count);
+        }else{
+            weaponCode = predeterminedWeaponToSpawn;
+        }
+    }
+
+    public void ChangeCreateContentTo(int weaponChoice){
+        if(weaponChoice < GlobalVariables.Instance.arsenalAmmo.Count){
+            weaponCode = weaponChoice;
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D other) {
