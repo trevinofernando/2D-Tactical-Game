@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerSettings : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerSettings : MonoBehaviour
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
     public Animator anim;
+    public TextMeshPro nameAndHealthBar;
     
     //The arsenal is static to have only one instance of this variable in 
     //all of the Player Settings classes
@@ -31,6 +33,9 @@ public class PlayerSettings : MonoBehaviour
         AICont = GetComponent<AIController>();
         rb = GetComponent<Rigidbody2D>();
         thisGameObject = gameObject;
+
+        //Initialize the player health/name
+        nameAndHealthBar.SetText(nameGiven + "\n" + gameManager.soldiersHealth[teamID, ID]);
     }
     public void SetColor(Color newColor)//RBGA
     {
@@ -97,6 +102,9 @@ public class PlayerSettings : MonoBehaviour
 
         //add ack the new soldier health
         gameManager.teamsHealth[teamID] += gameManager.soldiersHealth[teamID, ID];
+
+        //update the nameplate
+        nameAndHealthBar.SetText(nameGiven + "\n" + gameManager.soldiersHealth[teamID, ID]);
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
