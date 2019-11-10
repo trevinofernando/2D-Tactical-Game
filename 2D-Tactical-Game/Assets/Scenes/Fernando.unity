@@ -12971,11 +12971,11 @@ MonoBehaviour:
   mapXMax: 0
   mapYMax: 0
   numTeams: 4
-  numPlayersHuman: 4
-  numPlayersNPCs: 0
+  numPlayersHuman: 3
+  numPlayersNPCs: 1
   teamSize: 4
   healthPerAvatar: 100
-  isTeamAI: 00000000
+  isTeamAI: 01000000
   gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}

@@ -6,7 +6,6 @@ using UnityEngine;
 public class AIController : MonoBehaviour
 {
     public Animator anim;
-    public Transform weaponPivot;
     public Weapon weaponScript;
 
     //References to other scripts
@@ -18,6 +17,7 @@ public class AIController : MonoBehaviour
     private WeaponController weaponContr;
 
     private List<Transform> targets = new List<Transform>();
+    private float degreesOfDeadZone;
 
     //Temporal variables
     private RaycastHit2D hit;
@@ -25,6 +25,10 @@ public class AIController : MonoBehaviour
     private Vector2 direction;
     private Vector3 dir3;
     private Transform target;
+    private float xDiff;
+    private float yDiff;
+    private float zRotation;
+    private float currentRotation;
 
     public AIState curState = AIState.WaitingForTurn;
 
@@ -47,6 +51,7 @@ public class AIController : MonoBehaviour
         ps = GetComponent<PlayerSettings>();
         //Get reference to WeaponController component of this player object
         weaponContr = GetComponent<WeaponController>();
+        degreesOfDeadZone = weaponContr.degreesOfDeadZone;
     }
 
     // Update is called once per frame
@@ -54,6 +59,7 @@ public class AIController : MonoBehaviour
     {
         //Return if this player isn't an AI player
         if(!ps.iAmAI){
+            curState = AIState.WaitingForTurn;
             return;
         }
         switch (curState)
@@ -65,6 +71,9 @@ public class AIController : MonoBehaviour
                 }
                 break;
             case(AIState.PickingTarget):
+                //Reset List
+                targets.Clear(); 
+
                 for(int i = 0; i < GLOBALS.numTeams; i++){
                     //Check if this team is alive, else skip it
                     if(GM.teamsHealth[i] <= 0)
@@ -95,34 +104,42 @@ public class AIController : MonoBehaviour
 
                 foreach (Transform tar in targets){
                     //Find direction vector from self to target and normalize it to length 1
-                    dir3 = tar.position - transform.position;
+                    dir3 = tar.position - weaponContr.weaponPivot.transform.position;
                     dir3.Normalize();
                     dir3.z = 0;
 
                     //Direct cast from Vector3s to Vector2s
-                    origin = transform.position;
+                    origin = weaponContr.weaponPivot.transform.position;
                     direction = dir3;
 
                     //Send a ray and store the information in hit
-                    hit = Physics2D.Raycast(origin, direction);
-                    
+                    hit = Physics2D.Raycast(origin + direction*1.5f, direction);
                     //Check if we are hitting a player and that player is not in our team
                     if(hit.transform.tag == "Player" && ps.teamID != hit.transform.GetComponent<PlayerSettings>().teamID){
+                        Debug.Log("AI Player says: Found a Target!!");
                         target = hit.transform;
                         break;
                     }
                 }
 
+                weaponContr.ChangeWeapon(2); //Sniper
+                
                 if(target == null){
+                    Debug.Log("AI Player says: No targets in range");
+                    xDiff = 0;
+                    zRotation = 0;
+                    curState = AIState.Aiming;
                     break;
                 }
+
                 //Find diff in x and y
-                float xDiff = target.position.x - weaponContr.weaponPivot.position.x;
-                float yDiff = target.position.y - weaponContr.weaponPivot.position.y;
+                xDiff = target.position.x - weaponContr.weaponPivot.position.x;
+                yDiff = target.position.y - weaponContr.weaponPivot.position.y;
 
                 //Calculate angle to rotate with 2D tangent formula and change from radians to degrees
-                float zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
+                zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
                 
+                //StartCoroutine(ChangeStateIn(AIState.Aiming, 5f));
                 curState = AIState.Aiming;
                 break;
             case(AIState.Moving):
@@ -131,11 +148,37 @@ public class AIController : MonoBehaviour
                 break;
             case(AIState.Aiming):
                 //***************************TODO**************************
-                //move 
+                //Rotate Weapon
+                if(Mathf.Abs(weaponContr.weaponPivot.eulerAngles.z - zRotation) < 5f){
+                    Debug.Log("AI Player says: Shooting");
+                    curState = AIState.Shooting;
+                    weaponContr.AimTo(zRotation, xDiff);
+                    break;
+                }
+
+                currentRotation += 1f;
+
+                if (Mathf.Abs(currentRotation) < 89f)
+                {
+                    //We should be facing right
+                    transform.eulerAngles = new Vector3(0, 0, 0);
+                    //Rotate gun to point at mouse
+                    weaponContr.weaponPivot.rotation = Quaternion.Euler(0, 0, currentRotation);
+                }
+                else
+                {
+                    //We should be facing left
+                    transform.eulerAngles = new Vector3(0, 180, 0);
+                    //Rotate gun to point at mouse but gun is upside down, so flip 180 on x
+                    //And compansate fliping x by inverting z rotation
+                    weaponContr.weaponPivot.rotation = Quaternion.Euler(180, 0, -currentRotation);
+                }
+
                 break;
             case(AIState.Shooting):
                 //***************************TODO**************************
-
+                curState = AIState.WaitingForTurn;
+                weaponScript.fireTriggered = true;
                 break;
             case(AIState.Pause):
                 //***************************TODO**************************
@@ -146,5 +189,11 @@ public class AIController : MonoBehaviour
                 Debug.LogError("Invalid State reached... but HOW??!!");
                 break;
         }
+    }
+
+    private IEnumerator ChangeStateIn(AIState state, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        curState = state;
     }
 }

@@ -136,21 +136,24 @@ public class WeaponController : MonoBehaviour
         //Calculate angle with 2D tangent formula and change from radians to degrees
         float zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
         
-        if (xDiff > 0 + degreesOfDeadZone)
+        AimTo(zRotation, xDiff);
+    }
+
+    public void AimTo(float _zRotation, float _xDiff){
+        if (_xDiff > 0 + degreesOfDeadZone)
         {
             //We should be facing right
             transform.eulerAngles = new Vector3(0, 0, 0);
             //Rotate gun to point at mouse
-            weaponPivot.rotation = Quaternion.Euler(0, 0, zRotation);
+            weaponPivot.rotation = Quaternion.Euler(0, 0, _zRotation);
         }
-        else if(xDiff < 0 - degreesOfDeadZone)
+        else if(_xDiff < 0 - degreesOfDeadZone)
         {
             //We should be facing left
             transform.eulerAngles = new Vector3(0, 180, 0);
             //Rotate gun to point at mouse but gun is upside down, so flip 180 on x
             //And compansate fliping x by inverting z rotation
-            weaponPivot.rotation = Quaternion.Euler(180, 0, -zRotation);
+            weaponPivot.rotation = Quaternion.Euler(180, 0, -_zRotation);
         }
-
     }
 }

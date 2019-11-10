@@ -57,7 +57,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &1591137666376314640
 CapsuleCollider2D:
@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7529892519968174175}
-  weaponPivot: {fileID: 188067215955224553}
   weaponScript: {fileID: 1813370298514301842}
   curState: 0
 --- !u!1 &1591137666620986174
