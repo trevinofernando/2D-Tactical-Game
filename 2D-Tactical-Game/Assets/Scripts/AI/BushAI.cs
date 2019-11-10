@@ -77,13 +77,12 @@ public class BushAI : MonoBehaviour
         }
         */
 
-        if (currentWayPoint >= path.vectorPath.Count)
+        if(currentWayPoint >= path.vectorPath.Count)
         {
             Debug.Log("Reached end of path!");
             reachedEndOfPath = true;
             return;
-        }
-        else
+        }else
         {
             reachedEndOfPath = false;
         }
@@ -100,12 +99,10 @@ public class BushAI : MonoBehaviour
             currentWayPoint++;
         }
 
-        if (force.x <= 0.01f)
+        if(force.x <= 0.01f)
         {
             bushGraphics.localScale = new Vector3(-1f, 1f, 1f);
-        }
-
-        else if (force.x >= -0.01f)
+        }else if(force.x >= -0.01f)
         {
             bushGraphics.localScale = new Vector3(1f, 1f, 1f);
         }

@@ -12,17 +12,23 @@ public class BirdScript : MonoBehaviour
     public Transform target;
     public Transform birdGraphics;
 
+    /*
     public float checkStuck = 0.1f;
     private bool stuckInY = false;
-    private bool stuckInX = true;
+    private bool stuckInX = false;
+    private bool moveUp = false;
+    private bool moveRight = false;
+    private bool moveDown = false;
+    private bool moveLeft = false;
+    public float unstuckForce = 100f;
+    */
+
 
     public float speed = 200f;
     public float nextWaypointDistance = 3f;
-    public float unstuckForce = 100f;
 
     private Path path;
     private int currentWayPoint = 0;
-    private bool reachedEndOfPath = false;
     private GlobalVariables GLOBALS;
     private Seeker seeker;
     private Rigidbody2D rb;
@@ -56,9 +62,8 @@ public class BirdScript : MonoBehaviour
         targets[2] = topLeft;
         targets[3] = topRight;
 
-        StartCoroutine(CheckIfStuck());
-
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        UpdatePath();
+        //StartCoroutine(CheckIfStuck());
     }
 
     void UpdatePath()
@@ -67,6 +72,7 @@ public class BirdScript : MonoBehaviour
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
         }
+
 
     }
 
@@ -87,33 +93,63 @@ public class BirdScript : MonoBehaviour
 
         if (currentWayPoint >= path.vectorPath.Count)
         {
-            Debug.Log("Reached end of path!");
-            reachedEndOfPath = true;
             target = FindNewTarget();
+            UpdatePath();
             rb.velocity = new Vector3();
             return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
         }
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
 
+        /*
         if (stuckInX)
         {
             stuckInX = false;
-            int leftOrRight = rand.Next(2);
-            force += (leftOrRight > 0 ? Vector2.left : Vector2.right) * unstuckForce;
+            if (CheckDirectionForObject(Vector3.right))
+                force += Vector2.left * unstuckForce;
+            else
+                force += Vector2.right * unstuckForce;
+
+            //int leftOrRight = rand.Next(2);
+            //force += (leftOrRight > 0 ? Vector2.left : Vector2.right) * unstuckForce;
         }
 
         if (stuckInY)
         {
             stuckInY = false;
-            int upOrDown = rand.Next(2);
-            force += (upOrDown > 0 ? Vector2.up : Vector2.down) * unstuckForce;
+            if (CheckDirectionForObject(Vector3.up))
+                force += Vector2.down * unstuckForce;
+            else
+                force += Vector2.up * unstuckForce;
+            //int upOrDown = rand.Next(2);
+            //force += (upOrDown > 0 ? Vector2.up : Vector2.down) * unstuckForce;
         }
+        */
+
+        /*
+
+        if(moveUp)
+        {
+            force += Vector2.up * unstuckForce;
+            moveUp = false;
+        }
+        else if(moveRight)
+        {
+            force += Vector2.right * unstuckForce;
+            moveRight = false;
+        }
+        else if (moveDown)
+        {
+            force += Vector2.down * unstuckForce;
+            moveDown = false;
+        }
+        else if (moveLeft)
+        {
+            force += Vector2.left * unstuckForce;
+            moveLeft = false;
+        }
+        */
 
         rb.AddForce(force);
 
@@ -134,7 +170,7 @@ public class BirdScript : MonoBehaviour
             birdGraphics.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        
+
 
     }
 
@@ -147,7 +183,41 @@ public class BirdScript : MonoBehaviour
         return tempTrans;
     }
 
+    Transform FindTargetInDirection(Vector3 direction)
+    {
+        GameObject tempObject = new GameObject();
+        Transform tempTrans = tempObject.transform;
+        tempTrans.SetPositionAndRotation(direction + Vector3.Scale(direction, new Vector3(5, 5, 0)), Quaternion.identity);
+        return tempTrans;
+    }
+    
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Vector3 currentPosition = gameObject.transform.position;
 
+        if (other.transform.tag == "Player" || other.transform.tag == "Ground")
+            Physics2D.IgnoreCollision(other.collider, gameObject.GetComponent<Collider2D>());
+
+
+        /*
+        if (other.transform.position.x < currentPosition.x)
+        {
+            moveRight = true;
+        }
+        else if (other.transform.position.x > currentPosition.x)
+        {
+            moveLeft = true;
+        }
+        else if (other.transform.position.y < currentPosition.y)
+        {
+            moveUp = true;
+        }
+        else
+            moveDown = true;
+        */
+    }
+
+    /*
     IEnumerator CheckIfStuck()
     {
         previousPosition = gameObject.transform.position;
@@ -162,7 +232,7 @@ public class BirdScript : MonoBehaviour
             stuckInY = true;
         }
 
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1);
     }
 
 
@@ -183,17 +253,21 @@ public class BirdScript : MonoBehaviour
             Debug.Log("Stuck in Y Direction");
             return true;
         }
-            
+
         return false;
     }
 
-    /*
-    Transform FindNewWanderTarget()
+    bool CheckDirectionForObject(Vector3 direction)
     {
-        System.Random r = new System.Random();
-        int index = r.Next(0, wanderTargets.Length);
-        Debug.Log("Targeting wander " + index);
-        return wanderTargets[index];
+        Vector3 currentPosition = gameObject.transform.position;
+        RaycastHit2D raycast = Physics2D.Raycast(currentPosition, (direction - currentPosition).normalized);
+
+        if (Math.Abs(raycast.transform.position.x - currentPosition.x) < 0.5f ||
+            Math.Abs(raycast.transform.position.y - currentPosition.y) < 0.5f)
+            return true;
+        return false;
     }
     */
+
+    
 }

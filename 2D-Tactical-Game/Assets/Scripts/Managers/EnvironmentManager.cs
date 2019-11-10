@@ -7,21 +7,22 @@ public class EnvironmentManager : MonoBehaviour
 
     System.Random rand;
 
-    private GlobalVariables GLOBALS;
+    public int numHazards = 2;
     public Vector3 planeSpawnPoint;
-    public GameObject[] environmentHazards;
     public GameObject coconutBomberPrefab;
-    int hazardCode = 0;
+    public GameManager GM;
+    public SunScript sun;
+    
+    private int hazardCode = 1;
+    private GameObject go;
+    private GlobalVariables GLOBALS;
 
 
     /*
-     * 0    Sun
-     * 1    Plane 
-     * 2    Player Bush 
-     * 3    Tree (Palm and Oak)
-     * 4    Bird that doesn't attack, drops weapons/powerups
-     * 5    Land (Wolf and Mountain Lion)
-     * 6    Aquatic (Shark)
+     * 1    Sun
+     * 2    Plane 
+     * 3    Player Bush 
+     * 4    Land (Wolf and Mountain Lion)
      */
 
 
@@ -29,32 +30,38 @@ public class EnvironmentManager : MonoBehaviour
     {
         GLOBALS = GlobalVariables.Instance;
         rand = new System.Random();
-        planeSpawnPoint = new Vector3(GLOBALS.mapXMax + 30f, GLOBALS.mapYMax + 20f, 0);
-        //Attack();
+        //DeployHazard();
     }
 
-    void Attack()
+    public void DeployHazard()
     {
-        //hazardCode = rand.Next(environmentHazards.Length);
-        hazardCode = 1;
-        //environmentHazards[i].Shoot();
+        hazardCode = rand.Next(1, numHazards+1);
+
+        Debug.Log("Deploying a hazard");
 
         switch(hazardCode)
         {
-            case 0:
-
             case 1:
-                GameObject coconutBomber = Instantiate(coconutBomberPrefab, planeSpawnPoint, Quaternion.identity);
-                PlaneManager pm = coconutBomber.transform.GetComponent<PlaneManager>();
-                pm.SetTarget(new Vector2((GLOBALS.mapXMax / 2) + Random.Range(-20f, 20f), Random.Range(15f, 40f)), (int)Random.Range(3, 6), (GLOBALS.mapXMax / 2) - (int)Random.Range(0f, 30f));
+                this.go = GM.teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
+                while(this.go == null)
+                    this.go = GM.teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
+                sun.Shoot(this.go.transform.position);
+                AudioManager.instance.Play("Short_Choir");
                 break;
             case 2:
-
+                planeSpawnPoint = new Vector3(GLOBALS.mapXMax + 30f, GLOBALS.mapYMax + 20f, 0);
+                GameObject go = Instantiate(coconutBomberPrefab, planeSpawnPoint, Quaternion.identity);
+                PlaneManager pm = go.transform.GetComponent<PlaneManager>();
+                pm.SetTarget(new Vector2((GLOBALS.mapXMax / 2) + Random.Range(-20f, 20f), Random.Range(15f, 40f)), (int)Random.Range(3, 6), (GLOBALS.mapXMax / 2) - (int)Random.Range(0f, 30f));
+                break;
             case 3:
-
+                Debug.Log("Bush!");
+                break;
             case 4:
-
+                Debug.Log("Land Animal!");
+                break;
             default:
+                Debug.LogError("Impossible, there's not that many enivronmental hazards!");
                 break;
         }
     }
