@@ -6,6 +6,8 @@ using UnityEngine;
 public class AIController : MonoBehaviour
 {
     public Animator anim;
+    public Transform weaponPivot;
+    public Weapon weaponScript;
 
     //References to other scripts
     [System.NonSerialized]
@@ -50,12 +52,14 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Return if this player isn't an AI player
         if(!ps.iAmAI){
             return;
         }
         switch (curState)
         {
             case(AIState.WaitingForTurn):
+                //Change state when player starts turn
                 if(ps.isMyTurn){
                     curState = AIState.PickingTarget;
                 }

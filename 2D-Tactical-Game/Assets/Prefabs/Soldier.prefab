@@ -174,6 +174,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7529892519968174175}
+  weaponPivot: {fileID: 188067215955224553}
+  weaponScript: {fileID: 1813370298514301842}
   curState: 0
 --- !u!1 &1591137666620986174
 GameObject:
@@ -764,7 +766,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.28, y: 4.06}
+  m_Size: {x: 2.99, y: 0.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -804,6 +806,7 @@ MonoBehaviour:
   - {fileID: 6379592724916170784, guid: e901a0b7b64579d49a7ce62b38548f36, type: 3}
   canChangeWeapons: 1
   canShoot: 1
+  fireTriggered: 0
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

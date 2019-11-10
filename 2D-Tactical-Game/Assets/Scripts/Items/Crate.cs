@@ -6,6 +6,8 @@ public class Crate : MonoBehaviour
 {
     public string objectTagToInteract = "Player";
     public GameObject impactEffect;
+
+    [System.NonSerialized]
     public string[] weaponNames = 
     {
         "Gauntlet",

@@ -29,6 +29,7 @@ public class Weapon : MonoBehaviour
     public bool canChangeWeapons = true;
 
     public  bool canShoot = true;
+    public  bool fireTriggered = false;
     private bool targetSelected = false;
     private GameObject go;
     private Rigidbody2D rb;
@@ -47,9 +48,12 @@ public class Weapon : MonoBehaviour
         //if weapon is not equipped, then ignore all code
         //if is not the players turn, then ignore all code
         //if the game is paused, then ignore all code
-        if (playerSettings.isMyTurn && !playerSettings.iAmAI && Time.timeScale != 0.0f)
+        if (playerSettings.isMyTurn && Time.timeScale != 0.0f)
         {
-            if (Input.GetButtonDown("Fire1") && canShoot){
+            if(!playerSettings.iAmAI){
+                fireTriggered = Input.GetButtonDown("Fire1");
+            }
+            if (fireTriggered && canShoot){
                 switch (weaponCode)
                 {
                     case 0:// Gauntlet
@@ -57,6 +61,7 @@ public class Weapon : MonoBehaviour
                     case 1:// Bazooka
                     case 4:// Grenade
                         canShoot = false; //set flag
+                        fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
@@ -64,14 +69,16 @@ public class Weapon : MonoBehaviour
                     case 2:// Sniper
                     case 8://Shotgun
                         canShoot = false; //set flag
+                        fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
                     case 5:// Holy Grenade
+                        canShoot = false;//set flag
+                        fireTriggered = false;//set flag
                         zoomAmount = 20f; //set desired zoom
                         Invoke("SetZoom", 3f); //wait for explosion then zoom out if necessary
-                        canShoot = false;//set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         EndTurn();
@@ -79,9 +86,10 @@ public class Weapon : MonoBehaviour
                     case 3:// Homing Bazooka
                         if (!targetSelected)
                         {
-                            AudioManager.instance.Play("Target_Acquired");
+                            fireTriggered = false; //set flag
                             targetSelected = true; //set flag
                             canChangeWeapons = false; //set flag
+                            AudioManager.instance.Play("Target_Acquired");
                             mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //capture mouse location
                             mousePos.z = 0; //clean z value
                             go = Instantiate(targetSprite, mousePos, Quaternion.identity);//spawn target mark
@@ -89,8 +97,9 @@ public class Weapon : MonoBehaviour
                         }
                         else
                         {
-                            targetSelected = false;//set flag
                             canShoot = false;//set flag
+                            fireTriggered = false;//set flag
+                            targetSelected = false;//set flag
                             WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true, go.transform);//call method to spawn prefab
                             playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                             if (go != null)
@@ -102,6 +111,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case 6: //PlaneBomber
                         canShoot = false;
+                        fireTriggered = false;
                         
                         AudioManager.instance.Play("Target_Acquired");
                         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -121,6 +131,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case 7: //BFG900
                         canShoot = false;//set flag
+                        fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation, true);//call method to spawn prefab
@@ -132,6 +143,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case 9://Mjolnir
                         canShoot = false;//set flag
+                        fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
@@ -141,6 +153,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case 10://Infinity Gauntlet
                         canShoot = false;//set flag
+                        fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, true);//call method to spawn prefab
@@ -162,7 +175,8 @@ public class Weapon : MonoBehaviour
     public void EndTurn()
     {
         canShoot = true; //reset flag for next turn
-        canChangeWeapons = true; //reset flag next turn
+        fireTriggered = false; //reset flag for next turn
+        canChangeWeapons = true; //reset flag for next turn
         playerSettings.EndTurn(); //call master clean up function for all other scripts 
     }
 
