@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WeaponSelect : MonoBehaviour
 {
     public GameManager gm;
     public int weaponIndex;
     public GameObject weaponMenu;
+    public TextMeshProUGUI ammo;
 
     private GameObject currPlayer;
 
@@ -41,6 +43,7 @@ public class WeaponSelect : MonoBehaviour
         if(gm.gameState == GameManager.GameState.TurnInProgress){
             gm.isArsenalOpen = true;
             currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
+            ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount(weaponIndex).ToString("00"));
             currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
         }else{
             //Can't change weapons when no turn is in progress
