@@ -160,6 +160,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e8062a492e27c4d7fba3444c94f1eaee, type: 3}
   - {fileID: 21300000, guid: 52c2de2d51a25ae41a0d5e0123e9b199, type: 3}
   - {fileID: -6787613943959211932, guid: 9ac301f01995bc543ab20ab8121d80ea, type: 3}
+  - {fileID: 21300000, guid: 5e756bab324197b47b2104b6eb02b0a7, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -805,6 +806,7 @@ MonoBehaviour:
   - {fileID: 283400023036061233, guid: 1dd8308c0bbbabf4c8e53481d1e5885b, type: 3}
   - {fileID: 5557481230497431642, guid: 32233fb77312975438560dc0541cf5cc, type: 3}
   - {fileID: 6379592724916170784, guid: e901a0b7b64579d49a7ce62b38548f36, type: 3}
+  - {fileID: 1071730802671521817, guid: 688b88ad2468bb94b895806c17c8577e, type: 3}
   canChangeWeapons: 1
   canShoot: 1
   fireTriggered: 0
@@ -1173,11 +1175,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7780242704511960819}

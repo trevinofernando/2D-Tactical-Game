@@ -25,6 +25,7 @@ public class WeaponController : MonoBehaviour
      * 8    = Shotgun
      * 9    = Mjolnir
      * 10   = Infinity Gauntlet
+     * 11   = Teleport Grenade
     */
     private Weapon weaponScript;
     public int currWeapon = 0;

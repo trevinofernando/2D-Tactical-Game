@@ -44,7 +44,7 @@ public class WeaponSelect : MonoBehaviour
             gm.isArsenalOpen = true;
             currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
             ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount(weaponIndex).ToString("00"));
-            currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+            currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
         }else{
             //Can't change weapons when no turn is in progress
             weaponMenu.gameObject.transform.GetChild(0).gameObject.SetActive(false); //disable arsenal Menu

@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
      * 8    = Shotgun
      * 9    = Mjolnir
      * 10   = Infinity Gauntlet
+     * 11   = Teleport Grenade
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -60,6 +61,13 @@ public class Weapon : MonoBehaviour
                         break;
                     case (int)WeaponCodes.Bazooka:// Bazooka
                     case (int)WeaponCodes.Grenade:// Grenade
+                        canShoot = false; //set flag
+                        fireTriggered = false; //set flag
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
+                        EndTurn();
+                        break;
+                    case (int)WeaponCodes.Teleport_Grenade://Teleport Grenade
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab

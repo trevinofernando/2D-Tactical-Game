@@ -81,5 +81,6 @@ public enum WeaponCodes
     BFG9000 = 7,
     Shotgun = 8,
     Mjolnir = 9,
-    Infinity_Gauntlet = 10
+    Infinity_Gauntlet = 10,
+    Teleport_Grenade = 11
 }
