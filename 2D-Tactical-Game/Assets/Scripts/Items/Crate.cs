@@ -22,6 +22,7 @@ public class Crate : MonoBehaviour
         "Shotgun",
         "Mjolnir",
         "Infinity Gauntlet",
+        "Teleport Grenade",
         "MissingName",
         "MissingName"
     };
