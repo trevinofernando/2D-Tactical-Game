@@ -80,7 +80,7 @@ public class WeaponController : MonoBehaviour
         if(!playerSettings.HaveAmmo(weaponChoice)){
             return false;
         }
-        if(prevWeapon == weaponChoice){
+        if(prevWeapon == weaponChoice && !playerSettings.iAmAI){
             return true;
         }
         if(weaponChoice != (int)WeaponCodes.Gauntlet){

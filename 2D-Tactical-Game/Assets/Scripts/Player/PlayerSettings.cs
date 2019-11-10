@@ -49,29 +49,29 @@ public class PlayerSettings : MonoBehaviour
     {
         if (isMyTurn)
         {
-            //Revert Animations to idle
-            if(anim != null)
-            {
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isJumping", false);
-            }
-
-            //Change to default weapon
-            weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
-
-            //Reset these variable in case of sudden turn ending
-            weaponScript.canChangeWeapons = true;
-            weaponScript.canShoot = true;
-            
-            //Reset AI State machine to waiting
-            AICont.curState = AIController.AIState.WaitingForTurn;
-
             //Tell gameManager the turn is done
             if(gameManager != null)
             {
                 gameManager.isTurnFinished = true;
             }
         }
+        
+        //Revert Animations to idle
+        if(anim != null)
+        {
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isJumping", false);
+        }
+
+        //Change to default weapon
+        weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
+
+        //Reset these variable in case of sudden turn ending
+        weaponScript.canChangeWeapons = true;
+        weaponScript.canShoot = true;
+        
+        //Reset AI State machine to waiting
+        AICont.curState = AIController.AIState.WaitingForTurn;
 
         //Let all scripts in this player know the turn is done, so they stop updating
         isMyTurn = false;

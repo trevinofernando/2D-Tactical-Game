@@ -13,6 +13,7 @@ public class AIController : MonoBehaviour
     public GameManager GM;
     private Rigidbody2D rb;
     private PlayerSettings ps;
+    private DamageHandler dh;
     private GlobalVariables GLOBALS;
     private WeaponController weaponContr;
 
@@ -53,6 +54,8 @@ public class AIController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //Get reference to PlayerSettings component of this player object
         ps = GetComponent<PlayerSettings>();
+        //Get reference to DamageHandler component of this player object
+        dh = GetComponent<DamageHandler>();
         //Get reference to WeaponController component of this player object
         weaponContr = GetComponent<WeaponController>();
         degreesOfDeadZone = weaponContr.degreesOfDeadZone;
@@ -114,6 +117,8 @@ public class AIController : MonoBehaviour
                 break;
 
             case(AIState.tryingStraightShot):
+                //Reset target
+                target = null; 
                 //Loop thru all enemies and chose the first one with direct line of sight
                 foreach (Transform tar in targets){
                     //Find direction vector from self to target and normalize it to length 1
@@ -190,18 +195,29 @@ public class AIController : MonoBehaviour
                 {
                     case (int)WeaponCodes.Gauntlet:
 
-                        if(ps.HaveAmmo((int)WeaponCodes.BFG9000)){
+                        if(ps.HaveAmmo((int)WeaponCodes.BFG9000) && target.GetComponent<DamageHandler>().health < 50){
                             //Use BFG9000 if possible
                             weaponContr.ChangeWeapon((int)WeaponCodes.BFG9000);
-                        }else if(ps.HaveAmmo((int)WeaponCodes.Infinity_Gauntlet)){
+                        }
+                        else if(ps.HaveAmmo((int)WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID]){
                             //Use Infinity_Gauntlet if no BFG9000
                             weaponContr.ChangeWeapon((int)WeaponCodes.Infinity_Gauntlet);
-                        }else{
-                            //Check if target is above player, if so use bazooka. Else Grenade
-                            if(yDiff > 0){
-                                weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
-                            }else{
+                        }
+                        else{
+                            //If target is roughly on the same height, use grenades
+                            if(Mathf.Abs(yDiff) < 3f){
                                 weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                            }else if(yDiff > 0){//If target is above player, use Bazooka
+                                weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
+                            }else{//Else a grenade
+                                weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                            }
+
+                            //Compansate for for gravity
+                            if(Mathf.Abs(zRotation) < 90f){
+                                zRotation += 25f;//raise the hammer 5 degrees up
+                            }else{
+                                zRotation -= 25f;//raise the hammer 5 degrees up
                             }
                         }
                         break;
@@ -225,7 +241,8 @@ public class AIController : MonoBehaviour
                 //Check if gun is close to the correct angle
                 if(Mathf.Abs(currentRotation - (360 + zRotation) % 360) < 5f){
                     Debug.Log("AI Player says: Shooting");
-                    curState = AIState.Shooting;
+                    curState = AIState.Pause;
+                    StartCoroutine(ChangeStateIn(AIState.Shooting, 1f));
                     weaponContr.AimTo(zRotation, xDiff);
                     break;
                 }
@@ -237,7 +254,7 @@ public class AIController : MonoBehaviour
                 {
                     //We should be facing right
                     transform.eulerAngles = new Vector3(0, 0, 0);
-                    ps.FlipName(true);
+                    ps.FlipName(false);
                     //Rotate gun to point at mouse
                     weaponContr.weaponPivot.rotation = Quaternion.Euler(0, 0, currentRotation);
                 }
@@ -245,7 +262,7 @@ public class AIController : MonoBehaviour
                 {
                     //We should be facing left
                     transform.eulerAngles = new Vector3(0, 180, 0);
-                    ps.FlipName(false);
+                    ps.FlipName(true);
                     //Rotate gun to point at mouse but gun is upside down, so flip 180 on x
                     //And compansate fliping x by inverting z rotation
                     weaponContr.weaponPivot.rotation = Quaternion.Euler(180, 0, -currentRotation);
