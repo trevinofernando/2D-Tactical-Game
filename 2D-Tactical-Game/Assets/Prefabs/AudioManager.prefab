@@ -194,3 +194,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Lovely_Coconuts
+    clip: {fileID: 8300000, guid: 5ecceecdeface824eaa667b3bde03524, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

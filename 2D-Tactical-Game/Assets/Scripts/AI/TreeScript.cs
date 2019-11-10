@@ -13,11 +13,6 @@ public class TreeScript : MonoBehaviour
     public float autoDestroyOnHeight = -50f;
 
 
-    void Start()
-    {
-        Shoot();
-    }
-
     void Update()
     {
         if (gameObject.transform.position.y <= autoDestroyOnHeight)
