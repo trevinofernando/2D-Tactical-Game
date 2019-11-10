@@ -132,6 +132,7 @@ MonoBehaviour:
   bodySprite: {fileID: 1591137667599323426}
   weaponScript: {fileID: 1813370298514301842}
   anim: {fileID: 7529892519968174175}
+  nameTransform: {fileID: 2115051462203952996}
   nameAndHealthBar: {fileID: 5344124407204257616}
 --- !u!114 &5352855559125752562
 MonoBehaviour:
@@ -1173,11 +1174,11 @@ MonoBehaviour:
     lineCount: 2
     pageCount: 1
     materialCount: 1
-  m_havePropertiesChanged: 1
+  m_havePropertiesChanged: 0
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
-  m_isInputParsingRequired: 1
+  m_isInputParsingRequired: 0
   m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7780242704511960819}

@@ -237,6 +237,7 @@ public class AIController : MonoBehaviour
                 {
                     //We should be facing right
                     transform.eulerAngles = new Vector3(0, 0, 0);
+                    ps.FlipName(true);
                     //Rotate gun to point at mouse
                     weaponContr.weaponPivot.rotation = Quaternion.Euler(0, 0, currentRotation);
                 }
@@ -244,6 +245,7 @@ public class AIController : MonoBehaviour
                 {
                     //We should be facing left
                     transform.eulerAngles = new Vector3(0, 180, 0);
+                    ps.FlipName(false);
                     //Rotate gun to point at mouse but gun is upside down, so flip 180 on x
                     //And compansate fliping x by inverting z rotation
                     weaponContr.weaponPivot.rotation = Quaternion.Euler(180, 0, -currentRotation);

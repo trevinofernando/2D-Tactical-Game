@@ -147,6 +147,7 @@ public class WeaponController : MonoBehaviour
         {
             //We should be facing right
             transform.eulerAngles = new Vector3(0, 0, 0);
+            playerSettings.FlipName(false);
             //Rotate gun to point at mouse
             weaponPivot.rotation = Quaternion.Euler(0, 0, _zRotation);
         }
@@ -154,6 +155,7 @@ public class WeaponController : MonoBehaviour
         {
             //We should be facing left
             transform.eulerAngles = new Vector3(0, 180, 0);
+            playerSettings.FlipName(true);
             //Rotate gun to point at mouse but gun is upside down, so flip 180 on x
             //And compansate fliping x by inverting z rotation
             weaponPivot.rotation = Quaternion.Euler(180, 0, -_zRotation);
