@@ -68,3 +68,18 @@ public class GlobalVariables : MonoBehaviour
         }
     }
 }
+
+public enum WeaponCodes
+{
+    Gauntlet = 0,
+    Bazooka = 1,
+    Sniper = 2,
+    Homing_Bazooka = 3,
+    Grenade = 4,
+    Holy_Grenade = 5,
+    PlaneBomber = 6,
+    BFG9000 = 7,
+    Shotgun = 8,
+    Mjolnir = 9,
+    Infinity_Gauntlet = 10
+}

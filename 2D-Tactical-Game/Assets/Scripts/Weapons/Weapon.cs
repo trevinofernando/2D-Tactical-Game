@@ -58,23 +58,23 @@ public class Weapon : MonoBehaviour
                 {
                     case 0:// Gauntlet
                         break;
-                    case 1:// Bazooka
-                    case 4:// Grenade
+                    case (int)WeaponCodes.Bazooka:// Bazooka
+                    case (int)WeaponCodes.Grenade:// Grenade
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case 2:// Sniper
-                    case 8://Shotgun
+                    case (int)WeaponCodes.Sniper:// Sniper
+                    case (int)WeaponCodes.Shotgun://Shotgun
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case 5:// Holy Grenade
+                    case (int)WeaponCodes.Holy_Grenade:// Holy Grenade
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         zoomAmount = 20f; //set desired zoom
@@ -83,7 +83,7 @@ public class Weapon : MonoBehaviour
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case 3:// Homing Bazooka
+                    case (int)WeaponCodes.Homing_Bazooka:// Homing Bazooka
                         if (!targetSelected)
                         {
                             fireTriggered = false; //set flag
@@ -109,7 +109,7 @@ public class Weapon : MonoBehaviour
                             EndTurn();
                         }  
                         break;
-                    case 6: //PlaneBomber
+                    case (int)WeaponCodes.PlaneBomber: //PlaneBomber
                         canShoot = false;
                         fireTriggered = false;
                         
@@ -129,7 +129,7 @@ public class Weapon : MonoBehaviour
                         
                         EndTurn();
                         break;
-                    case 7: //BFG900
+                    case (int)WeaponCodes.BFG9000: //BFG900
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
@@ -141,7 +141,7 @@ public class Weapon : MonoBehaviour
                         Invoke("SetZoom", 5f); //wait for animation then zoom out
                         EndTurn();
                         break;
-                    case 9://Mjolnir
+                    case (int)WeaponCodes.Mjolnir://Mjolnir
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
@@ -151,7 +151,7 @@ public class Weapon : MonoBehaviour
                         Invoke("UnfreezePosition", 2f); //unfreeze player after animation
                         EndTurn();
                         break;
-                    case 10://Infinity Gauntlet
+                    case (int)WeaponCodes.Infinity_Gauntlet://Infinity Gauntlet
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly

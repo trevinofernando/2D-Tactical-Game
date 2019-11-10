@@ -75,15 +75,15 @@ public class WeaponController : MonoBehaviour
 
     }
 
-    public bool ChangeWeapon(int weaponChoice)
+    public bool ChangeWeapon(int weaponChoice) //returns true if the weapon change was possible
     {
         if(!playerSettings.HaveAmmo(weaponChoice)){
             return false;
         }
         if(prevWeapon == weaponChoice){
-            return false;
+            return true;
         }
-        if(weaponChoice != 0){
+        if(weaponChoice != (int)WeaponCodes.Gauntlet){
             AudioManager.instance.Play("Weapon_Swap");
         }
         prevWeapon = currWeapon; //To keep track of what weapon to go back if out of ammo

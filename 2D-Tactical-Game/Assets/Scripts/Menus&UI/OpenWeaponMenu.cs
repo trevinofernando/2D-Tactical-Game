@@ -20,7 +20,8 @@ public class OpenWeaponMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gm.gameState == GameManager.GameState.TurnInProgress)
+        //Can't open menu when a turn is not in progress or if it's an AI turn
+        if (gm.gameState == GameManager.GameState.TurnInProgress && !GlobalVariables.Instance.isTeamAI[gm.currTeamTurn])
         {
             if (Input.GetKeyDown(KeyCode.I))
             {

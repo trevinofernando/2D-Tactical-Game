@@ -30,7 +30,8 @@ public class AIController : MonoBehaviour
     private float tmp;
     private float zRotation;
     private float currentRotation;
-    private bool coroutineFinished = true;
+    private int curWeapon = 0;
+    //private bool coroutineFinished = true;
 
     public AIState curState = AIState.WaitingForTurn;
 
@@ -70,8 +71,10 @@ public class AIController : MonoBehaviour
             case(AIState.WaitingForTurn):
                 //Change state when player starts turn
                 if(ps.isMyTurn){
+                    curWeapon = (int)WeaponCodes.Gauntlet; //Return to default weapon
+                    weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet); //Gauntlet
                     curState = AIState.Pause;
-                    StartCoroutine(ChangeStateIn(AIState.PickingTarget, 3f));
+                    StartCoroutine(ChangeStateIn(AIState.PickingTarget, 2f));
                 }
                 break;
             case(AIState.PickingTarget):
@@ -106,6 +109,12 @@ public class AIController : MonoBehaviour
                 //sort by soldiers health decending
                 targets = targets.OrderBy(x => -x.GetComponent<DamageHandler>().health).ToList();
 
+                curState = AIState.Pause;
+                StartCoroutine(ChangeStateIn(AIState.tryingStraightShot, 1f));
+                break;
+
+            case(AIState.tryingStraightShot):
+                //Loop thru all enemies and chose the first one with direct line of sight
                 foreach (Transform tar in targets){
                     //Find direction vector from self to target and normalize it to length 1
                     dir3 = tar.position - weaponContr.weaponPivot.transform.position;
@@ -125,15 +134,49 @@ public class AIController : MonoBehaviour
                         break;
                     }
                 }
-
-                weaponContr.ChangeWeapon(2); //Sniper
+                
                 
                 if(target == null){
-                    Debug.Log("AI Player says: No targets in range");
-                    xDiff = 0;
-                    zRotation = 0;
-                    curState = AIState.Aiming;
-                    break;
+                    Debug.Log("AI Player says: No target in sight");
+                    //Set target to be the closest one
+                    target = targets.First();
+                    weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
+                }else{
+                    //Find a default weapon to fall back to
+                    if(ps.HaveAmmo((int)WeaponCodes.Sniper)){//Check if we have Sniper Ammo
+                        //Set Sniper as default choice
+                        curWeapon = (int)WeaponCodes.Sniper;
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Sniper);
+                    }
+                    else if(ps.HaveAmmo((int)WeaponCodes.Shotgun)){//Check if we have Shotgun Ammo
+                        //Set Shotgun as default choice if no Sniper Ammo
+                        curWeapon = (int)WeaponCodes.Shotgun;
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun);
+                    }
+                    else if(ps.HaveAmmo((int)WeaponCodes.Holy_Grenade)){//Check if we have Holy Grenade Ammo
+                        curWeapon = (int)WeaponCodes.Holy_Grenade;
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Holy_Grenade);
+                    }
+                    else if(ps.HaveAmmo((int)WeaponCodes.Grenade)){//Check if we have Grenade Ammo
+                        curWeapon = (int)WeaponCodes.Grenade;
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                    }
+                    else{//If all fails, then use Bazooka
+                        curWeapon = (int)WeaponCodes.Bazooka;
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
+                    }
+                    //-------Default Gun has been set
+                    //If distance is small, prioritize Shotgun
+                    if(Vector2.Distance(target.position, transform.position) < 10f){
+                        //Try to use Shotgun, else use the Grenade launcher
+                        if(!weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun)){
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                        }
+                        if(Vector2.Distance(target.position, transform.position) < 4f){
+                        //Close enough for Mjolnir
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Mjolnir);
+                    }
+                    }
                 }
 
                 //Find diff in x and y
@@ -142,16 +185,42 @@ public class AIController : MonoBehaviour
 
                 //Calculate angle to rotate with 2D tangent formula and change from radians to degrees
                 zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
-                
-                //StartCoroutine(ChangeStateIn(AIState.Aiming, 5f));
-                curState = AIState.Aiming;
-                break;
-            case(AIState.tryingStraightShot):
-                //***************************TODO**************************
 
+                switch (curWeapon)
+                {
+                    case (int)WeaponCodes.Gauntlet:
+
+                        if(ps.HaveAmmo((int)WeaponCodes.BFG9000)){
+                            //Use BFG9000 if possible
+                            weaponContr.ChangeWeapon((int)WeaponCodes.BFG9000);
+                        }else if(ps.HaveAmmo((int)WeaponCodes.Infinity_Gauntlet)){
+                            //Use Infinity_Gauntlet if no BFG9000
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Infinity_Gauntlet);
+                        }else{
+                            //Check if target is above player, if so use bazooka. Else Grenade
+                            if(yDiff > 0){
+                                weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
+                            }else{
+                                weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                            }
+                        }
+                        break;
+                    case (int)WeaponCodes.Mjolnir:
+                        if(Mathf.Abs(zRotation) < 90f){
+                            zRotation += 5f;//raise the hammer 5 degrees up
+                        }else{
+                            zRotation -= 5f;//raise the hammer 5 degrees up
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
+                //Change state and wait 
+                curState = AIState.Pause;
+                StartCoroutine(ChangeStateIn(AIState.Aiming, 1f));
                 break;
             case(AIState.Aiming):
-                //***************************TODO**************************
                 
                 //Check if gun is close to the correct angle
                 if(Mathf.Abs(currentRotation - (360 + zRotation) % 360) < 5f){
@@ -203,6 +272,6 @@ public class AIController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         curState = state;
-        coroutineFinished = true;
+        //coroutineFinished = true;
     }
 }

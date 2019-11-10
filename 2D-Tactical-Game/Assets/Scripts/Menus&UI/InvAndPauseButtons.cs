@@ -14,6 +14,7 @@ public class InvAndPauseButtons : MonoBehaviour
     {
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Ground"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Player"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Default"), true);
     }
 
     // Update is called once per frame
@@ -21,6 +22,10 @@ public class InvAndPauseButtons : MonoBehaviour
     {
         //Only run code if a turn is in progress
         if(gm.gameState == GameManager.GameState.TurnInProgress){
+            //Stop player from changing the weapon of an AI player
+            if(GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
+                return; //Not a human turn, so leave
+            }
             //Find Mouse position in monitor and then translate that to a point in the world
             mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);

@@ -49,7 +49,7 @@ public class PlayerSettings : MonoBehaviour
             }
 
             //Change to default weapon
-            weaponContr.ChangeWeapon(0);
+            weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
 
             //Reset these variable in case of sudden turn ending
             weaponScript.canChangeWeapons = true;
