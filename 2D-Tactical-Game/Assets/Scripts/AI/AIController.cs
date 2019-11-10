@@ -27,6 +27,7 @@ public class AIController : MonoBehaviour
     private Transform target;
     private float xDiff;
     private float yDiff;
+    private float tmp;
     private float zRotation;
     private float currentRotation;
     private bool coroutineFinished = true;
@@ -37,6 +38,7 @@ public class AIController : MonoBehaviour
     {
         WaitingForTurn,
         PickingTarget,
+        tryingStraightShot,
         Moving,
         Aiming,
         Shooting,
@@ -56,21 +58,20 @@ public class AIController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //Return if this player isn't an AI player
         if(!ps.iAmAI){
-            curState = AIState.WaitingForTurn;
+            curState = AIState.WaitingForTurn;//Just in case something external ends the AI turn
             return;
         }
         switch (curState)
         {
             case(AIState.WaitingForTurn):
                 //Change state when player starts turn
-                if(ps.isMyTurn && coroutineFinished){
-                    coroutineFinished = false;
-                    StartCoroutine(ChangeStateIn(AIState.PickingTarget, 5f));
-                    //curState = AIState.PickingTarget;
+                if(ps.isMyTurn){
+                    curState = AIState.Pause;
+                    StartCoroutine(ChangeStateIn(AIState.PickingTarget, 3f));
                 }
                 break;
             case(AIState.PickingTarget):
@@ -145,20 +146,22 @@ public class AIController : MonoBehaviour
                 //StartCoroutine(ChangeStateIn(AIState.Aiming, 5f));
                 curState = AIState.Aiming;
                 break;
-            case(AIState.Moving):
+            case(AIState.tryingStraightShot):
                 //***************************TODO**************************
 
                 break;
             case(AIState.Aiming):
                 //***************************TODO**************************
-                //Rotate Weapon
-                if(Mathf.Abs(currentRotation - Mathf.Abs(zRotation)) < 25f){
+                
+                //Check if gun is close to the correct angle
+                if(Mathf.Abs(currentRotation - (360 + zRotation) % 360) < 5f){
                     Debug.Log("AI Player says: Shooting");
                     curState = AIState.Shooting;
                     weaponContr.AimTo(zRotation, xDiff);
                     break;
                 }
 
+                //Rotate Weapon
                 currentRotation = (currentRotation + 1) % 360;
                 
                 if (Mathf.Cos(currentRotation * Mathf.Deg2Rad) > 0)
@@ -179,13 +182,15 @@ public class AIController : MonoBehaviour
 
                 break;
             case(AIState.Shooting):
-                //***************************TODO**************************
                 curState = AIState.WaitingForTurn;
                 weaponScript.fireTriggered = true;
                 break;
-            case(AIState.Pause):
+            case(AIState.Moving):
                 //***************************TODO**************************
-
+                break;
+            case(AIState.Pause):
+                //This is a dead state meant for the AI to just wait for some time
+                //This state should only be called along with the coroutine ChangeStateIn()
                 break;
 
             default:

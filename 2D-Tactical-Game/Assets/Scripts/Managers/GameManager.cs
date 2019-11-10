@@ -519,6 +519,7 @@ public class GameManager : MonoBehaviour
                             // 50% of droping health
                             go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
                         }
+                        //Tell camera to look at the plane
                         cam.soldier = go;
                         cam.shouldFollowTarget = true;
                         cam.SetZoom(100f);
@@ -534,6 +535,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                //Time reached 0, break while loop
                 break;
             }
             yield return new WaitForSeconds(1.0f);//wait one second
