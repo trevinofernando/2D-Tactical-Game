@@ -132,6 +132,7 @@ MonoBehaviour:
   bodySprite: {fileID: 1591137667599323426}
   weaponScript: {fileID: 1813370298514301842}
   anim: {fileID: 7529892519968174175}
+  nameTransform: {fileID: 2115051462203952996}
   nameAndHealthBar: {fileID: 5344124407204257616}
 --- !u!114 &5352855559125752562
 MonoBehaviour:

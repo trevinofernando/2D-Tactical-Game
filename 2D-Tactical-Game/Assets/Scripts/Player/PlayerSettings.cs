@@ -14,6 +14,7 @@ public class PlayerSettings : MonoBehaviour
     public SpriteRenderer bodySprite;
     public Weapon weaponScript;
     public Animator anim;
+    public RectTransform nameTransform;
     public TextMeshPro nameAndHealthBar;
     
     //The arsenal is static to have only one instance of this variable in 
@@ -25,6 +26,8 @@ public class PlayerSettings : MonoBehaviour
     private AIController AICont;
     private WeaponController weaponContr;
     private Rigidbody2D rb;
+    private bool textLookingLeft = false;
+    private int angle;
 
     void Start()
     {
@@ -104,7 +107,28 @@ public class PlayerSettings : MonoBehaviour
         gameManager.teamsHealth[teamID] += gameManager.soldiersHealth[teamID, ID];
 
         //update the nameplate
-        nameAndHealthBar.SetText(nameGiven + "\n" + gameManager.soldiersHealth[teamID, ID]);
+        nameAndHealthBar.SetText(nameGiven + "\n" + newHealth);
+        //nameAndHealthBar.SetText(nameGiven + "\n" + gameManager.soldiersHealth[teamID, ID]);
+    }
+
+    public void FlipName(bool playerLookingLeft){
+        angle = 0;
+        if(playerLookingLeft){
+            //Check if text is currently looking left
+            if(!textLookingLeft){
+                //Flip text
+                angle = 180;
+                textLookingLeft = true;//set the flag
+            }
+        }else{
+            if(textLookingLeft){
+                //Flip text
+                angle = 180;
+                textLookingLeft = false;//set the flag
+            }
+        }
+        //Flip text to Always read from left to right
+        nameTransform.Rotate(new UnityEngine.Vector3(0, angle, 0));
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
