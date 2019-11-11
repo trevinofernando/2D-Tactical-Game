@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 40
-  damageToProps: 100
+  damageToProps: 99
 --- !u!1 &6846543882319661073
 GameObject:
   m_ObjectHideFlags: 0

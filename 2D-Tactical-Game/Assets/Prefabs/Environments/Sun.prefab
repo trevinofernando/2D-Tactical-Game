@@ -93,9 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137db6ef3b5dd97468eb807676d6aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 50
+  damageToPlayer: 35
   damageToProps: 9999
-  pushBackForce: 500
+  pushBackForce: 400
   traceDuration: 1
   mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   startColor: {r: 1, g: 1, b: 0, a: 0.5882353}

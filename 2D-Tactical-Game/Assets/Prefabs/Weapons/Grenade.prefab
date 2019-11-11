@@ -245,11 +245,12 @@ MonoBehaviour:
   launchForce: 1000
   explosionForce: 500
   extraUpForce: -1
-  explosionRadius: 4
+  explosionRadius: 5
   impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
     type: 3}
   spawnSoundName: Grenade_Launcher
   explosionSoundName: Dark_Explosion
   impactSound1: Metal_Hit_High
   impactSound2: Metal_Hit_Low
+  isTreeProjectile: 0
   autoDestroyOnHeight: -50

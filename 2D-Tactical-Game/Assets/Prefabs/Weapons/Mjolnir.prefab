@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd162f38fa94f634488f2c167b0f0167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 35
+  damageToPlayer: 40
   damageToProps: 100
   delayTime: 1.5
   horizontalForce: 2000

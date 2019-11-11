@@ -15,7 +15,7 @@ public class Hadouken : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
-        //AudioManager.instance.Play("Hadouken");
+        AudioManager.instance.Play("Hadouken");
         //Add initial force once to make a parabolic trajectory
         rb.AddForce(transform.right * launchForce * rb.mass);
         Destroy(gameObject, autoDestroyTimer);
@@ -25,7 +25,7 @@ public class Hadouken : MonoBehaviour
     {
         
         //Explosion Sound
-        //AudioManager.instance.Play("");
+        AudioManager.instance.Play("Slap");
         
         //Create an impact effect like an explosion
         if(impactEffect != null)

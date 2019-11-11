@@ -200,3 +200,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Hadouken
+    clip: {fileID: 8300000, guid: 9d5bf7299c695834e9854e2138e56f44, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Slap
+    clip: {fileID: 8300000, guid: 34b604dcc97b62046a7c9d688fec478a, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

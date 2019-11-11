@@ -101,7 +101,7 @@ MonoBehaviour:
   startColor: {r: 1, g: 1, b: 0, a: 1}
   endColor: {r: 1, g: 1, b: 1, a: 1}
   mat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  traceDuration: 0.05
+  traceDuration: 0.1
 --- !u!1 &1646029629805856825
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,7 +92,7 @@ public class Projectile_Bomb : MonoBehaviour
             {
                 var dir = (col.transform.position - transform.position);
                 float wearoff = 1 - (dir.magnitude / explosionRadius);
-                target.TakeDamage( (int)(damageToPlayer * wearoff), damageToProps);
+                target.TakeDamage( Mathf.Max(0, (int)(damageToPlayer * wearoff)), damageToProps);
             }
         }
 
