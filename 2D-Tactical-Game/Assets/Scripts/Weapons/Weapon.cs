@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
      * 9    = Mjolnir
      * 10   = Infinity Gauntlet
      * 11   = Teleport Grenade
+     * 12   = Hadouken
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -61,6 +62,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case (int)WeaponCodes.Bazooka:// Bazooka
                     case (int)WeaponCodes.Grenade:// Grenade
+                    case (int)WeaponCodes.Hadouken:// Hadouken
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab

@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 6266857216538379172}
   m_Layer: 0
   m_Name: Mjolnir
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

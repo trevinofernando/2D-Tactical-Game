@@ -82,5 +82,6 @@ public enum WeaponCodes
     Shotgun = 8,
     Mjolnir = 9,
     Infinity_Gauntlet = 10,
-    Teleport_Grenade = 11
+    Teleport_Grenade = 11,
+    Hadouken = 12
 }
