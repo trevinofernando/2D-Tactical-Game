@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1071730802671521819}
   - component: {fileID: 5833167029226084502}
   - component: {fileID: 3643555499164389044}
-  - component: {fileID: -2124547653311230606}
+  - component: {fileID: 5786785407982401679}
   m_Layer: 0
   m_Name: TeleportGrenade
   m_TagString: Projectile
@@ -226,7 +226,7 @@ CircleCollider2D:
   m_Offset: {x: -0.13552362, y: -0.020648658}
   serializedVersion: 2
   m_Radius: 0.35640794
---- !u!114 &-2124547653311230606
+--- !u!114 &5786785407982401679
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,19 +235,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1071730802671521817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d791f89fd05cb349acd6c13932ceb6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c6aa999e6bd1e14f84e74ba582b5157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 60
   damageToProps: 60
-  timer: 3
+  timer: 4
   IsHoly: 0
   launchForce: 1000
-  explosionForce: 500
+  explosionForce: 1000
   extraUpForce: -1
   explosionRadius: 4
-  impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
-    type: 3}
+  impactEffect: {fileID: 0}
   spawnSoundName: Grenade_Launcher
   explosionSoundName: Dark_Explosion
   impactSound1: Metal_Hit_High
