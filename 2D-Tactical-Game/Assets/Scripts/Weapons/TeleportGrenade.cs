@@ -4,34 +4,31 @@ using UnityEngine;
 
 public class TeleportGrenade : MonoBehaviour
 {
-    private GameManager gm;
-    private CameraController cam;
-
-    public int damageToPlayer = 60;
-    public int damageToProps = 60;
-    public int timer = 3;
-    public bool IsHoly = false;
+    public float delay = 2f;
+    public int timer = 5;
     public float launchForce = 1000f;
-    public float explosionForce = 1000f;
-    public float extraUpForce = -1f;
-    public float explosionRadius = 4f;
     public GameObject impactEffect;
     public string spawnSoundName = "Grenade_Launcher";
     public string explosionSoundName = "Dark_Explosion";
     public string impactSound1 = "Metal_Hit_High";
     public string impactSound2 = "Metal_Hit_Low";
-    public bool isTreeProjectile = false;
     public float autoDestroyOnHeight = -50f;
-    private float rotationAmount;
     private bool soundAlternator;
+    private GameManager gm;
     private Rigidbody2D rb;
-    private CircleCollider2D cirColider;
-    private DamageHandler target;
+    private SpriteRenderer sr;
+    private TrailRenderer tr;
+    private GameObject soldier;
+    private Vector3 location;
+
+
 
     void Start()
     {
         gm = GlobalVariables.Instance.GM;
-        cam = GlobalVariables.Instance.GM.cam;
+        soldier = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];
+        sr = GetComponent<SpriteRenderer>();
+        tr = GetComponent<TrailRenderer>();
 
         AudioManager.instance.Play(spawnSoundName);
         
@@ -60,49 +57,20 @@ public class TeleportGrenade : MonoBehaviour
         //Explosion Sound
         AudioManager.instance.Play(explosionSoundName);
 
-        //Create an impact effect like an explosion
-        if(impactEffect != null)
-        {
-            Instantiate(impactEffect, transform.position, Quaternion.identity);
-        }
+        // grab location of grenade
+        location = gameObject.transform.position;
 
-        /* steps:
-         * shoot the thingy
-         * when it detonates, make an implosion
-         * swap camera over to the palyer
-         * watch him dissapear into the void
-         * swap camera BACK to implosion site
-         * watch player reappear from the void
-         */
-        /*  TODO: MAKE THE CAMERA WORK AS INTENDED!!!!!!!!!!!!!!!!!!!!!!!
-            // set focus to the player
-            gm.cam.soldier = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];
-            gm.cam.shouldFollowTarget = true;
+        // make grenade dissapear
+        tr.enabled = false;
+        sr.enabled = false;
 
-            // wait a second
-            Timer2(1);
+        // set focus to the player
+        CameraController.instance.soldier = soldier;
 
-            // set focus BACK to projectile
-            gm.cam.soldier = gm.projectile;
-            gm.cam.shouldFollowTarget = true;
-        */
-        // move player to the detonation point
-        gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]].transform.position = gameObject.transform.position;
-        Destroy(gameObject);
+        Destroy(gameObject, (8 * delay));
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-
-        if(isTreeProjectile)
-        {
-            if (other.transform.GetComponent<TreeScript>())
-            {
-                Physics2D.IgnoreCollision(other.collider, gameObject.GetComponent<Collider2D>());
-            }
-                
-        }
-
-
         if(soundAlternator){
             AudioManager.instance.Play(impactSound1);
         }else{
@@ -113,17 +81,34 @@ public class TeleportGrenade : MonoBehaviour
 
     private IEnumerator Timer(float waitTime)
     {
-        float delay = 0f;
-        if(IsHoly){
-            delay = 2f;
-        }
         yield return new WaitForSeconds(waitTime - delay);
         if(delay > 0){
-            AudioManager.instance.Play("Holy_Aleluya");
-            yield return new WaitForSeconds(delay);
+            Detonate();
+            // anim 1
+            if (impactEffect != null)
+            {
+                yield return new WaitForSeconds(delay);
+                Instantiate(impactEffect, soldier.transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(0.25f); // need to figure out frames here
+                soldier.transform.position = new Vector3(soldier.transform.position.x, soldier.transform.position.y, -100); // make him "dissapear!"
+            }
+            yield return new WaitForSeconds(delay - 0.25f);     // minus whatever frames you need above
         }
-        Detonate();
-    } private IEnumerator Timer2(float waitTime)
+        rb = soldier.GetComponent<Rigidbody2D>();
+        soldier.transform.position = new Vector3(location.x, location.y, -100); // set pos to "invisible" new position
+        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        // anim 2
+        if (impactEffect != null)
+        {
+            yield return new WaitForSeconds(delay);
+            Instantiate(impactEffect, location, Quaternion.identity);
+            yield return new WaitForSeconds(0.25f);
+            soldier.transform.position = location;
+        }
+        yield return new WaitForSeconds(delay - 0.25f);
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+    } 
+    private IEnumerator Timer2(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
     }
