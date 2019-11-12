@@ -73,7 +73,7 @@ public class MapInitializer : MonoBehaviour
 
     void DetermineMapTheme()
     {
-        switch(mapThemeResult)
+        switch(GLOBALS.mapTheme)
         {
             case MapTheme.Forest:
                 mapTheme = MapTheme.Forest;
