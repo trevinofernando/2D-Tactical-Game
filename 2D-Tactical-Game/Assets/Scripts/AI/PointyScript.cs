@@ -7,7 +7,8 @@ public class PointyScript : MonoBehaviour
 
     public int damage = 10;
     public float autoDestroyOnHeight = -50f;
-    public float pushBackForce = 2500f;
+    public float pushBackForceTurn = 4000f;
+    public float pushBackForceNotTurn = 500f;
     private Vector3 direction;
 
 
@@ -43,12 +44,15 @@ public class PointyScript : MonoBehaviour
                 Rigidbody2D rb = otherTransform.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    //End players turn?
-                    //otherTransform.GetComponent<PlayerSettings>();
-
                     rb.velocity = new Vector3(0, 0, 0);
-                    //Only add force if component have a rigidbody2D
-                    rb.AddForce(direction * pushBackForce);
+
+                    PlayerSettings ps = otherTransform.GetComponent<PlayerSettings>();
+
+                    //Check if it's the player's turn
+                    if(!ps.isMyTurn)
+                        rb.AddForce(direction * pushBackForceNotTurn);
+                    else
+                        rb.AddForce(direction * pushBackForceTurn);
                 }
 
             }

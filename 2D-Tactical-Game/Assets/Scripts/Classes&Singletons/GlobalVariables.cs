@@ -2,6 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum MapSize
+{
+    Small = 1,
+    Medium = 2,
+    Large = 3
+}
+
+public enum MapTheme
+{
+    Desert = 1,
+    Forest = 2,
+    Beach = 3
+}
+
 //Singleton implementation for global variables
 
 public class GlobalVariables : MonoBehaviour
@@ -14,8 +29,8 @@ public class GlobalVariables : MonoBehaviour
     //MAP related variables
     public int[,] mapState = new int[1000,1000];
     public List<int> arsenalAmmo = new List<int>();
-    public String mapSize = "Large";
-    public String mapTheme = "Desert";
+    public MapSize mapSize;
+    public MapTheme mapTheme;
     public int mapXMin = 0;
     public int mapYMin = 0;
     public int mapXMax;

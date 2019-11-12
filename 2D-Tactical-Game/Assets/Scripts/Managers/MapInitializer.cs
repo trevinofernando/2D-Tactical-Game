@@ -39,79 +39,52 @@ public class MapInitializer : MonoBehaviour
     public GameObject mediumBeach;
     public GameObject smallBeach;
 
-
-
-    public enum MapSize
-    {
-        Small,
-        Medium,
-        Large
-    }
-
-    public enum MapTheme
-    {
-        Desert,
-        Forest,
-        Beach
-    }
-
-
     void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
-        DetermineMapTheme(GLOBALS.mapTheme);
-        DetermineMapSize(GLOBALS.mapSize);
+        DetermineMapTheme();
+        DetermineMapSize();
         GLOBALS.mapXMax = xMax;
         GLOBALS.mapYMax = yMax;
         
     }
 
-    void DetermineMapSize(string map)
-    {
-        MapSize mapSizeResult;
-        if(Enum.TryParse<MapSize>(map, out mapSizeResult))
+    void DetermineMapSize()
+    { 
+        switch(GLOBALS.mapSize)
         {
-            switch(mapSizeResult)
-            {
-                case MapSize.Large:
-                    mapSize = MapSize.Large;
-                    xMax = largeCoordinate.x;
-                    yMax = largeCoordinate.y;
-                    break;
-                case MapSize.Medium:
-                    mapSize = MapSize.Medium;
-                    xMax = mediumCoordinate.x;
-                    yMax = mediumCoordinate.y;
-                    break;
-                default:
-                    mapSize = MapSize.Small;
-                    xMax = smallCoordinate.x;
-                    yMax = smallCoordinate.y;
-                    break;
-            }
+            case MapSize.Large:
+                mapSize = MapSize.Large;
+                xMax = largeCoordinate.x;
+                yMax = largeCoordinate.y;
+                break;
+            case MapSize.Medium:
+                mapSize = MapSize.Medium;
+                xMax = mediumCoordinate.x;
+                yMax = mediumCoordinate.y;
+                break;
+            default:
+                mapSize = MapSize.Small;
+                xMax = smallCoordinate.x;
+                yMax = smallCoordinate.y;
+                break;
         }
-
     }
 
-    void DetermineMapTheme(string theme)
+    void DetermineMapTheme()
     {
-        MapTheme mapThemeResult;
-        if (Enum.TryParse<MapTheme>(theme, out mapThemeResult))
+        switch(mapThemeResult)
         {
-            switch(mapThemeResult)
-            {
-                case MapTheme.Forest:
-                    mapTheme = MapTheme.Forest;
-                    break;
-                case MapTheme.Beach:
-                    mapTheme = MapTheme.Beach;
-                    break;
-                default:
-                    mapTheme = MapTheme.Desert;
-                    break;
-            }
+            case MapTheme.Forest:
+                mapTheme = MapTheme.Forest;
+                break;
+            case MapTheme.Beach:
+                mapTheme = MapTheme.Beach;
+                break;
+            default:
+                mapTheme = MapTheme.Desert;
+                break;
         }
-
     }
 
     public Vector3[] GenerateMap()
