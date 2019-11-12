@@ -41,7 +41,6 @@ public class CameraController : MonoBehaviour
         }
         
         cam = gameObject.GetComponent<Camera>();
-        Debug.Log(cameraOffset);
         transform.position = cameraOffset;
         newPosition = cameraOffset;
         minEdgeLimit = new Vector2(-25f, -15f);
@@ -77,6 +76,7 @@ public class CameraController : MonoBehaviour
         speed = smoothSpeed * 10f * Time.deltaTime;
         //move a fraction (speed) of the way between the current location and de desired location
         newPosition = Vector3.Lerp(transform.position, target.transform.position + cameraOffset, speed);
+        newPosition.z = cameraOffset.z;
         transform.position = newPosition;
     }
     private void HandleZoom()

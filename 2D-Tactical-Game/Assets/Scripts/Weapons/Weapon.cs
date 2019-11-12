@@ -58,7 +58,7 @@ public class Weapon : MonoBehaviour
             if (fireTriggered && canShoot){
                 switch (weaponCode)
                 {
-                    case 0:// Gauntlet
+                    case (int)WeaponCodes.Gauntlet:// Gauntlet
                         break;
                     case (int)WeaponCodes.Bazooka:// Bazooka
                     case (int)WeaponCodes.Grenade:// Grenade

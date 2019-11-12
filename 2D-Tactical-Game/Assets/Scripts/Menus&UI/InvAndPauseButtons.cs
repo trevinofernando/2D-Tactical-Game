@@ -33,7 +33,7 @@ public class InvAndPauseButtons : MonoBehaviour
             //Check if mouse is in the boundaries of the button
             if(Mathf.Abs(transform.position.x - mousePosition.x) < 3f && Mathf.Abs(transform.position.y - mousePosition.y) < 1f){
                 currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-                currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+                currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
             }
         }
     }
@@ -43,7 +43,7 @@ public class InvAndPauseButtons : MonoBehaviour
         //Debug.Log("is this actually working?");
         if(gm.gameState == GameManager.GameState.TurnInProgress){
             currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-            currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+            currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
         }
     }
 */

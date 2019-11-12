@@ -63,6 +63,8 @@ public class OpenWeaponMenu : MonoBehaviour
         // this is never used anywhere btw
         Debug.Log("we mousin over bois!");
         currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-        currPlayer.GetComponent<WeaponController>().ChangeWeapon(0);        // change weapon to selected button
+        if(!GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
+            currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
+        }
     }
 }

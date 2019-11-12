@@ -42,9 +42,11 @@ public class WeaponSelect : MonoBehaviour
     {
         if(gm.gameState == GameManager.GameState.TurnInProgress){
             gm.isArsenalOpen = true;
-            currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-            ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount(weaponIndex).ToString("00"));
-            currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
+            if(!GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
+                currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
+                ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount(weaponIndex).ToString("00"));
+                currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
+            }
         }else{
             //Can't change weapons when no turn is in progress
             weaponMenu.gameObject.transform.GetChild(0).gameObject.SetActive(false); //disable arsenal Menu
