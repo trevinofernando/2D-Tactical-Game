@@ -146,7 +146,8 @@ public class AIController : MonoBehaviour
                     //Set target to be the closest one
                     target = targets.First();
                     weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
-                }else{
+                }
+                else{
                     //Find a default weapon to fall back to
                     if(ps.HaveAmmo((int)WeaponCodes.Sniper)){//Check if we have Sniper Ammo
                         //Set Sniper as default choice
@@ -173,14 +174,22 @@ public class AIController : MonoBehaviour
                     //-------Default Gun has been set
                     //If distance is small, prioritize Shotgun
                     if(Vector2.Distance(target.position, transform.position) < 10f){
-                        //Try to use Shotgun, else use the Grenade launcher
+                        //Try to use Shotgun, else use the Hadouken else, Grenade launcher
+                        if(ps.HaveAmmo((int)WeaponCodes.Shotgun)){
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun);
+                        }else if(ps.HaveAmmo((int)WeaponCodes.Hadouken)){
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Hadouken);
+                        }else{
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                        }
                         if(!weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun)){
                             weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
                         }
                         if(Vector2.Distance(target.position, transform.position) < 4f){
-                        //Close enough for Mjolnir
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Mjolnir);
-                    }
+                            //Close enough for Mjolnir
+                            curWeapon = (int)WeaponCodes.Mjolnir;
+                            weaponContr.ChangeWeapon((int)WeaponCodes.Mjolnir);
+                        }
                     }
                 }
 
