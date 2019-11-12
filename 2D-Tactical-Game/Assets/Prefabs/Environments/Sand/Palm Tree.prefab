@@ -98,6 +98,9 @@ MonoBehaviour:
   health: 100
   isPlayer: 0
   iAmDead: 0
+  dropCrate: 1
+  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
+    type: 3}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
 --- !u!60 &-1261149042578069243

@@ -95,9 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   isPlayer: 0
   iAmDead: 0
+  dropCrate: 1
+  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
+    type: 3}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
 --- !u!60 &6431271838707751631
@@ -198,4 +201,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   autoDestroyOnHeight: -50
-  pushBackForce: 2500
+  pushBackForceTurn: 4000
+  pushBackForceNotTurn: 500

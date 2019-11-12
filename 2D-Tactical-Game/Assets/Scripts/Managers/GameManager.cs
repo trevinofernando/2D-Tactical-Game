@@ -492,6 +492,7 @@ public class GameManager : MonoBehaviour
                     planeWasCalled = true; //set flag
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
+                    /*
                     if (Random.Range(0f,1f) > 0.7f){
                         environmentManager.DeployHazard();
                         /*
@@ -509,7 +510,7 @@ public class GameManager : MonoBehaviour
                             }
                             
                         }
-                        */
+                       
                     }else if(Random.Range(0f,1f) > 0.5f){//Chance of calling the cargo plane
                         turnClock += (int)(GLOBALS.mapXMax / 100) + 5f; //Give extra time to watch plane fly
                         if(Random.Range(0f,1f) > 0.5f){
@@ -531,7 +532,9 @@ public class GameManager : MonoBehaviour
                             }
                         }
                     }
+                    */
                 }
+                
             }
             else
             {

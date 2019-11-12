@@ -28,14 +28,20 @@ public class GameOptionsMenu : MonoBehaviour
     public Dropdown teamColorIndex;
     public Dropdown gameModeIndex; // 1 is LTS, 2 is BTC. if 0 choose 1.
 
+    // object variables tied to map submenu
+    public Dropdown mapThemeDropdown;
+    public Dropdown mapSizeDropdown;
+
     // we need to transfer these to global vars
-    public int teamSize = 8;
-    public int numTeams = 8;
-    public float turnTimer;
-    public float gameTimer;
-    public int playerHealth;
-    public bool enableSupplyCrates;
-    public int gameMode;
+    private int teamSize = 8;
+    private int numTeams = 8;
+    private float turnTimer;
+    private float gameTimer;
+    private int playerHealth;
+    private bool enableSupplyCrates;
+    private int gameMode;
+    private int mapTheme;
+    private int mapSize;
 
     public int currentTeamShowing;
 
@@ -242,6 +248,18 @@ public class GameOptionsMenu : MonoBehaviour
             gameMode++;
 
         enableSupplyCrates = supplyCrateToggle.isOn;
+
+        // map theme, map size
+        mapTheme = mapThemeDropdown.value;
+        if (mapTheme == 0)
+            mapTheme++;
+
+        mapSize = mapSizeDropdown.value;
+        if (mapSize == 0 || mapSize == 2)
+            mapSize++;
+
+        Debug.Log(mapTheme.ToString());
+        Debug.Log(mapSize.ToString());
     }
 
     public void SetOfficialTeamColors ()
@@ -273,6 +291,8 @@ public class GameOptionsMenu : MonoBehaviour
         GLOBALS.timePerTurn = turnTimer;
         GLOBALS.TimePerGame = gameTimer * 60;   // convert seconds to minutes.
         GLOBALS.gameMode = gameMode;
+
+        
 
         GLOBALS.teamColors = new Color[numTeams];
         GLOBALS.isTeamAI = new bool[numTeams];

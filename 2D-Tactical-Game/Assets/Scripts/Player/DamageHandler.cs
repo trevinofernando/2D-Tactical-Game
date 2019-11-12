@@ -7,6 +7,8 @@ public class DamageHandler : MonoBehaviour
     public int health = 100;
     public bool isPlayer = false;
     public bool iAmDead = false;
+    public bool dropCrate = false;
+    public GameObject cratePrefab;
     public GameObject deathEffect;
     [System.NonSerialized] public PlayerSettings ps;
     public Animator anim;
@@ -103,6 +105,11 @@ public class DamageHandler : MonoBehaviour
         }
         if(transform.tag == "Ground"){
             //GlobalVariables.Instance.mapState[(int)transform.position.x / 2, (int)transform.position.y / 2] = 0;
+        }
+
+        if(dropCrate)
+        {
+            Instantiate(cratePrefab, transform.position, Quaternion.identity);
         }
         Destroy(gameObject);
     }
