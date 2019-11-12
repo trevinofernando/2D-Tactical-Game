@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
     public float cameraSpeed = 5f;
     public float scrollSpeed = 5f;
     public float screenBorderOffset = 10f;
-    public Vector3 cameraOffset;
+    public Vector3 cameraOffset = new Vector3(0, 0, -10);
 
     public float minZoom = 5f;
     public float maxZoom = 60f;
@@ -41,7 +41,8 @@ public class CameraController : MonoBehaviour
         }
         
         cam = gameObject.GetComponent<Camera>();
-        cameraOffset = new Vector3(0, 0, -10);
+        Debug.Log(cameraOffset);
+        transform.position = cameraOffset;
         newPosition = cameraOffset;
         minEdgeLimit = new Vector2(-25f, -15f);
         maxEdgeLimit = new Vector2(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 25f);
