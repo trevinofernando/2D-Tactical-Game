@@ -9322,7 +9322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &837861689
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -9594,6 +9594,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115885540}
     m_Modifications:
+    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_Name
+      value: Lite Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 907484094617270486, guid: 1061ab6ac85dbe248b928abf6739ed89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9658,16 +9668,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.204
-      objectReference: {fileID: 0}
-    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
-        type: 3}
-      propertyPath: m_Name
-      value: Lite Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1061ab6ac85dbe248b928abf6739ed89, type: 3}
@@ -15383,7 +15383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0b688460445947b8f0fe54f8544c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000002000000010000000300000001000000
+  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000002000000010000000400000003000000
   mapSize: 0
   mapTheme: 0
   mapXMin: 0
@@ -15878,7 +15878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1362157191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24274,13 +24274,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numHazards: 2
   planeSpawnPoint: {x: 0, y: 0, z: 0}
+  sunSpawnPoint: {x: 0, y: 0, z: 0}
   coconutBomberPrefab: {fileID: 6110699083877153648, guid: 426e03aa45d8bfc4d81dd9c124a4eadd,
     type: 3}
   healthPlanePrefab: {fileID: 6110699083877153648, guid: 41d056140467d1846a0fd60df32b3247,
     type: 3}
   cratePlanePrefab: {fileID: 6110699083877153648, guid: 1357e0a482e090942ad6907977f41cc1,
     type: 3}
-  sun: {fileID: 837861691}
+  sunPrefab: {fileID: 7392224832945154436, guid: 51e6392e04b64444b8ba985b41897c82,
+    type: 3}
+  isReady: 0
+  cam: {fileID: 519420030}
 --- !u!4 &2074784435
 Transform:
   m_ObjectHideFlags: 0
