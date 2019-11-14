@@ -7,7 +7,7 @@ using UnityEngine;
 public class MapInitializer : MonoBehaviour
 {
     //Default map size
-    public MapSize mapSize = MapSize.Small;
+    public MapSize mapSize = MapSize.Large;
     public MapTheme mapTheme = MapTheme.Desert;
     private GlobalVariables GLOBALS;
     public GameObject tilePrefab;
@@ -42,6 +42,7 @@ public class MapInitializer : MonoBehaviour
     void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
+        GLOBALS.mapSize = MapSize.Large;
         DetermineMapTheme();
         DetermineMapSize();
         GLOBALS.mapXMax = xMax;
@@ -51,6 +52,9 @@ public class MapInitializer : MonoBehaviour
 
     void DetermineMapSize()
     { 
+
+
+
         switch(GLOBALS.mapSize)
         {
             case MapSize.Large:
@@ -89,6 +93,10 @@ public class MapInitializer : MonoBehaviour
 
     public Vector3[] GenerateMap()
     {
+
+        //Debug.LogError("The map size is " + mapSize);
+        mapSize = MapSize.Large;
+
         switch(mapTheme)
         {
             case MapTheme.Beach:
@@ -122,17 +130,19 @@ public class MapInitializer : MonoBehaviour
                 break;
 
             default:
-                if (mapSize.Equals(MapSize.Large))
+                if (mapSize.Equals(MapSize.Small))
                 {
-                    Instantiate(largeDesert, largeMapSpawnPoint, Quaternion.identity);
+                    Instantiate(smallDesert, smallMapSpawnPoint, Quaternion.identity);
                 }
+                /*
                 else if (mapSize.Equals(MapSize.Medium))
                 {
                     Instantiate(mediumDesert, mediumMapSpawnPoint, Quaternion.identity);
                 }
+                */
                 else
                 {
-                    Instantiate(smallDesert, smallMapSpawnPoint, Quaternion.identity);
+                    Instantiate(largeDesert, largeMapSpawnPoint, Quaternion.identity);
                 }
                 break;
         }

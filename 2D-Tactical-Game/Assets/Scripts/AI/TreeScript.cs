@@ -22,7 +22,7 @@ public class TreeScript : MonoBehaviour
 
     }
 
-    void Shoot()
+    public void Shoot()
     {   
         AudioManager.instance.Play("Leaves_Rustling");
         GameObject leftCoconut = Instantiate(projectilePrefab, transform.position + downLeft, Quaternion.identity);

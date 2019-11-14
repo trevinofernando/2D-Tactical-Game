@@ -385,13 +385,13 @@ public class GameManager : MonoBehaviour
                     //Force player to change to the gauntlet weapon
                     if(currTeamTurn < 0 || currSoldierTurn[currTeamTurn] < 0)
                         return;
-                    
+
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
-                    if (go != null)
+                    if (go != null && !GLOBALS.isTeamAI[currTeamTurn])
                     {
                         WeaponController wc = go.GetComponent<WeaponController>();
                         if(wc != null)
-                            wc.ChangeWeapon(GauntletCursorCode); // Weapon Code for the gauntlet is 0
+                            wc.ChangeWeapon((int)WeaponCodes.Gauntlet); // Weapon Code for the gauntlet is 0
                     }
                     
                 }
@@ -490,6 +490,10 @@ public class GameManager : MonoBehaviour
                 if(!planeWasCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
                     Random.InitState(System.DateTime.Now.Millisecond);
                     planeWasCalled = true; //set flag
+                    if(environmentManager.isReady)
+                    {
+                        environmentManager.DeployHazard();
+                    }
                     //Chance of Environment Hazard activation.
                     go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
                     /*
