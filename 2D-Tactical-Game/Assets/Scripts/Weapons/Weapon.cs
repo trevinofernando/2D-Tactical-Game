@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject targetSprite;
-    public int weaponCode = 0;
+    [System.NonSerialized] public int weaponCode = 0;
     private Vector3 PlaneSpawnPoint;
     /*
      * 0    = Gauntlet
@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
      * 10   = Infinity Gauntlet
      * 11   = Teleport Grenade
      * 12   = Hadouken
+     * 13   = Mine
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -28,11 +29,11 @@ public class Weapon : MonoBehaviour
     public Transform firePoint1;
     public Transform firePoint2;
     public GameObject[] projectilePrefab;
-    public bool canChangeWeapons = true;
+    [System.NonSerialized] public bool canChangeWeapons = true;
 
-    public  bool canShoot = true;
-    public  bool fireTriggered = false;
-    private bool targetSelected = false;
+    [System.NonSerialized] public  bool canShoot = true;
+    [System.NonSerialized] public  bool fireTriggered = false;
+    [System.NonSerialized] public bool targetSelected = false;
     private GameObject go;
     private Rigidbody2D rb;
     private Vector3 mousePos;
@@ -62,6 +63,7 @@ public class Weapon : MonoBehaviour
                         break;
                     case (int)WeaponCodes.Bazooka:// Bazooka
                     case (int)WeaponCodes.Grenade:// Grenade
+                    case (int)WeaponCodes.Teleport_Grenade://Teleport Grenade
                     case (int)WeaponCodes.Hadouken:// Hadouken
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
@@ -69,11 +71,12 @@ public class Weapon : MonoBehaviour
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Teleport_Grenade://Teleport Grenade
+                    case (int)WeaponCodes.Mine:// Mine
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
+                        Invoke("StopCameraFollow", 5f);
                         EndTurn();
                         break;
                     case (int)WeaponCodes.Sniper:// Sniper
@@ -186,12 +189,17 @@ public class Weapon : MonoBehaviour
     {
         canShoot = true; //reset flag for next turn
         fireTriggered = false; //reset flag for next turn
+        targetSelected = false;//reset flag for next turn
         canChangeWeapons = true; //reset flag for next turn
         playerSettings.EndTurn(); //call master clean up function for all other scripts 
     }
 
     private void UnfreezePosition(){
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; //rotation on Z should be freeze at all time
+    }
+
+    private void StopCameraFollow(){
+        GlobalVariables.Instance.GM.projectile = null;
     }
 
     private void SetZoom(){

@@ -98,5 +98,6 @@ public enum WeaponCodes
     Mjolnir = 9,
     Infinity_Gauntlet = 10,
     Teleport_Grenade = 11,
-    Hadouken = 12
+    Hadouken = 12,
+    Mine = 13
 }

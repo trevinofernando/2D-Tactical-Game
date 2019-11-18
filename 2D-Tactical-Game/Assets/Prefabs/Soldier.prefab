@@ -110,6 +110,8 @@ MonoBehaviour:
   health: 100
   isPlayer: 1
   iAmDead: 0
+  dropCrate: 0
+  cratePrefab: {fileID: 0}
   deathEffect: {fileID: 0}
   anim: {fileID: 7529892519968174175}
 --- !u!114 &5226463133170334109
@@ -163,6 +165,7 @@ MonoBehaviour:
   - {fileID: -6787613943959211932, guid: 9ac301f01995bc543ab20ab8121d80ea, type: 3}
   - {fileID: 21300000, guid: 5e756bab324197b47b2104b6eb02b0a7, type: 3}
   - {fileID: 21300000, guid: 15462a5da56c4034cb6362ce69138163, type: 3}
+  - {fileID: 21300000, guid: 7c5fe7aac4a54774ca36d9df1438b9e1, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -770,7 +773,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.99, y: 0.65}
+  m_Size: {x: 2.67, y: 1.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -790,7 +793,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSprite: {fileID: 7354808264935725193, guid: aaddce2ab1e0d064495d83adcf51b61a,
     type: 3}
-  weaponCode: 0
   endTurnDelay: 3
   playerSettings: {fileID: 5226463133170334109}
   WeaponController: {fileID: 5352855559125752562}
@@ -810,9 +812,7 @@ MonoBehaviour:
   - {fileID: 6379592724916170784, guid: e901a0b7b64579d49a7ce62b38548f36, type: 3}
   - {fileID: 1071730802671521817, guid: 688b88ad2468bb94b895806c17c8577e, type: 3}
   - {fileID: 4878705914938089888, guid: b916bf524cfb49f4085e8f1426c20786, type: 3}
-  canChangeWeapons: 1
-  canShoot: 1
-  fireTriggered: 0
+  - {fileID: 9173754519141483635, guid: 2aea52ea54d54be4abec48904efea4db, type: 3}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

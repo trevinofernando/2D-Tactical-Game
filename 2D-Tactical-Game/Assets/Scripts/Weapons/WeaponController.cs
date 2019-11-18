@@ -27,6 +27,7 @@ public class WeaponController : MonoBehaviour
      * 10   = Infinity Gauntlet
      * 11   = Teleport Grenade
      * 12   = Hadouken
+     * 13   = Mine
     */
     private Weapon weaponScript;
     public int currWeapon = 0;
