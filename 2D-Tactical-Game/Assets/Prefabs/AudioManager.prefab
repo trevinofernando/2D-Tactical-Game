@@ -212,3 +212,15 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Proximity_Alarm
+    clip: {fileID: 8300000, guid: 03e2e3b713680e24b98b649b216eb710, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Mine_Blast
+    clip: {fileID: 8300000, guid: 2a5de1353618a324ca7272762eaadeed, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
