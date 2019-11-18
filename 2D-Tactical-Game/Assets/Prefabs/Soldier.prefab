@@ -166,6 +166,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5e756bab324197b47b2104b6eb02b0a7, type: 3}
   - {fileID: 21300000, guid: 15462a5da56c4034cb6362ce69138163, type: 3}
   - {fileID: 21300000, guid: 7c5fe7aac4a54774ca36d9df1438b9e1, type: 3}
+  - {fileID: 5045779276726489351, guid: 170246721b9c522429a3aab9b8b04a18, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -813,6 +814,7 @@ MonoBehaviour:
   - {fileID: 1071730802671521817, guid: 688b88ad2468bb94b895806c17c8577e, type: 3}
   - {fileID: 4878705914938089888, guid: b916bf524cfb49f4085e8f1426c20786, type: 3}
   - {fileID: 9173754519141483635, guid: 2aea52ea54d54be4abec48904efea4db, type: 3}
+  - {fileID: 6933527585770443422, guid: 1659551f583616d44bda485afb17dcc9, type: 3}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

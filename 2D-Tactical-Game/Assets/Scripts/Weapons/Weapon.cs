@@ -65,6 +65,7 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.Grenade:// Grenade
                     case (int)WeaponCodes.Teleport_Grenade://Teleport Grenade
                     case (int)WeaponCodes.Hadouken:// Hadouken
+                    case (int)WeaponCodes.Bang_Pistol:// Bang_Pistol
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab

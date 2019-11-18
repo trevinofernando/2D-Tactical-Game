@@ -99,5 +99,6 @@ public enum WeaponCodes
     Infinity_Gauntlet = 10,
     Teleport_Grenade = 11,
     Hadouken = 12,
-    Mine = 13
+    Mine = 13,
+    Bang_Pistol = 14
 }

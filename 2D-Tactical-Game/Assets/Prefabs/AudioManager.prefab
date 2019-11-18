@@ -224,3 +224,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Troll_Gun
+    clip: {fileID: 8300000, guid: bd800ffe7a302e249b7d0c9f6e9c3972, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
