@@ -312,6 +312,9 @@ public class GameManager : MonoBehaviour
                     
                     coroutineStarted = false; //Reset coroutine check
 
+                    //Stop Coroutine just in case of premature death or self injure
+                    StopCoroutine(coroutineTurnClock);
+
                     //If there is a projectile, follow it
                     if(projectile != null){
                         cam.soldier = projectile;
@@ -320,9 +323,6 @@ public class GameManager : MonoBehaviour
                     }else{
                         gameState = GameState.TurnTransition;
                     }
-
-                    //Stop Coroutine just in case of premature death or self injure
-                    StopCoroutine(coroutineTurnClock);
 
                     //Deactivate movement Script for player or AI to play
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];

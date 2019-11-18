@@ -19,10 +19,8 @@ public class Grenade : MonoBehaviour
     public string impactSound2 = "Metal_Hit_Low";
     public bool isTreeProjectile = false;
     public float autoDestroyOnHeight = -50f;
-    private float rotationAmount;
     private bool soundAlternator;
     private Rigidbody2D rb;
-    private CircleCollider2D cirColider;
     private DamageHandler target;
 
     void Start()
@@ -32,8 +30,6 @@ public class Grenade : MonoBehaviour
         //Add initial force once to make a parabolic trajectory
         rb = gameObject.GetComponent<Rigidbody2D>();
         rb.AddForce(transform.right * launchForce * rb.mass);
-        if (rb == null)
-            Debug.Log("null rigidbody");
 
         StartCoroutine(Timer((float)timer));
     }

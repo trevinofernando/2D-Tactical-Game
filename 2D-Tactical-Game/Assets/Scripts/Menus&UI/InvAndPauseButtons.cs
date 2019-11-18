@@ -24,13 +24,13 @@ public class InvAndPauseButtons : MonoBehaviour
         if(gm.gameState == GameManager.GameState.TurnInProgress){
             //Stop player from changing the weapon of an AI player
             if(GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
-                Debug.Log("AI, can't chnge weapon");
+
                 return; //Not a human turn, so leave
             }
             //Find Mouse position in monitor and then translate that to a point in the world
             mousePosition = Input.mousePosition;
             mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-            Debug.Log("passed");
+
             //Check if mouse is in the boundaries of the button
             if (Mathf.Abs(transform.position.x - mousePosition.x) < 3f && Mathf.Abs(transform.position.y - mousePosition.y) < 1f){
                 currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player

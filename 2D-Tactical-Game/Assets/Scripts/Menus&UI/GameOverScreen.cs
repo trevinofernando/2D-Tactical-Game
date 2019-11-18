@@ -34,19 +34,4 @@ public class GameOverScreen : MonoBehaviour
         }
     
     }
-
-    void Update()
-    {
-        /*
-        if(!gameObject.enabled)
-            return;
-        */
-
-        //check for escape key to go back to the menu
-        if(Input.GetKey(KeyCode.Escape))
-        {
-            //Back to the menu
-            SceneManager.LoadScene(0);
-        }
-    }
 }

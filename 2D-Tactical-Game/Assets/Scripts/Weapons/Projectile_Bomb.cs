@@ -10,12 +10,12 @@ public class Projectile_Bomb : MonoBehaviour
     public int damageToProps = 40;
     public float launchForce = 1000f;
     public float explosionForce = 1000f;
-    public float extraUpForce = -1f;
     public float explosionRadius = 5f;
     public GameObject impactEffect;
     public float autoDestroyOnHeight = -50f;
     private Rigidbody2D rb;
     private float travelingDirection;
+
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -29,22 +29,21 @@ public class Projectile_Bomb : MonoBehaviour
         }
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
         if(gameObject.transform.position.y <= autoDestroyOnHeight)
         {
             Destroy(gameObject);
         }
-    }
 
-    void FixedUpdate()
-    {
         //Calculate projectile traveling direction by using it's velocity on each frame
         travelingDirection = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
 
         //Set the rotation of the projectile to point to it's current direction for a more realistic effect.
         transform.rotation = Quaternion.Euler(0, 0, travelingDirection);
     }
+    
     void OnTriggerEnter2D(Collider2D colInfo)
     {
         if(colInfo.transform.tag == transform.tag){

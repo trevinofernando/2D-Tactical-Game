@@ -69,6 +69,8 @@ public class PlayerSettings : MonoBehaviour
         //Reset these variable in case of sudden turn ending
         weaponScript.canChangeWeapons = true;
         weaponScript.canShoot = true;
+        weaponScript.fireTriggered = false; //reset flag for next turn
+        weaponScript.targetSelected = false;//reset flag for next turn
         
         //Reset AI State machine to waiting
         AICont.curState = AIController.AIState.WaitingForTurn;
