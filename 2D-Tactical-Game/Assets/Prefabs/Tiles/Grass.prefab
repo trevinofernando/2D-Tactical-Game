@@ -143,5 +143,8 @@ MonoBehaviour:
   health: 5
   isPlayer: 0
   iAmDead: 0
+  dropCrate: 0
+  cratePrefab: {fileID: 0}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
+  sprRend: {fileID: 6385235533078779046}

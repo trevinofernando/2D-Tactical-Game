@@ -12,12 +12,15 @@ public class DamageHandler : MonoBehaviour
     public GameObject deathEffect;
     [System.NonSerialized] public PlayerSettings ps;
     public Animator anim;
+    public SpriteRenderer sprRend;
+    private int baseHealth;
     private PlayerMovement movementControls;
 
 
 
     void Start()
     {
+        baseHealth = health;
         if(isPlayer){
             ps = GetComponent<PlayerSettings>();
         }
@@ -86,6 +89,11 @@ public class DamageHandler : MonoBehaviour
         }
         else //we must be a tile, prop, etc.
         {
+            if(sprRend != null){
+                float normalizedColor = ((health * 155f) / baseHealth + 100f) / 255f; //This will give a value between 100 and 255
+                sprRend.color = new Color(normalizedColor, normalizedColor, normalizedColor, 1f);
+            }
+            
             if (health <= 0)
             {
                 DestroyProp();

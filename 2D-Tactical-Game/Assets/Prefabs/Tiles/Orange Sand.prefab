@@ -140,8 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 15
   isPlayer: 0
   iAmDead: 0
+  dropCrate: 0
+  cratePrefab: {fileID: 0}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
+  sprRend: {fileID: 4378301550762690017}
