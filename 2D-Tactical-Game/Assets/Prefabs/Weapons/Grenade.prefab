@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 60
-  damageToProps: 60
+  damageToProps: 45
   timer: 3
   IsHoly: 0
   launchForce: 1000

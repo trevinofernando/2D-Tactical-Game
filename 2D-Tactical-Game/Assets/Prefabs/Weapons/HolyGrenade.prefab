@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 60
-  damageToProps: 60
+  damageToProps: 50
   timer: 3
   IsHoly: 1
   launchForce: 1000
@@ -252,4 +252,5 @@ MonoBehaviour:
   explosionSoundName: Distant_Explosion
   impactSound1: Metal_Hit_High
   impactSound2: Metal_Hit_Low
+  isTreeProjectile: 0
   autoDestroyOnHeight: -50

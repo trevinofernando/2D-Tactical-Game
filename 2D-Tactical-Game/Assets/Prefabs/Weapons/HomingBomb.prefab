@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directHitDamage: 10
   damageToPlayer: 30
-  damageToProps: 30
+  damageToProps: 25
   launchForce: 1000
   explosionForce: 400
   extraUpForce: -1

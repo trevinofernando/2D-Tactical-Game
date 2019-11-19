@@ -241,10 +241,9 @@ MonoBehaviour:
   isCargo: 0
   directHitDamage: 10
   damageToPlayer: 40
-  damageToProps: 40
+  damageToProps: 30
   launchForce: 1000
   explosionForce: 500
-  extraUpForce: -1
   explosionRadius: 5
   impactEffect: {fileID: 2150632809549486280, guid: aba0286abb5a94f42a81f02763e67b58,
     type: 3}

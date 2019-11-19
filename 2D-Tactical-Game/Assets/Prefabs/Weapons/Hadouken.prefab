@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageToPlayer: 35
-  damageToProps: 40
+  damageToProps: 35
   launchForce: 500
   upForce: 300
   impactForce: 1500

@@ -172,7 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 2.4
   isLoyal: 1
-  damageToPlayer: 70
+  damageToPlayer: 80
   damageToProps: 20
   launchForce: 1000
   explosionForce: 1000

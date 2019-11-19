@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 644938416043750476}
   - component: {fileID: 1407490005900282467}
   m_Layer: 0
-  m_Name: Sun (2)
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137db6ef3b5dd97468eb807676d6aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 50
+  damageToPlayer: 30
   damageToProps: 9999
   pushBackForce: 500
   traceDuration: 1
