@@ -24,8 +24,15 @@ public class Crate : MonoBehaviour
         "Infinity Gauntlet",
         "Teleport Grenade",
         "Hadouken",
+        "Mine",
+        "Bang_Pistol",
+        "Space_Boots",
         "MissingName",
-        "MissingName"
+        "MissingName",
+        "MissingName",
+        "MissingName",
+        "MissingName",
+
     };
     private int weaponCode;
 

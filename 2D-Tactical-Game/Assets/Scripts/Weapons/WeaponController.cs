@@ -28,6 +28,8 @@ public class WeaponController : MonoBehaviour
      * 11   = Teleport Grenade
      * 12   = Hadouken
      * 13   = Mine
+     * 14   = BangPistol
+     * 15   = SpaceBoots
     */
     private Weapon weaponScript;
     public int currWeapon = 0;

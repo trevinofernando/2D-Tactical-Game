@@ -100,5 +100,6 @@ public enum WeaponCodes
     Teleport_Grenade = 11,
     Hadouken = 12,
     Mine = 13,
-    Bang_Pistol = 14
+    Bang_Pistol = 14,
+    Space_Boots = 15
 }

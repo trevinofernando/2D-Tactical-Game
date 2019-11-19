@@ -22,12 +22,19 @@ public class Weapon : MonoBehaviour
      * 11   = Teleport Grenade
      * 12   = Hadouken
      * 13   = Mine
+     * 14   = BangPistol
+     * 15   = SpaceBoots
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
     public WeaponController WeaponController;
     public Transform firePoint1;
     public Transform firePoint2;
+    public SpriteRenderer frontFeet;
+    public SpriteRenderer backFeet;
+    public float spaceBootTime = 15f;
+    public Sprite spaceBootSprite;
+    public Sprite normalFeetSprite;
     public GameObject[] projectilePrefab;
     [System.NonSerialized] public bool canChangeWeapons = true;
 
@@ -38,9 +45,13 @@ public class Weapon : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 mousePos;
     private float zoomAmount;
+    private IEnumerator coroutineSpaceBoots;
+    private bool spaceBootsUsed = false;
+    private float normalGravity;
 
     private void Start() {
         rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
+        normalGravity = rb.gravityScale;
         PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 20f, 0);
     }
 
@@ -179,6 +190,20 @@ public class Weapon : MonoBehaviour
                         Invoke("SetZoom", 7.5f); //wait for animation then zoom out
                         EndTurn();
                         break;
+                    case (int)WeaponCodes.Space_Boots://Space Boots
+                        if(spaceBootsUsed){
+                            StopCoroutine(coroutineSpaceBoots);
+                        }
+                        spaceBootsUsed = true;
+                        coroutineSpaceBoots = SpaceBootMode(spaceBootTime);
+                        StartCoroutine(coroutineSpaceBoots);
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
+
+                        //Change weapon if we have no more ammo
+                        if(!playerSettings.HaveAmmo((int)WeaponCodes.Space_Boots)){
+                            WeaponController.ChangeWeapon((int)WeaponCodes.Gauntlet);
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -186,9 +211,25 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private IEnumerator SpaceBootMode(float waitTime)
+    {
+        rb.gravityScale = 1f;
+        frontFeet.sprite = spaceBootSprite;
+        backFeet.sprite = spaceBootSprite;
+        AudioManager.instance.Play("Carros_De_Fuego");
+        AudioManager.instance.Stop("The Duel");
+        yield return new WaitForSeconds(waitTime);
+        AudioManager.instance.Stop("Carros_De_Fuego");
+        AudioManager.instance.Play("The Duel");
+        frontFeet.sprite = normalFeetSprite;
+        backFeet.sprite = normalFeetSprite;
+        rb.gravityScale = normalGravity;
+    }
+
     public void EndTurn()
     {
         canShoot = true; //reset flag for next turn
+        spaceBootsUsed = false;
         fireTriggered = false; //reset flag for next turn
         targetSelected = false;//reset flag for next turn
         canChangeWeapons = true; //reset flag for next turn
@@ -206,5 +247,6 @@ public class Weapon : MonoBehaviour
     private void SetZoom(){
         playerSettings.cam.SetZoom(zoomAmount);
     }
+
 
 }

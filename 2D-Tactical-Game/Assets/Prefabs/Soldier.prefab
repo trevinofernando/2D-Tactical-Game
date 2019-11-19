@@ -114,6 +114,7 @@ MonoBehaviour:
   cratePrefab: {fileID: 0}
   deathEffect: {fileID: 0}
   anim: {fileID: 7529892519968174175}
+  sprRend: {fileID: 0}
 --- !u!114 &5226463133170334109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +168,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 15462a5da56c4034cb6362ce69138163, type: 3}
   - {fileID: 21300000, guid: 7c5fe7aac4a54774ca36d9df1438b9e1, type: 3}
   - {fileID: 5045779276726489351, guid: 170246721b9c522429a3aab9b8b04a18, type: 3}
+  - {fileID: 21300000, guid: 8925ade6e1003ae41b21f918b57df470, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -799,6 +801,12 @@ MonoBehaviour:
   WeaponController: {fileID: 5352855559125752562}
   firePoint1: {fileID: 3310176537547046930}
   firePoint2: {fileID: 8589799381862919829}
+  frontFeet: {fileID: 1591137667607095209}
+  backFeet: {fileID: 1591137666620986168}
+  spaceBootTime: 15
+  spaceBootSprite: {fileID: 21300000, guid: 8925ade6e1003ae41b21f918b57df470, type: 3}
+  normalFeetSprite: {fileID: 6433506887459809949, guid: 5a9e7d39ff690bc41b79bc4d3b8cc1ec,
+    type: 3}
   projectilePrefab:
   - {fileID: 0}
   - {fileID: 1071730802671521817, guid: 9692fc6e7e767e54889f19e05ad04df8, type: 3}
@@ -815,6 +823,7 @@ MonoBehaviour:
   - {fileID: 4878705914938089888, guid: b916bf524cfb49f4085e8f1426c20786, type: 3}
   - {fileID: 9173754519141483635, guid: 2aea52ea54d54be4abec48904efea4db, type: 3}
   - {fileID: 6933527585770443422, guid: 1659551f583616d44bda485afb17dcc9, type: 3}
+  - {fileID: 0}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0
