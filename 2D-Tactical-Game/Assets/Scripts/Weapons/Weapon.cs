@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour
      * 13   = Mine
      * 14   = BangPistol
      * 15   = SpaceBoots
+     * 16   = ThunderGun
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -70,20 +71,32 @@ public class Weapon : MonoBehaviour
             if (fireTriggered && canShoot){
                 switch (weaponCode)
                 {
-                    case (int)WeaponCodes.Gauntlet:// Gauntlet
+                    case (int)WeaponCodes.Gauntlet://Do nothing
                         break;
-                    case (int)WeaponCodes.Bazooka:// Bazooka
-                    case (int)WeaponCodes.Grenade:// Grenade
-                    case (int)WeaponCodes.Teleport_Grenade://Teleport Grenade
-                    case (int)WeaponCodes.Hadouken:// Hadouken
-                    case (int)WeaponCodes.Bang_Pistol:// Bang_Pistol
+
+                    case (int)WeaponCodes.Bazooka: //Weapons that spawn a projectile and the camera follows the projectile
+                    case (int)WeaponCodes.Grenade:
+                    case (int)WeaponCodes.Teleport_Grenade:
+                    case (int)WeaponCodes.Hadouken:
+                    case (int)WeaponCodes.Bang_Pistol:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Mine:// Mine
+
+                    case (int)WeaponCodes.Sniper: //Weapons that don't need the camera to follow them
+                    case (int)WeaponCodes.Shotgun:
+                    case (int)WeaponCodes.ThunderGun:
+                        canShoot = false; //set flag
+                        fireTriggered = false; //set flag
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
+                        EndTurn();
+                        break;
+
+                    case (int)WeaponCodes.Mine:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
@@ -91,15 +104,8 @@ public class Weapon : MonoBehaviour
                         Invoke("StopCameraFollow", 5f);
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Sniper:// Sniper
-                    case (int)WeaponCodes.Shotgun://Shotgun
-                        canShoot = false; //set flag
-                        fireTriggered = false; //set flag
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false);//call method to spawn prefab
-                        playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
-                        EndTurn();
-                        break;
-                    case (int)WeaponCodes.Holy_Grenade:// Holy Grenade
+
+                    case (int)WeaponCodes.Holy_Grenade:
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         zoomAmount = 20f; //set desired zoom
@@ -108,7 +114,8 @@ public class Weapon : MonoBehaviour
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Homing_Bazooka:// Homing Bazooka
+
+                    case (int)WeaponCodes.Homing_Bazooka:
                         if (!targetSelected)
                         {
                             fireTriggered = false; //set flag
@@ -134,7 +141,8 @@ public class Weapon : MonoBehaviour
                             EndTurn();
                         }  
                         break;
-                    case (int)WeaponCodes.PlaneBomber: //PlaneBomber
+
+                    case (int)WeaponCodes.PlaneBomber:
                         canShoot = false;
                         fireTriggered = false;
                         
@@ -154,7 +162,8 @@ public class Weapon : MonoBehaviour
                         
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.BFG9000: //BFG900
+
+                    case (int)WeaponCodes.BFG9000:
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
@@ -166,7 +175,8 @@ public class Weapon : MonoBehaviour
                         Invoke("SetZoom", 5f); //wait for animation then zoom out
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Mjolnir://Mjolnir
+
+                    case (int)WeaponCodes.Mjolnir:
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
@@ -176,7 +186,8 @@ public class Weapon : MonoBehaviour
                         Invoke("UnfreezePosition", 2f); //unfreeze player after animation
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Infinity_Gauntlet://Infinity Gauntlet
+
+                    case (int)WeaponCodes.Infinity_Gauntlet:
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
@@ -190,7 +201,8 @@ public class Weapon : MonoBehaviour
                         Invoke("SetZoom", 7.5f); //wait for animation then zoom out
                         EndTurn();
                         break;
-                    case (int)WeaponCodes.Space_Boots://Space Boots
+
+                    case (int)WeaponCodes.Space_Boots:
                         if(spaceBootsUsed){
                             StopCoroutine(coroutineSpaceBoots);
                         }

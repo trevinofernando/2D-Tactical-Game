@@ -27,7 +27,7 @@ public class Crate : MonoBehaviour
         "Mine",
         "Bang_Pistol",
         "Space_Boots",
-        "MissingName",
+        "ThunderGun",
         "MissingName",
         "MissingName",
         "MissingName",

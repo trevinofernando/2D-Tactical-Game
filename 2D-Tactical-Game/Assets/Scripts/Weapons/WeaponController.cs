@@ -29,6 +29,7 @@ public class WeaponController : MonoBehaviour
      * 13   = Mine
      * 14   = BangPistol
      * 15   = SpaceBoots
+     * 16   = ThunderGun
     */
     private Weapon weaponScript;
     public int currWeapon = 0;

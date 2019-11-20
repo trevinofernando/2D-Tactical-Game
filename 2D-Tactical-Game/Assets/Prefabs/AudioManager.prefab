@@ -236,3 +236,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: ThunderGun
+    clip: {fileID: 8300000, guid: 2978faa6ca4136141b061914c4337bd4, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

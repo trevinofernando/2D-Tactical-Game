@@ -101,5 +101,6 @@ public enum WeaponCodes
     Hadouken = 12,
     Mine = 13,
     Bang_Pistol = 14,
-    Space_Boots = 15
+    Space_Boots = 15,
+    ThunderGun = 16
 }

@@ -52,7 +52,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.05
   m_AngularDrag: 0
   m_GravityScale: 3
   m_Material: {fileID: 0}
@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7c5fe7aac4a54774ca36d9df1438b9e1, type: 3}
   - {fileID: 5045779276726489351, guid: 170246721b9c522429a3aab9b8b04a18, type: 3}
   - {fileID: 21300000, guid: 8925ade6e1003ae41b21f918b57df470, type: 3}
+  - {fileID: 21300000, guid: 4740f2d7faf75d8449f2c35b2b962287, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -824,6 +825,7 @@ MonoBehaviour:
   - {fileID: 9173754519141483635, guid: 2aea52ea54d54be4abec48904efea4db, type: 3}
   - {fileID: 6933527585770443422, guid: 1659551f583616d44bda485afb17dcc9, type: 3}
   - {fileID: 0}
+  - {fileID: 4411499753474433866, guid: 5e7f0499a1f5e8b47b62b85156cbfb7c, type: 3}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0
