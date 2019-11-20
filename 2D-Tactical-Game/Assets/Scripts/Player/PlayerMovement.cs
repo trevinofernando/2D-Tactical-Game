@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
                 //By not calling this when movement is 0, this stops bugs responsible for weird physics movements where the x axis is constrained
                 rb.velocity = new Vector2(moveDirection * speed * Time.deltaTime, rb.velocity.y );
             }else{
-                rb.velocity = new Vector2(0, rb.velocity.y );
+                //rb.velocity = new Vector2(0, rb.velocity.y );
             }
 
 
