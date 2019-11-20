@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private float turnClockWhenPause;
     public float gameClock = 0f;
     private float gameClockWhenPause;
-    public float timeWatchingDamage = 3f;
+    public float timeWatchingDamage = 1.5f;
     private bool coroutineStarted = false;
     private bool coroutineEnded = false;
     private IEnumerator coroutineTurnClock;
@@ -489,49 +489,8 @@ public class GameManager : MonoBehaviour
                     {
                         environmentManager.DeployHazard();
                     }
-                    //Chance of Environment Hazard activation.
-                    go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
-                    /*
-                    if (Random.Range(0f,1f) > 0.7f){
-                        environmentManager.DeployHazard();
-                        /*
-                        if(go != null)
-                        {
-                            
-                            //Tell camera to look at the sun
-                            
-                            if(sun != null){
-                                cam.soldier = go;
-                                cam.shouldFollowTarget = true;
-                                cam.SetZoom(30f);
-                                sun.Shoot(go.transform.position);
-                                AudioManager.instance.Play("Short_Choir");
-                            }
-                            
-                        }
-                       
-                    }else if(Random.Range(0f,1f) > 0.5f){//Chance of calling the cargo plane
-                        turnClock += (int)(GLOBALS.mapXMax / 100) + 5f; //Give extra time to watch plane fly
-                        if(Random.Range(0f,1f) > 0.5f){
-                            // 50% of droping crates
-                            go = Instantiate(planeCratesPrefab, PlaneSpawnPoint, Quaternion.identity);
-                        }else{
-                            // 50% of droping health
-                            go = Instantiate(planeHealerPrefab, PlaneSpawnPoint, Quaternion.identity);
-                        }
-                        //Tell camera to look at the plane
-                        cam.soldier = go;
-                        cam.shouldFollowTarget = true;
-                        cam.SetZoom(100f);
-                        if(go != null){
-                            pm = go.GetComponent<PlaneManager>();
-                            if(pm != null){
-                                pm.GM = thisGM;
-                                pm.SetTarget(new Vector2((GLOBALS.mapXMax/2) + Random.Range(-20f,20f), Random.Range(15f,40f)), (int)Random.Range(3,6), (GLOBALS.mapXMax/2) - (int)Random.Range(0f,30f));
-                            }
-                        }
-                    }
-                    */
+                    //Chose random player
+                    //go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];
                 }
                 
             }

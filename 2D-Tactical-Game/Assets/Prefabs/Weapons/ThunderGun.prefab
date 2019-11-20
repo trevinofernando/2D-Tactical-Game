@@ -115,11 +115,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8aae1f9d4a67a43aec588386ead99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageToPlayer: 10
+  damageToPlayer: 15
   damageToProps: 1
-  pushForwardForce: 50
-  pushBackForce: 30
+  pushForwardForce: 55
+  pushBackForce: 35
   upForce: 300
+  layerToIgnore:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &7330356440419965396
 GameObject:
   m_ObjectHideFlags: 0

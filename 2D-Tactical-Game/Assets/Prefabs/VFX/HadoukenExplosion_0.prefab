@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8493618198977764873}
   - component: {fileID: 5915225877526447422}
   - component: {fileID: 7088126087282275275}
+  - component: {fileID: -4020809410164436537}
   m_Layer: 0
   m_Name: HadoukenExplosion_0
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3732037712651161057}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.863619, y: 0.16549113, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -67,8 +68,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1157620103
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -1046449590305211257, guid: a230ce0a27bcffd4092768c8a5c7d2ed,
     type: 3}
@@ -101,3 +102,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4020809410164436537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3732037712651161057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49711fb19f7213747a0dc0889d450267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToAutoDestroy: 0.1

@@ -9,6 +9,7 @@ public class ThunderGunScript : MonoBehaviour
     public float pushForwardForce = 50f;
     public float pushBackForce = 50f;
     public float upForce = 300f;
+    public LayerMask layerToIgnore;
 
     private void Start() {
         AudioManager.instance.Play("ThunderGun");
@@ -20,7 +21,7 @@ public class ThunderGunScript : MonoBehaviour
         Vector2 direction = -transform.right; //opposite to facing direction 
 
         //Send a ray and store the information in hit
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction, 2f, layerToIgnore);
 
         if(hit.transform != null){
             Debug.Log(hit.transform.tag);

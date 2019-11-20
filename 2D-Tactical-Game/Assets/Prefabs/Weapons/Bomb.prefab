@@ -240,7 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCargo: 0
   directHitDamage: 10
-  damageToPlayer: 40
+  damageToPlayer: 30
   damageToProps: 30
   launchForce: 1000
   explosionForce: 500

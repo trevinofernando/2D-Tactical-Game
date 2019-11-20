@@ -4911,7 +4911,7 @@ MonoBehaviour:
   currSoldierTurn: 
   turnClock: 0
   gameClock: 0
-  timeWatchingDamage: 3
+  timeWatchingDamage: 1.5
   gameState: 0
   prevGameState: 0
   suddenDeath: 0

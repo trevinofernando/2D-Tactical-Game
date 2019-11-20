@@ -289,6 +289,5 @@ MonoBehaviour:
   launchForce: 500
   upForce: 300
   impactForce: 1500
-  impactEffect: {fileID: 3732037712651161057, guid: 44b63619e0b4414429b737a4d00a3550,
-    type: 3}
+  impactEffect: {fileID: 0}
   autoDestroyTimer: 10

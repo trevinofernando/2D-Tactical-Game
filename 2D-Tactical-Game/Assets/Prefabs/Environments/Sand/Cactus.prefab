@@ -103,6 +103,7 @@ MonoBehaviour:
     type: 3}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
+  sprRend: {fileID: 0}
 --- !u!60 &6431271838707751631
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -201,5 +202,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 5
   autoDestroyOnHeight: -50
-  pushBackForceTurn: 4000
+  pushBackForceTurn: 500
   pushBackForceNotTurn: 500

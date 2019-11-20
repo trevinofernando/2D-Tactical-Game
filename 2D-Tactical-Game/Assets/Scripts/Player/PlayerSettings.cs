@@ -135,7 +135,9 @@ public class PlayerSettings : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(!isMyTurn && other.transform.tag == "Player"){
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            if(other.transform.GetComponent<PlayerSettings>().isMyTurn){
+                rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
         }
     }
 

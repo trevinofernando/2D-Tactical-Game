@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directHitDamage: 10
-  damageToPlayer: 30
+  damageToPlayer: 25
   damageToProps: 25
   launchForce: 1000
   explosionForce: 400
