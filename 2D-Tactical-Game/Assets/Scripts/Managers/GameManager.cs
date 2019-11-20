@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
     public GameObject planeHealerPrefab;
     public GameObject planeCratesPrefab;
     public Vector3 PlaneSpawnPoint;
-    public CrosshairManager crosshairManger;
     public Vector3 spawnOffset = new Vector3(-18, 10, 0);
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
@@ -119,13 +118,9 @@ public class GameManager : MonoBehaviour
 
             for(int j = 0; j < GLOBALS.teamSize; j++)
             {
-                spawnOffset.x += 2; //temporary offset until map generation is done
                 //Spawn Player
-                //teams[i , j] = Instantiate(soldierPrefab, transform.position + spawnOffset, transform.rotation);
-                //temporary spawn location until map generation is done
                 teams[i , j] = Instantiate(soldierPrefab, spawnLocations[count++], transform.rotation);
 
-                teams[i, j].GetComponent<WeaponController>().crosshairs = crosshairManger;
                 teams[i, j].GetComponent<AIController>().GM = thisGM;
                 
                 ps = teams[i, j].GetComponent<PlayerSettings>();

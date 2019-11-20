@@ -9,7 +9,6 @@ public class WeaponController : MonoBehaviour
     public Transform weaponPivot;
     public GameObject weapon;
     [System.NonSerialized] public PlayerSettings playerSettings;
-    [System.NonSerialized] public CrosshairManager crosshairs;
 
     private SpriteRenderer sprRenderer;
     public Sprite[] weaponSprites;
@@ -97,7 +96,7 @@ public class WeaponController : MonoBehaviour
         sprRenderer.sprite = weaponSprites[weaponChoice]; //change to corresponding sprite
         //Only change cursor if not an AI player
         if(!playerSettings.iAmAI){
-            crosshairs.SetCrosshairTo(weaponChoice);
+            CrosshairManager.Instance.SetCrosshairTo(weaponChoice);
         }
         return true;
     }

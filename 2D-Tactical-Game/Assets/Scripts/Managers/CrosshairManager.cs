@@ -5,61 +5,27 @@ using UnityEngine.UI;
 
 public class CrosshairManager : MonoBehaviour
 { 
-    public Sprite[] sprites;
+    public Texture2D[] cursorImages;
+    public static CrosshairManager Instance { get; private set; }
 
-    private Vector3 mousePosition;
-    private Vector2 offset;
-    private Image img;
-    private bool onSyncWithFixedUpdate;
-
-    void Awake()
+    private void Awake()
     {
-        img = gameObject.GetComponent<Image>();
-    }
-
-    void Start()
-    {
-        //Hide mouse cursor to show crosshair instead
-        img.sprite = sprites[0];
-    }
-
-    void LateUpdate()
-    {
-        //Sync with Fixed update to stop weird cursor movement when following plane
-        if(!onSyncWithFixedUpdate && Time.timeScale != 0.0f){ //Ignore sync if time is stopped
-            return;
+        //This will only pass once at the beggining of the game 
+        if (Instance == null){
+            Instance = this;//Self reference
         }
         else{
-            onSyncWithFixedUpdate = false;
+            Destroy(gameObject);//Destroy duplicate instance
         }
-        //Find Mouse position in monitor and then translate that to a point in the world
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        
-        //sprite[0] is the gauntlet
-        if(img.sprite == sprites[0]){
-            //offset the sprite to have the gauntlet finger tip exactly on the cursor tip
-            offset = new Vector2(-0.45f, 0.7f); 
-        }else{
-            offset = Vector2.zero;
-        }
-        // Move Crosshair to mouse position. And leave the z coordinate alone
-        transform.position = new Vector3(mousePosition.x - offset.x, mousePosition.y - offset.y, -5f);
     }
 
     public void SetCrosshairTo(int indexOfCrosshairChoice)
     {
-        img.sprite = sprites[indexOfCrosshairChoice];
-        if(indexOfCrosshairChoice == 0){
-            img.enabled = false;
-            Cursor.visible = true; //show gauntlet
-        }else{
-            img.enabled = true;
-            Cursor.visible = false; //hide gauntlet
+        Vector2 hotSpot = Vector2.zero;
+        if(cursorImages[indexOfCrosshairChoice].name != "Gauntlet"){
+            hotSpot = new Vector2(cursorImages[indexOfCrosshairChoice].width / 2, cursorImages[indexOfCrosshairChoice].height / 2);
         }
+        Cursor.SetCursor(cursorImages[indexOfCrosshairChoice], hotSpot, CursorMode.Auto);
     }
 
-    private void FixedUpdate() {
-        onSyncWithFixedUpdate = true;
-    }
 }
