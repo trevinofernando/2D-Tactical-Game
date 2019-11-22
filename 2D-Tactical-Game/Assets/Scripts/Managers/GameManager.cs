@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
     private bool isTurnFinishedWhenPaused;
     public bool isOneTeamAlive = false;
     public bool stateSaved = false;
-    public bool planeWasCalled = false;
+    public bool hazardsWereCalled = false;
     public int winningTeamID;
     public string winningTeamName;
     public bool isArsenalOpen = false;
@@ -475,17 +475,18 @@ public class GameManager : MonoBehaviour
     public IEnumerator SetTurnClock(float waitTime)
     {
         turnClock = waitTime;
-        planeWasCalled = false;
         //Debug.Log("Timer for TURN Clock started with " + waitTime + " Seconds");
         while (true)
         {
+            yield return new WaitForSeconds(1.0f);//wait one second
+
             if (turnClock > 0)
             {
                 turnClock--;//update the clock timer
 
-                if(!planeWasCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
+                if(!hazardsWereCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
                     Random.InitState(System.DateTime.Now.Millisecond);
-                    planeWasCalled = true; //set flag
+                    hazardsWereCalled = true; //set flag
                     if(environmentManager.isReady)
                     {
                         environmentManager.DeployHazard();
@@ -500,9 +501,9 @@ public class GameManager : MonoBehaviour
                 //Time reached 0, break while loop
                 break;
             }
-            yield return new WaitForSeconds(1.0f);//wait one second
         }
         //Debug.Log("Timer for TURN Clock finished");
+        hazardsWereCalled = false;
         isTurnFinished = true;
         coroutineEnded = true;
     }

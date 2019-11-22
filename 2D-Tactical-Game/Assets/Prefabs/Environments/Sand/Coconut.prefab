@@ -447,8 +447,11 @@ MonoBehaviour:
   health: 100
   isPlayer: 0
   iAmDead: 0
+  dropCrate: 0
+  cratePrefab: {fileID: 0}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
+  sprRend: {fileID: 0}
 --- !u!114 &2880340708203235163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,7 +471,7 @@ MonoBehaviour:
   launchForce: 0
   explosionForce: 1000
   extraUpForce: -1
-  explosionRadius: 2
+  explosionRadius: 3
   impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
     type: 3}
   spawnSoundName: 

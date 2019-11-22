@@ -5532,7 +5532,7 @@ MonoBehaviour:
   isTurnFinished: 0
   isOneTeamAlive: 0
   stateSaved: 0
-  planeWasCalled: 0
+  hazardsWereCalled: 0
   winningTeamID: 0
   winningTeamName: 
   isArsenalOpen: 0
@@ -12659,7 +12659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1362157191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19314,8 +19314,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e3813735c1a31034d8f7bbea1f3c56e1, type: 3}
   - {fileID: 2800000, guid: 033f3f2a214efe04d87dc7e0a0e1f6ad, type: 3}
   - {fileID: 2800000, guid: 93c5149567ae05740a8cab1859aaca89, type: 3}
-  - {fileID: 2800000, guid: e1ea2f62e6e9bee4aba180c594d203c9, type: 3}
-  - {fileID: 2800000, guid: e1ea2f62e6e9bee4aba180c594d203c9, type: 3}
+  - {fileID: 2800000, guid: 01ce8696017390b4c8f275cc672a0c8e, type: 3}
+  - {fileID: 2800000, guid: 40ce57ded79c49841aa69b24eb2e0ef0, type: 3}
   - {fileID: 2800000, guid: b0581dfbdbccb8c459d50b8fd3818222, type: 3}
   - {fileID: 2800000, guid: e1ea2f62e6e9bee4aba180c594d203c9, type: 3}
   - {fileID: 2800000, guid: be395bb6f8b78e84cb907080f8b16397, type: 3}

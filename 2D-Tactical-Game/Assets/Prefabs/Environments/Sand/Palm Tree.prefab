@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5093664468095071904}
   - component: {fileID: 5093664468095071919}
-  - component: {fileID: 5093664468095071918}
   - component: {fileID: -1261149042578069243}
+  - component: {fileID: 5093664468095071918}
   - component: {fileID: -6207429770959904721}
   m_Layer: 0
   m_Name: Palm Tree
@@ -83,26 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5093664468095071918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5093664468095071905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  isPlayer: 0
-  iAmDead: 0
-  dropCrate: 1
-  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
-    type: 3}
-  deathEffect: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!60 &-1261149042578069243
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -202,6 +182,27 @@ PolygonCollider2D:
       - {x: 0.24499999, y: -1.025}
       - {x: 0.295, y: -0.965}
       - {x: 0.315, y: -0.765}
+--- !u!114 &5093664468095071918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5093664468095071905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 70
+  isPlayer: 0
+  iAmDead: 0
+  dropCrate: 1
+  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
+    type: 3}
+  deathEffect: {fileID: 0}
+  anim: {fileID: 0}
+  sprRend: {fileID: 0}
 --- !u!114 &-6207429770959904721
 MonoBehaviour:
   m_ObjectHideFlags: 0

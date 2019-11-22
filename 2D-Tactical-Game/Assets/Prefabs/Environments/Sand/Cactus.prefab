@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2584179119313658706}
   - component: {fileID: 2584179119313658707}
-  - component: {fileID: 2584179119313658708}
   - component: {fileID: 6431271838707751631}
+  - component: {fileID: 2584179119313658708}
   - component: {fileID: 1351243665249065341}
   m_Layer: 0
   m_Name: Cactus
@@ -83,27 +83,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2584179119313658708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2584179119313658705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 50
-  isPlayer: 0
-  iAmDead: 0
-  dropCrate: 1
-  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
-    type: 3}
-  deathEffect: {fileID: 0}
-  anim: {fileID: 0}
-  sprRend: {fileID: 0}
 --- !u!60 &6431271838707751631
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -188,6 +167,27 @@ PolygonCollider2D:
       - {x: 0.21, y: -1.135}
       - {x: 0.19, y: -1.055}
       - {x: 0.11, y: -0.98499995}
+--- !u!114 &2584179119313658708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2584179119313658705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b96bd7c11fd861419240a7851c6ae9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 40
+  isPlayer: 0
+  iAmDead: 0
+  dropCrate: 1
+  cratePrefab: {fileID: 6357585962467195801, guid: 4867bc7e6497a9448a0024e8df7eeb52,
+    type: 3}
+  deathEffect: {fileID: 0}
+  anim: {fileID: 0}
+  sprRend: {fileID: 0}
 --- !u!114 &1351243665249065341
 MonoBehaviour:
   m_ObjectHideFlags: 0
