@@ -6,7 +6,7 @@ using TMPro;
 public class WeaponSelect : MonoBehaviour
 {
     public GameManager gm;
-    public int weaponIndex;
+    public WeaponCodes wc;
     public GameObject weaponMenu;
     public TextMeshProUGUI ammo;
 
@@ -35,7 +35,7 @@ public class WeaponSelect : MonoBehaviour
     {
         // call ChangeWeapon
         currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-        currPlayer.GetComponent<WeaponController>().ChangeWeapon(weaponIndex);        // change weapon to selected button
+        currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)wc);        // change weapon to selected button
     }
 
     public void OnEnable()
@@ -44,7 +44,7 @@ public class WeaponSelect : MonoBehaviour
             gm.isArsenalOpen = true;
             if(!GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
                 currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
-                ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount(weaponIndex).ToString("00"));
+                ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount((int)wc).ToString("00"));
                 currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
             }
         }else{
