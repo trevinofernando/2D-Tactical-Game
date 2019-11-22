@@ -257,7 +257,7 @@ public class AIController : MonoBehaviour
                 }
 
                 //Rotate Weapon
-                currentRotation = (currentRotation + 1) % 360;
+                currentRotation = (currentRotation + 4) % 360;
                 
                 if (Mathf.Cos(currentRotation * Mathf.Deg2Rad) > 0)
                 {
