@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     private float turnClockWhenPause;
     public float gameClock = 0f;
     private float gameClockWhenPause;
-    public float timeWatchingDamage = 1.5f;
+    public float timeWatchingDamage = 2f;
     private bool coroutineStarted = false;
     private bool coroutineEnded = false;
     private IEnumerator coroutineTurnClock;
@@ -377,10 +377,11 @@ public class GameManager : MonoBehaviour
                     isTurnFinishedWhenPaused = isTurnFinished; //Save turn state
                     currTeamTurnWhenPause = currTeamTurn; //Save current Team Turn
 
-                    //Force player to change to the gauntlet weapon
+                    //Check for out of bounce errors
                     if(currTeamTurn < 0 || currSoldierTurn[currTeamTurn] < 0)
                         return;
 
+                    //Force player to change to the gauntlet weapon
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if (go != null && !GLOBALS.isTeamAI[currTeamTurn])
                     {

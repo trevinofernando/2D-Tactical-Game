@@ -28,6 +28,7 @@ public class PlayerSettings : MonoBehaviour
     private Rigidbody2D rb;
     private bool textLookingLeft = false;
     private int angle;
+    private PlayerSettings ps;
 
     void Start()
     {
@@ -135,15 +136,37 @@ public class PlayerSettings : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         if(!isMyTurn && other.transform.tag == "Player"){
+            //ps = other.transform.GetComponent<PlayerSettings>();
             if(other.transform.GetComponent<PlayerSettings>().isMyTurn){
                 rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            }
+            
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other) {
+        if(!isMyTurn && other.transform.tag == "Player"){
+            //Check if the other player turn is 
+            ps = other.transform.GetComponent<PlayerSettings>();
+            if(ps == null || gameManager.gameState != GameManager.GameState.TurnInProgress){
+                return;
+            }
+            if(!ps.isMyTurn && ps.ID == gameManager.currSoldierTurn[gameManager.currTeamTurn]){
+                UnfreezePlayer(rb);
+            }
+        }
+    }
+    
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if(!isMyTurn && other.transform.tag == "Player"){
+            if(other.transform.GetComponent<PlayerSettings>().isMyTurn){
+                UnfreezePlayer(rb);
             }
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other) {
-        if(!isMyTurn && other.transform.tag == "Player"){
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        }
+    private void UnfreezePlayer(Rigidbody2D _rb){
+        _rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 }
