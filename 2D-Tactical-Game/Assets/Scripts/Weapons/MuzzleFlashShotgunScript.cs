@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MuzzleFlashShotgunScript : MonoBehaviour
 {
-    public int damageToPlayer = 50;
-    public int damageToProps = 50;
-    public float pushBackForce = 1250f;
+    public int damageToPlayer = 20;
+    public int damageToProps = 15;
+    public float pushBackForce = 250f;
     public Color startColor = new Color(1, 1, 0, 1); //Yellow
     public Color endColor = new Color(1, 1, 1, 1); //White
     public Material mat;
-    public float traceDuration = 0.05f;
+    public float traceDuration = 0.1f;
     private RaycastHit2D [] hitList;
     private Vector2 origin;
     private Vector2 direction;

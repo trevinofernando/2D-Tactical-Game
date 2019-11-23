@@ -12219,7 +12219,7 @@ MonoBehaviour:
   numPlayersNPCs: 2
   teamSize: 4
   healthPerAvatar: 100
-  isTeamAI: 01010101
+  isTeamAI: 00010001
   gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}

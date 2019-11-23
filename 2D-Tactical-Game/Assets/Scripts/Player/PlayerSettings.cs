@@ -66,6 +66,7 @@ public class PlayerSettings : MonoBehaviour
 
         //Change to default weapon
         weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
+        AICont.curWeapon = (int)WeaponCodes.Gauntlet;
 
         //Reset these variable in case of sudden turn ending
         weaponScript.canChangeWeapons = true;
