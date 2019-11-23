@@ -24,7 +24,6 @@ public class ThunderGunScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(origin, direction, 2f, layerToIgnore);
 
         if(hit.transform != null){
-            Debug.Log(hit.transform.tag);
             //get rigidbody to add a force to reflect the impact
             Rigidbody2D rb = hit.transform.GetComponent<Rigidbody2D>();
             if(rb != null)

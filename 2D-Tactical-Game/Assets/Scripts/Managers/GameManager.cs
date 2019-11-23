@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
                 //Spawn Player
                 teams[i , j] = Instantiate(soldierPrefab, spawnLocations[count++], transform.rotation);
 
-                teams[i, j].GetComponent<AIController>().GM = thisGM;
+                //teams[i, j].GetComponent<AIController>().GM = thisGM;
                 
                 ps = teams[i, j].GetComponent<PlayerSettings>();
                 ps.gameManager = thisGM; //Self reference to each soldier to keep contact

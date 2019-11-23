@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour
 {
-    public Animator anim;
-    public Weapon weaponScript;
 
     //References to other scripts
-    [System.NonSerialized]
-    public GameManager GM;
+    private Animator anim;
+    private GameManager GM;
     private Rigidbody2D rb;
-    private PlayerSettings ps;
     private DamageHandler dh;
+    private PlayerSettings ps;
+    private Weapon weaponScript;
     private GlobalVariables GLOBALS;
     private WeaponController weaponContr;
 
@@ -30,8 +29,12 @@ public class AIController : MonoBehaviour
     private float yDiff;
     private float tmp;
     private float zRotation;
+    private float angle_1;
+    private float angle_2;
     private float currentRotation;
     private int curWeapon = 0;
+    private static float[] launchForces;
+    private static float[] velocity;
     //private bool coroutineFinished = true;
 
     public AIState curState = AIState.WaitingForTurn;
@@ -41,6 +44,7 @@ public class AIController : MonoBehaviour
         WaitingForTurn,
         PickingTarget,
         tryingStraightShot,
+        tryingParabolicShot,
         Moving,
         Aiming,
         Shooting,
@@ -49,17 +53,66 @@ public class AIController : MonoBehaviour
 
     void Start()
     {
+        //Get reference to Globals
         GLOBALS = GlobalVariables.Instance;
-        //Get reference to rigidbody of this player object
-        rb = GetComponent<Rigidbody2D>();
+        //Get a reference to Game Manager
+        GM = GLOBALS.GM; 
+
+
         //Get reference to PlayerSettings component of this player object
         ps = GetComponent<PlayerSettings>();
+        weaponScript = ps.weaponScript; //Reference to the Weapon script from PlayerSettings
+        anim = ps.anim;//Reference to the Animator component from PlayerSettings
+
+        //Initialize array of 0's of size = the # of weapons
+        launchForces = new float[GLOBALS.arsenalAmmo.Count]; 
+        //Populate all weapon launch forces array of the projectiles needed
+        launchForces[(int)WeaponCodes.Grenade] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Grenade].GetComponent<Grenade>().launchForce;
+        launchForces[(int)WeaponCodes.Bazooka] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Bazooka].GetComponent<Projectile_Bomb>().launchForce;
+        launchForces[(int)WeaponCodes.Mine] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Mine].GetComponent<LandMineScript>().launchForce;
+        launchForces[(int)WeaponCodes.Holy_Grenade] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Holy_Grenade].GetComponent<Grenade>().launchForce;
+        launchForces[(int)WeaponCodes.Homing_Bazooka] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Homing_Bazooka].GetComponent<HomingBomb>().launchForce;
+        launchForces[(int)WeaponCodes.Teleport_Grenade] = ps.weaponScript.projectilePrefab[(int)WeaponCodes.Teleport_Grenade].GetComponent<TeleportGrenade>().launchForce;
+        
+        //Initialize array of 0's of size = the # of weapons
+        velocity = new float[GLOBALS.arsenalAmmo.Count]; 
+        for(int i = 0; i < GLOBALS.arsenalAmmo.Count;i++){
+            if(ps.weaponScript.projectilePrefab[i] == null){
+                continue;
+            }
+            rb = ps.weaponScript.projectilePrefab[i].GetComponent<Rigidbody2D>();
+            if(rb == null){
+                continue;
+            }
+            velocity[i] = (launchForces[i] / rb.mass) * Time.fixedDeltaTime;
+        }
+
+        //Get reference to rigidbody of this player object
+        rb = GetComponent<Rigidbody2D>();
+
         //Get reference to DamageHandler component of this player object
         dh = GetComponent<DamageHandler>();
+
         //Get reference to WeaponController component of this player object
         weaponContr = GetComponent<WeaponController>();
         degreesOfDeadZone = weaponContr.degreesOfDeadZone;
     }
+
+/*
+    private void FixedUpdate() {
+        onSyncWithFixedUpdate = true;
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        //This will sync with FixedUpdate with the intention of pausing the game and 
+        if(!onSyncWithFixedUpdate){
+            return;
+        }else{
+            onSyncWithFixedUpdate = false;
+        }
+*/
 
     // Update is called once per frame
     void FixedUpdate()
@@ -80,7 +133,9 @@ public class AIController : MonoBehaviour
                     StartCoroutine(ChangeStateIn(AIState.PickingTarget, 2f));
                 }
                 break;
+                
             case(AIState.PickingTarget):
+                //Debug.Log("PickingTarget");
                 //Reset List
                 targets.Clear(); 
 
@@ -117,8 +172,10 @@ public class AIController : MonoBehaviour
                 break;
 
             case(AIState.tryingStraightShot):
+                //Debug.Log("tryingStraightShot");
                 //Reset target
                 target = null; 
+
                 //Loop thru all enemies and chose the first one with direct line of sight
                 foreach (Transform tar in targets){
                     //Find direction vector from self to target and normalize it to length 1
@@ -141,118 +198,137 @@ public class AIController : MonoBehaviour
                 }
                 
                 
-                if(target == null){
+                if(target == null){//change state TODO
                     Debug.Log("AI Player says: No target in sight");
                     //Set target to be the closest one
                     target = targets.First();
-                    weaponContr.ChangeWeapon((int)WeaponCodes.Gauntlet);
+
+                    //Change state and wait 
+                    curState = AIState.Pause;
+                    StartCoroutine(ChangeStateIn(AIState.tryingParabolicShot, 1f));
+                    //leave state
+                    break;
                 }
-                else{
-                    //Find a default weapon to fall back to
-                    if(ps.HaveAmmo((int)WeaponCodes.Sniper)){//Check if we have Sniper Ammo
-                        //Set Sniper as default choice
-                        curWeapon = (int)WeaponCodes.Sniper;
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Sniper);
+                
+
+                zRotation = CalculateStraightShotAngle(target);
+
+                //Find a default weapon to fall back to
+                if(TryWeapon(WeaponCodes.Sniper))               {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Shotgun))         {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Holy_Grenade))    {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Hadouken))        {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.BFG9000))         {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Mine))            {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Grenade))         {/*Nothing to do*/}
+                else if(TryWeapon(WeaponCodes.Bazooka))         {/*Nothing to do*/}
+                else   {TryWeapon(WeaponCodes.Bang_Pistol);}
+
+                //-------Default Weapon has been set---------//
+
+                //If distance between target is small, then prioritize other short range weapons
+                if(Vector2.Distance(target.position, transform.position) < 10f){
+
+                    //Try to use Shotgun, else use the Hadouken, else ThunderGun
+                    if(TryWeapon(WeaponCodes.Shotgun))          {/*Nothing to do*/}
+                    else if(TryWeapon(WeaponCodes.Hadouken))    {/*Nothing to do*/}
+                    else if(TryWeapon(WeaponCodes.ThunderGun))  {/*Nothing to do*/}
+                    else                                        {/*Keep default weapon*/}
+
+                    //If the angle is good for launching, then prioritize ThunderGun
+                    if(zRotation > 30f && zRotation < 60f){
+                        TryWeapon(WeaponCodes.ThunderGun);
                     }
-                    else if(ps.HaveAmmo((int)WeaponCodes.Shotgun)){//Check if we have Shotgun Ammo
-                        //Set Shotgun as default choice if no Sniper Ammo
-                        curWeapon = (int)WeaponCodes.Shotgun;
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun);
-                    }
-                    else if(ps.HaveAmmo((int)WeaponCodes.Holy_Grenade)){//Check if we have Holy Grenade Ammo
-                        curWeapon = (int)WeaponCodes.Holy_Grenade;
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Holy_Grenade);
-                    }
-                    else if(ps.HaveAmmo((int)WeaponCodes.Grenade)){//Check if we have Grenade Ammo
-                        curWeapon = (int)WeaponCodes.Grenade;
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                    }
-                    else{//If all fails, then use Bazooka
-                        curWeapon = (int)WeaponCodes.Bazooka;
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
-                    }
-                    //-------Default Gun has been set
-                    //If distance is small, prioritize Shotgun
-                    if(Vector2.Distance(target.position, transform.position) < 10f){
-                        //Try to use Shotgun, else use the Hadouken else, Grenade launcher
-                        if(ps.HaveAmmo((int)WeaponCodes.Shotgun)){
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun);
-                        }else if(ps.HaveAmmo((int)WeaponCodes.Hadouken)){
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Hadouken);
-                        }else{
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                        }
-                        if(!weaponContr.ChangeWeapon((int)WeaponCodes.Shotgun)){
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                        }
-                        if(Vector2.Distance(target.position, transform.position) < 4f){
-                            //Close enough for Mjolnir
-                            curWeapon = (int)WeaponCodes.Mjolnir;
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Mjolnir);
-                        }
+
+                    //If target is in melee range, then prioritize Mjolnir
+                    if(Vector2.Distance(target.position, transform.position) < 4f){
+                        //Close enough for Mjolnir
+                        TryWeapon(WeaponCodes.Mjolnir);
                     }
                 }
-
-                //Find diff in x and y
-                xDiff = target.position.x - weaponContr.weaponPivot.position.x;
-                yDiff = target.position.y - weaponContr.weaponPivot.position.y;
-
-                //Calculate angle to rotate with 2D tangent formula and change from radians to degrees
-                zRotation = Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
-
+                
+                float rotationOffset = 0f;
                 switch (curWeapon)
                 {
-                    case (int)WeaponCodes.Gauntlet:
-
-                        if(ps.HaveAmmo((int)WeaponCodes.BFG9000) && target.GetComponent<DamageHandler>().health < 50){
-                            //Use BFG9000 if possible
-                            weaponContr.ChangeWeapon((int)WeaponCodes.BFG9000);
-                        }
-                        else if(ps.HaveAmmo((int)WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID]){
-                            //Use Infinity_Gauntlet if no BFG9000
-                            weaponContr.ChangeWeapon((int)WeaponCodes.Infinity_Gauntlet);
-                        }
-                        else{
-                            //If target is roughly on the same height, use grenades
-                            if(Mathf.Abs(yDiff) < 3f){
-                                weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                            }else if(yDiff > 0){//If target is above player, use Bazooka
-                                weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
-                            }else{//Else a grenade
-                                weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                            }
-
-                            //Compansate for for gravity
-                            if(Mathf.Abs(zRotation) < 90f){
-                                zRotation += 25f;//raise the hammer 5 degrees up
-                            }else{
-                                zRotation -= 25f;//raise the hammer 5 degrees up
-                            }
-                        }
-                        break;
                     case (int)WeaponCodes.Mjolnir:
-                        if(Mathf.Abs(zRotation) < 90f){
-                            zRotation += 5f;//raise the hammer 5 degrees up
-                        }else{
-                            zRotation -= 5f;//raise the hammer 5 degrees up
-                        }
+                    case (int)WeaponCodes.ThunderGun:
+                        rotationOffset = 7f;
+                        break;
+
+                    case (int)WeaponCodes.Hadouken:
+                        rotationOffset = 1.5f;
+                        break;
+
+                    case (int)WeaponCodes.Mine:
+                    case (int)WeaponCodes.Bazooka:
+                    case (int)WeaponCodes.Grenade:
+                    case (int)WeaponCodes.Holy_Grenade:
+                    case (int)WeaponCodes.Teleport_Grenade:
+                        //**************TODO********************
                         break;
                     default:
                         break;
+                }
+                
+                if(Mathf.Abs(zRotation) < 90f){
+                    zRotation += rotationOffset;//raise weapon x degrees up
+                }else{
+                    zRotation -= rotationOffset;//raise weapon x degrees up
+                }
+
+                //Change state and wait 
+                curState = AIState.Pause;
+                StartCoroutine(ChangeStateIn(AIState.Aiming, 1f));
+                break;
+
+            case(AIState.tryingParabolicShot):
+                //Debug.Log("tryingParabolicShot");
+
+                //This is for BFG9000, ThunderGun and sets yDiff and xDiff 
+                zRotation = CalculateStraightShotAngle(target);
+
+                if(Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f){
+                    //In ThunderGun range and optimal angle range
+                    TryWeapon(WeaponCodes.ThunderGun);
+                }
+                else if(target.GetComponent<DamageHandler>().health < 50){
+                    //This target has low health
+                    TryWeapon(WeaponCodes.BFG9000);
+                }
+                else if(dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID]){
+                    //AI has low health and is not the last man of its team
+                    TryWeapon(WeaponCodes.Infinity_Gauntlet);
+                }
+                else{
+                    //If target is roughly on the same height, use grenades
+                    if(Mathf.Abs(yDiff) < 3f){
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                    }else if(yDiff > 0){//If target is above player, use Bazooka
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
+                    }else{//Else a grenade
+                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
+                    }
+
+                    //Compansate for for gravity
+                    if(Mathf.Abs(zRotation) < 90f){
+                        zRotation += 25f;//raise the hammer 5 degrees up
+                    }else{
+                        zRotation -= 25f;//raise the hammer 5 degrees up
+                    }
                 }
                 
                 //Change state and wait 
                 curState = AIState.Pause;
                 StartCoroutine(ChangeStateIn(AIState.Aiming, 1f));
                 break;
+
             case(AIState.Aiming):
-                
                 //Check if gun is close to the correct angle
                 if(Mathf.Abs(currentRotation - (360 + zRotation) % 360) < 5f){
-                    Debug.Log("AI Player says: Shooting");
+                    Debug.Log("Finished Aiming");
+                    weaponContr.AimTo(zRotation, xDiff);
                     curState = AIState.Pause;
                     StartCoroutine(ChangeStateIn(AIState.Shooting, 1f));
-                    weaponContr.AimTo(zRotation, xDiff);
                     break;
                 }
 
@@ -278,13 +354,17 @@ public class AIController : MonoBehaviour
                 }
 
                 break;
+
             case(AIState.Shooting):
+                //Debug.Log("Shooting");
                 curState = AIState.WaitingForTurn;
                 weaponScript.fireTriggered = true;
                 break;
+
             case(AIState.Moving):
                 //***************************TODO**************************
                 break;
+
             case(AIState.Pause):
                 //This is a dead state meant for the AI to just wait for some time
                 //This state should only be called along with the coroutine ChangeStateIn()
@@ -301,5 +381,56 @@ public class AIController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         curState = state;
         //coroutineFinished = true;
+    }
+
+    private float CalculateStraightShotAngle(Transform _target){
+        //Find diff in x and y
+        xDiff = _target.position.x - weaponContr.weaponPivot.position.x;
+        yDiff = _target.position.y - weaponContr.weaponPivot.position.y;
+
+        //Calculate angle to rotate with 2D tangent formula and change from radians to degrees
+        return Mathf.Atan2(yDiff, xDiff) * Mathf.Rad2Deg;
+    }
+
+    private bool CalculateParabolicShotAngles(Transform _target, int weaponCode){
+        //Source position
+        float x1 = transform.position.x;
+        float y1 = transform.position.y;
+
+        //Target position
+        float x = _target.position.x;
+        float y = _target.position.y;
+
+        //Target position normalized by moving source to (0,0)
+        x = x - x1;
+        y = y - y1;
+
+        //Grab Velocity for specific projectile
+        float v = velocity[weaponCode];
+
+        //Get gravity from Unity Project Settings (assuming there is only gravity on the y axis)
+        float g = -Physics2D.gravity.y;
+
+        //Check if the target is reachable
+        //discriminant = v^4 - g(gx^2 + 2yv^2)
+        float discriminant = Mathf.Pow(v,4) - g * (g*x*x + 2*y*v*v);
+        if(discriminant < 0){
+            //In this case the target is unreachable 
+            return false;
+        }
+        //Theta = ( v^2 (+-) sqrt(discriminant) ) / ( gx )
+        angle_1 = (v * v + Mathf.Sqrt(discriminant)) / (g * x);
+        angle_2 = (v * v - Mathf.Sqrt(discriminant)) / (g * x);
+        return true;
+    }
+
+    private bool TryWeapon(WeaponCodes weaponCode){
+        if(ps.HaveAmmo((int)weaponCode)){//Check if we have Ammo of given weapon
+            //Equip weapon
+            curWeapon = (int)weaponCode;
+            weaponContr.ChangeWeapon((int)weaponCode);
+            return true;
+        }
+        return false;
     }
 }
