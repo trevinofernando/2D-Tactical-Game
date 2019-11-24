@@ -10,7 +10,8 @@ public enum Hazard
     Plane_Healer = 2,
     Plane_Crates = 3,
     Player_Bush = 4,
-    Tree = 5
+    Tree = 5, 
+    Wizard = 6
 }
 
 public class EnvironmentManager : MonoBehaviour
@@ -18,23 +19,27 @@ public class EnvironmentManager : MonoBehaviour
 
     System.Random rand;
 
-    public int numHazards = 5;
+    //Hazards
+    public int numHazards = 7;
     public Vector3 planeSpawnPoint;
     public Vector3 sunSpawnPoint;
     public GameObject coconutBomberPrefab;
     public GameObject healthPlanePrefab;
     public GameObject cratePlanePrefab;
     public GameObject sunPrefab;
+    public GameObject wizardPrefab;
+    public GameObject palmPrefab;
+
+    public bool isReady = false;
+    
+    public CameraController cam;
     private GameObject sun;
     private SunScript sunScript;
-    private GameObject[] trees;
-    private int numTrees = 6;
-    public bool isReady = false;
 
     private Hazard hazard;
     private GameObject go;
     private GlobalVariables GLOBALS;
-    public CameraController cam;
+    
 
 
     void Awake()
@@ -69,6 +74,8 @@ public class EnvironmentManager : MonoBehaviour
             case Hazard.Tree:
                 //DeployTree();
                 break;
+            case Hazard.Wizard:
+                break;
             default://Do nothing
                 break;
         }
@@ -77,18 +84,25 @@ public class EnvironmentManager : MonoBehaviour
     void InitHazards()
     {
         PlaceSun();
-        //GetTrees();
+        //SpawnTrees();
         isReady = true;
     }
 
     void PlaceSun()
     {
-        if (GLOBALS.mapSize == MapSize.Small)
+        switch(GLOBALS.mapSize)
         {
-            sunSpawnPoint = new Vector3(155, 120, 0);
+            case MapSize.Large:
+                sunSpawnPoint = new Vector3(440, 195, 0);
+                break;
+            case MapSize.Medium:
+                sunSpawnPoint = new Vector3(295, 130, 0);
+                break;
+            case MapSize.Small:
+                sunSpawnPoint = new Vector3(150, 90, 0);
+                break;
         }
-        else
-            sunSpawnPoint = new Vector3(315, 225, 0);
+        
         this.sun = Instantiate(sunPrefab, sunSpawnPoint, Quaternion.identity);
         sunScript = this.sun.transform.GetComponent<SunScript>();
     }
@@ -117,36 +131,13 @@ public class EnvironmentManager : MonoBehaviour
         AudioManager.instance.Play("Short_Choir");
     }
 
-    void GetTrees()
-    {
-        
-        trees = new GameObject[numTrees];
-        var gameObjects = FindObjectsOfType<GameObject>();
-        int count = 0;
-        foreach(GameObject go in gameObjects)
-        {
-            Debug.Log("Looking for a tree...");
-            if(go.transform.GetComponent<TreeScript>())
-            {
-                trees[count++] = go;
-                Debug.LogError("Hey look a tree!");
-            }
-
-        }
-        /*
-        trees[0] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree");
-        trees[1] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree1");
-        trees[2] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree2");
-        trees[3] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree3");
-        trees[4] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree4");
-        trees[5] = GameObject.Find("/Sand Large Environment/Ground/Palm Tree5");
-        */
-        if(trees[0] != null)
-            Debug.LogError("Got the trees!");
-    }
-
     void DeployTree()
     {
-        trees[rand.Next(0, numTrees+1)].transform.GetComponent<TreeScript>().Shoot();
+        //trees[rand.Next(0, numTrees+1)].transform.GetComponent<TreeScript>().Shoot();
+    }
+
+    void DeployWizard()
+    {
+
     }
 }

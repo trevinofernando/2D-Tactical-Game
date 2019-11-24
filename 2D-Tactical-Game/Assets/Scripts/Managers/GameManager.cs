@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
         GLOBALS.GM = thisGM;
 
         /****** TODO: Call Map generator and get spawn locations *******/
-        spawnLocations = mapInitializer.GenerateMap();
+        spawnLocations = mapInitializer.GenerateSpawns();
         //mapInitializer = gameObject.GetComponent<MapInitializer>();
 
         int count = 0;
