@@ -5536,6 +5536,80 @@ MonoBehaviour:
   winningTeamID: 0
   winningTeamName: 
   isArsenalOpen: 0
+--- !u!1 &702591688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 702591689}
+  - component: {fileID: 702591690}
+  m_Layer: 0
+  m_Name: Map Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &702591689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702591688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702591690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702591688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde1a507779800f40939f75c5dd44fb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  desertZonePrefabs:
+  - {fileID: 8054023930295167360, guid: 63b626d77f30d784b9cf125297666faf, type: 3}
+  - {fileID: 8054023930295167360, guid: a2ee7eece4c996844aa0ba3e6f768414, type: 3}
+  - {fileID: 8054023930295167360, guid: 3833d96ee21a59c4b8a8faf5e7c511f5, type: 3}
+  - {fileID: 6130421341211880236, guid: 305ce75d1405dc94ba2d7c9d6217df6f, type: 3}
+  - {fileID: 6130421341211880236, guid: 605b0eeea4ee52d409bbaf85e7ed7cca, type: 3}
+  - {fileID: 6130421341211880236, guid: 68a9b14fda6fd234c9b83d338f245a02, type: 3}
+  - {fileID: 2632478049124558350, guid: 7a3db8c324b23a340a408504297328ca, type: 3}
+  - {fileID: 2632478049124558350, guid: 8e85debc61e19b744aa03c7c48d83e96, type: 3}
+  - {fileID: 2632478049124558350, guid: 9c75d9cb0879b4b408512b89a1045328, type: 3}
+  - {fileID: 2632478049124558350, guid: 72f9d60965e7ab545bfa395ebd6b1353, type: 3}
+  - {fileID: 2632478049124558350, guid: 5b5da6411648db84bae4955119c63b31, type: 3}
+  forestZonePrefabs: []
+  oneHighBasePlatform: {fileID: 1461800579003262429, guid: 8a93767a475467645b2e0a92f4642b88,
+    type: 3}
+  twoHighBasePlatform: {fileID: 9080088214722178845, guid: b8380466ff9e0654e9a1d1f610970f67,
+    type: 3}
+  platformVert: {fileID: 3580132827930609281, guid: 6aea4624f040b3d48ad328fd628b4d4d,
+    type: 3}
+  platformHoriz: {fileID: 3580132827930609281, guid: 210917799d18672498b8dbaf5483c516,
+    type: 3}
+  smallZoneRows: 2
+  mediumZoneRows: 3
+  largeZoneRows: 5
+  smallZoneColumns: 2
+  mediumZoneColumns: 4
+  largeZoneColumns: 6
+  xZoneSize: 60
+  yZoneSize: 30
+  platformSpawnProb: 0
+  emptyZoneProb: 0
 --- !u!1 &706646338
 GameObject:
   m_ObjectHideFlags: 0
@@ -19611,6 +19685,8 @@ MonoBehaviour:
     type: 3}
   sunPrefab: {fileID: 7392224832945154436, guid: 51e6392e04b64444b8ba985b41897c82,
     type: 3}
+  wizardPrefab: {fileID: 0}
+  palmPrefab: {fileID: 0}
   isReady: 0
   cam: {fileID: 519420030}
 --- !u!4 &2074784435
