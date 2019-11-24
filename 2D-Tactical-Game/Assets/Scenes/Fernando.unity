@@ -12282,8 +12282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a0000000200000001000000040000000300000005000000630000000300000001000000
-  mapSize: 0
-  mapTheme: 0
+  mapSize: 3
+  mapTheme: 1
   mapXMin: 0
   mapYMin: 0
   mapXMax: 0
@@ -16754,10 +16754,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5024973b6982443884a0394fdfc4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 0
-  mapTheme: 0
-  tilePrefab: {fileID: 1982589862050825191, guid: 36024aa62ede9974e966fa11bf0f7a00,
-    type: 3}
   largeDesert: {fileID: 5468126684467185041, guid: bbc398ee68a6962489ea7f35e3c4f9ba,
     type: 3}
   mediumDesert: {fileID: 0}
@@ -16766,9 +16762,6 @@ MonoBehaviour:
   largeForest: {fileID: 0}
   mediumForest: {fileID: 0}
   smallForest: {fileID: 0}
-  largeBeach: {fileID: 0}
-  mediumBeach: {fileID: 0}
-  smallBeach: {fileID: 0}
 --- !u!4 &1738065372
 Transform:
   m_ObjectHideFlags: 0

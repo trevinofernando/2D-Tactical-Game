@@ -61,7 +61,6 @@ public class OpenWeaponMenu : MonoBehaviour
     void OnMouseOver ()
     {
         // this is never used anywhere btw
-        Debug.Log("we mousin over bois!");
         currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
         if(!GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
             currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button

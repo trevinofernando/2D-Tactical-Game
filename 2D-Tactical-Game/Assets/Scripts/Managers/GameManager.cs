@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         isTurnFinished = false; //Set initial state
         Time.timeScale = 1.0f; //Set normal time for game to run
 
-        PlaneSpawnPoint  = new Vector3(GLOBALS.mapXMax + 30f, GLOBALS.mapYMax + 20f, 0);
+        PlaneSpawnPoint  = new Vector3(GLOBALS.mapXMax + 50f, GLOBALS.mapYMax + 20f, 0);
 
         //Initialize array to hold each soldier object team[Team][Avatar]
         teams = new GameObject[GLOBALS.numTeams, GLOBALS.teamSize];

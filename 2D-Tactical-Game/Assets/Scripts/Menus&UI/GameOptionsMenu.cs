@@ -189,34 +189,34 @@ public class GameOptionsMenu : MonoBehaviour
         // rotate through each color
         for (int colorIndex = 1; colorIndex < 9; colorIndex++)
         {
-            Debug.Log("Checking color " + colorIndex);
+            //Debug.Log("Checking color " + colorIndex);
             checker = 0;
             // check each team's color to see if its taken
             for (int teamNumber = 0; teamNumber < numTeams; teamNumber++)
             {
-                Debug.Log("Checking team " + invalidTeam + " with team " + teamNumber);
+                //Debug.Log("Checking team " + invalidTeam + " with team " + teamNumber);
                 if (teamNumber == invalidTeam)
                 {
-                    Debug.Log("Same team, NEXT!!!");
+                    //Debug.Log("Same team, NEXT!!!");
                     continue;
                 }
                 if (colorIndex == teams[teamNumber].teamColorIndex)
                 {
-                    Debug.Log("Same color, TOSS IT OUT!!");
+                    //Debug.Log("Same color, TOSS IT OUT!!");
                     checker++;
                     break;
                 }
-                Debug.Log("made it through the for loop");
+                //Debug.Log("made it through the for loop");
             }
 
-            Debug.Log("checking the checker of size " + checker);
+            //Debug.Log("checking the checker of size " + checker);
             if (checker == 0)
             {
-                Debug.Log("Looks like we found a match, bois. colorIndex is " + colorIndex);
+                //Debug.Log("Looks like we found a match, bois. colorIndex is " + colorIndex);
                 teams[invalidTeam].teamColorIndex = colorIndex;
                 break;
             }
-            Debug.Log("changing the color now.");
+            //Debug.Log("changing the color now.");
         }
     }
 
@@ -230,10 +230,10 @@ public class GameOptionsMenu : MonoBehaviour
 
             for (int betaTeam = alphaTeam + 1; betaTeam < numTeams; betaTeam++)
             {
-                Debug.Log("Checking team " + alphaTeam + " with team " + betaTeam);
+                //Debug.Log("Checking team " + alphaTeam + " with team " + betaTeam);
                 if (teams[alphaTeam].teamColorIndex == teams[betaTeam].teamColorIndex)
                 {
-                    Debug.Log("SAME COLOR!! Fixing team " + betaTeam);
+                    //Debug.Log("SAME COLOR!! Fixing team " + betaTeam);
                     FindAdequateColor(betaTeam);
                 }
             }
@@ -258,8 +258,8 @@ public class GameOptionsMenu : MonoBehaviour
         if (mapSize == 0 || mapSize == 2)
             mapSize++;
 
-        Debug.Log(mapTheme.ToString());
-        Debug.Log(mapSize.ToString());
+        //Debug.Log(mapTheme.ToString());
+        //Debug.Log(mapSize.ToString());
     }
 
     public void SetOfficialTeamColors ()
@@ -271,19 +271,19 @@ public class GameOptionsMenu : MonoBehaviour
     }
     public void BeginGame ()
     {
-        Debug.Log("START MATCH");
+        //Debug.Log("START MATCH");
         // check for color conflicts
-        Debug.Log("Checking for color conflicts...");
+        //Debug.Log("Checking for color conflicts...");
         CheckForColorConflicts();
-        Debug.Log("Successfully resolved any color conflicts.");
+        //Debug.Log("Successfully resolved any color conflicts.");
 
         // set team colors officially
         SetOfficialTeamColors();
-        Debug.Log("Successfully established official team colors.");
+        //Debug.Log("Successfully established official team colors.");
 
         // fetch the advanced options that haven't been updated yet
         UpdateEverythingElse();
-        Debug.Log("Successfully updated everything else.");
+        //Debug.Log("Successfully updated everything else.");
 
         GLOBALS.numTeams = numTeams;
         GLOBALS.teamSize = teamSize;
@@ -303,7 +303,7 @@ public class GameOptionsMenu : MonoBehaviour
             GLOBALS.isTeamAI[teamNumber] = teams[teamNumber].isAI;
         }
 
-        Debug.Log("Successfully updated Globals");
+        //Debug.Log("Successfully updated Globals");
 
         // swap the scenes
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
