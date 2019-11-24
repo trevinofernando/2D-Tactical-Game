@@ -6,162 +6,108 @@ using UnityEngine;
 
 public class MapInitializer : MonoBehaviour
 {
-    //Default map size
-    public MapSize mapSize = MapSize.Large;
-    public MapTheme mapTheme = MapTheme.Desert;
     private GlobalVariables GLOBALS;
-    public GameObject tilePrefab;
-    private List<GameObject> gameObjects;
-    private List<Vector3> spawnPoints;
-    private int xMax;
-    private int yMax;
-    private Vector3 smallMapSpawnPoint = new Vector3(70, 80, 0);
-    private Vector2Int smallCoordinate = new Vector2Int(100, 50);
 
-    private Vector3 mediumMapSpawnPoint = new Vector3(105, 47, 0);
-    private Vector2Int mediumCoordinate = new Vector2Int(200, 130);
+    private Vector3 smallBackgroundSpawnPoint = new Vector3(70, 80, 0);
+    private Vector2Int smallCoordinate = new Vector2Int(135, 75);
 
-    private Vector3 largeMapSpawnPoint = new Vector3(170, 150, 0);
-    private Vector2Int largeCoordinate = new Vector2Int(290, 100);
+    private Vector3 mediumBackgroundSpawnPoint = new Vector3(105, 47, 0);
+    private Vector2Int mediumCoordinate = new Vector2Int(280, 115);
 
-    //Desert Maps
+    private Vector3 largeBackgroundSpawnPoint = new Vector3(170, 150, 0);
+    private Vector2Int largeCoordinate = new Vector2Int(425, 180);
+
+    //Desert Background
     public GameObject largeDesert;
     public GameObject mediumDesert;
     public GameObject smallDesert;
 
-    //Forest Maps
+    //Forest Background
     public GameObject largeForest;
     public GameObject mediumForest;
     public GameObject smallForest;
 
-    //Beach maps
-    public GameObject largeBeach;
-    public GameObject mediumBeach;
-    public GameObject smallBeach;
 
     void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
-        GLOBALS.mapSize = MapSize.Large;
-        DetermineMapTheme();
         DetermineMapSize();
-        GLOBALS.mapXMax = xMax;
-        GLOBALS.mapYMax = yMax;
-        
+        //PlaceBackground();
     }
 
     void DetermineMapSize()
     { 
 
-
-
         switch(GLOBALS.mapSize)
         {
             case MapSize.Large:
-                mapSize = MapSize.Large;
-                xMax = largeCoordinate.x;
-                yMax = largeCoordinate.y;
+                GLOBALS.mapXMax = largeCoordinate.x;
+                GLOBALS.mapYMax = largeCoordinate.y;
                 break;
             case MapSize.Medium:
-                mapSize = MapSize.Medium;
-                xMax = mediumCoordinate.x;
-                yMax = mediumCoordinate.y;
+                GLOBALS.mapXMax = mediumCoordinate.x;
+                GLOBALS.mapYMax = mediumCoordinate.y;
+                break;
+            case MapSize.Small:
+                GLOBALS.mapXMax = smallCoordinate.x;
+                GLOBALS.mapYMax = smallCoordinate.y;
                 break;
             default:
-                mapSize = MapSize.Small;
-                xMax = smallCoordinate.x;
-                yMax = smallCoordinate.y;
                 break;
         }
     }
 
-    void DetermineMapTheme()
+    void PlaceBackground()
     {
         switch(GLOBALS.mapTheme)
         {
-            case MapTheme.Forest:
-                mapTheme = MapTheme.Forest;
+            case MapTheme.Desert:
+                switch(GLOBALS.mapSize)
+                {
+                    case MapSize.Large:
+                        Instantiate(largeDesert, largeBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    case MapSize.Medium:
+                        Instantiate(mediumDesert, mediumBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    case MapSize.Small:
+                        Instantiate(smallDesert, smallBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    default:
+                        break;
+                }
                 break;
-            case MapTheme.Beach:
-                mapTheme = MapTheme.Beach;
+            case MapTheme.Forest:
+                switch (GLOBALS.mapSize)
+                {
+                    case MapSize.Large:
+                        Instantiate(largeForest, largeBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    case MapSize.Medium:
+                        Instantiate(mediumForest, mediumBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    case MapSize.Small:
+                        Instantiate(smallForest, smallBackgroundSpawnPoint, Quaternion.identity);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
-                mapTheme = MapTheme.Desert;
                 break;
         }
     }
 
-    public Vector3[] GenerateMap()
-    {
-
-        //Debug.LogError("The map size is " + mapSize);
-        mapSize = MapSize.Large;
-
-        switch(mapTheme)
-        {
-            case MapTheme.Beach:
-                if(mapSize.Equals(MapSize.Large))
-                {
-                    Instantiate(largeBeach, largeMapSpawnPoint, Quaternion.identity);
-                }
-                else if(mapSize.Equals(MapSize.Medium))
-                {
-                    Instantiate(mediumBeach, mediumMapSpawnPoint, Quaternion.identity);
-                }
-                else 
-                {
-                    Instantiate(smallBeach, smallMapSpawnPoint, Quaternion.identity);
-                }
-                break;
-
-            case MapTheme.Forest:
-                if (mapSize.Equals(MapSize.Large))
-                {
-                    Instantiate(largeForest, largeMapSpawnPoint, Quaternion.identity);
-                }
-                else if (mapSize.Equals(MapSize.Medium))
-                {
-                    Instantiate(mediumForest, mediumMapSpawnPoint, Quaternion.identity);
-                }
-                else
-                {
-                    Instantiate(smallForest, smallMapSpawnPoint, Quaternion.identity);
-                }
-                break;
-
-            default:
-                if (mapSize.Equals(MapSize.Small))
-                {
-                    Instantiate(smallDesert, smallMapSpawnPoint, Quaternion.identity);
-                }
-                /*
-                else if (mapSize.Equals(MapSize.Medium))
-                {
-                    Instantiate(mediumDesert, mediumMapSpawnPoint, Quaternion.identity);
-                }
-                */
-                else
-                {
-                    Instantiate(largeDesert, largeMapSpawnPoint, Quaternion.identity);
-                }
-                break;
-        }
-
-        return GenerateSpawns();
-    }
-
-
-
-    private Vector3[] GenerateSpawns()
+    public Vector3[] GenerateSpawns()
     {
         List<Vector3> spawns = new List<Vector3>();
         float soldierSizeX = 1.503002f;
         float soldierSizeY = 2.663491f;
         int numSpawns = 0;
 
-        for(int x = 2; x < xMax; x+=4)
+        for(int x = 2; x < GLOBALS.mapXMax; x+=4)
         {
-            for(int y = 2; y < yMax; y+=4)
+            for(int y = 2; y < GLOBALS.mapYMax; y+=4)
             {
                 Vector2 tempStart = new Vector2(x, y);
                 Vector2 tempEnd = new Vector2(x + soldierSizeX, y + soldierSizeY);
@@ -172,7 +118,6 @@ public class MapInitializer : MonoBehaviour
                     spawns.Add(tempStart);
                     numSpawns++;
                 }
-                
             }
         }
 
@@ -189,7 +134,5 @@ public class MapInitializer : MonoBehaviour
 
         return shuffledSpawns.ToArray();
     }
-
-
 
 }
