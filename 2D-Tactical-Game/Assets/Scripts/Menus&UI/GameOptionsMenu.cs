@@ -131,7 +131,7 @@ public class GameOptionsMenu : MonoBehaviour
     {
         teams[currentTeamShowing].teamName = teamNameTMP.text;
         teams[currentTeamShowing].isAI = isAIToggle.isOn;
-        Debug.Log("Color is " + teamColorIndex.value);
+        //Debug.Log("Color is " + teamColorIndex.value);
         teams[currentTeamShowing].teamColorIndex = teamColorIndex.value;
         for (int playerNumber = 0; playerNumber < teamSize; playerNumber++)
         {

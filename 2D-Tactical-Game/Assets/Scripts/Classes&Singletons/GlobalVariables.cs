@@ -64,6 +64,7 @@ public class GlobalVariables : MonoBehaviour
     public float timeBetweenTurns = 5f; // 5 seconds
     public float TimePerGame = 60f * 20f; // 20 minutes
 
+    [System.NonSerialized]
     public GameManager GM;
 
     private void Awake()

@@ -30,7 +30,7 @@ public class MapGenerator : MonoBehaviour
     public double emptyZoneProb;
 
     //References to global variables
-    private GlobalVariables GLOBALS;
+    public GlobalVariables GLOBALS; //made this public to allow for running game from Fernando's scene
     private GameManager GM;
     private MapSize mapSize;
     private MapTheme mapTheme;
@@ -72,8 +72,9 @@ public class MapGenerator : MonoBehaviour
             Destroy(gameObject);
         }
 
-
-        GLOBALS = GlobalVariables.Instance;
+        if(GlobalVariables.Instance != null){//Else use the default or previous instance
+            GLOBALS = GlobalVariables.Instance;
+        }
         mapSize = GLOBALS.mapSize;
         mapTheme = GLOBALS.mapTheme;
         platformRowNums = new List<int>();
