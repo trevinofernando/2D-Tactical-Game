@@ -51,9 +51,9 @@ public class Weapon : MonoBehaviour
     private float normalGravity;
 
     private void Start() {
+        PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 20f, 0);
         rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
         normalGravity = rb.gravityScale;
-        PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 20f, 0);
     }
 
 

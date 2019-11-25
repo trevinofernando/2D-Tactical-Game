@@ -19373,7 +19373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cursorImages:
   - {fileID: 2800000, guid: e1ea2f62e6e9bee4aba180c594d203c9, type: 3}
-  - {fileID: 2800000, guid: 8c3a16495456d1e478b3c8ced6453eef, type: 3}
+  - {fileID: 2800000, guid: a5aaa8cb60b1c994ba90fcde6a5273c1, type: 3}
   - {fileID: 2800000, guid: b02d38f7ac8b456429ea51f8bef397d9, type: 3}
   - {fileID: 2800000, guid: e3813735c1a31034d8f7bbea1f3c56e1, type: 3}
   - {fileID: 2800000, guid: b0581dfbdbccb8c459d50b8fd3818222, type: 3}
