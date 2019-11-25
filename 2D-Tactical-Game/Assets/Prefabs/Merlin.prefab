@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 4555489210329520940}
   - component: {fileID: 1427388441393385349}
   - component: {fileID: 7089128189272728226}
+  - component: {fileID: -2484821341785273952}
   m_Layer: 0
   m_Name: Merlin
   m_TagString: Untagged
@@ -260,6 +261,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToAutoDestroy: 1
+--- !u!114 &-2484821341785273952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3368308984162276364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd194d557f89c964a80e1ec89b14ec85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToSpawn: {fileID: 4548086427132974067, guid: 871439951e61a4f4f8e028bfc6f57522,
+    type: 3}
+  delayTime: 0.5
+  localPosition: {fileID: 7269470954253480931}
+  offsetFromSelf: {x: 0, y: 0, z: 0}
+  worldPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4179324126270557036
 GameObject:
   m_ObjectHideFlags: 0

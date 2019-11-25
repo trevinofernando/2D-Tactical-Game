@@ -30,8 +30,7 @@ public class CameraController : MonoBehaviour
     private float speed;
     private Camera cam;
 
-    void Start()
-    {
+    private void Awake() {
         if (instance == null)
             instance = this;
         else
@@ -39,6 +38,10 @@ public class CameraController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+
+    void Start()
+    {
         
         cam = gameObject.GetComponent<Camera>();
         transform.position = cameraOffset;
