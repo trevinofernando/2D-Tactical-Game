@@ -255,11 +255,11 @@ public class GameOptionsMenu : MonoBehaviour
             mapTheme++;
 
         mapSize = mapSizeDropdown.value;
-        if (mapSize == 0 || mapSize == 2)
+        if (mapSize == 0)
             mapSize++;
 
         //Debug.Log(mapTheme.ToString());
-        //Debug.Log(mapSize.ToString());
+        Debug.Log(mapSize.ToString());
     }
 
     public void SetOfficialTeamColors ()
@@ -271,7 +271,9 @@ public class GameOptionsMenu : MonoBehaviour
     }
     public void BeginGame ()
     {
-        //Debug.Log("START MATCH");
+        // need to save current team's fields
+        SavePlayerFields();
+        Debug.Log("START MATCH");
         // check for color conflicts
         //Debug.Log("Checking for color conflicts...");
         CheckForColorConflicts();
@@ -292,7 +294,8 @@ public class GameOptionsMenu : MonoBehaviour
         GLOBALS.TimePerGame = gameTimer * 60;   // convert seconds to minutes.
         GLOBALS.gameMode = gameMode;
 
-        
+        GLOBALS.mapSize = (MapSize)mapSize;
+        GLOBALS.mapTheme = (MapTheme)mapTheme;
 
         GLOBALS.teamColors = new Color[numTeams];
         GLOBALS.isTeamAI = new bool[numTeams];
