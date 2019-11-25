@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public float groundDistance = 0.2f;
     public Animator anim;
+    [System.NonSerialized]
+    public bool standingOnPlatform = false;
 
     //private float 
     [System.NonSerialized]
@@ -21,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
     private PlayerSettings ps;
 
     /*
-     We will make an invisible rectangle to check if it overlaps with anything under 
-     the player for that we need the CapsuleCollider2D and get it's dimensions.
+        We will make an invisible rectangle to check if it overlaps with anything under 
+        the player for that we need the CapsuleCollider2D and get it's dimensions.
 
             ____
            /    \
@@ -119,9 +121,10 @@ public class PlayerMovement : MonoBehaviour
                 //But we can jump, so check for Up arrow, Space or "w"
                 //And check if we are relatively not moving up or down
                 //but if theres a ramp we could be moving up and down but no faster than "speed"
-                if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < 5f)
+                if (Input.GetAxisRaw("Vertical") > 0 && (Mathf.Abs( rb.velocity.y) < 5f || standingOnPlatform))
                 {
                     //Debug.Log("Jump");
+                    standingOnPlatform = false;
                     anim.SetTrigger("takeOff");
                     anim.SetBool("isJumping", true);
                     rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

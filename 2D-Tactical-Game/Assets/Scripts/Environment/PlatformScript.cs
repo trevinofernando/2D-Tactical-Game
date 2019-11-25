@@ -14,6 +14,7 @@ public class PlatformScript : MonoBehaviour
     private float velocityX;
     private Vector2 velocity;
     private Rigidbody2D rb;
+    private PlayerMovement playerMov;
 
     public double maxSpeedY;
     public double maxSpeedX;
@@ -55,5 +56,17 @@ public class PlatformScript : MonoBehaviour
         }
 
         rb.velocity = velocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if(other.transform.tag == "Player"){
+            other.transform.GetComponent<PlayerMovement>().standingOnPlatform = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other) {
+        if(other.transform.tag == "Player"){
+            other.transform.GetComponent<PlayerMovement>().standingOnPlatform = false;
+        }
     }
 }
