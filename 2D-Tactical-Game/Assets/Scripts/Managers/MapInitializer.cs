@@ -8,10 +8,10 @@ public class MapInitializer : MonoBehaviour
 {
     private GlobalVariables GLOBALS;
 
-    private Vector3 smallBackgroundSpawnPoint = new Vector3(70, 80, 0);
+    private Vector3 smallBackgroundSpawnPoint = new Vector3(65, 65, 0);
     private Vector2Int smallCoordinate = new Vector2Int(135, 75);
 
-    private Vector3 mediumBackgroundSpawnPoint = new Vector3(105, 47, 0);
+    private Vector3 mediumBackgroundSpawnPoint = new Vector3(130, 75, 0);
     private Vector2Int mediumCoordinate = new Vector2Int(280, 115);
 
     private Vector3 largeBackgroundSpawnPoint = new Vector3(170, 150, 0);
@@ -32,7 +32,7 @@ public class MapInitializer : MonoBehaviour
     {
         GLOBALS = GlobalVariables.Instance;
         DetermineMapSize();
-        //PlaceBackground();
+        PlaceBackground();
     }
 
     void DetermineMapSize()
@@ -65,13 +65,13 @@ public class MapInitializer : MonoBehaviour
                 switch(GLOBALS.mapSize)
                 {
                     case MapSize.Large:
-                        Instantiate(largeDesert, largeBackgroundSpawnPoint, Quaternion.identity);
+                        Instantiate(largeDesert, new Vector3(), Quaternion.identity);
                         break;
                     case MapSize.Medium:
-                        Instantiate(mediumDesert, mediumBackgroundSpawnPoint, Quaternion.identity);
+                        Instantiate(mediumDesert, new Vector3(), Quaternion.identity);
                         break;
                     case MapSize.Small:
-                        Instantiate(smallDesert, smallBackgroundSpawnPoint, Quaternion.identity);
+                        Instantiate(smallDesert, new Vector3(), Quaternion.identity);
                         break;
                     default:
                         break;
