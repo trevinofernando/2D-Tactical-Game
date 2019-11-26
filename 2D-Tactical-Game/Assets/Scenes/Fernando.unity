@@ -7622,16 +7622,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115885540}
     m_Modifications:
-    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
-        type: 3}
-      propertyPath: m_Name
-      value: Lite Water
-      objectReference: {fileID: 0}
-    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 907484094617270486, guid: 1061ab6ac85dbe248b928abf6739ed89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7696,6 +7686,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_Name
+      value: Lite Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122263976806910230, guid: 1061ab6ac85dbe248b928abf6739ed89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1061ab6ac85dbe248b928abf6739ed89, type: 3}
