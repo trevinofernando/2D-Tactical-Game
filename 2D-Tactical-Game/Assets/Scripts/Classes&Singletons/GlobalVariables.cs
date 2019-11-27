@@ -103,5 +103,8 @@ public enum WeaponCodes
     Mine = 13,
     Bang_Pistol = 14,
     Space_Boots = 15,
-    ThunderGun = 16
+    ThunderGun = 16,
+    Weak_Stone = 17,
+    Normal_Stone = 18,
+    Hard_Stone = 19
 }

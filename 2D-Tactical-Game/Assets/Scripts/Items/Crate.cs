@@ -28,11 +28,12 @@ public class Crate : MonoBehaviour
         "Bang_Pistol",
         "Space_Boots",
         "ThunderGun",
+        "Weak_Stone",
+        "Normal_Stone",
+        "Hard_Stone",
         "MissingName",
         "MissingName",
         "MissingName",
-        "MissingName",
-
     };
     private int weaponCode;
 
@@ -62,9 +63,12 @@ public class Crate : MonoBehaviour
             //get Player Settings component
             PlayerSettings ps = other.transform.GetComponent<PlayerSettings>();
             if(ps != null){
-                //pass negative damage to heal
-                ps.UpdateAmmo(weaponCode, + 1);
-
+                if(weaponCode >= (int)WeaponCodes.Weak_Stone && weaponCode <= (int)WeaponCodes.Hard_Stone){
+                    ps.UpdateAmmo(weaponCode, + 5);
+                }else{
+                    ps.UpdateAmmo(weaponCode, + 1);
+                }
+                
                 AudioManager.instance.Play("Weapon_PickUp");
                 //Spawn some VFX when picked up
                 if(impactEffect != null)

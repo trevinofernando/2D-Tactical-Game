@@ -25,6 +25,9 @@ public class Weapon : MonoBehaviour
      * 14   = BangPistol
      * 15   = SpaceBoots
      * 16   = ThunderGun
+     * 17   = Weak_Stone
+     * 18   = Normal_Stone
+     * 19   = Hard_Stone
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -71,9 +74,6 @@ public class Weapon : MonoBehaviour
             if (fireTriggered && canShoot){
                 switch (weaponCode)
                 {
-                    case (int)WeaponCodes.Gauntlet://Do nothing
-                        break;
-
                     case (int)WeaponCodes.Bazooka: //Weapons that spawn a projectile and the camera follows the projectile
                     case (int)WeaponCodes.Grenade:
                     case (int)WeaponCodes.Teleport_Grenade:
@@ -217,6 +217,7 @@ public class Weapon : MonoBehaviour
                         }
                         break;
                     default:
+                        //Here we have: Gauntlet, Weak_Stone, Normal_Stone, Hard_Stone
                         break;
                 }
             }
