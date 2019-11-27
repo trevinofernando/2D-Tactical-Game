@@ -102,6 +102,7 @@ MonoBehaviour:
     type: 3}
   deathEffect: {fileID: 0}
   anim: {fileID: 0}
+  sprRend: {fileID: 0}
 --- !u!60 &6450198992083450216
 PolygonCollider2D:
   m_ObjectHideFlags: 0

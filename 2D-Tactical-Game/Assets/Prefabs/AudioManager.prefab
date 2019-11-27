@@ -248,3 +248,9 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Building_Blocks
+    clip: {fileID: 8300000, guid: e70d087dd40c32c429d351ecbc11be15, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}

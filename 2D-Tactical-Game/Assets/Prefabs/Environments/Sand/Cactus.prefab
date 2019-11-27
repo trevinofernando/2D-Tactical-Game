@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6431271838707751631}
   - component: {fileID: 2584179119313658708}
   - component: {fileID: 1351243665249065341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cactus
   m_TagString: Ground
   m_Icon: {fileID: 0}
