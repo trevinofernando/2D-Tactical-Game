@@ -33,6 +33,7 @@ public class EnvironmentManager : MonoBehaviour
     public bool isReady = false;
     
     public CameraController cam;
+    public MapGenerator mapGenerator;
     private GameObject sun;
     private SunScript sunScript;
 
@@ -52,7 +53,8 @@ public class EnvironmentManager : MonoBehaviour
 
     public void DeployHazard()
     {
-        hazard = (Hazard)rand.Next(0, numHazards+6);
+        hazard = (Hazard)rand.Next(0, numHazards+1);
+        //hazard = Hazard.Wizard;
 
 
         switch(hazard)
@@ -75,6 +77,8 @@ public class EnvironmentManager : MonoBehaviour
                 //DeployTree();
                 break;
             case Hazard.Wizard:
+                //DeployWizard();
+                mapGenerator.RespawnZone();
                 break;
             default://Do nothing
                 break;
@@ -136,8 +140,11 @@ public class EnvironmentManager : MonoBehaviour
         //trees[rand.Next(0, numTrees+1)].transform.GetComponent<TreeScript>().Shoot();
     }
 
-    void DeployWizard()
+    public void DeployWizard(Vector3 target)
     {
-
+        GLOBALS.GM.turnClock += (int)(GLOBALS.mapXMax / 100) + 7f;
+        GameObject go = Instantiate(wizardPrefab, target, Quaternion.identity);
+        cam.soldier = go;
+        cam.SetZoom(30f);
     }
 }
