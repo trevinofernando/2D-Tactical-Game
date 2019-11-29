@@ -98,23 +98,20 @@ public class MapInitializer : MonoBehaviour
         }
     }
 
-    public Vector3[] GenerateSpawns()
+    public Vector3[] GenerateSpawns(float sizeX, float sizeY, bool checkForColliderBelow)
     {
         List<Vector3> spawns = new List<Vector3>();
-        float soldierSizeX = 1.503002f;
-        float soldierSizeY = 2.663491f;
         int numSpawns = 0;
 
         for(int x = 2; x < GLOBALS.mapXMax; x+=4)
         {
-            for(int y = 2; y < GLOBALS.mapYMax; y+=4)
+            for(int y = 2; y < GLOBALS.mapYMax + 3; y+=4)
             {
                 Vector2 tempStart = new Vector2(x, y);
-                Vector2 tempEnd = new Vector2(x + soldierSizeX, y + soldierSizeY);
+                Vector2 tempEnd = new Vector2(x + sizeX, y + sizeY);
                 Collider2D[] tempColliders = Physics2D.OverlapAreaAll(tempStart, tempEnd);
                 if (tempColliders.Length == 0)
                 {
-
                     spawns.Add(tempStart);
                     numSpawns++;
                 }

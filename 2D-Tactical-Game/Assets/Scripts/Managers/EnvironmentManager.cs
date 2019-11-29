@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public enum Hazard
 {
+    /* Bad Hazards */
     Sun = 0,
     Coconut_Bomber = 1,
-    Plane_Healer = 2,
-    Plane_Crates = 3,
-    Player_Bush = 4,
-    Tree = 5, 
-    Wizard = 6
+    Mine_Bomber = 2,
+    Tree = 3,
+    Wizard = 4,
+    Player_Bush = 5,
+    Bird = 6,
+    /* Good Hazards */
+    Plane_Healer = 7,
+    Plane_Crates = 8
 }
 
 public class EnvironmentManager : MonoBehaviour
@@ -20,29 +23,50 @@ public class EnvironmentManager : MonoBehaviour
     System.Random rand;
 
     //Hazards
-    public int numHazards = 7;
+    private int numHazards = 9;
     public Vector3 planeSpawnPoint;
     public Vector3 sunSpawnPoint;
     public GameObject coconutBomberPrefab;
     public GameObject healthPlanePrefab;
     public GameObject cratePlanePrefab;
+    public GameObject minePlanePrefab;
     public GameObject sunPrefab;
     public GameObject wizardPrefab;
     public GameObject palmPrefab;
+    public GameObject cactusPrefab;
 
     public bool isReady = false;
     
     public CameraController cam;
     public MapGenerator mapGenerator;
+    public MapInitializer mapInitializer;
     private GameObject sun;
     private SunScript sunScript;
-
+    
+    private bool goodHazard;
+    public double badHazardChance;
     private Hazard hazard;
     private GameObject go;
     private GlobalVariables GLOBALS;
+
+    private GameObject treePrefab;
+    public List<GameObject> trees;
+    private int numTrees;
+    public int numTreesSmall;
+    public int numTreesMedium;
+    public int numTreesLarge;
+
+    private GameObject pointyPrefab;
+    private List<GameObject> pointies;
+    private int numPointy;
+    public int numPointySmall;
+    public int numPointyMedium;
+    public int numPointyLarge;
+
     
-
-
+    
+    
+    
     void Awake()
     {
         GLOBALS = GlobalVariables.Instance;
@@ -53,32 +77,45 @@ public class EnvironmentManager : MonoBehaviour
 
     public void DeployHazard()
     {
-        hazard = (Hazard)rand.Next(0, numHazards+1);
-        //hazard = Hazard.Wizard;
+        if(rand.NextDouble() >= badHazardChance)
+        {
+            hazard = (Hazard)rand.Next(0, 7);
+        }
+        else
+        {
+            hazard = (Hazard)rand.Next(7, numHazards + 2);
+        }
 
+        //hazard = Hazard.Wizard;
 
         switch(hazard)
         {
+            /* Bad Hazards */
             case Hazard.Sun:
                 DeploySun();
                 break;
             case Hazard.Coconut_Bomber:
                 DeployPlane(coconutBomberPrefab);
                 break;
+            case Hazard.Mine_Bomber:
+                DeployPlane(minePlanePrefab);
+                break;
+            case Hazard.Tree:
+                DeployTree();
+                break;
+            case Hazard.Wizard:
+                mapGenerator.RespawnZone();
+                break;
+            case Hazard.Player_Bush:
+                break;
+            case Hazard.Bird:
+                break;
+            /* Good hazards */
             case Hazard.Plane_Healer: 
                 DeployPlane(healthPlanePrefab);
                 break;
             case Hazard.Plane_Crates: 
                 DeployPlane(cratePlanePrefab);
-                break;
-            case Hazard.Player_Bush:
-                break;
-            case Hazard.Tree:
-                //DeployTree();
-                break;
-            case Hazard.Wizard:
-                //DeployWizard();
-                mapGenerator.RespawnZone();
                 break;
             default://Do nothing
                 break;
@@ -87,28 +124,65 @@ public class EnvironmentManager : MonoBehaviour
 
     void InitHazards()
     {
+        switch (GLOBALS.mapSize)
+        {
+            case MapSize.Large:
+                sunSpawnPoint = new Vector3(440, 195, 0);
+                numTrees = numTreesLarge + rand.Next(3);
+                numPointy = numPointyLarge + rand.Next(3);
+                break;
+            case MapSize.Medium:
+                sunSpawnPoint = new Vector3(295, 130, 0);
+                numTrees = numTreesMedium + rand.Next(2);
+                numPointy = numPointyMedium + rand.Next(3);
+                break;
+            case MapSize.Small:
+                sunSpawnPoint = new Vector3(150, 90, 0);
+                numTrees = numTreesSmall + rand.Next(2);
+                numPointy = numPointySmall + rand.Next(3);
+                break;
+        }
+        switch (GLOBALS.mapTheme) 
+        {
+            case MapTheme.Desert:
+                treePrefab = palmPrefab;
+                pointyPrefab = cactusPrefab;
+                break;
+            case MapTheme.Forest:
+                break;
+        }
+
         PlaceSun();
         //SpawnTrees();
+        //SpawnPointy();
         isReady = true;
     }
 
     void PlaceSun()
     {
-        switch(GLOBALS.mapSize)
-        {
-            case MapSize.Large:
-                sunSpawnPoint = new Vector3(440, 195, 0);
-                break;
-            case MapSize.Medium:
-                sunSpawnPoint = new Vector3(295, 130, 0);
-                break;
-            case MapSize.Small:
-                sunSpawnPoint = new Vector3(150, 90, 0);
-                break;
-        }
         
         this.sun = Instantiate(sunPrefab, sunSpawnPoint, Quaternion.identity);
         sunScript = this.sun.transform.GetComponent<SunScript>();
+    }
+
+    void SpawnTrees()
+    {
+        trees = new List<GameObject>();
+        Vector3[] treeSpawnLocations = mapInitializer.GenerateSpawns(5.18442f, 5.448769f, true);
+        for(int i = 0; i < numTrees; i++)
+        {
+            trees.Add(Instantiate(treePrefab, treeSpawnLocations[i], Quaternion.identity));
+        }
+    }
+
+    void SpawnPointy()
+    {
+        pointies = new List<GameObject>();
+        Vector3[] pointySpawnLocations = mapInitializer.GenerateSpawns(1.391115f, 2.4288675f,true);
+        for(int i = 0; i < numPointy; i++)
+        {
+            pointies.Add(Instantiate(pointyPrefab, pointySpawnLocations[i], Quaternion.identity));
+        }
     }
 
     void DeployPlane(GameObject prefab)
@@ -137,13 +211,18 @@ public class EnvironmentManager : MonoBehaviour
 
     void DeployTree()
     {
-        //trees[rand.Next(0, numTrees+1)].transform.GetComponent<TreeScript>().Shoot();
+
+        for(int i = 0; i < trees.Count - rand.Next(trees.Count); i++)
+        {
+            trees[i].transform.GetComponent<TreeScript>().Shoot();
+        }
+
     }
 
     public void DeployWizard(Vector3 target)
     {
         GLOBALS.GM.turnClock += (int)(GLOBALS.mapXMax / 100) + 7f;
-        GameObject go = Instantiate(wizardPrefab, target, Quaternion.identity);
+        GameObject go = Instantiate(wizardPrefab, target + new Vector3(30, 15, 0), Quaternion.identity);
         cam.soldier = go;
         cam.SetZoom(30f);
     }

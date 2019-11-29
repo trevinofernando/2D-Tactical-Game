@@ -57,6 +57,8 @@ public class MapGenerator : MonoBehaviour
 
     public EnvironmentManager environmentManager;
 
+    public LayerMask layerMask;
+
 
     void Awake()
     {
@@ -202,7 +204,7 @@ public class MapGenerator : MonoBehaviour
     public void RespawnZone()
     {
         zoneToRespawn = GetMostDestroyedZone();
-        zonePrefab = desertZonePrefabs[zoneToRespawn];
+        zonePrefab = desertZonePrefabs[zonePrefabNum[zoneToRespawn]];
         spawnSpot = zoneObjects[zoneToRespawn].transform.position;
         this.environmentManager.DeployWizard(spawnSpot);
         Invoke("CreateZone", 11f);
@@ -217,13 +219,9 @@ public class MapGenerator : MonoBehaviour
         {
             Destroy(toDelete);
         }
-        if (zoneToRespawn == null)
-        {
-            Debug.Log("Zone to Respawn is null!");
-        }
     }
 
-    //Returns a list of the zone indices in order
+    //Returns the index of zoneObjects zone that has the least number of colliders
     int GetMostDestroyedZone()
     {
         int mostDestroyedIndex = 0;
@@ -234,9 +232,25 @@ public class MapGenerator : MonoBehaviour
             GameObject go = zoneObjects[i];
             if (go == null)
                 continue;
-            Transform parent = zoneObjects[i].transform;
-            int numChildren = GetNumChildren(parent);
-            if(numChildren < leastChildren)
+            bool hasPlayer = false;
+            int childCount = 0;
+            Vector2 tempStart = go.transform.position;
+            Vector2 tempEnd = tempStart + new Vector2(60, 30);
+            Collider2D[] tempColliders = Physics2D.OverlapAreaAll(tempStart, tempEnd);
+            foreach(Collider2D collider in tempColliders)
+            {
+                if(collider.tag == "Player")
+                {
+                    hasPlayer = true;
+                    break;
+                }
+                childCount++;
+            }
+            if (hasPlayer)
+                continue;
+            Debug.Log(childCount);
+            
+            if(leastChildren > childCount)
             {
                 mostDestroyedIndex = i;
             }

@@ -5665,6 +5665,9 @@ MonoBehaviour:
   emptyZoneProb: 0
   GLOBALS: {fileID: 1289858338}
   environmentManager: {fileID: 2074784434}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 784
 --- !u!1 &706646338
 GameObject:
   m_ObjectHideFlags: 0
@@ -19819,7 +19822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd658d51cf2de9141bc3442abfef8fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numHazards: 2
   planeSpawnPoint: {x: 0, y: 0, z: 0}
   sunSpawnPoint: {x: 0, y: 0, z: 0}
   coconutBomberPrefab: {fileID: 6110699083877153648, guid: 426e03aa45d8bfc4d81dd9c124a4eadd,
@@ -19828,15 +19830,28 @@ MonoBehaviour:
     type: 3}
   cratePlanePrefab: {fileID: 6110699083877153648, guid: 1357e0a482e090942ad6907977f41cc1,
     type: 3}
+  minePlanePrefab: {fileID: 6110699083877153648, guid: 6f0ada8b262c33b44b1197e6898768c6,
+    type: 3}
   sunPrefab: {fileID: 7392224832945154436, guid: 51e6392e04b64444b8ba985b41897c82,
     type: 3}
   wizardPrefab: {fileID: 3368308984162276364, guid: 03e66e6996006fd4191ef64127ff1f20,
     type: 3}
   palmPrefab: {fileID: 5093664468095071905, guid: b490fa3bec2fde74993d4eff898c2c21,
     type: 3}
+  cactusPrefab: {fileID: 2584179119313658705, guid: da19f2aa051fbce43b6471c9c8b13cbc,
+    type: 3}
   isReady: 0
   cam: {fileID: 519420030}
   mapGenerator: {fileID: 702591690}
+  mapInitializer: {fileID: 1738065371}
+  badHazardChance: 0.6
+  trees: []
+  numTreesSmall: 1
+  numTreesMedium: 3
+  numTreesLarge: 5
+  numPointySmall: 1
+  numPointyMedium: 3
+  numPointyLarge: 5
 --- !u!4 &2074784435
 Transform:
   m_ObjectHideFlags: 0
