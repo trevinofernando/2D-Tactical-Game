@@ -474,7 +474,7 @@ MonoBehaviour:
   explosionRadius: 3
   impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,
     type: 3}
-  spawnSoundName: 
+  spawnSoundName: Leaves_Rustling
   explosionSoundName: Dark_Explosion
   impactSound1: 
   impactSound2: 
