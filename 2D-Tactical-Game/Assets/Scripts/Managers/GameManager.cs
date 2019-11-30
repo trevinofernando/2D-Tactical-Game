@@ -163,6 +163,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coroutineGameClock);
         coroutineStarted = false;
         gameState = GameState.TurnTransition;
+        AudioListener.pause = false;//un-pause all sound affected by time
     }
 
 

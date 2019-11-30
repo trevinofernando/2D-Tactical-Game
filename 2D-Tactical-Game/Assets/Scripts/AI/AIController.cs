@@ -152,7 +152,9 @@ public class AIController : MonoBehaviour
                             continue; //Soldier is dead, move on
                         
                         //Add Soldier to possible targets to shoot
-                        targets.Add(GM.teams[i,j].transform);
+                        if(GM.teams[i,j] != null){
+                            targets.Add(GM.teams[i,j].transform);
+                        }
                     }
                 }
 
