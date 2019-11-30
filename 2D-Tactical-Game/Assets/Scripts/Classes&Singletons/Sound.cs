@@ -15,6 +15,8 @@ public class Sound
 
     public bool loop;
 
+    public bool isAffectedByTime;
+
     [HideInInspector]
     public AudioSource source;
 

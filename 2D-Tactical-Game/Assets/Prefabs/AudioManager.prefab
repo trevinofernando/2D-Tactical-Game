@@ -49,208 +49,243 @@ MonoBehaviour:
     volume: 0.2
     pitch: 0.98
     loop: 1
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Missile_LockOn
     clip: {fileID: 8300000, guid: 74b713967e7cda946a371ae4a88a3b6e, type: 3}
     volume: 1
     pitch: 1
     loop: 1
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Sniper
     clip: {fileID: 8300000, guid: f684cbfa33a902d4f812e99ffc906d5a, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Target_Acquired
     clip: {fileID: 8300000, guid: e106ad8296e3dba478031326c717dd3c, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Dark_Explosion
     clip: {fileID: 8300000, guid: 58f12f78ba30cd64e9a61a43cbb1fad4, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Fatality
     clip: {fileID: 8300000, guid: b921d672f2ac00045828a617aafaddab, type: 3}
     volume: 0.75
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Take_Damage
     clip: {fileID: 8300000, guid: b08303fcd51c49e49969e0c6c6e63b6a, type: 3}
     volume: 0.2
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Short_Choir
     clip: {fileID: 8300000, guid: c2ab05ec55bfc074fae55aba370f7e24, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Grenade_Launcher
     clip: {fileID: 8300000, guid: ac4ff1403295829499c1a19b4d27c919, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Drowning
     clip: {fileID: 8300000, guid: b0025ea0b8e47ff418b2187b541ef8b2, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Magic_PickUp
     clip: {fileID: 8300000, guid: 64a74ff13a31da046ab7998a577889d5, type: 3}
     volume: 0.75
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Holy_Aleluya
     clip: {fileID: 8300000, guid: 16b7e7e21afda9f428a81fd59e81dcb1, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Distant_Explosion
     clip: {fileID: 8300000, guid: c743f77d1e49b1247a6c1a397b906bb1, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Metal_Hit_High
     clip: {fileID: 8300000, guid: e5fdd043cf017624cb0f7314ee6de53c, type: 3}
     volume: 0.4
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Old_Motor
     clip: {fileID: 8300000, guid: b0fbf1c80027d8e46b82838ff8ea5819, type: 3}
     volume: 0.3
     pitch: 0.7
     loop: 1
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Metal_Hit_Low
     clip: {fileID: 8300000, guid: 64be9c4686fad8f4a839cfa9259af96b, type: 3}
     volume: 0.4
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Bomb_Falling
     clip: {fileID: 8300000, guid: e5cee3637925e174eb8875805ec0548a, type: 3}
     volume: 0.75
     pitch: 0.75
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: BFG9000
     clip: {fileID: 8300000, guid: d6c36f9786250e9419bf6af4036d44ac, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Shotgun
     clip: {fileID: 8300000, guid: 76dd5608f12b0144e8f052e8cd0502e1, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Weapon_PickUp
     clip: {fileID: 8300000, guid: 545d949b3d034bf4f947ff9ead59ac59, type: 3}
     volume: 0.3
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Weapon_Swap
     clip: {fileID: 8300000, guid: 7d89d6759aa0b064e93467f8ff52f80d, type: 3}
     volume: 0.4
     pitch: 1.5
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Hammer_Spin
     clip: {fileID: 8300000, guid: 5faa2864201ae5448b097add04cd1b47, type: 3}
     volume: 0.5
     pitch: 1
     loop: 1
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Hammer_Hit
     clip: {fileID: 8300000, guid: b8d120ec14723264cac8cfa493b3d486, type: 3}
     volume: 0.4
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: I_Am_Inevitable
     clip: {fileID: 8300000, guid: c71d3e09d5249c846ab6c9017d477858, type: 3}
     volume: 1
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Leaves_Rustling
     clip: {fileID: 8300000, guid: 08a72a9c315d3f84c830b2abbd669bf9, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Lovely_Coconuts
     clip: {fileID: 8300000, guid: 5ecceecdeface824eaa667b3bde03524, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Hadouken
     clip: {fileID: 8300000, guid: 9d5bf7299c695834e9854e2138e56f44, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Slap
     clip: {fileID: 8300000, guid: 34b604dcc97b62046a7c9d688fec478a, type: 3}
     volume: 0.6
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
   - name: Proximity_Alarm
     clip: {fileID: 8300000, guid: 03e2e3b713680e24b98b649b216eb710, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Mine_Blast
     clip: {fileID: 8300000, guid: 2a5de1353618a324ca7272762eaadeed, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Troll_Gun
     clip: {fileID: 8300000, guid: bd800ffe7a302e249b7d0c9f6e9c3972, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Carros_De_Fuego
     clip: {fileID: 8300000, guid: c62d37ee6390b2745ad1a28331801c00, type: 3}
-    volume: 0.7
+    volume: 0.6
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: ThunderGun
     clip: {fileID: 8300000, guid: 2978faa6ca4136141b061914c4337bd4, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: The_Sorcerers_Apprentice
     clip: {fileID: 8300000, guid: a04a8107213ab2842a7b6cbe2cbbbd75, type: 3}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     loop: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Building_Blocks
     clip: {fileID: 8300000, guid: e70d087dd40c32c429d351ecbc11be15, type: 3}
     volume: 0.7
     pitch: 1
     loop: 0
+    isAffectedByTime: 0
     source: {fileID: 0}
