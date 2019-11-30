@@ -204,7 +204,11 @@ public class MapGenerator : MonoBehaviour
     public void RespawnZone()
     {
         zoneToRespawn = GetMostDestroyedZone();
+        if (zoneToRespawn > desertZonePrefabs.Length)
+            return;
         zonePrefab = desertZonePrefabs[zonePrefabNum[zoneToRespawn]];
+        if (zonePrefab == null)
+            return;
         spawnSpot = zoneObjects[zoneToRespawn].transform.position;
         this.environmentManager.DeployWizard(spawnSpot);
         Invoke("CreateZone", 11f);
