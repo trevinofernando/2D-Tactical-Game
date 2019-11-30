@@ -367,6 +367,7 @@ public class GameManager : MonoBehaviour
                 if(!stateSaved){
                     stateSaved = true; //Update flag
                     Time.timeScale = 0.0f; //Stop time
+                    AudioListener.pause = true; //pause all sound affected by time
 
                     turnClockWhenPause = turnClock; //Save turnClock
                     StopCoroutine(coroutineTurnClock); //And stop the turn Coroutine
@@ -393,7 +394,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.P) || !pauseMenuCanvas.gameObject.activeInHierarchy){
                     stateSaved = false; //reset flag
-                    
+                    AudioListener.pause = false;//un-pause all sound affected by time
                     isTurnFinished = isTurnFinishedWhenPaused; //Recover this variable state
 
                     //Check if the coroutine was in progress or not, this only happens in exactly 1 frame
