@@ -71,6 +71,7 @@ public class EnvironmentManager : MonoBehaviour
     {
         GLOBALS = GlobalVariables.Instance;
         rand = new System.Random();
+        trees = new List<GameObject>();
         InitHazards();
         //DeployHazard();
     }
@@ -214,6 +215,11 @@ public class EnvironmentManager : MonoBehaviour
 
         for(int i = 0; i < trees.Count - rand.Next(trees.Count); i++)
         {
+            if(trees[i] == null)
+            {
+                Debug.Log("Tree is null!");
+                continue;
+            }
             trees[i].transform.GetComponent<TreeScript>().Shoot();
         }
 
