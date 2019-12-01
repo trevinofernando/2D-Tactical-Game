@@ -221,7 +221,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Lovely_Coconuts
     clip: {fileID: 8300000, guid: 5ecceecdeface824eaa667b3bde03524, type: 3}
-    volume: 0.5
+    volume: 0.45
     pitch: 1
     loop: 0
     isAffectedByTime: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: The_Sorcerers_Apprentice
     clip: {fileID: 8300000, guid: a04a8107213ab2842a7b6cbe2cbbbd75, type: 3}
-    volume: 0.5
+    volume: 0.45
     pitch: 1
     loop: 0
     isAffectedByTime: 1
@@ -291,7 +291,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Tactical_Nuke_Incoming
     clip: {fileID: 8300000, guid: cd56cca09a17856418436f4b3c9b04da, type: 3}
-    volume: 0.7
+    volume: 0.6
     pitch: 1
     loop: 0
     isAffectedByTime: 1

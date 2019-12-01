@@ -16,6 +16,8 @@ public class AIController : MonoBehaviour
     private GlobalVariables GLOBALS;
     private WeaponController weaponContr;
 
+    [System.NonSerialized]
+    public Transform target;
     private List<Transform> targets = new List<Transform>();
     private float degreesOfDeadZone;
 
@@ -24,7 +26,6 @@ public class AIController : MonoBehaviour
     private Vector2 origin;
     private Vector2 direction;
     private Vector3 dir3;
-    private Transform target;
     private float xDiff;
     private float yDiff;
     private float tmp;
@@ -283,10 +284,9 @@ public class AIController : MonoBehaviour
 
             case(AIState.tryingParabolicShot):
                 //Debug.Log("tryingParabolicShot");
-
+                
                 //This is for BFG9000, ThunderGun and sets yDiff and xDiff 
                 zRotation = CalculateStraightShotAngle(target);
-
                 
                 if(TryWeapon(WeaponCodes.ThunderGun) && Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f)
                 {/*In ThunderGun range and optimal angle range*/}
@@ -294,6 +294,15 @@ public class AIController : MonoBehaviour
                 {/*The target has low health*/}
                 else if(TryWeapon(WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID])
                 {/*AI has low health and is not the last man of its team*/}
+                else if(TryWeapon(WeaponCodes.Homing_Bazooka)){
+                    zRotation = 90;
+                    weaponScript.fireTriggered = true;
+                }
+                else if(TryWeapon(WeaponCodes.PlaneBomber) || TryWeapon(WeaponCodes.Plane_Nuke)){
+                    //Sort list for farthest and highest targets
+                    targets = targets.OrderBy(x => -(x.position.y * 100 + Vector2.Distance(this.transform.position,x.position))).ToList();
+                    target = targets[0];
+                }
                 else{
                     angle_1 = angle_2 = 0f;
                     if(CalculateParabolicShotAngles(target, WeaponCodes.Bazooka) && TryWeapon(WeaponCodes.Bazooka))                         {/*Nothing to do*/}
