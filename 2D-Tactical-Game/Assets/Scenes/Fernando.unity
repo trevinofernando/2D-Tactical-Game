@@ -12445,6 +12445,10 @@ MonoBehaviour:
   - {r: 0, g: 1, b: 0, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.9887359, g: 1, b: 0, a: 1}
+  - {r: 0.08220887, g: 1, b: 0, a: 1}
+  - {r: 1, g: 0, b: 0.9248581, a: 1}
+  - {r: 0.7553053, g: 0, b: 1, a: 1}
   timePerTurn: 60
   timeBetweenTurns: 5
   TimePerGame: 1200
