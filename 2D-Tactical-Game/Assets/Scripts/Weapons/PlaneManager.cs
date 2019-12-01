@@ -24,6 +24,7 @@ public class PlaneManager : MonoBehaviour
     void Start()
     {
         AudioManager.instance.Play(planeSound);
+
         //Can't allow static planes
         if(speed == 0){
             speed = -5;
@@ -84,6 +85,11 @@ public class PlaneManager : MonoBehaviour
     public void SetTarget(Vector2 _target, int _numItemsToDrop = -1, int _dropArea = -1){
         target = _target;
 
+        if(transform.position.x < GlobalVariables.Instance.mapXMax / 2){
+            //Force movement from left to right
+            speed = Mathf.Abs(speed);
+        }
+
         //This two are in case we want to modify this values when calling this method
         if(_numItemsToDrop > 0){
             numItemsToDrop = _numItemsToDrop;
@@ -105,6 +111,16 @@ public class PlaneManager : MonoBehaviour
             for(int i = 0; i < numItemsToDrop; i++){
                 //Find the DropPoints for the plane to release the cargo
                 dropPoints[i] = FindDropPoint(new Vector2(_target.x + i * spaceBetweenDrops - dropArea / 2, _target.y));
+            }
+            //Reverse list if speed is positive
+            if(Mathf.Sign(speed) > 0){
+                for (int i = 0; i < numItemsToDrop / 2; i++)
+                {
+                    //Simple Swap from both ends inwards
+                    Vector2 tmp = dropPoints[i];
+                    dropPoints[i] = dropPoints[numItemsToDrop - i - 1];
+                    dropPoints[numItemsToDrop - i - 1] = tmp;
+                }
             }
         }
         

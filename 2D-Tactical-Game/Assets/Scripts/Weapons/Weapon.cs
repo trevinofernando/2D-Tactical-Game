@@ -151,7 +151,11 @@ public class Weapon : MonoBehaviour
                         mousePos.z = 0;
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
-                        WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, true, go.transform);
+                        if(mousePos.x > PlaneSpawnPoint.x / 2){
+                            WeaponController.Shoot(projectilePrefab[weaponCode], new Vector3(0, PlaneSpawnPoint.y,0), Quaternion.identity, true, go.transform);
+                        }else{
+                            WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, true, go.transform);
+                        }
                         zoomAmount = 30f;
                         SetZoom();
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
