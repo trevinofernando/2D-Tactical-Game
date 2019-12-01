@@ -216,8 +216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf36800ae689a4244be3ee117513f9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  environmentManager: {fileID: 4252298642561114599, guid: 9187d61e067313044a6c877d252eac94,
-    type: 3}
   projectilePrefab: {fileID: 2880340708203235166, guid: 6e6a9dc50d853114ea10d32ea031d5b2,
     type: 3}
   pushForce: 2500
@@ -235,10 +233,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

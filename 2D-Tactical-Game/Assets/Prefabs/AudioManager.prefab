@@ -91,7 +91,7 @@ MonoBehaviour:
     volume: 0.2
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Short_Choir
     clip: {fileID: 8300000, guid: c2ab05ec55bfc074fae55aba370f7e24, type: 3}
@@ -105,7 +105,7 @@ MonoBehaviour:
     volume: 0.5
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Drowning
     clip: {fileID: 8300000, guid: b0025ea0b8e47ff418b2187b541ef8b2, type: 3}
@@ -119,7 +119,7 @@ MonoBehaviour:
     volume: 0.75
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Holy_Aleluya
     clip: {fileID: 8300000, guid: 16b7e7e21afda9f428a81fd59e81dcb1, type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
     volume: 0.4
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Old_Motor
     clip: {fileID: 8300000, guid: b0fbf1c80027d8e46b82838ff8ea5819, type: 3}
@@ -154,7 +154,7 @@ MonoBehaviour:
     volume: 0.4
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Bomb_Falling
     clip: {fileID: 8300000, guid: e5cee3637925e174eb8875805ec0548a, type: 3}
@@ -182,14 +182,14 @@ MonoBehaviour:
     volume: 0.3
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Weapon_Swap
     clip: {fileID: 8300000, guid: 7d89d6759aa0b064e93467f8ff52f80d, type: 3}
     volume: 0.4
     pitch: 1.5
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Hammer_Spin
     clip: {fileID: 8300000, guid: 5faa2864201ae5448b097add04cd1b47, type: 3}
@@ -238,7 +238,7 @@ MonoBehaviour:
     volume: 0.6
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
   - name: Proximity_Alarm
     clip: {fileID: 8300000, guid: 03e2e3b713680e24b98b649b216eb710, type: 3}
@@ -287,5 +287,5 @@ MonoBehaviour:
     volume: 0.7
     pitch: 1
     loop: 0
-    isAffectedByTime: 0
+    isAffectedByTime: 1
     source: {fileID: 0}
