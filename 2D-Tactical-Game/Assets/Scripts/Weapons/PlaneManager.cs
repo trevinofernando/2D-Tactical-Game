@@ -10,6 +10,7 @@ public class PlaneManager : MonoBehaviour
     public bool randomizeDrops = false;
     public GameObject[] prefabCargo;
     public string planeSound;
+    public string planeSoundOnSpawn = "";
 
     [System.NonSerialized] public Vector2[] dropPoints;
     [System.NonSerialized] public GameManager GM;
@@ -24,6 +25,9 @@ public class PlaneManager : MonoBehaviour
     void Start()
     {
         AudioManager.instance.Play(planeSound);
+        if(planeSoundOnSpawn != ""){
+            AudioManager.instance.Play(planeSoundOnSpawn);
+        }
         //Can't allow static planes
         if(speed == 0){
             speed = -5;
@@ -84,6 +88,11 @@ public class PlaneManager : MonoBehaviour
     public void SetTarget(Vector2 _target, int _numItemsToDrop = -1, int _dropArea = -1){
         target = _target;
 
+        if(transform.position.x < GlobalVariables.Instance.mapXMax / 2){
+            //Force movement from left to right
+            speed = Mathf.Abs(speed);
+        }
+
         //This two are in case we want to modify this values when calling this method
         if(_numItemsToDrop > 0){
             numItemsToDrop = _numItemsToDrop;
@@ -96,7 +105,7 @@ public class PlaneManager : MonoBehaviour
         dropPoints = new Vector2[numItemsToDrop];
                 
         if(numItemsToDrop == 1){
-            dropPoints[0] = target;
+            dropPoints[0] = FindDropPoint(new Vector2(target.x, target.y));
         }else{
             //There are 2 or more drop points
             //Divide the area in evenly spaced points
@@ -104,7 +113,17 @@ public class PlaneManager : MonoBehaviour
             //Calculate each spawn according to area
             for(int i = 0; i < numItemsToDrop; i++){
                 //Find the DropPoints for the plane to release the cargo
-                dropPoints[i] = FindDropPoint(new Vector2(_target.x + i * spaceBetweenDrops - dropArea / 2, _target.y));
+                dropPoints[i] = FindDropPoint(new Vector2(target.x + i * spaceBetweenDrops - dropArea / 2, target.y));
+            }
+            //Reverse list if speed is positive
+            if(Mathf.Sign(speed) > 0){
+                for (int i = 0; i < numItemsToDrop / 2; i++)
+                {
+                    //Simple Swap from both ends inwards
+                    Vector2 tmp = dropPoints[i];
+                    dropPoints[i] = dropPoints[numItemsToDrop - i - 1];
+                    dropPoints[numItemsToDrop - i - 1] = tmp;
+                }
             }
         }
         

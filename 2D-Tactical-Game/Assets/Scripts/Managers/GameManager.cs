@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -162,6 +163,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coroutineGameClock);
         coroutineStarted = false;
         gameState = GameState.TurnTransition;
+        AudioListener.pause = false;//un-pause all sound affected by time
     }
 
 
@@ -486,11 +488,15 @@ public class GameManager : MonoBehaviour
                 turnClock--;//update the clock timer
 
                 if(!hazardsWereCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
-                    Random.InitState(System.DateTime.Now.Millisecond);
+                    UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
                     hazardsWereCalled = true; //set flag
                     if(environmentManager.isReady)
                     {
-                        environmentManager.DeployHazard();
+                        try{
+                            environmentManager.DeployHazard();
+                        }catch(Exception e){
+                            Debug.LogError("Environment Error: " + e);
+                        }
                     }
                     //Chose random player
                     //go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];

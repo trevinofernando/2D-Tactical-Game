@@ -12,6 +12,7 @@ public class Projectile_Bomb : MonoBehaviour
     public float explosionForce = 1000f;
     public float explosionRadius = 5f;
     public GameObject impactEffect;
+    public string explosionSound = "Dark_Explosion";
     public float autoDestroyOnHeight = -50f;
     private Rigidbody2D rb;
     private float travelingDirection;
@@ -51,8 +52,9 @@ public class Projectile_Bomb : MonoBehaviour
         }
         
         //Explosion Sound
-        AudioManager.instance.Play("Dark_Explosion");
-        AudioManager.instance.Stop("Bomb_Falling"); //in te case of being dropped from a plane
+        AudioManager.instance.Play(explosionSound);
+        AudioManager.instance.Stop("Bomb_Falling"); //in the case of being dropped from a plane
+        AudioManager.instance.Stop("Tactical_Nuke_Incoming"); //if its a nuke
 
         //Look for a DamageHandler script in object collided
         DamageHandler target = colInfo.GetComponent<DamageHandler>();

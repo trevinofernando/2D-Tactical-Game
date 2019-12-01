@@ -47,6 +47,7 @@ public class PlayerSettings : MonoBehaviour
     public void SetColor(Color newColor)//RBGA
     {
         bodySprite.color = newColor;
+        nameAndHealthBar.color = newColor;
     }
 
     public void EndTurn()

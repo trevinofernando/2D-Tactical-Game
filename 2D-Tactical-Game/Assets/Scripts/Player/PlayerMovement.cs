@@ -12,11 +12,12 @@ public class PlayerMovement : MonoBehaviour
     public float distanceOffsetY = 0.4f;
     public bool isGrounded;
     public float groundDistance = 0.2f;
+    public LayerMask groundLayers;
     public Animator anim;
-    [System.NonSerialized]
-    public bool standingOnPlatform = false;
 
     //private float 
+    [System.NonSerialized]
+    public bool standingOnPlatform = false;
     [System.NonSerialized]
     public float moveDirection;
     private Rigidbody2D rb;
@@ -92,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             playerPosition = transform.position;
 
             //Check for any overlap area under the players feet
-            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottomLeftCorner, playerPosition + centerToBottomRightCorner);
+            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottomLeftCorner, playerPosition + centerToBottomRightCorner, groundLayers);
             //isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundDistance);
 
 
