@@ -289,3 +289,10 @@ MonoBehaviour:
     loop: 0
     isAffectedByTime: 1
     source: {fileID: 0}
+  - name: Tactical_Nuke_Incoming
+    clip: {fileID: 8300000, guid: cd56cca09a17856418436f4b3c9b04da, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    isAffectedByTime: 1
+    source: {fileID: 0}

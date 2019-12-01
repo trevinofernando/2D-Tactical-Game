@@ -143,6 +143,7 @@ public class Weapon : MonoBehaviour
                         break;
 
                     case (int)WeaponCodes.PlaneBomber:
+                    case (int)WeaponCodes.Plane_Nuke:
                         canShoot = false;
                         fireTriggered = false;
                         

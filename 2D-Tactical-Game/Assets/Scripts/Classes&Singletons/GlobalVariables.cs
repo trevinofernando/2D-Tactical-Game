@@ -106,5 +106,6 @@ public enum WeaponCodes
     ThunderGun = 16,
     Weak_Stone = 17,
     Normal_Stone = 18,
-    Hard_Stone = 19
+    Hard_Stone = 19,
+    Plane_Nuke = 20
 }

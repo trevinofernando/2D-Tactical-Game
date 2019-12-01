@@ -94,6 +94,9 @@ MonoBehaviour:
   distanceOffsetY: 0.01
   isGrounded: 0
   groundDistance: 0.2
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 769
   anim: {fileID: 7529892519968174175}
 --- !u!114 &6509640893437391283
 MonoBehaviour:
@@ -173,6 +176,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2d4717018536764391072986b32e208, type: 3}
   - {fileID: 21300000, guid: c2d4717018536764391072986b32e208, type: 3}
   - {fileID: 21300000, guid: c2d4717018536764391072986b32e208, type: 3}
+  - {fileID: 21300000, guid: 0c8c79e44291dd445978c33ff3bd3441, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -831,6 +835,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 6110699083877153648, guid: dcd4fb78102604949b6a5a63a4e6fcde, type: 3}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

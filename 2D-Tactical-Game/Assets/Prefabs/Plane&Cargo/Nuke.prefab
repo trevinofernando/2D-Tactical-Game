@@ -242,12 +242,13 @@ MonoBehaviour:
   isCargo: 1
   directHitDamage: 100
   damageToPlayer: 100
-  damageToProps: 100
+  damageToProps: 40
   launchForce: 0
   explosionForce: 1500
   explosionRadius: 50
   impactEffect: {fileID: 1724120063549510294, guid: d7a91434b7c47b341b8ef42667ca1251,
     type: 3}
+  explosionSound: Distant_Explosion
   autoDestroyOnHeight: -50
 --- !u!1 &3510214099386841677
 GameObject:

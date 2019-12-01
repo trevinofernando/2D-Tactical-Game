@@ -31,7 +31,7 @@ public class Crate : MonoBehaviour
         "Weak_Stone",
         "Normal_Stone",
         "Hard_Stone",
-        "MissingName",
+        "Plane_Nuke",
         "MissingName",
         "MissingName",
     };
