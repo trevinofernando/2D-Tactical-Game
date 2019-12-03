@@ -56,6 +56,10 @@ public class CameraController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //If we lose reference to the player because someone unexpectedly died during their turn, then recover the reference
+        if(soldier == null && GlobalVariables.Instance.GM.gameState == GameManager.GameState.TurnInProgress){
+            soldier = GlobalVariables.Instance.GM.teams[GlobalVariables.Instance.GM.currTeamTurn, GlobalVariables.Instance.GM.currSoldierTurn[GlobalVariables.Instance.GM.currTeamTurn]];
+        }
         if (shouldFollowTarget || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             shouldFollowTarget = true;
