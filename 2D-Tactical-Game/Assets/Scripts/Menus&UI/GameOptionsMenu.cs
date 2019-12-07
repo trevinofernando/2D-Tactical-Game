@@ -10,6 +10,10 @@ public class GameOptionsMenu : MonoBehaviour
     // the team object array
     public SampleTeam[] teams = new SampleTeam[8];
     private GlobalVariables GLOBALS;
+
+    // object vairables tied to simple start game
+    public TextMeshProUGUI numberOfPlayersText;
+    private int numOfPlayers = 2;
     
     // object variables tied to team submenu
     public TMP_InputField[] namesTMP;
@@ -33,11 +37,11 @@ public class GameOptionsMenu : MonoBehaviour
     public Dropdown mapSizeDropdown;
 
     // we need to transfer these to global vars
-    private int teamSize = 8;
-    private int numTeams = 8;
+    private int teamSize = 8;   // 1-8
+    private int numTeams = 8;   // 2-8
     private float turnTimer;
     private float gameTimer;
-    private int playerHealth;
+    private int playerHealth = 100;
     private bool enableSupplyCrates;
     private int gameMode;
     private int mapTheme;
@@ -257,9 +261,6 @@ public class GameOptionsMenu : MonoBehaviour
         mapSize = mapSizeDropdown.value;
         if (mapSize == 0)
             mapSize++;
-
-        //Debug.Log(mapTheme.ToString());
-        Debug.Log(mapSize.ToString());
     }
 
     public void SetOfficialTeamColors ()
@@ -271,21 +272,10 @@ public class GameOptionsMenu : MonoBehaviour
     }
     public void BeginGame ()
     {
-        // need to save current team's fields
         SavePlayerFields();
-        Debug.Log("START MATCH");
-        // check for color conflicts
-        //Debug.Log("Checking for color conflicts...");
         CheckForColorConflicts();
-        //Debug.Log("Successfully resolved any color conflicts.");
-
-        // set team colors officially
         SetOfficialTeamColors();
-        //Debug.Log("Successfully established official team colors.");
-
-        // fetch the advanced options that haven't been updated yet
         UpdateEverythingElse();
-        //Debug.Log("Successfully updated everything else.");
 
         GLOBALS.numTeams = numTeams;
         GLOBALS.teamSize = teamSize;
@@ -306,15 +296,51 @@ public class GameOptionsMenu : MonoBehaviour
             GLOBALS.isTeamAI[teamNumber] = teams[teamNumber].isAI;
         }
 
-        //Debug.Log("Successfully updated Globals");
-
-        // swap the scenes
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 
-        // transfer everything to global variables
-        // need to transfer:
-        // - number of human teams / AI teams (can reference a method that establishes this)
-        // - all of the team names AND player names in the form of a 2D array (can reference teams[] in a method)
-        // - the team colors (for loop, teams[i].teamColor)
+    public void simpleIncrement ()
+    {
+        if (numOfPlayers < 4)
+        {
+            numOfPlayers++;
+            numberOfPlayersText.SetText("" + numOfPlayers);
+        }
+    }
+
+    public void simpleDecrement ()
+    {
+        if (numOfPlayers > 1)
+        {
+            numOfPlayers--;
+            numberOfPlayersText.SetText("" + numOfPlayers);
+        }
+    }
+
+    public void simpleBeginGame ()
+    {
+        if (numOfPlayers == 1 || numOfPlayers == 3)
+        {
+            numOfPlayers++;
+            teams[numOfPlayers - 1].isAI = true;
+        }
+
+        numTeams = numOfPlayers;
+        teamSize = 4;
+        playerHealth = 100;
+        turnTimer = 45;
+        gameTimer = 10;
+        gameMode = 1;
+
+        if (numOfPlayers <= 2)
+        {
+            mapSize = 1;
+        }
+        else
+        {
+            mapSize = 2;
+        }
+
+        BeginGame();
     }
 }
