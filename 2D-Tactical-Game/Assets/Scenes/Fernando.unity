@@ -22407,6 +22407,10 @@ MonoBehaviour:
     type: 3}
   cactusPrefab: {fileID: 2584179119313658705, guid: da19f2aa051fbce43b6471c9c8b13cbc,
     type: 3}
+  oakTreePrefab: {fileID: 5872875491475325037, guid: 988ca754863298f43846ccb25dad3fc3,
+    type: 3}
+  thornBushPrefab: {fileID: 5519560086839124820, guid: 10d2a2442e3b3de409f0a96ab81651dd,
+    type: 3}
   isReady: 0
   cam: {fileID: 519420030}
   mapGenerator: {fileID: 702591690}

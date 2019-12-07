@@ -34,6 +34,8 @@ public class EnvironmentManager : MonoBehaviour
     public GameObject wizardPrefab;
     public GameObject palmPrefab;
     public GameObject cactusPrefab;
+    public GameObject oakTreePrefab;
+    public GameObject thornBushPrefab;
 
     public bool isReady = false;
     
