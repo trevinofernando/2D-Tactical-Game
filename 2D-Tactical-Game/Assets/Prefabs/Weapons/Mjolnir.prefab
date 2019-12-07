@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 5606224246818515662}
   - component: {fileID: 1602568809626686682}
   - component: {fileID: 6266857216538379172}
+  - component: {fileID: -7514443902491326574}
   m_Layer: 0
   m_Name: Mjolnir
   m_TagString: Projectile
@@ -178,3 +179,16 @@ MonoBehaviour:
   verticalForce: 500
   swingSound: Hammer_Spin
   hitSound: Hammer_Hit
+--- !u!114 &-7514443902491326574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557481230497431642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49711fb19f7213747a0dc0889d450267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToAutoDestroy: 3

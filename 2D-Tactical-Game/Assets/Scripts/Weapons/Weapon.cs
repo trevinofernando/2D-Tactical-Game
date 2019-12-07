@@ -209,7 +209,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, false, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, true, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         zoomAmount = 5f;
                         SetZoom();

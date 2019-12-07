@@ -20,6 +20,7 @@ public class TeleportGrenade : MonoBehaviour
     private TrailRenderer tr;
     private GameObject soldier;
     private Vector3 location;
+    private bool isInvisible = false;
 
 
 
@@ -61,6 +62,7 @@ public class TeleportGrenade : MonoBehaviour
         location = gameObject.transform.position;
 
         // make grenade dissapear
+        isInvisible = true;
         tr.enabled = false;
         sr.enabled = false;
 
@@ -71,6 +73,9 @@ public class TeleportGrenade : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
+        if(isInvisible){
+            return;
+        }
         if(soundAlternator){
             AudioManager.instance.Play(impactSound1);
         }else{

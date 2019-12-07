@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 1274218764703728900}
   - component: {fileID: 5942255426555917004}
   - component: {fileID: -7976885536725261453}
+  - component: {fileID: -14361522170761246}
   m_Layer: 0
   m_Name: BigLaser
   m_TagString: Projectile
@@ -389,6 +390,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageToPlayer: 40
   damageToProps: 99
+--- !u!114 &-14361522170761246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4731540090307745078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49711fb19f7213747a0dc0889d450267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToAutoDestroy: 10
 --- !u!1 &6846543882319661073
 GameObject:
   m_ObjectHideFlags: 0

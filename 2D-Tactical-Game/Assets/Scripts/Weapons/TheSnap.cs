@@ -25,6 +25,7 @@ public class TheSnap : MonoBehaviour
     }
 
     private void Snap(){
+        transform.parent = null;
         foreach (GameObject player in GM.teams)
         {
             if(player == null){

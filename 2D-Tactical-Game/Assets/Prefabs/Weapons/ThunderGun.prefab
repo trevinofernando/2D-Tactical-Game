@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1589523646123023583}
   - component: {fileID: 1852237479472659406}
   - component: {fileID: -188038334779667995}
+  - component: {fileID: -1675043336096705185}
   m_Layer: 0
   m_Name: ThunderGun
   m_TagString: Projectile
@@ -123,6 +124,19 @@ MonoBehaviour:
   layerToIgnore:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &-1675043336096705185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411499753474433866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49711fb19f7213747a0dc0889d450267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToAutoDestroy: 5
 --- !u!1 &7330356440419965396
 GameObject:
   m_ObjectHideFlags: 0
