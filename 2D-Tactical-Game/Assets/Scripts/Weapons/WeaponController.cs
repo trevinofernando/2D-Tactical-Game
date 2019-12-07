@@ -30,6 +30,9 @@ public class WeaponController : MonoBehaviour
      * 14   = BangPistol
      * 15   = SpaceBoots
      * 16   = ThunderGun
+     * 17   = Weak_Stone
+     * 18   = Normal_Stone
+     * 19   = Hard_Stone
     */
     private Weapon weaponScript;
     public int currWeapon = 0;
@@ -74,6 +77,8 @@ public class WeaponController : MonoBehaviour
                 if(prevWeapon != currWeapon)
                 {
                     ChangeWeapon(currWeapon);
+                }else if(!playerSettings.HaveAmmo(currWeapon)){
+                    ChangeWeapon((int)WeaponCodes.Gauntlet);
                 }
             }
         }

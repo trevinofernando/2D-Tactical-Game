@@ -469,7 +469,7 @@ MonoBehaviour:
   timer: 5
   IsHoly: 0
   launchForce: 0
-  explosionForce: 1000
+  explosionForce: 500
   extraUpForce: -1
   explosionRadius: 3
   impactEffect: {fileID: 6013304362626085121, guid: a725e45ddd0ee3748bccfdd525ac7f6f,

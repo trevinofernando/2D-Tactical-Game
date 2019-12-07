@@ -30,13 +30,16 @@ public class PlayerSettings : MonoBehaviour
     private int angle;
     private PlayerSettings ps;
 
+    private void Awake() {
+        thisGameObject = gameObject;
+    }
+
     void Start()
     {
         //Get reference to weaponController and AIController script, and Rigidbody component
         weaponContr = GetComponent<WeaponController>();
         AICont = GetComponent<AIController>();
         rb = GetComponent<Rigidbody2D>();
-        thisGameObject = gameObject;
 
         //Initialize the player health/name
         nameAndHealthBar.SetText(nameGiven + "\n" + gameManager.soldiersHealth[teamID, ID]);
@@ -44,6 +47,7 @@ public class PlayerSettings : MonoBehaviour
     public void SetColor(Color newColor)//RBGA
     {
         bodySprite.color = newColor;
+        nameAndHealthBar.color = newColor;
     }
 
     public void EndTurn()

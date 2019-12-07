@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -101,8 +102,8 @@ public class GameManager : MonoBehaviour
         thisGM = gameObject.GetComponent<GameManager>();
         GLOBALS.GM = thisGM;
 
-        /****** TODO: Call Map generator and get spawn locations *******/
-        spawnLocations = mapInitializer.GenerateSpawns();
+        /****** Call Map generator and get spawn locations for players*******/
+        spawnLocations = mapInitializer.GenerateSpawns(1.503002f, 2.663491f, false);
         //mapInitializer = gameObject.GetComponent<MapInitializer>();
 
         int count = 0;
@@ -162,6 +163,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(coroutineGameClock);
         coroutineStarted = false;
         gameState = GameState.TurnTransition;
+        AudioListener.pause = false;//un-pause all sound affected by time
     }
 
 
@@ -367,6 +369,7 @@ public class GameManager : MonoBehaviour
                 if(!stateSaved){
                     stateSaved = true; //Update flag
                     Time.timeScale = 0.0f; //Stop time
+                    AudioListener.pause = true; //pause all sound affected by time
 
                     turnClockWhenPause = turnClock; //Save turnClock
                     StopCoroutine(coroutineTurnClock); //And stop the turn Coroutine
@@ -393,7 +396,7 @@ public class GameManager : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.P) || !pauseMenuCanvas.gameObject.activeInHierarchy){
                     stateSaved = false; //reset flag
-                    
+                    AudioListener.pause = false;//un-pause all sound affected by time
                     isTurnFinished = isTurnFinishedWhenPaused; //Recover this variable state
 
                     //Check if the coroutine was in progress or not, this only happens in exactly 1 frame
@@ -485,11 +488,15 @@ public class GameManager : MonoBehaviour
                 turnClock--;//update the clock timer
 
                 if(!hazardsWereCalled && gameState == GameState.TurnTransition && (int) turnClock == (int) waitTime - 2){
-                    Random.InitState(System.DateTime.Now.Millisecond);
+                    UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
                     hazardsWereCalled = true; //set flag
                     if(environmentManager.isReady)
                     {
-                        environmentManager.DeployHazard();
+                        try{
+                            environmentManager.DeployHazard();
+                        }catch(Exception e){
+                            Debug.LogError("Environment Error: " + e);
+                        }
                     }
                     //Chose random player
                     //go = teams[Random.Range(0, GLOBALS.numTeams), Random.Range(0, GLOBALS.teamSize)];

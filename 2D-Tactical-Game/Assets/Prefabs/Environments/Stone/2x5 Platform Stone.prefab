@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9028838419191065484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 2x5 Platform Stone
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,11 +47,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -107,6 +102,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (6)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &4221626523859613512 stripped
@@ -122,11 +122,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -182,6 +177,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (3)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &4584104729580896722 stripped
@@ -197,11 +197,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,6 +252,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &2347794880398437858 stripped
@@ -272,11 +272,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -332,6 +327,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (7)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &681860107827724654 stripped
@@ -347,11 +347,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -407,6 +402,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (8)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &7088258173259784645 stripped
@@ -422,11 +422,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -482,6 +477,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &7220692231446052316 stripped
@@ -497,11 +497,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -557,6 +552,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &6432065830431886163 stripped
@@ -572,11 +572,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -632,6 +627,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &4693177427429428165 stripped
@@ -647,11 +647,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -707,6 +702,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (5)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}
 --- !u!4 &4929081628016474334 stripped
@@ -722,11 +722,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9028838419191065484}
     m_Modifications:
-    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
-        type: 3}
-      propertyPath: m_Name
-      value: Stone (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 3562892852788665093, guid: c04447cd828f673449d4c23a98dfaa7e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -781,6 +776,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468230697499089460, guid: c04447cd828f673449d4c23a98dfaa7e,
+        type: 3}
+      propertyPath: m_Name
+      value: Stone (9)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c04447cd828f673449d4c23a98dfaa7e, type: 3}

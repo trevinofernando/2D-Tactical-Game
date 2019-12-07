@@ -12,17 +12,20 @@ public class PlayerMovement : MonoBehaviour
     public float distanceOffsetY = 0.4f;
     public bool isGrounded;
     public float groundDistance = 0.2f;
+    public LayerMask groundLayers;
     public Animator anim;
 
     //private float 
+    [System.NonSerialized]
+    public bool standingOnPlatform = false;
     [System.NonSerialized]
     public float moveDirection;
     private Rigidbody2D rb;
     private PlayerSettings ps;
 
     /*
-     We will make an invisible rectangle to check if it overlaps with anything under 
-     the player for that we need the CapsuleCollider2D and get it's dimensions.
+        We will make an invisible rectangle to check if it overlaps with anything under 
+        the player for that we need the CapsuleCollider2D and get it's dimensions.
 
             ____
            /    \
@@ -90,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
             playerPosition = transform.position;
 
             //Check for any overlap area under the players feet
-            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottomLeftCorner, playerPosition + centerToBottomRightCorner);
+            isGrounded = Physics2D.OverlapArea(playerPosition + centerToBottomLeftCorner, playerPosition + centerToBottomRightCorner, groundLayers);
             //isGrounded = Physics2D.Raycast(transform.position, Vector2.down, groundDistance);
 
 
@@ -119,9 +122,10 @@ public class PlayerMovement : MonoBehaviour
                 //But we can jump, so check for Up arrow, Space or "w"
                 //And check if we are relatively not moving up or down
                 //but if theres a ramp we could be moving up and down but no faster than "speed"
-                if (Input.GetAxisRaw("Vertical") > 0 && Mathf.Abs( rb.velocity.y) < 5f)
+                if (Input.GetAxisRaw("Vertical") > 0 && (Mathf.Abs( rb.velocity.y) < 5f || standingOnPlatform))
                 {
                     //Debug.Log("Jump");
+                    standingOnPlatform = false;
                     anim.SetTrigger("takeOff");
                     anim.SetBool("isJumping", true);
                     rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);

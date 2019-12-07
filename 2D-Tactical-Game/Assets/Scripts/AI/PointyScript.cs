@@ -44,15 +44,8 @@ public class PointyScript : MonoBehaviour
                 Rigidbody2D rb = otherTransform.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    rb.velocity = new Vector3(0, 0, 0);
-
-                    PlayerSettings ps = otherTransform.GetComponent<PlayerSettings>();
-
-                    //Check if it's the player's turn
-                    if(!ps.isMyTurn)
-                        rb.AddForce(direction * pushBackForceNotTurn);
-                    else
-                        rb.AddForce(direction * pushBackForceTurn);
+                    //rb.velocity = new Vector3(0, 0, 0);
+                    rb.AddForce(direction * pushBackForceTurn);
                 }
 
             }

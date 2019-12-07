@@ -16,6 +16,8 @@ public class AIController : MonoBehaviour
     private GlobalVariables GLOBALS;
     private WeaponController weaponContr;
 
+    [System.NonSerialized]
+    public Transform target;
     private List<Transform> targets = new List<Transform>();
     private float degreesOfDeadZone;
 
@@ -24,7 +26,6 @@ public class AIController : MonoBehaviour
     private Vector2 origin;
     private Vector2 direction;
     private Vector3 dir3;
-    private Transform target;
     private float xDiff;
     private float yDiff;
     private float tmp;
@@ -152,7 +153,9 @@ public class AIController : MonoBehaviour
                             continue; //Soldier is dead, move on
                         
                         //Add Soldier to possible targets to shoot
-                        targets.Add(GM.teams[i,j].transform);
+                        if(GM.teams[i,j] != null){
+                            targets.Add(GM.teams[i,j].transform);
+                        }
                     }
                 }
 
@@ -281,47 +284,32 @@ public class AIController : MonoBehaviour
 
             case(AIState.tryingParabolicShot):
                 //Debug.Log("tryingParabolicShot");
-
+                
                 //This is for BFG9000, ThunderGun and sets yDiff and xDiff 
                 zRotation = CalculateStraightShotAngle(target);
-
+                angle_1 = angle_2 = 0f;
                 
-                if(TryWeapon(WeaponCodes.ThunderGun) && Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f)
-                {/*In ThunderGun range and optimal angle range*/}
-                else if(TryWeapon(WeaponCodes.BFG9000) && target.GetComponent<DamageHandler>().health < 50)
-                {/*The target has low health*/}
-                else if(TryWeapon(WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID])
-                {/*AI has low health and is not the last man of its team*/}
+                if(TryWeapon(WeaponCodes.ThunderGun) && Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f){/*In ThunderGun range and optimal angle range*/}
+                else if(TryWeapon(WeaponCodes.BFG9000) && target.GetComponent<DamageHandler>().health < 50){/*The target has low health*/}
+                else if(TryWeapon(WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID]){/*AI has low health and is not the last man of its team*/}
+                else if(TryWeapon(WeaponCodes.PlaneBomber) || TryWeapon(WeaponCodes.Plane_Nuke)){
+                    //Sort list for farthest and highest targets
+                    targets = targets.OrderBy(x => -(x.position.y * 100 + Vector2.Distance(this.transform.position,x.position))).ToList();
+                    target = targets[0];
+                }
+                else if(TryWeapon(WeaponCodes.Homing_Bazooka)){
+                    zRotation = 90;
+                    weaponScript.fireTriggered = true;
+                }
                 else{
-                    angle_1 = angle_2 = 0f;
                     if(CalculateParabolicShotAngles(target, WeaponCodes.Bazooka) && TryWeapon(WeaponCodes.Bazooka))                         {/*Nothing to do*/}
-                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Holy_Grenade) && TryWeapon(WeaponCodes.Holy_Grenade))          {/*Nothing to do*/}
                     else if(CalculateParabolicShotAngles(target, WeaponCodes.Mine) && TryWeapon(WeaponCodes.Mine))                          {/*Nothing to do*/}
+                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Holy_Grenade) && TryWeapon(WeaponCodes.Holy_Grenade))          {/*Nothing to do*/}
                     else if(CalculateParabolicShotAngles(target, WeaponCodes.Grenade) && TryWeapon(WeaponCodes.Grenade))                    {/*Nothing to do*/}
                     else if(CalculateParabolicShotAngles(target, WeaponCodes.Teleport_Grenade) && TryWeapon(WeaponCodes.Teleport_Grenade))  {/*Nothing to do*/}
                     else{TryWeapon(WeaponCodes.Bang_Pistol);}
 
-                    //Debug.Log(zRotation);
-                    //Debug.Log(angle_1);
-                    //Debug.Log(angle_2);
                     zRotation = angle_1;
-                    /*
-                    //If target is roughly on the same height, use grenades
-                    if(Mathf.Abs(yDiff) < 3f){
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                    }else if(yDiff > 0){//If target is above player, use Bazooka
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Bazooka);
-                    }else{//Else a grenade
-                        weaponContr.ChangeWeapon((int)WeaponCodes.Grenade);
-                    }
-
-                    //Compansate for for gravity
-                    if(Mathf.Abs(zRotation) < 90f){
-                        zRotation += 25f;//raise the hammer 5 degrees up
-                    }else{
-                        zRotation -= 25f;//raise the hammer 5 degrees up
-                    }
-                    */
                 }
                 
                 //Change state and wait 
@@ -417,18 +405,19 @@ public class AIController : MonoBehaviour
         float v = velocity[(int)weaponCode];
 
         //Get gravity from Unity Project Settings (assuming there is only gravity on the y axis)
-        float g = Physics2D.gravity.y;
+        float g = -Physics2D.gravity.y;
 
         //Check if the target is reachable
         //discriminant = v^4 - g(gx^2 + 2yv^2)
         float discriminant = v*v*v*v - g * (g*x*x + 2*y*v*v);
+
         if(discriminant < 0){
             //In this case the target is unreachable 
             return false;
         }
         //Theta = ( v^2 (+-) sqrt(discriminant) ) / ( gx )
-        angle_1 =  Mathf.Atan2((v * v + Mathf.Sqrt(discriminant)) , (g * x)) * Mathf.Rad2Deg; //Low trajectory
-        angle_2 =  Mathf.Atan2((v * v - Mathf.Sqrt(discriminant)) , (g * x)) * Mathf.Rad2Deg; //High trajectory
+        angle_1 =  Mathf.Atan2((v * v - Mathf.Sqrt(discriminant)) , (g * x)) * Mathf.Rad2Deg; //Low trajectory
+        angle_2 =  Mathf.Atan2((v * v + Mathf.Sqrt(discriminant)) , (g * x)) * Mathf.Rad2Deg; //High trajectory
         /*
         if(x < 0){
             if(y < 0){//3rd quadrant

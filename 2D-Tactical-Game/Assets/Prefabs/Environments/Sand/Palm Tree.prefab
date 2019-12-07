@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: -1261149042578069243}
   - component: {fileID: 5093664468095071918}
   - component: {fileID: -6207429770959904721}
-  m_Layer: 0
+  - component: {fileID: -8992680544005190565}
+  m_Layer: 8
   m_Name: Palm Tree
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -220,3 +221,24 @@ MonoBehaviour:
   pushForce: 2500
   angularVelocity: 500
   autoDestroyOnHeight: -50
+--- !u!50 &-8992680544005190565
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5093664468095071905}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 50
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 5
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5

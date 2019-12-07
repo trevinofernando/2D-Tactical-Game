@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
-
-
     //Prefabs for map components
     public GameObject[] desertZonePrefabs;
     public GameObject[] forestZonePrefabs;
@@ -30,17 +28,21 @@ public class MapGenerator : MonoBehaviour
     public double emptyZoneProb;
 
     //References to global variables
-    private GlobalVariables GLOBALS;
+    public GlobalVariables GLOBALS; //made this public to allow for running game from Fernando's scene
     private GameManager GM;
     private MapSize mapSize;
     private MapTheme mapTheme;
     
     //Keep reference of each object for respawning function
-    private List<GameObject> zones;
+    private List<GameObject> zoneObjects;
+    private List<int> zonePrefabNum;
     private List<int> platformRowNums;
     private int skipPlatform;
     private int numPlatforms;
-    
+    private int zoneToRespawn;
+    GameObject zonePrefab;
+    Vector3 spawnSpot;
+
     private int numRows;
     private int numCols;
     private System.Random rand;
@@ -53,31 +55,21 @@ public class MapGenerator : MonoBehaviour
     private Vector3 xZoneOffset;
     private Vector3 yZoneOffset;
 
-    //Self Reference
-    public static MapGenerator Instance { get; private set; }
+    public EnvironmentManager environmentManager;
+
+    public LayerMask layerMask;
+
 
     void Awake()
     {
-        //This will only pass once at the beginning of the game 
-        if (Instance == null)
-        {
-            //Self reference
-            Instance = this;
-            //Make this object persistent
-            DontDestroyOnLoad(gameObject);
+        if(GlobalVariables.Instance != null){//Else use the default or previous instance
+            GLOBALS = GlobalVariables.Instance;
         }
-        else
-        {
-            //Destroy duplicate instance created by changing Scene
-            Destroy(gameObject);
-        }
-
-
-        GLOBALS = GlobalVariables.Instance;
         mapSize = GLOBALS.mapSize;
         mapTheme = GLOBALS.mapTheme;
         platformRowNums = new List<int>();
-        zones = new List<GameObject>();
+        zoneObjects = new List<GameObject>();
+        zonePrefabNum = new List<int>();
         rand = new System.Random();
         xZoneOffset = new Vector3(xZoneSize + 3, 0, 0);
         yZoneOffset = new Vector3(0, yZoneSize + 3, 0);
@@ -128,12 +120,12 @@ public class MapGenerator : MonoBehaviour
 
         for (int y = 0; y < numRows; y++)
         {
-            zones.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
+            zoneObjects.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
             spawnPosition += xZoneOffset;
             for (int x = 1; x < numCols; x++)
             {
                 spawnPosition += xPlatformOffset;
-                zones.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
+                zoneObjects.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
                 spawnPosition += xZoneOffset;
             }
             spawnPosition += yZoneOffset;
@@ -143,12 +135,17 @@ public class MapGenerator : MonoBehaviour
 
     GameObject PickRandomZone()
     {
+        int zoneNum;
         switch(mapTheme)
         {
             case MapTheme.Desert:
-                return desertZonePrefabs[rand.Next(desertZonePrefabs.Length)];
+                zoneNum = rand.Next(desertZonePrefabs.Length);
+                zonePrefabNum.Add(zoneNum);
+                return desertZonePrefabs[zoneNum];
             case MapTheme.Forest:
-                return forestZonePrefabs[rand.Next(forestZonePrefabs.Length)];
+                zoneNum = rand.Next(forestZonePrefabs.Length);
+                zonePrefabNum.Add(zoneNum);
+                return forestZonePrefabs[zoneNum];
             default:
                 return new GameObject();
         }
@@ -179,21 +176,21 @@ public class MapGenerator : MonoBehaviour
             case MapSize.Large:
                 for(int i = 0; i < 5; i++)
                 {
-                    Vector3 offSet = new Vector3(0, i*2, 0);
+                    Vector3 offSet = new Vector3(0, i*4, 0);
                     Instantiate(twoHighBasePlatform, spawnPosition + offSet, Quaternion.identity);
                 }
                 break;
             case MapSize.Medium:
                 for (int i = 0; i < 3; i++)
                 {
-                    Vector3 offSet = new Vector3(0, i*2 , 0);
+                    Vector3 offSet = new Vector3(0, i*4 , 0);
                     Instantiate(twoHighBasePlatform, spawnPosition + offSet, Quaternion.identity);
                 }
                 break;
             case MapSize.Small:
                 for (int i = 0; i < 2; i++)
                 {
-                    Vector3 offSet = new Vector3(0, i*2, 0);
+                    Vector3 offSet = new Vector3(0, i*4, 0);
                     Instantiate(twoHighBasePlatform, spawnPosition + offSet, Quaternion.identity);
                 }
                 break;
@@ -204,19 +201,70 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    void RespawnZone()
+    public void RespawnZone()
     {
-
+        zoneToRespawn = GetMostDestroyedZone();
+        zonePrefab = desertZonePrefabs[zonePrefabNum[zoneToRespawn]];
+        spawnSpot = zoneObjects[zoneToRespawn].transform.position;
+        this.environmentManager.DeployWizard(spawnSpot);
+        Invoke("CreateZone", 11f);
     }
 
-    //Returns a list of the zone indices in order
-    List<Zone> GetZoneRespawnPriorities()
+    private void CreateZone()
     {
-        List<Zone> respawnPriorities = new List<Zone>();
-
-
-        return respawnPriorities;
+        Debug.Log("Creating zone!");
+        GameObject toDelete = zoneObjects[zoneToRespawn];
+        zoneObjects.Insert(zoneToRespawn, Instantiate(zonePrefab, spawnSpot, Quaternion.identity));
+        if (toDelete != null)
+        {
+            Destroy(toDelete);
+        }
     }
 
+    //Returns the index of zoneObjects zone that has the least number of colliders
+    int GetMostDestroyedZone()
+    {
+        int mostDestroyedIndex = 0;
+        int leastChildren = (int)1e9;
 
+        for(int i = 0; i < zoneObjects.Count; i++)
+        {
+            GameObject go = zoneObjects[i];
+            if (go == null)
+                continue;
+            bool hasPlayer = false;
+            int childCount = 0;
+            Vector2 tempStart = go.transform.position;
+            Vector2 tempEnd = tempStart + new Vector2(60, 30);
+            Collider2D[] tempColliders = Physics2D.OverlapAreaAll(tempStart, tempEnd);
+            foreach(Collider2D collider in tempColliders)
+            {
+                if(collider.tag == "Player")
+                {
+                    hasPlayer = true;
+                    break;
+                }
+                childCount++;
+            }
+            if (hasPlayer)
+                continue;
+            Debug.Log(childCount);
+            
+            if(leastChildren > childCount)
+            {
+                mostDestroyedIndex = i;
+            }
+        }
+        return mostDestroyedIndex;
+    }
+
+    int GetNumChildren(Transform parent)
+    {
+        int numChildren = 0;
+        foreach(Transform child in parent)
+        {
+            numChildren += child.childCount;
+        }
+        return numChildren;
+    }
 }

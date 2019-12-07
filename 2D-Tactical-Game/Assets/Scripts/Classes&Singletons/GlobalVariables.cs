@@ -64,6 +64,7 @@ public class GlobalVariables : MonoBehaviour
     public float timeBetweenTurns = 5f; // 5 seconds
     public float TimePerGame = 60f * 20f; // 20 minutes
 
+    [System.NonSerialized]
     public GameManager GM;
 
     private void Awake()
@@ -102,5 +103,9 @@ public enum WeaponCodes
     Mine = 13,
     Bang_Pistol = 14,
     Space_Boots = 15,
-    ThunderGun = 16
+    ThunderGun = 16,
+    Weak_Stone = 17,
+    Normal_Stone = 18,
+    Hard_Stone = 19,
+    Plane_Nuke = 20
 }

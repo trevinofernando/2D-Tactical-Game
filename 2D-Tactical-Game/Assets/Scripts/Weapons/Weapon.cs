@@ -25,6 +25,9 @@ public class Weapon : MonoBehaviour
      * 14   = BangPistol
      * 15   = SpaceBoots
      * 16   = ThunderGun
+     * 17   = Weak_Stone
+     * 18   = Normal_Stone
+     * 19   = Hard_Stone
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -44,6 +47,7 @@ public class Weapon : MonoBehaviour
     [System.NonSerialized] public bool targetSelected = false;
     private GameObject go;
     private Rigidbody2D rb;
+    private AIController aiContr;
     private Vector3 mousePos;
     private float zoomAmount;
     private IEnumerator coroutineSpaceBoots;
@@ -51,9 +55,10 @@ public class Weapon : MonoBehaviour
     private float normalGravity;
 
     private void Start() {
-        rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
-        normalGravity = rb.gravityScale;
         PlaneSpawnPoint  = new Vector3(GlobalVariables.Instance.mapXMax + 30f, GlobalVariables.Instance.mapYMax + 20f, 0);
+        rb = playerSettings.thisGameObject.GetComponent<Rigidbody2D>();
+        aiContr = playerSettings.thisGameObject.GetComponent<AIController>();
+        normalGravity = rb.gravityScale;
     }
 
 
@@ -71,9 +76,6 @@ public class Weapon : MonoBehaviour
             if (fireTriggered && canShoot){
                 switch (weaponCode)
                 {
-                    case (int)WeaponCodes.Gauntlet://Do nothing
-                        break;
-
                     case (int)WeaponCodes.Bazooka: //Weapons that spawn a projectile and the camera follows the projectile
                     case (int)WeaponCodes.Grenade:
                     case (int)WeaponCodes.Teleport_Grenade:
@@ -122,7 +124,11 @@ public class Weapon : MonoBehaviour
                             targetSelected = true; //set flag
                             canChangeWeapons = false; //set flag
                             AudioManager.instance.Play("Target_Acquired");
-                            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //capture mouse location
+                            if(playerSettings.iAmAI){
+                                mousePos = aiContr.target.position;
+                            }else{
+                                mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //capture mouse location
+                            }
                             mousePos.z = 0; //clean z value
                             go = Instantiate(targetSprite, mousePos, Quaternion.identity);//spawn target mark
                             Destroy(go, playerSettings.gameManager.turnClock); //just in case the turn ends suddenly
@@ -143,15 +149,24 @@ public class Weapon : MonoBehaviour
                         break;
 
                     case (int)WeaponCodes.PlaneBomber:
+                    case (int)WeaponCodes.Plane_Nuke:
                         canShoot = false;
                         fireTriggered = false;
                         
                         AudioManager.instance.Play("Target_Acquired");
-                        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        if(playerSettings.iAmAI){
+                            mousePos = aiContr.target.position;
+                        }else{
+                            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        }
                         mousePos.z = 0;
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
-                        WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, true, go.transform);
+                        if(mousePos.x > PlaneSpawnPoint.x / 2){
+                            WeaponController.Shoot(projectilePrefab[weaponCode], new Vector3(0, PlaneSpawnPoint.y,0), Quaternion.identity, true, go.transform);
+                        }else{
+                            WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, true, go.transform);
+                        }
                         zoomAmount = 30f;
                         SetZoom();
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
@@ -217,6 +232,7 @@ public class Weapon : MonoBehaviour
                         }
                         break;
                     default:
+                        //Here we have: Gauntlet, Weak_Stone, Normal_Stone, Hard_Stone
                         break;
                 }
             }
