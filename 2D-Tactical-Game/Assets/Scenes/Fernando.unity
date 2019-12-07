@@ -11745,6 +11745,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8922552718644912695, guid: 6641b622c0494494db84f6847ba25c4a,
+        type: 3}
+      propertyPath: sounds.Array.data[36].pitch
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6641b622c0494494db84f6847ba25c4a, type: 3}
 --- !u!1 &1164700215
@@ -14191,7 +14196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82d0b688460445947b8f0fe54f8544c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000002000000010000000400000003000000050000006300000003000000010000000f0000000a0000000500000001000000
+  arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000002000000010000000400000003000000050000006300000003000000010000000f0000000a000000050000000100000005000000
   mapSize: 1
   mapTheme: 1
   mapXMin: 0
@@ -14203,7 +14208,7 @@ MonoBehaviour:
   numPlayersNPCs: 2
   teamSize: 4
   healthPerAvatar: 100
-  isTeamAI: 01010101
+  isTeamAI: 00010001
   gameMode: 1
   teamColors:
   - {r: 1, g: 0, b: 0, a: 1}
@@ -21949,6 +21954,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e3813735c1a31034d8f7bbea1f3c56e1, type: 3}
   - {fileID: 2800000, guid: e3813735c1a31034d8f7bbea1f3c56e1, type: 3}
   - {fileID: 2800000, guid: e3813735c1a31034d8f7bbea1f3c56e1, type: 3}
+  - {fileID: 2800000, guid: a29a8a05dd7d6314584aa82e7ddb3915, type: 3}
 --- !u!4 &2044761740
 Transform:
   m_ObjectHideFlags: 0

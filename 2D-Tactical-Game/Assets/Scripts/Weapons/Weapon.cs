@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public GameObject targetSprite;
+    public Animator anim;
     [System.NonSerialized] public int weaponCode = 0;
     private Vector3 PlaneSpawnPoint;
     /*
@@ -28,6 +29,7 @@ public class Weapon : MonoBehaviour
      * 17   = Weak_Stone
      * 18   = Normal_Stone
      * 19   = Hard_Stone
+     * 20   = Tactical_Nuke
     */
     public float endTurnDelay = 0f;
     public PlayerSettings playerSettings;
@@ -83,7 +85,7 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.Bang_Pistol:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
@@ -93,7 +95,7 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.ThunderGun:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, false);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
@@ -101,7 +103,7 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.Mine:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         Invoke("StopCameraFollow", 5f);
                         EndTurn();
@@ -112,11 +114,11 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         zoomAmount = 20f; //set desired zoom
                         Invoke("SetZoom", 3f); //wait for explosion then zoom out if necessary
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         EndTurn();
                         break;
-
+                        
                     case (int)WeaponCodes.Homing_Bazooka:
                         if (!targetSelected)
                         {
@@ -138,7 +140,7 @@ public class Weapon : MonoBehaviour
                             canShoot = false;//set flag
                             fireTriggered = false;//set flag
                             targetSelected = false;//set flag
-                            WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true, go.transform);//call method to spawn prefab
+                            WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true, go.transform);//call method to spawn prefab
                             playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                             if (go != null)
                             {
@@ -163,9 +165,9 @@ public class Weapon : MonoBehaviour
 
                         go = Instantiate(targetSprite, mousePos, Quaternion.identity);
                         if(mousePos.x > PlaneSpawnPoint.x / 2){
-                            WeaponController.Shoot(projectilePrefab[weaponCode], new Vector3(0, PlaneSpawnPoint.y,0), Quaternion.identity, true, go.transform);
+                            WeaponController.Shoot(projectilePrefab[weaponCode], new Vector3(0, PlaneSpawnPoint.y,0), Quaternion.identity, false, true, go.transform);
                         }else{
-                            WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, true, go.transform);
+                            WeaponController.Shoot(projectilePrefab[weaponCode], PlaneSpawnPoint, Quaternion.identity, false, true, go.transform);
                         }
                         zoomAmount = 30f;
                         SetZoom();
@@ -183,7 +185,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 7f); //unfreeze player after animation
                         zoomAmount = 100f; //set desired zoom
@@ -196,7 +198,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 2f); //unfreeze player after animation
                         EndTurn();
@@ -207,7 +209,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, false, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         zoomAmount = 5f;
                         SetZoom();
@@ -218,6 +220,7 @@ public class Weapon : MonoBehaviour
                         break;
 
                     case (int)WeaponCodes.Space_Boots:
+                        fireTriggered = false;//set flag
                         if(spaceBootsUsed){
                             StopCoroutine(coroutineSpaceBoots);
                         }
@@ -231,6 +234,14 @@ public class Weapon : MonoBehaviour
                             WeaponController.ChangeWeapon((int)WeaponCodes.Gauntlet);
                         }
                         break;
+
+                    case (int)WeaponCodes.Hulk_Punch:
+                        fireTriggered = false;//set flag
+                        anim.SetTrigger("Hulk_Punch");
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true, false);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
+                        break;
+
                     default:
                         //Here we have: Gauntlet, Weak_Stone, Normal_Stone, Hard_Stone
                         break;

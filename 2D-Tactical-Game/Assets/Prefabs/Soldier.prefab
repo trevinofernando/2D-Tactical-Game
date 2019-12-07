@@ -177,6 +177,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c2d4717018536764391072986b32e208, type: 3}
   - {fileID: 21300000, guid: c2d4717018536764391072986b32e208, type: 3}
   - {fileID: 21300000, guid: 0c8c79e44291dd445978c33ff3bd3441, type: 3}
+  - {fileID: 5268797700412558040, guid: d2d9b912cdeddae44981fdef6471d28a, type: 3}
   currWeapon: 0
   prevWeapon: 0
   numWeapons: 0
@@ -803,6 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetSprite: {fileID: 7354808264935725193, guid: aaddce2ab1e0d064495d83adcf51b61a,
     type: 3}
+  anim: {fileID: 7529892519968174175}
   endTurnDelay: 3
   playerSettings: {fileID: 5226463133170334109}
   WeaponController: {fileID: 5352855559125752562}
@@ -836,6 +838,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 6110699083877153648, guid: dcd4fb78102604949b6a5a63a4e6fcde, type: 3}
+  - {fileID: 624706245164149023, guid: 5dcc137b6075b0a41b92fd74ee8aec1d, type: 3}
 --- !u!1 &4124883912320935195
 GameObject:
   m_ObjectHideFlags: 0

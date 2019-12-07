@@ -9,7 +9,7 @@ public class MeleePunch : MonoBehaviour
     public float delayTime = 1.5f;
     public float horizontalForce = 2000f;
     public float verticalForce = 500f;
-    public string swingSound = "Hammer_Spin";
+    public string swingSound = "";
     public string hitSound = "Hammer_Hit";
     private Collider2D thisCollider;
     private DamageHandler target;
@@ -20,13 +20,17 @@ public class MeleePunch : MonoBehaviour
         thisCollider = gameObject.GetComponent<Collider2D>();
         thisCollider.enabled = false; //make sure the collider is deactivated
         Invoke("EnableCollider", delayTime); //enable collider after animation if there is any
-        AudioManager.instance.Play(swingSound);
+        if(swingSound != ""){
+            AudioManager.instance.Play(swingSound);
+        }
         Destroy(gameObject, delayTime + 0.03f);
     }
 
     private void EnableCollider(){
         thisCollider.enabled = true; //enable collider
-        AudioManager.instance.Stop(swingSound);
+        if(swingSound != ""){
+            AudioManager.instance.Stop(swingSound);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

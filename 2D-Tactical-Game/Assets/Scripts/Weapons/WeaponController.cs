@@ -33,6 +33,7 @@ public class WeaponController : MonoBehaviour
      * 17   = Weak_Stone
      * 18   = Normal_Stone
      * 19   = Hard_Stone
+     * 20   = Tactical_Nuke
     */
     private Weapon weaponScript;
     public int currWeapon = 0;
@@ -107,12 +108,15 @@ public class WeaponController : MonoBehaviour
         return true;
     }
 
-    public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction, bool cameraShouldFollow = true, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)
+    public void Shoot(GameObject projectilePrefab, Vector3 firePoint, Quaternion direction,bool isChild = false, bool cameraShouldFollow = true, Transform target = null, int numItemsToDrop = -1, int dropArea = -1)
     {
         if(projectilePrefab != null )
         {
             go = Instantiate(projectilePrefab, firePoint, direction);
 
+            if(isChild){
+                go.transform.parent = weapon.transform;
+            }
             if(cameraShouldFollow){//Don't follow the sniper or shotgun or melee weapons
                 playerSettings.gameManager.projectile = go;//Tell GM what projectile is  in the game, to tell the camera to follow it
             } 

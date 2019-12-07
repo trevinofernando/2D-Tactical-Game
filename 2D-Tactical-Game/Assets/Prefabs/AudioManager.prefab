@@ -296,3 +296,17 @@ MonoBehaviour:
     loop: 0
     isAffectedByTime: 1
     source: {fileID: 0}
+  - name: Smash
+    clip: {fileID: 8300000, guid: df7ee9661a4a9a043a801dd0b910d24f, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    isAffectedByTime: 1
+    source: {fileID: 0}
+  - name: Brick_Destroyed
+    clip: {fileID: 8300000, guid: 15fad099250692e448837ebf632446be, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    isAffectedByTime: 1
+    source: {fileID: 0}

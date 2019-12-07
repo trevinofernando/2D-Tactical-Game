@@ -107,5 +107,6 @@ public enum WeaponCodes
     Weak_Stone = 17,
     Normal_Stone = 18,
     Hard_Stone = 19,
-    Plane_Nuke = 20
+    Plane_Nuke = 20,
+    Hulk_Punch = 21
 }
