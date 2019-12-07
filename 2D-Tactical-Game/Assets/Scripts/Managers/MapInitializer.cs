@@ -105,6 +105,11 @@ public class MapInitializer : MonoBehaviour
 
         for(int x = 2; x < GLOBALS.mapXMax; x+=4)
         {
+            if(x % 60 <= 12 )
+            {
+                continue;
+            }
+
             for(int y = 2; y < GLOBALS.mapYMax + 3; y+=4)
             {
                 Vector2 tempStart = new Vector2(x, y);
