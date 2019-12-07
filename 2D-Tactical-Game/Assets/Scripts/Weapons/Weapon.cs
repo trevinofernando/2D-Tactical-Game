@@ -208,6 +208,7 @@ public class Weapon : MonoBehaviour
                         canShoot = false;//set flag
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
+                        AudioManager.instance.Stop("Carros_De_Fuego");
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
                         WeaponController.Shoot(projectilePrefab[weaponCode], transform.position, transform.rotation, true, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
@@ -272,6 +273,7 @@ public class Weapon : MonoBehaviour
         fireTriggered = false; //reset flag for next turn
         targetSelected = false;//reset flag for next turn
         canChangeWeapons = true; //reset flag for next turn
+        AudioManager.instance.Stop("Carros_De_Fuego");
         playerSettings.EndTurn(); //call master clean up function for all other scripts 
     }
 
