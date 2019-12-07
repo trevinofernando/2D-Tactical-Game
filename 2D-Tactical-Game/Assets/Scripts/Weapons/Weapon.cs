@@ -82,7 +82,6 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.Grenade:
                     case (int)WeaponCodes.Teleport_Grenade:
                     case (int)WeaponCodes.Hadouken:
-                    case (int)WeaponCodes.Bang_Pistol:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
                         WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
@@ -93,9 +92,10 @@ public class Weapon : MonoBehaviour
                     case (int)WeaponCodes.Sniper: //Weapons that don't need the camera to follow them
                     case (int)WeaponCodes.Shotgun:
                     case (int)WeaponCodes.ThunderGun:
+                    case (int)WeaponCodes.Bang_Pistol:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, false);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true, false);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         EndTurn();
                         break;
@@ -185,7 +185,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation, false, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint2.position, firePoint2.rotation, true, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 7f); //unfreeze player after animation
                         zoomAmount = 100f; //set desired zoom
@@ -198,7 +198,7 @@ public class Weapon : MonoBehaviour
                         fireTriggered = false;//set flag
                         //freeze player in place to play animation smoothly
                         rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, true, true);//call method to spawn prefab
                         playerSettings.UpdateAmmo(weaponCode, -1);//decrement the ammo on this weapon
                         Invoke("UnfreezePosition", 2f); //unfreeze player after animation
                         EndTurn();
