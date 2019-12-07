@@ -299,7 +299,7 @@ MonoBehaviour:
   - name: Smash
     clip: {fileID: 8300000, guid: df7ee9661a4a9a043a801dd0b910d24f, type: 3}
     volume: 0.6
-    pitch: 1
+    pitch: 1.1
     loop: 0
     isAffectedByTime: 1
     source: {fileID: 0}
