@@ -12,25 +12,6 @@ public class WeaponSelect : MonoBehaviour
 
     private GameObject currPlayer;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // update this sprite (maybe do in global unsire!)
-
-        // figure out status of menu
-        
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // this doesnt work here because the obj is disabled when you turn it off lol
-        
-        
-    }
-
     public void CallWeaponSwap()
     {
         // call ChangeWeapon
@@ -45,7 +26,7 @@ public class WeaponSelect : MonoBehaviour
             if(!GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
                 currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
                 ammo.SetText(currPlayer.GetComponent<PlayerSettings>().AmmoCount((int)wc).ToString("00"));
-                currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
+                currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to gauntlet
             }
         }else{
             //Can't change weapons when no turn is in progress

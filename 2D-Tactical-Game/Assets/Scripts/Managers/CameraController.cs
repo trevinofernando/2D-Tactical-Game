@@ -29,6 +29,7 @@ public class CameraController : MonoBehaviour
     private float scroll;
     private float speed;
     private Camera cam;
+    private bool coroutineInProgress = false;
 
     private void Awake() {
         if (instance == null)
@@ -63,6 +64,10 @@ public class CameraController : MonoBehaviour
         if (shouldFollowTarget || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             shouldFollowTarget = true;
+            if(!coroutineInProgress){
+                coroutineInProgress = true;
+                StartCoroutine(FindSoldier(2f));
+            }
             FollowTarget(soldier);
         }
 
@@ -160,6 +165,17 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         //change camera state to following again
         shouldFollowTarget = true;
+    }
+
+    public IEnumerator FindSoldier(float waitTime)
+    {
+        //wait about 5 seconds to reset camera to following the player again
+        yield return new WaitForSeconds(waitTime);
+        //If we lose reference to the player because someone unexpectedly took damage during their turn, then recover the reference
+        if(GlobalVariables.Instance.GM.gameState == GameManager.GameState.TurnInProgress){
+            soldier = GlobalVariables.Instance.GM.teams[GlobalVariables.Instance.GM.currTeamTurn, GlobalVariables.Instance.GM.currSoldierTurn[GlobalVariables.Instance.GM.currTeamTurn]];
+        }
+        coroutineInProgress = false;
     }
 
     public void SetZoom(float zoomAmount){

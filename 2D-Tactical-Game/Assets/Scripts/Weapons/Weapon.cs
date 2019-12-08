@@ -72,7 +72,8 @@ public class Weapon : MonoBehaviour
         //if the game is paused, then ignore all code
         if (playerSettings.isMyTurn && Time.timeScale != 0.0f)
         {
-            if(!playerSettings.iAmAI){
+            //Debounce double click when selecting weapons
+            if(!playerSettings.iAmAI && !playerSettings.gameManager.isArsenalOpen){
                 fireTriggered = Input.GetButtonDown("Fire1");
             }
             if (fireTriggered && canShoot){
