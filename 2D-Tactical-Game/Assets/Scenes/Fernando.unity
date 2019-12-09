@@ -6955,7 +6955,9 @@ MonoBehaviour:
   - {fileID: 2632478049124558350, guid: 9c75d9cb0879b4b408512b89a1045328, type: 3}
   - {fileID: 2632478049124558350, guid: 72f9d60965e7ab545bfa395ebd6b1353, type: 3}
   - {fileID: 2632478049124558350, guid: 5b5da6411648db84bae4955119c63b31, type: 3}
-  forestZonePrefabs: []
+  forestZonePrefabs:
+  - {fileID: 2176769842922268391, guid: fe525d36e4ed6464e83b94b92d315217, type: 3}
+  - {fileID: 9109685501562517052, guid: 1981fa03dd80c8547a74b7e64df5f3b4, type: 3}
   oneHighBasePlatform: {fileID: 1461800579003262429, guid: 8a93767a475467645b2e0a92f4642b88,
     type: 3}
   twoHighBasePlatform: {fileID: 9080088214722178845, guid: b8380466ff9e0654e9a1d1f610970f67,
@@ -19350,9 +19352,12 @@ MonoBehaviour:
     type: 3}
   smallDesert: {fileID: 2359081157751029374, guid: 9403112caed5a5b46a6abd95fd78c381,
     type: 3}
-  largeForest: {fileID: 0}
-  mediumForest: {fileID: 0}
-  smallForest: {fileID: 0}
+  largeForest: {fileID: 582879394744436573, guid: 925b2fb447016cf468adad55cd8474d3,
+    type: 3}
+  mediumForest: {fileID: 1601711023947402415, guid: ea7feae453a90ac4a8d040eda9f6ac1c,
+    type: 3}
+  smallForest: {fileID: 568376689240086787, guid: d5a10e51643d2284b97c7fb53ac1a1e5,
+    type: 3}
 --- !u!4 &1738065372
 Transform:
   m_ObjectHideFlags: 0
