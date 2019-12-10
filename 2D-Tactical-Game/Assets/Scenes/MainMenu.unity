@@ -1888,6 +1888,8 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: Desert
       m_Image: {fileID: 0}
+    - m_Text: Forest
+      m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

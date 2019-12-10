@@ -23,10 +23,11 @@ public class BFGLaser : MonoBehaviour
     public IEnumerator DamageArea(Transform obj, int _damageToPlayer, int _damageToProps, float delayTime){
         //Wait a few seconds and start
         yield return new WaitForSeconds(delayTime);
-
-        DamageHandler target = obj.GetComponent<DamageHandler>();
-        if(target != null){
-            target.TakeDamage( _damageToPlayer , _damageToProps);
+        if(obj != null){
+            DamageHandler target = obj.GetComponent<DamageHandler>();
+            if(target != null){
+                target.TakeDamage( _damageToPlayer , _damageToProps);
+            }
         }
         Destroy(gameObject);
     }
