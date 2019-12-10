@@ -9,13 +9,13 @@ public class MapInitializer : MonoBehaviour
     private GlobalVariables GLOBALS;
 
     private Vector3 smallBackgroundSpawnPoint = new Vector3(65, 65, 0);
-    private Vector2Int smallCoordinate = new Vector2Int(135, 75);
+    private Vector2Int smallCoordinate = new Vector2Int(135, 70);
 
     private Vector3 mediumBackgroundSpawnPoint = new Vector3(130, 75, 0);
-    private Vector2Int mediumCoordinate = new Vector2Int(280, 115);
+    private Vector2Int mediumCoordinate = new Vector2Int(280, 110);
 
     private Vector3 largeBackgroundSpawnPoint = new Vector3(170, 150, 0);
-    private Vector2Int largeCoordinate = new Vector2Int(425, 180);
+    private Vector2Int largeCoordinate = new Vector2Int(425, 175);
 
     //Desert Background
     public GameObject largeDesert;
@@ -103,14 +103,14 @@ public class MapInitializer : MonoBehaviour
         List<Vector3> spawns = new List<Vector3>();
         int numSpawns = 0;
 
-        for(int x = 2; x < GLOBALS.mapXMax; x+=4)
+        for(int x = 5; x < GLOBALS.mapXMax -5; x+=4)
         {
             if(x % 60 <= 12 )
             {
                 continue;
             }
 
-            for(int y = 2; y < GLOBALS.mapYMax + 3; y+=4)
+            for(int y = 2; y < GLOBALS.mapYMax -5; y+=4)
             {
                 Vector2 tempStart = new Vector2(x, y);
                 Vector2 tempEnd = new Vector2(x + sizeX, y + sizeY);
