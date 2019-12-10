@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     private Vector3[] spawnLocations;
     public MapInitializer mapInitializer;
     public Canvas gameOverCanvas;
+    public Canvas suddenDeathCanvas;
     public Canvas pauseMenuCanvas;
     public SunScript sun;
     public GameObject projectile;
@@ -215,7 +216,9 @@ public class GameManager : MonoBehaviour
                     coroutineStarted = true;
                     coroutineTurnClock = SetTurnClock(GLOBALS.timeBetweenTurns); //time between turns should be 1 to 5 sec
                     StartCoroutine(coroutineTurnClock);
-
+                    if(suddenDeath){
+                        StartCoroutine(ShowSuddenDeathCanvas(2f));
+                    }
                     
                 }
 
@@ -472,7 +475,22 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);//wait one second
         }
         //Debug.Log("Timer for GAME Clock finished");
+        DamageHandler dh;
+        foreach(GameObject player in teams){
+            if(player != null){
+                dh = player.GetComponent<DamageHandler>();
+                //Reduce 100% of the player health and heal 1hp (-1). The 0's are for prop damage
+                dh.TakeDamage(-1, 0, 100,0);
+            }
+        }
+        StartCoroutine(ShowSuddenDeathCanvas(1f));
         suddenDeath = true;
+    }
+
+    public IEnumerator ShowSuddenDeathCanvas(float waitTime){
+        suddenDeathCanvas.gameObject.SetActive(true);
+        yield return new WaitForSeconds(waitTime);
+        suddenDeathCanvas.gameObject.SetActive(false);
     }
 
     public IEnumerator SetTurnClock(float waitTime)
