@@ -81,7 +81,6 @@ public class Weapon : MonoBehaviour
                 {
                     case (int)WeaponCodes.Bazooka: //Weapons that spawn a projectile and the camera follows the projectile
                     case (int)WeaponCodes.Grenade:
-                    case (int)WeaponCodes.Teleport_Grenade:
                     case (int)WeaponCodes.Hadouken:
                         canShoot = false; //set flag
                         fireTriggered = false; //set flag
@@ -219,6 +218,11 @@ public class Weapon : MonoBehaviour
                         zoomAmount = 25f; //set desired zoom
                         Invoke("SetZoom", 7.5f); //wait for animation then zoom out
                         EndTurn();
+                        break;
+
+                    case (int)WeaponCodes.Teleport_Grenade:
+                        WeaponController.Shoot(projectilePrefab[weaponCode], firePoint1.position, firePoint1.rotation, false, true);//call method to spawn prefab
+                        playerSettings.UpdateAmmo(weaponCode, -1); //decrement the ammo on this weapon
                         break;
 
                     case (int)WeaponCodes.Space_Boots:

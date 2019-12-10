@@ -50,7 +50,9 @@ public class TeleportGrenade : MonoBehaviour
         }
 
         //Calculate rotation amount given the horizontal speed
-        rb.angularVelocity = -rb.velocity.x * 25f; 
+        if(rb != null){
+            rb.angularVelocity = -rb.velocity.x * 25f; 
+        }
     }
 
     void Detonate()
@@ -99,9 +101,9 @@ public class TeleportGrenade : MonoBehaviour
             }
             yield return new WaitForSeconds(delay - 0.25f);     // minus whatever frames you need above
         }
-        rb = soldier.GetComponent<Rigidbody2D>();
+        Rigidbody2D rbPlayer = soldier.GetComponent<Rigidbody2D>();
         soldier.transform.position = new Vector3(location.x, location.y, -100); // set pos to "invisible" new position
-        rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        rbPlayer.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
         // anim 2
         if (impactEffect != null)
         {
@@ -111,10 +113,6 @@ public class TeleportGrenade : MonoBehaviour
             soldier.transform.position = location;
         }
         yield return new WaitForSeconds(delay - 0.25f);
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rbPlayer.constraints = RigidbodyConstraints2D.FreezeRotation;
     } 
-    private IEnumerator Timer2(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-    }
 }
