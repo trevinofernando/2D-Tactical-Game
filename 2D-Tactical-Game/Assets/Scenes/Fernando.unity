@@ -6974,7 +6974,7 @@ MonoBehaviour:
   largeZoneColumns: 6
   xZoneSize: 60
   yZoneSize: 30
-  platformSpawnProb: 0
+  platformSpawnProb: 0.75
   emptyZoneProb: 0
   GLOBALS: {fileID: 1289858338}
   environmentManager: {fileID: 2074784434}
@@ -14652,7 +14652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arsenalAmmo: 01000000630000000a00000005000000630000000200000002000000010000000a00000002000000010000000400000003000000050000006300000003000000010000000f0000000a000000050000000100000005000000
   mapSize: 1
-  mapTheme: 1
+  mapTheme: 2
   mapXMin: 0
   mapYMin: 0
   mapXMax: 0

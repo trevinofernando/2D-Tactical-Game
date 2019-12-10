@@ -16,7 +16,7 @@ public class PlatformScript : MonoBehaviour
     private Rigidbody2D rb;
     private PlayerMovement playerMov;
 
-    public int heightMax;
+    private int heightMax;
     public double maxSpeedY;
     public double maxSpeedX;
     public bool moveVertically;
@@ -30,7 +30,7 @@ public class PlatformScript : MonoBehaviour
         maxHeight = GLOBALS.mapYMax;
         startingY = transform.position.y;
         startingX = transform.position.x;
-        heightMax = rand.Next(45, 60);
+        heightMax = rand.Next(45, 60) + (int)startingY;
 
         if(moveVertically)
         {
@@ -49,11 +49,11 @@ public class PlatformScript : MonoBehaviour
     {
         float currentHeight = transform.position.y;
 
-        if(currentHeight >= startingY + heightMax)
+        if(currentHeight >= heightMax)
         {
             velocity = new Vector2(velocityX, -velocityY);
         }
-        else if(currentHeight <= 0)
+        else if(currentHeight <= startingY)
         {
             velocity = new Vector2(velocityX, velocityY);
         }
