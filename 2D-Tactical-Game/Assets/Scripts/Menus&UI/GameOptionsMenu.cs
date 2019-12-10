@@ -93,9 +93,9 @@ public class GameOptionsMenu : MonoBehaviour
         
         // initialize the sliders
         SetPlayersPerTeam(4);
-        SetTurnTimer(6);
-        SetGameTimer(1);
-        SetPlayerHealth(100);
+        SetTurnTimer(12);
+        SetGameTimer(4);
+        SetPlayerHealth(10);
     }
 
     public void NextTeam ()
@@ -182,7 +182,7 @@ public class GameOptionsMenu : MonoBehaviour
 
     public void SetPlayerHealth(float sliderValue)
     {
-        playerHealth = (int)sliderValue;
+        playerHealth = Mathf.Clamp((int)sliderValue * 10, 1, 999);
         playerHealthTMP.text = (playerHealth.ToString() + " HP");
     }
 
