@@ -37,6 +37,7 @@ public class MapGenerator : MonoBehaviour
     private List<GameObject> zoneObjects;
     private List<int> zonePrefabNum;
     private List<int> platformRowNums;
+    private List<int> startingColliderPlatform;
     private int skipPlatform;
     private int numPlatforms;
     private int zoneToRespawn;
@@ -49,9 +50,9 @@ public class MapGenerator : MonoBehaviour
 
     //Position spawning offsets
     private Vector3 xPlatformOffset = new Vector3(10, 0, 0);
-    private int yLargeBaseOffset = 16;
-    private int yMediumBaseOffset = 10;
-    private int ySmallBaseOffset = 6;
+    private int yLargeBaseOffset = 18;
+    private int yMediumBaseOffset = 12;
+    private int ySmallBaseOffset = 8;
     private Vector3 xZoneOffset;
     private Vector3 yZoneOffset;
 
@@ -70,8 +71,9 @@ public class MapGenerator : MonoBehaviour
         platformRowNums = new List<int>();
         zoneObjects = new List<GameObject>();
         zonePrefabNum = new List<int>();
+        startingColliderPlatform = new List<int>();
         rand = new System.Random();
-        xZoneOffset = new Vector3(xZoneSize + 3, 0, 0);
+        xZoneOffset = new Vector3(xZoneSize + 6, 0, 0);
         yZoneOffset = new Vector3(0, yZoneSize + 3, 0);
 
         switch (mapSize)
@@ -120,22 +122,39 @@ public class MapGenerator : MonoBehaviour
 
         for (int y = 0; y < numRows; y++)
         {
-            zoneObjects.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
+            GameObject zone = Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity);
+            zoneObjects.Add(zone);
+            InitZoneNumColliders(zone);
             spawnPosition += xZoneOffset;
             for (int x = 1; x < numCols; x++)
             {
                 if(rand.NextDouble() <= platformSpawnProb && y > 0)
                 {
-                    Instantiate(platformVert, spawnPosition, Quaternion.identity);
+                    Instantiate(platformVert, spawnPosition + new Vector3(2, 0, 0), Quaternion.identity);
                 }
 
                 spawnPosition += xPlatformOffset;
-                zoneObjects.Add(Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity));
+                GameObject zonee = Instantiate(PickRandomZone(), spawnPosition, Quaternion.identity);
+                zoneObjects.Add(zonee);
+                InitZoneNumColliders(zonee);
                 spawnPosition += xZoneOffset;
             }
             spawnPosition += yZoneOffset;
             spawnPosition.x = 0;
         }
+    }
+
+    void InitZoneNumColliders(GameObject go)
+    {
+        int childCount = 0;
+        Vector2 tempStart = go.transform.position;
+        Vector2 tempEnd = tempStart + new Vector2(60, 30);
+        Collider2D[] tempColliders = Physics2D.OverlapAreaAll(tempStart, tempEnd);
+        foreach (Collider2D collider in tempColliders)
+        {
+            childCount++;
+        }
+        startingColliderPlatform.Add(childCount);
     }
 
     GameObject PickRandomZone()
@@ -161,11 +180,11 @@ public class MapGenerator : MonoBehaviour
         
         SpawnOneColBasePlatform(new Vector3(0, 0, 0));
         
-        Vector3 spawnPosition = new Vector3(60, 0, 0);
+        Vector3 spawnPosition = new Vector3(66, 0, 0);
         
         for(int i = 1; i < numCols; i++)
         {
-            Instantiate(platformVert, spawnPosition + new Vector3(5, 0, 0), Quaternion.identity);
+            Instantiate(platformVert, spawnPosition + new Vector3(2, 0, 0), Quaternion.identity);
             spawnPosition += xPlatformOffset;
             SpawnOneColBasePlatform(spawnPosition);
             spawnPosition += xZoneOffset;
@@ -225,7 +244,6 @@ public class MapGenerator : MonoBehaviour
 
     private void CreateZone()
     {
-        Debug.Log("Creating zone!");
         GameObject toDelete = zoneObjects[zoneToRespawn];
         zoneObjects.Insert(zoneToRespawn, Instantiate(zonePrefab, spawnSpot, Quaternion.identity));
         if (toDelete != null)
@@ -238,7 +256,7 @@ public class MapGenerator : MonoBehaviour
     int GetMostDestroyedZone()
     {
         int mostDestroyedIndex = 0;
-        int leastChildren = (int)1e9;
+        double leastChildren = 1e9;
 
         for(int i = 0; i < zoneObjects.Count; i++)
         {
@@ -252,20 +270,15 @@ public class MapGenerator : MonoBehaviour
             Collider2D[] tempColliders = Physics2D.OverlapAreaAll(tempStart, tempEnd);
             foreach(Collider2D collider in tempColliders)
             {
-                if(collider.tag == "Player")
-                {
-                    hasPlayer = true;
-                    break;
-                }
                 childCount++;
             }
-            if (hasPlayer)
+            if (i >= startingColliderPlatform.Count)
                 continue;
-            Debug.Log(childCount);
-            
-            if(leastChildren > childCount)
+            double ratio = (double)childCount / startingColliderPlatform[i];
+            if(leastChildren >ratio)
             {
                 mostDestroyedIndex = i;
+                leastChildren = ratio;
             }
         }
         return mostDestroyedIndex;

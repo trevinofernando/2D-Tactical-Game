@@ -103,9 +103,9 @@ public class MapInitializer : MonoBehaviour
         List<Vector3> spawns = new List<Vector3>();
         int numSpawns = 0;
 
-        for(int x = 5; x < GLOBALS.mapXMax -5; x+=4)
+        for(int x = 4; x < GLOBALS.mapXMax -5; x+=3)
         {
-            if(x % 60 <= 12 )
+            if(!SafeToSpawn(x))
             {
                 continue;
             }
@@ -136,5 +136,16 @@ public class MapInitializer : MonoBehaviour
 
         return shuffledSpawns.ToArray();
     }
+    /*Avoid 58-78, 135-153, 210-228, 286-305, 360-384 
+     * For platform areas 
+     */
+    bool SafeToSpawn(int x)
+    {
+        if ((x > 58 && x < 78) || (x > 135 && x < 153) || (x > 210 && x < 228) || (x > 286 && x < 305) || (x > 360 && x < 384))
+            return false;
+        return true;
+    }
 
 }
+
+

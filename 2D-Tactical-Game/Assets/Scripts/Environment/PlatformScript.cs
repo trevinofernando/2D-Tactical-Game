@@ -30,7 +30,7 @@ public class PlatformScript : MonoBehaviour
         maxHeight = GLOBALS.mapYMax;
         startingY = transform.position.y;
         startingX = transform.position.x;
-        heightMax = rand.Next(45, 60) + (int)startingY;
+        heightMax = rand.Next(25, 35) + (int)startingY;
 
         if(moveVertically)
         {

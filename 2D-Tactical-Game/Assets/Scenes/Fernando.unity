@@ -15080,8 +15080,8 @@ MonoBehaviour:
   mapXMax: 0
   mapYMax: 0
   numTeams: 4
-  numPlayersHuman: 2
-  numPlayersNPCs: 2
+  numPlayersHuman: 4
+  numPlayersNPCs: 4
   teamSize: 4
   healthPerAvatar: 100
   isTeamAI: 00000000

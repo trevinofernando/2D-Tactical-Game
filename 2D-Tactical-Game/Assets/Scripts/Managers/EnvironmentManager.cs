@@ -5,16 +5,18 @@ using UnityEngine;
 public enum Hazard
 {
     /* Bad Hazards */
-    Sun = 0,
+    Sun = 4,
     Coconut_Bomber = 1,
     Mine_Bomber = 2,
     Tree = 3,
-    Wizard = 4,
+    Wizard = 0,
+    /*
     Player_Bush = 5,
     Bird = 6,
+    */
     /* Good Hazards */
-    Plane_Healer = 7,
-    Plane_Crates = 8
+    Plane_Healer = 5,
+    Plane_Crates = 6
 }
 
 public class EnvironmentManager : MonoBehaviour
@@ -23,7 +25,7 @@ public class EnvironmentManager : MonoBehaviour
     System.Random rand;
 
     //Hazards
-    private int numHazards = 9;
+    private int numHazards = 7;
     public Vector3 planeSpawnPoint;
     public Vector3 sunSpawnPoint;
     public GameObject coconutBomberPrefab;
@@ -80,17 +82,19 @@ public class EnvironmentManager : MonoBehaviour
 
     public void DeployHazard()
     {
+        int number = 0;
         if(rand.NextDouble() >= badHazardChance)
         {
-            hazard = (Hazard)rand.Next(0, 7);
+            number = rand.Next(0, 6);
+            hazard = (Hazard)number;
         }
         else
         {
-            hazard = (Hazard)rand.Next(7, numHazards + 2);
+            number = rand.Next(5, numHazards);
+            hazard = (Hazard)number;
         }
 
-        //hazard = Hazard.Wizard;
-
+        Debug.Log("Number " + number + " " + hazard);
         switch(hazard)
         {
             /* Bad Hazards */
@@ -104,15 +108,17 @@ public class EnvironmentManager : MonoBehaviour
                 DeployPlane(minePlanePrefab);
                 break;
             case Hazard.Tree:
-                DeployTree();
+                //DeployTree();
                 break;
             case Hazard.Wizard:
                 mapGenerator.RespawnZone();
                 break;
+            /*
             case Hazard.Player_Bush:
                 break;
             case Hazard.Bird:
                 break;
+            */
             /* Good hazards */
             case Hazard.Plane_Healer: 
                 DeployPlane(healthPlanePrefab);
