@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038143, y: 15}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3513160
@@ -778,6 +778,7 @@ MonoBehaviour:
   wc: 7
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 754559089}
+  btn: {fileID: 721833166}
 --- !u!1 &43925667
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,6 +1693,7 @@ MonoBehaviour:
   wc: 20
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 522820008}
+  btn: {fileID: 1670197587}
 --- !u!1 &181378255
 GameObject:
   m_ObjectHideFlags: 0
@@ -2139,6 +2141,7 @@ MonoBehaviour:
   wc: 3
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 838135991}
+  btn: {fileID: 1595203862}
 --- !u!1 &214333881
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,6 +2988,7 @@ MonoBehaviour:
   wc: 17
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1852537963}
+  btn: {fileID: 1207998064}
 --- !u!1 &286787247
 GameObject:
   m_ObjectHideFlags: 0
@@ -5446,6 +5450,7 @@ MonoBehaviour:
   wc: 16
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 677383315}
+  btn: {fileID: 1405992661}
 --- !u!1 &546639506
 GameObject:
   m_ObjectHideFlags: 0
@@ -7547,6 +7552,7 @@ MonoBehaviour:
   wc: 10
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 2050106174}
+  btn: {fileID: 1772845681}
 --- !u!1 &746887050
 GameObject:
   m_ObjectHideFlags: 0
@@ -8391,6 +8397,7 @@ MonoBehaviour:
   wc: 11
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1107371634}
+  btn: {fileID: 934764561}
 --- !u!1 &811651524
 GameObject:
   m_ObjectHideFlags: 0
@@ -8879,6 +8886,7 @@ MonoBehaviour:
   wc: 15
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1608192196}
+  btn: {fileID: 1694108190}
 --- !u!1 &837861688
 GameObject:
   m_ObjectHideFlags: 0
@@ -9679,6 +9687,7 @@ MonoBehaviour:
   wc: 9
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1427244239}
+  btn: {fileID: 3513160}
 --- !u!1 &885425795
 GameObject:
   m_ObjectHideFlags: 0
@@ -11174,6 +11183,7 @@ MonoBehaviour:
   wc: 21
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1257513103}
+  btn: {fileID: 206615269}
 --- !u!1 &994802734
 GameObject:
   m_ObjectHideFlags: 0
@@ -11846,6 +11856,7 @@ MonoBehaviour:
   wc: 18
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1243530181}
+  btn: {fileID: 469556397}
 --- !u!1 &1101025758
 GameObject:
   m_ObjectHideFlags: 0
@@ -13899,6 +13910,7 @@ MonoBehaviour:
   wc: 6
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1080340415}
+  btn: {fileID: 1372194404}
 --- !u!1 &1231576440
 GameObject:
   m_ObjectHideFlags: 0
@@ -14756,6 +14768,7 @@ MonoBehaviour:
   wc: 12
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1753289564}
+  btn: {fileID: 1950304694}
 --- !u!1 &1257513101
 GameObject:
   m_ObjectHideFlags: 0
@@ -15313,6 +15326,7 @@ MonoBehaviour:
   wc: 14
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 811698441}
+  btn: {fileID: 1571208902}
 --- !u!1 &1311741942
 GameObject:
   m_ObjectHideFlags: 0
@@ -15934,6 +15948,7 @@ MonoBehaviour:
   wc: 5
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 267788835}
+  btn: {fileID: 750598859}
 --- !u!1 &1386493718
 GameObject:
   m_ObjectHideFlags: 0
@@ -17336,6 +17351,7 @@ MonoBehaviour:
   wc: 2
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 907434473}
+  btn: {fileID: 811651526}
 --- !u!1 &1517684595
 GameObject:
   m_ObjectHideFlags: 0
@@ -18322,6 +18338,7 @@ MonoBehaviour:
   wc: 19
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 47257882}
+  btn: {fileID: 1244236062}
 --- !u!1 &1595203860
 GameObject:
   m_ObjectHideFlags: 0
@@ -18360,7 +18377,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000038143, y: 15}
+  m_AnchoredPosition: {x: 0, y: 15}
   m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595203862
@@ -18674,6 +18691,7 @@ MonoBehaviour:
   wc: 4
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 187574250}
+  btn: {fileID: 244388217}
 --- !u!1 &1608192194
 GameObject:
   m_ObjectHideFlags: 0
@@ -19123,6 +19141,7 @@ MonoBehaviour:
   wc: 1
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 1434931479}
+  btn: {fileID: 1721601548}
 --- !u!1 &1640975353
 GameObject:
   m_ObjectHideFlags: 0
@@ -19250,6 +19269,7 @@ MonoBehaviour:
   wc: 13
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 441306592}
+  btn: {fileID: 791152182}
 --- !u!1 &1668746084
 GameObject:
   m_ObjectHideFlags: 0
@@ -20728,6 +20748,7 @@ MonoBehaviour:
   wc: 8
   weaponMenu: {fileID: 1403003663}
   ammo: {fileID: 498511233}
+  btn: {fileID: 593102155}
 --- !u!1 &1779848893
 GameObject:
   m_ObjectHideFlags: 0
