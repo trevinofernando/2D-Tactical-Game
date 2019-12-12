@@ -110,6 +110,7 @@ public class GameManager : MonoBehaviour
         int count = 0;
 
         //Create Teams
+        PlayerSettings.arsenalAmmo = new List<List<int>>();
         for (int i = 0; i < GLOBALS.numTeams; i++)
         {
             List<int> subArsenal = new List<int>();
