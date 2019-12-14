@@ -12,11 +12,13 @@ public class InvAndPauseButtons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Ground"), true);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Player"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Default"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Player"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Ground"), true);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Buttons"), LayerMask.NameToLayer("Water"), true);
     }
 
+/*
     // Update is called once per frame
     void Update()
     {
@@ -24,7 +26,6 @@ public class InvAndPauseButtons : MonoBehaviour
         if(gm.gameState == GameManager.GameState.TurnInProgress){
             //Stop player from changing the weapon of an AI player
             if(GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
-
                 return; //Not a human turn, so leave
             }
             //Find Mouse position in monitor and then translate that to a point in the world
@@ -38,16 +39,16 @@ public class InvAndPauseButtons : MonoBehaviour
             }
         }
     }
-/* 
+*/
     void OnMouseOver ()
     {
         //Debug.Log("is this actually working?");
-        if(gm.gameState == GameManager.GameState.TurnInProgress){
+        if(gm.gameState == GameManager.GameState.TurnInProgress && !GlobalVariables.Instance.isTeamAI[gm.currTeamTurn]){
             currPlayer = gm.teams[gm.currTeamTurn, gm.currSoldierTurn[gm.currTeamTurn]];  // find the current player
             currPlayer.GetComponent<WeaponController>().ChangeWeapon((int)WeaponCodes.Gauntlet);        // change weapon to selected button
         }
     }
-*/
+
     public void PauseGame ()
     {
         gm.prevGameState = gm.gameState; //save prevGameState
