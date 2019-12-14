@@ -238,6 +238,7 @@ public class EnvironmentManager : MonoBehaviour
         GLOBALS.GM.turnClock += (int)(GLOBALS.mapXMax / 100) + 7f;
         GameObject go = Instantiate(wizardPrefab, target + new Vector3(30, 15, 0), Quaternion.identity);
         cam.soldier = go;
+        cam.shouldFollowTarget = true;
         cam.SetZoom(30f);
     }
 }
