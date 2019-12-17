@@ -225,27 +225,12 @@ public class GameManager : MonoBehaviour
 
                 if (isTurnFinished)
                 {
-                    coroutineStarted = false; //Reset coroutine check
-                    isTurnFinished = false; //Reset check before changing state
-                    gameState = GameState.TurnInProgress;//change State
-
+                    //----------Try to find the next player before changing the state and reseting flags----------------
                     //Find out which team is next in turn. By looping thru the number of teams - 1
                     //If we don't get to the break statement, then game is over
-                    isOneTeamAlive = true;
-                    for (int i = 0; i < GLOBALS.numTeams - 1; i++)
-                    {
-                        //Give turn to next team
-                        currTeamTurn = (currTeamTurn + 1) % GLOBALS.numTeams;
+                    isOneTeamAlive = !FindNextTeam();
 
-                        //Check if next team is dead
-                        if (teamsHealth[currTeamTurn] > 0)
-                        {
-                            //A team with acceptable health was found
-                            isOneTeamAlive = false;
-                            break;
-                        }
-                    }
-
+                    
                     if (isOneTeamAlive)
                     {
                         //Check if all teams are dead by checking the last team
@@ -261,27 +246,24 @@ public class GameManager : MonoBehaviour
 
                         //Trigger GameOver state
                         gameState = GameState.GameOver;
+                        break;
                     }
 
                     //Depending on the next Teams turn, find out which soldier is next on their team
-                    for (int j = 0; j < GLOBALS.teamSize; j++)
-                    {
-                        //go to the next player alive in that turn
-                        currSoldierTurn[currTeamTurn] = (currSoldierTurn[currTeamTurn] + 1) % GLOBALS.teamSize;
-                        //check if Soldier is alive before choosing it for next turn
-                        if (soldiersHealth[currTeamTurn, currSoldierTurn[currTeamTurn]] > 0)
-                        {
-                            break;
-                        }
+                    if(!FindNextPlayer()){
+                        Debug.Log("All Players in the next team are dead, restarting state");
+                        break;
                     }
+
+                    //----------Next player was found, so continue and reset flags----------------
+                    coroutineStarted = false; //Reset coroutine check
+                    isTurnFinished = false; //Reset check before changing state
+                    gameState = GameState.TurnInProgress;//change State
 
                     // Activate movement Script for player or AI to play and tell camera
                     go = teams[currTeamTurn, currSoldierTurn[currTeamTurn]];
                     if(go != null)
                     {
-                        //**************TODO*********************************
-                        //Check for Human/AI
-
                         go.GetComponent<PlayerSettings>().isMyTurn = true;
 
                         //Tell camera which player is next in turn
@@ -293,7 +275,6 @@ public class GameManager : MonoBehaviour
                     {
                         Debug.LogError("Next Soldier in turn is dead, this state should never be reached");
                     }
-
 
                 }
 
@@ -456,6 +437,42 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("Invalid State reached... but HOW??!!");
                 break;
         }
+    }
+
+    private bool FindNextTeam(){
+        //Find out which team is next in turn. By looping thru the number of teams - 1
+        //If we don't get to the break statement, then game is over
+        int teamInTurn = currTeamTurn;
+        for (int i = 0; i < GLOBALS.numTeams - 1; i++)
+        {
+            //Give turn to next team
+            teamInTurn = (teamInTurn + 1) % GLOBALS.numTeams;
+
+            //Check if next team is dead
+            if (teamsHealth[teamInTurn] > 0)
+            {
+                //A team with acceptable health was found
+                currTeamTurn = teamInTurn;
+                return true; //successfully found the next team
+            }
+        }
+        return false; //To say that one team is alive
+    }
+
+    private bool FindNextPlayer(){
+        int playerInTurn = currSoldierTurn[currTeamTurn];
+        for (int j = 0; j < GLOBALS.teamSize; j++)
+        {
+            //go to the next player alive in that turn
+            playerInTurn = (playerInTurn + 1) % GLOBALS.teamSize;
+            //check if Soldier is alive before choosing it for next turn
+            if (soldiersHealth[currTeamTurn, playerInTurn] > 0)
+            {
+                currSoldierTurn[currTeamTurn] = playerInTurn;
+                return true;
+            }
+        }
+        return false;
     }
 
     public IEnumerator SetGameClock(float waitTime)
