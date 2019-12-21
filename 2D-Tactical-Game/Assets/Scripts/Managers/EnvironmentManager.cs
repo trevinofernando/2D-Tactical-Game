@@ -94,7 +94,7 @@ public class EnvironmentManager : MonoBehaviour
             hazard = (Hazard)number;
         }
 
-        Debug.Log("Number " + number + " " + hazard);
+        //Debug.Log("Number " + number + " " + hazard);
         switch(hazard)
         {
             /* Bad Hazards */
