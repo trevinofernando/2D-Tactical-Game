@@ -263,7 +263,7 @@ public class MapGenerator : MonoBehaviour
             GameObject go = zoneObjects[i];
             if (go == null)
                 continue;
-            bool hasPlayer = false;
+            //bool hasPlayer = false;
             int childCount = 0;
             Vector2 tempStart = go.transform.position;
             Vector2 tempEnd = tempStart + new Vector2(60, 30);
