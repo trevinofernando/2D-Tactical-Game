@@ -19,7 +19,10 @@ public class AIController : MonoBehaviour
     [System.NonSerialized]
     public Transform target;
     private List<Transform> targets = new List<Transform>();
+    System.Random rand;
     private float degreesOfDeadZone;
+    private float baseHealth;
+    private float allEnemiesHealth;
 
     //Temporal variables
     private RaycastHit2D hit;
@@ -58,7 +61,8 @@ public class AIController : MonoBehaviour
         GLOBALS = GlobalVariables.Instance;
         //Get a reference to Game Manager
         GM = GLOBALS.GM; 
-
+        
+        rand = new System.Random();
 
         //Get reference to PlayerSettings component of this player object
         ps = GetComponent<PlayerSettings>();
@@ -93,6 +97,7 @@ public class AIController : MonoBehaviour
 
         //Get reference to DamageHandler component of this player object
         dh = GetComponent<DamageHandler>();
+        baseHealth = dh.health;
 
         //Get reference to WeaponController component of this player object
         weaponContr = GetComponent<WeaponController>();
@@ -137,7 +142,7 @@ public class AIController : MonoBehaviour
             case(AIState.PickingTarget):
                 //Reset List
                 targets.Clear(); 
-
+                allEnemiesHealth = 0;
                 for(int i = 0; i < GLOBALS.numTeams; i++){
                     //Check if this team is alive, else skip it
                     if(GM.teamsHealth[i] <= 0)
@@ -155,6 +160,8 @@ public class AIController : MonoBehaviour
                         //Add Soldier to possible targets to shoot
                         if(GM.teams[i,j] != null){
                             targets.Add(GM.teams[i,j].transform);
+                            //And record it's health for Infinity Gauntlet Calculations
+                            allEnemiesHealth += GM.soldiersHealth[i,j];
                         }
                     }
                 }
@@ -285,28 +292,35 @@ public class AIController : MonoBehaviour
             case(AIState.tryingParabolicShot):
                 //Debug.Log("tryingParabolicShot");
                 
-                //This is for BFG9000, ThunderGun and sets yDiff and xDiff 
+                //This is for ThunderGun and sets yDiff and xDiff 
                 zRotation = CalculateStraightShotAngle(target);
                 angle_1 = angle_2 = 0f;
                 
-                if(TryWeapon(WeaponCodes.ThunderGun) && Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f){/*In ThunderGun range and optimal angle range*/}
-                else if(TryWeapon(WeaponCodes.BFG9000) && target.GetComponent<DamageHandler>().health < 50){/*The target has low health*/}
-                else if(TryWeapon(WeaponCodes.Infinity_Gauntlet) && dh.health < 50 && dh.health != GM.teamsHealth[ps.teamID]){/*AI has low health and is not the last man of its team*/}
-                else if(TryWeapon(WeaponCodes.PlaneBomber) || TryWeapon(WeaponCodes.Plane_Nuke)){
+                if(TryWeapon(WeaponCodes.ThunderGun) && Vector2.Distance(target.position, transform.position) < 10f && zRotation > 10f && zRotation < 70f)
+                {/*In ThunderGun range and optimal angle range*/}
+                else if(TryWeapon(WeaponCodes.BFG9000) && targets.Last().GetComponent<DamageHandler>().health < 50)
+                {/*The target has low health*/
+                    zRotation = CalculateStraightShotAngle(targets.Last());
+                }
+                else if(TryWeapon(WeaponCodes.Infinity_Gauntlet) && (dh.health < allEnemiesHealth/2f) && dh.health != GM.teamsHealth[ps.teamID])
+                {/*AI has low health and is not the last man of its team*/}
+                else if(TryWeapon(WeaponCodes.PlaneBomber) || TryWeapon(WeaponCodes.Plane_Nuke))
+                {
                     //Sort list for farthest and highest targets
                     targets = targets.OrderBy(x => -(x.position.y * 100 + Vector2.Distance(this.transform.position,x.position))).ToList();
-                    target = targets[0];
+                    target = targets.First();
                 }
-                else if(TryWeapon(WeaponCodes.Homing_Bazooka)){
+                else if(TryWeapon(WeaponCodes.Homing_Bazooka))
+                {
                     zRotation = 90;
                     weaponScript.fireTriggered = true;
                 }
                 else{
-                    if(CalculateParabolicShotAngles(target, WeaponCodes.Bazooka) && TryWeapon(WeaponCodes.Bazooka))                         {/*Nothing to do*/}
-                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Mine) && TryWeapon(WeaponCodes.Mine))                          {/*Nothing to do*/}
-                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Holy_Grenade) && TryWeapon(WeaponCodes.Holy_Grenade))          {/*Nothing to do*/}
-                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Grenade) && TryWeapon(WeaponCodes.Grenade))                    {/*Nothing to do*/}
-                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Teleport_Grenade) && TryWeapon(WeaponCodes.Teleport_Grenade))  {/*Nothing to do*/}
+                    if(CalculateParabolicShotAngles(target, WeaponCodes.Bazooka) && TryWeapon(WeaponCodes.Bazooka) && rand.NextDouble() > 0.5)      {/*Nothing to do*/}
+                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Mine) && TryWeapon(WeaponCodes.Mine))                                  {/*Nothing to do*/}
+                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Holy_Grenade) && TryWeapon(WeaponCodes.Holy_Grenade))                  {/*Nothing to do*/}
+                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Grenade) && TryWeapon(WeaponCodes.Grenade) && rand.NextDouble() > 0.5) {/*Nothing to do*/}
+                    else if(CalculateParabolicShotAngles(target, WeaponCodes.Teleport_Grenade) && TryWeapon(WeaponCodes.Teleport_Grenade))          {/*Nothing to do*/}
                     else{TryWeapon(WeaponCodes.Bang_Pistol);}
 
                     zRotation = angle_1;
