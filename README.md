@@ -5,7 +5,7 @@ This is a 2D tactical turn-based game inspired by the Worms series. We will be u
 
 ## Description
 
-This is a local multiplayer game where players can sit together in one machine and take turns in the computer to do their moves. Play as a squad of size 1 to 8 in a match of a maximum of 8 squads (teams). Chose from a variety of 20+ different weapons and tools to eliminate the oter players before they eliminate you. Last team standing wins!
+This is a local multiplayer game where players can sit together in one machine and take turns in the computer to do their moves. Play as a squad of size 1 to 8 in a match of a maximum of 8 squads (teams). Chose from a variety of 20+ different weapons and tools to eliminate the other players before they eliminate you. Last team standing wins!
 
 ### How to Play
 
