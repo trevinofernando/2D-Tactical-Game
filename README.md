@@ -2,7 +2,6 @@
 This is a 2D tactical turn-based game inspired by the Worms series. We will be using the Unity game engine to create the game in a team of 3 developers.
 
 ![alt text](https://raw.githubusercontent.com/trevinofernando/2D-Tactical-Game/master/2D-Tactical-Game/Assets/Sprites/SquiresLogo.png)
-![alt text](https://raw.githubusercontent.com/trevinofernando/2D-Tactical-Game/master/2D-Tactical-Game/Assets/Sprites/Team4Logo.png)
 
 ## Description
 
@@ -20,3 +19,5 @@ This game is meant to be played on **PC** with a **keyboard** and **mouse**. Her
 * **Move Right:** "d" / Right-arrow
 * **Aim:** With cursor/Mouse
 * **Shoot:** Mouse Left-Click
+
+![alt text](https://raw.githubusercontent.com/trevinofernando/2D-Tactical-Game/master/2D-Tactical-Game/Assets/Sprites/Team4Logo.png)
