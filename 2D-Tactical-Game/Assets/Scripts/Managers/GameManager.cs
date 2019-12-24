@@ -21,12 +21,11 @@ public class GameManager : MonoBehaviour
     public Canvas suddenDeathCanvas;
     public Canvas pauseMenuCanvas;
     public SunScript sun;
-    public GameObject projectile;
+    [System.NonSerialized] public GameObject projectile;
     public EnvironmentManager environmentManager;
 
     //Teams related variables
-    [System.NonSerialized]
-    public GameObject[,] teams; //[TeamID, SoldierID]
+    [System.NonSerialized] public GameObject[,] teams; //[TeamID, SoldierID]
     public int deadTeamsCounter = 0; 
     public int[] teamsHealth; //[TeamID]
     public int[,] soldiersHealth; //[TeamID, SoldierID]

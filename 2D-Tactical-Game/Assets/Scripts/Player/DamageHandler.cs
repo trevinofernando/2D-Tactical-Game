@@ -44,10 +44,13 @@ public class DamageHandler : MonoBehaviour
         if(damageToProps == -1){
             damageToProps = damageToPlayers;
         }
-        if(isPlayer){
-            health -= (int)((float)damageToPlayers + (float)health * damageToPlayersPercent / 100f);
-        }else{
-            health -= (int)((float)damageToProps + (float)health * damageToPropsPercent / 100f);
+        //If health is already 0, then the death sequence has been started, no need to change this value any more
+        if(health > 0){
+            if(isPlayer){
+                health -= (int)((float)damageToPlayers + (float)health * damageToPlayersPercent / 100f);
+            }else{
+                health -= (int)((float)damageToProps   + (float)health * damageToPropsPercent   / 100f);
+            }
         }
         
 
